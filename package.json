@@ -1,0 +1,22 @@
+{
+  "name": "collaborative-lists",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "local": "./node_modules/.bin/nodemon -L --ignore public/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/efredine/collaborative-lists.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/efredine/collaborative-lists/issues"
+  },
+  "homepage": "https://github.com/efredine/collaborative-lists#readme"
+}
