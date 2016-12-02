@@ -20,6 +20,18 @@ class App extends Component {
     .then(function(responseText) {
       console.log(responseText);
     });
+
+    fetch("http://localhost:8080/api/update", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      body: "theThing=something"
+    }).then(function(res) {
+      console.log("Submission response:", res);
+    }, function(e) {
+      console.log("Error submitting form:", e);
+    });
   }
 
   render() {

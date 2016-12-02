@@ -1,6 +1,9 @@
-var app = require('express')();
-var server = require('http').Server(app);
-var io = require('socket.io')(server);
+const app = require('express')();
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
+const bodyParser    = require("body-parser");
+
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -8,8 +11,13 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.get("/api/list", (req, res) =>{
+app.get("/api/list", (req, res) => {
   res.json(["Hello World"]);
+});
+
+app.post("/api/update", (req, res) => {
+  console.log(req.body.theThing);
+  res.json(["Got it"]);
 });
 
 server.listen(8080);
