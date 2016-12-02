@@ -13,7 +13,8 @@ const todo = (state, action) => {
       return Object.assign(
         {},
         state,
-        {completed: !state.completed
+        {
+          completed: !state.completed
       });
     default:
       return state
