@@ -1,24 +1,11 @@
-// Application entrypoint.
-
-// Load up the application styles
-require("../styles/application.scss");
-
-// Render the top-level React component
-// import React from 'react';
-// import ReactDOM from 'react-dom';
-
-// ReactDOM.render(<App />, document.getElementById('react-root'));
-
-
 import React from 'react'
 import { render } from 'react-dom'
-import { Provider } from 'react-redux'
 import { createStore } from 'redux'
-// import todoApp from './reducers'
-// import App from './components/App'
-import App from './App.jsx';
+import { Provider } from 'react-redux'
+import App from './components/App'
+import reducer from './reducers'
 
-let store = createStore(() => {})
+const store = createStore(reducer)
 
 render(
   <Provider store={store}>
