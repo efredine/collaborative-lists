@@ -10,11 +10,11 @@ const todo = (state, action) => {
       if (state.id !== action.id) {
         return state
       }
-
-      return {
-        ...state,
-        completed: !state.completed
-      }
+      return Object.assign(
+        {},
+        state,
+        {completed: !state.completed
+      });
     default:
       return state
   }
