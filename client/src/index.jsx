@@ -12,7 +12,8 @@ import fetch from 'isomorphic-fetch'
 const loggerMiddleware = createLogger();
 const socket = io('http://localhost:8080');
 const socketIoMiddleware = createSocketIoMiddleware(socket, ['SERVER/ADD_TODO', 'SERVER/TOGGLE_TODO'], pessimisticExecute);
-let store;
+const store = applyMiddleware(socketIoMiddleware, loggerMiddleware)(createStore)(reducer);
+
 
 function pessimisticExecute(action, emit, next, dispatch) {
   emit('action', action);
@@ -23,7 +24,6 @@ fetch('http://localhost:8080/api/list')
   return response.text();
 })
 .then(function(responseText) {
-  store = applyMiddleware(socketIoMiddleware, loggerMiddleware)(createStore)(reducer);
   JSON.parse(responseText).forEach(action => {
     store.dispatch(action);
   })
@@ -33,5 +33,8 @@ fetch('http://localhost:8080/api/list')
     </Provider>,
     document.getElementById('react-root')
   )
+})
+.catch(error => {
+  document.getElementById('react-root').appendChild(document.createTextNode("Error: can't connect to server."));
 });
 
