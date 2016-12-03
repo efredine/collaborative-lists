@@ -7,11 +7,11 @@ import fetch from 'isomorphic-fetch'
 class App extends Component {
 
   componentDidMount() {
-    var socket = io('http://localhost:8080');
-    socket.on('news', function (data) {
-      console.log(data);
-      socket.emit('my other event', { my: 'data' });
-    });
+    // var socket = io('http://localhost:8080');
+    // socket.on('news', function (data) {
+    //   console.log(data);
+    //   socket.emit('my other event', { my: 'data' });
+    // });
 
     fetch('http://localhost:8080/api/list')
     .then(function(response) {
