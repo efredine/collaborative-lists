@@ -4,6 +4,7 @@ const io = require('socket.io')(server);
 const bodyParser    = require("body-parser");
 
 let nextTodoId = 0;
+const actionHistory = [];
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -14,7 +15,7 @@ app.use(function(req, res, next) {
 });
 
 app.get("/api/list", (req, res) => {
-  res.json(["Hello World"]);
+  res.json(actionHistory);
 });
 
 app.post("/api/update", (req, res) => {
@@ -35,6 +36,7 @@ io.on('connection', function(socket){
       action.type = 'TOGGLE_TODO';
     }
     console.log(action);
+    actionHistory.push(action);
     io.emit('action', action);
   });
   // socket.on('action', (action) => {
