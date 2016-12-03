@@ -24,5 +24,14 @@ module.exports = {
         loaders: ["style", "css", "sass"]
       }
     ]
+  },
+  devServer: {
+    historyApiFallback: true,
+    proxy: {
+      '/': {
+        target: 'http://localhost:8080',
+        secure: false
+      }
+    }
   }
 }

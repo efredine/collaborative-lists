@@ -25,20 +25,12 @@ class App extends Component {
     return (
       <div>
         <AddTodo />
-        <VisibleTodoList />
+        <VisibleTodoList
+          filter={this.props.params.filter || 'all'}
+        />
         <Footer />
       </div>
     );
   }
 }
 export default App;
-
-// const App = () => (
-//   <div>
-//     <AddTodo />
-//     <VisibleTodoList />
-//     <Footer />
-//   </div>
-// )
-
-// export default App
