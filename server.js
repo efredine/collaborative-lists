@@ -23,6 +23,10 @@ app.post("/api/update", (req, res) => {
   res.json(["Got it"]);
 });
 
+app.get('/*', (req, res) => {
+  res.sendfile(path.join(__dirname, 'index.html'));
+});
+
 server.listen(8080);
 
 io.on('connection', function(socket){
@@ -39,20 +43,5 @@ io.on('connection', function(socket){
     actionHistory.push(action);
     io.emit('action', action);
   });
-  // socket.on('action', (action) => {
-  //   console.log(action);
-  //   socket.broadcast.emit('action', action);
 
-  //   // if(action.type === 'server/hello'){
-  //   //   console.log('Got hello data!', action.data);
-  //   //   socket.emit('action', {type:'message', data:'good day!'});
-  //   // }
-  // });
 });
-
-// io.on('connection', function (socket) {
-//   socket.emit('news', { hello: 'world' });
-//   socket.on('my other event', function (data) {
-//     console.log(data);
-//   });
-// });
