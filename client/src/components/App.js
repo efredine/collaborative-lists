@@ -3,6 +3,7 @@ import Footer from './Footer'
 import AddTodo from '../containers/AddTodo'
 import VisibleTodoList from '../containers/VisibleTodoList'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import ActionListContainer from '../containers/ActionListContainer.jsx'
 
 
 class App extends Component {
@@ -40,7 +41,7 @@ class App extends Component {
           <Footer />
         </TabPanel>
         <TabPanel>
-          <h2>Hello from Bar</h2>
+          <ActionListContainer />
         </TabPanel>
 
       </Tabs>
