@@ -17,13 +17,6 @@ class App extends Component {
   }
 
   render() {
-    // return (
-    //   <div>
-    //     <AddTodo />
-    //     <VisibleTodoList />
-    //     <Footer />
-    //   </div>
-    // );
 
     return (
       <Tabs
@@ -31,8 +24,8 @@ class App extends Component {
         selectedIndex={0}
       >
         <TabList>
-          <Tab>Foo</Tab>
-          <Tab>Bar</Tab>
+          <Tab>List</Tab>
+          <Tab>History</Tab>
         </TabList>
 
         <TabPanel>

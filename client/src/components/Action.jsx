@@ -4,7 +4,7 @@ class Action extends Component {
   render() {
     return (
         <li>
-          {this.props.type} {this.props.id}
+          {this.props.type} {this.props.text}
         </li>
     );
   }

@@ -6,11 +6,9 @@ class ActionList extends Component {
     const actionItems = this.props.actions.map((action) => {
       return (<Action
                 key={action.id}
-                type={action.type}
-                id={action.id}
+                {...action}
               />);
-
-    });
+      });
     return (
       <ul>
         {actionItems}

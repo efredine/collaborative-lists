@@ -34,25 +34,11 @@ io.on('connection', function(socket){
       action.id = nextTodoId++;
     } else {
       action.type = 'TOGGLE_TODO';
+      action.toggleId = nextTodoId++;
     }
     console.log(action);
     actionHistory.push(action);
     io.emit('action', action);
   });
-  // socket.on('action', (action) => {
-  //   console.log(action);
-  //   socket.broadcast.emit('action', action);
 
-  //   // if(action.type === 'server/hello'){
-  //   //   console.log('Got hello data!', action.data);
-  //   //   socket.emit('action', {type:'message', data:'good day!'});
-  //   // }
-  // });
 });
-
-// io.on('connection', function (socket) {
-//   socket.emit('news', { hello: 'world' });
-//   socket.on('my other event', function (data) {
-//     console.log(data);
-//   });
-// });
