@@ -10,7 +10,7 @@ class ActionList extends Component {
               />);
       });
     return (
-      <ul>
+      <ul className="list-unstyled">
         {actionItems}
       </ul>
     );
