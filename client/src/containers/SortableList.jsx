@@ -34,8 +34,10 @@ class SortableList extends Component {
     super(props);
     this.moveCard = this.moveCard.bind(this);
     this.findCard = this.findCard.bind(this);
+    this.broadcastMove = this.broadcastMove.bind(this);
     this.state = {
-      todos: props.todos
+      todos: props.todos,
+      lastOverId: null
     }
   }
 
@@ -49,14 +51,22 @@ class SortableList extends Component {
 
   moveCard(id, atIndex) {
     const { todo, index } = this.findCard(id);
+    const overId = this.state.todos[atIndex].id;
     this.setState(update(this.state, {
       todos: {
         $splice: [
           [index, 1],
           [atIndex, 0, todo]
         ]
+      },
+      lastOverId: {
+        $set: overId
       }
     }));
+  }
+
+  broadcastMove(droppedId) {
+    this.props.move(droppedId, this.state.lastOverId);
   }
 
   findCard(id) {
@@ -79,7 +89,12 @@ class SortableList extends Component {
       <div style={style}>
         {todos.map(todo => {
           return (
-            <SortableCard key={todo.id} id={todo.id} moveCard={this.moveCard} findCard={this.findCard}>
+            <SortableCard
+              key={todo.id}
+              id={todo.id}
+              moveCard={this.moveCard}
+              findCard={this.findCard}
+              broadcastMove={this.broadcastMove}>
               <Todo
                 onClick={() => onTodoClick(todo.id)}
                 {...todo}

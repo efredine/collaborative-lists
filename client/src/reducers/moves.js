@@ -17,60 +17,55 @@ const moveTodos = (todos, index, atIndex) => {
   return result;
 }
 
-const move = (state, action) => {
-  const dragStart = currentDrag(state);
-  const overId = action.id;
+const move = (todos, action) => {
+  const {draggedId, overId} = action;
 
   // index is the current index of the todo being dragged
-  const index = find(state.todos, dragStart.todoId);
+  const index = find(todos, draggedId);
 
-  // atIndex is the index of the todo that we are currently dragging over
-  const atIndex = find(state.todos, overId);
-  state.todos = moveTodos(state.todos, index, atIndex);
-  state.drags.moves.push(Object.assign({}, dragStart, {
-    overId,
-    index,
-    atIndex
-  }));
-  return state;
+  // atIndex is the index of the todo that we dragged over
+  const atIndex = find(todos, overId);
+  return moveTodos(todos, index, atIndex);
 }
 
 // called to complete a drag action
-const endDrag = (state, action) => {
-  const dragStart = currentDrag(state);
+// const endDrag = (state, action) => {
+//   const dragStart = currentDrag(state);
 
-  // get the moves associated with this drag
-  const moves = state.drags.moves.filter(m => m.dragId === dragStart.dragId);
-  if(!action.didDrop) {
-    // undo the moves
-    if(moves.length > 0) {
-      // move from the current index back to the index of the first move.
-      const atIndex = moves[0].index;
-      const index = find(state.todos, dragStart.todoId);
-      state.todos = moveTodos(state.todos, index, atIndex);
+//   // get the moves associated with this drag
+//   const moves = state.drags.moves.filter(m => m.dragId === dragStart.dragId);
+//   if(!action.didDrop) {
+//     // undo the moves
+//     if(moves.length > 0) {
+//       // move from the current index back to the index of the first move.
+//       const atIndex = moves[0].index;
+//       const index = find(state.todos, dragStart.todoId);
+//       state.todos = moveTodos(state.todos, index, atIndex);
 
-      // delete all the moves associated with this drag
-      state.drags.moves = state.drags.moves.reduce([], (moves, move) => {
-        if(move.dragId !== dragStart.dragId) {
-          moves.push(move);
-        }
-        return moves;
-      });
-    }
-  } else {
-    // save this as a successful drag
-    state.drags.dragEnds.push(dragStart);
-  }
-}
+//       // delete all the moves associated with this drag
+//       state.drags.moves = state.drags.moves.reduce([], (moves, move) => {
+//         if(move.dragId !== dragStart.dragId) {
+//           moves.push(move);
+//         }
+//         return moves;
+//       });
+//     }
+//   } else {
+//     // save this as a successful drag
+//     state.drags.dragEnds.push(dragStart);
+//   }
+// }
 
 const moves = (state, action) => {
   switch (action.type) {
-    case 'START_DRAG':
-      const newState = Object.assign({}, state)
-      newState.todos = newState.todos.reverse()
-      return newState;
+    // case 'START_DRAG':
+    //   const newState = Object.assign({}, state)
+    //   newState.todos = newState.todos.reverse()
+    //   return newState;
     case 'MOVE':
-      return move(state, action);
+      const newState = Object.assign({}, state)
+      newState.todos = move(state.todos, action);
+      return newState;
     case 'END_DRAG':
       return state;
     default:

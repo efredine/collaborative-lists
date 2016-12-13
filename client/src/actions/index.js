@@ -15,17 +15,18 @@ export const toggleTodo = (id) => {
   };
 }
 
-export const startDrag = (id) => ({
-  type: 'START_DRAG',
-  id
-});
+// export const startDrag = (id) => ({
+//   type: 'START_DRAG',
+//   id
+// });
 
-export const move = (id) => ({
+export const move = (draggedId, overId) => ({
   type: 'MOVE',
-  id
+  draggedId,
+  overId
 });
 
-export const endDrag = (didDrop) => ({
-  type: 'END_DRAG',
-  didDrop
-});
+// export const endDrag = (didDrop) => ({
+//   type: 'END_DRAG',
+//   didDrop
+// });

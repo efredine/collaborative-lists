@@ -25,6 +25,8 @@ const cardSource = {
 
     if (!didDrop) {
       props.moveCard(droppedId, originalIndex);
+    } else {
+      props.broadcastMove(droppedId);
     }
   }
 };
