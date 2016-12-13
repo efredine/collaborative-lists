@@ -5,6 +5,7 @@ import Todo from '../components/Todo';
 import { DropTarget, DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import ItemTypes from './ItemTypes';
+import shallowEqual from '../utils/shallowEqual'
 
 const style = {
   width: 400
@@ -16,11 +17,11 @@ const cardTarget = {
 };
 
 function todosDifferent(a, b) {
-  // if (a.length === b. length) {
-  //   return a.some((t, index) => {
-  //     t.id !== b[index].id
-  //   })
-  // }
+  if (a.length === b. length) {
+    return !a.every((t, index) => {
+      shallowEqual(t, b[index]);
+    })
+  }
   return true;
 }
 
