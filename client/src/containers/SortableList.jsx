@@ -51,8 +51,11 @@ class SortableList extends Component {
 
 
 const dropTarget = DropTarget( ItemTypes.CARD, cardTarget,
-  connect => ({
-    connectDropTarget: connect.dropTarget()
-  }))(SortableList);
+  connect =>{
+    debugger;
+    return {
+      connectDropTarget: connect.dropTarget()
+    };
+  })(SortableList);
 
 export default DragDropContext(HTML5Backend)(dropTarget);

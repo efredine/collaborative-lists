@@ -66,8 +66,9 @@ const endDrag = (state, action) => {
 const moves = (state, action) => {
   switch (action.type) {
     case 'START_DRAG':
-      state.todos = state.todos.reverse()
-      return state;
+      const newState = Object.assign({}, state)
+      newState.todos = newState.todos.reverse()
+      return newState;
     case 'MOVE':
       return move(state, action);
     case 'END_DRAG':
