@@ -3,7 +3,7 @@ import { toggleTodo, startDrag, endDrag, move } from '../actions'
 import SortableList from './SortableList.jsx'
 
 const getVisibleTodos = (todos, filter) => {
-  debugger;
+  // debugger;
   switch (filter) {
     case 'SHOW_ALL':
       return todos
@@ -21,10 +21,10 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps =  ({
-  onTodoClick: toggleTodo,
-  startDrag: startDrag,
-  endDrag: endDrag,
-  move: move
+  onTodoClick: toggleTodo //,
+  // startDrag: startDrag,
+  // endDrag: endDrag,
+  // move: move
 })
 
 const VisibleTodoList = connect(

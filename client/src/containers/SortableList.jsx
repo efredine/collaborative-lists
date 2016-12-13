@@ -20,11 +20,50 @@ class SortableList extends Component {
     connectDropTarget: PropTypes.func.isRequired
   };
 
+
+  constructor(props) {
+    super(props);
+    this.moveCard = this.moveCard.bind(this);
+    this.findCard = this.findCard.bind(this);
+    this.state = {
+      todos: props.todos
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    // TODO: check if todos have changed first
+    this.setState({
+      todos: nextProps.todos
+    })
+  }
+
+  moveCard(id, atIndex) {
+    const { todo, index } = this.findCard(id);
+    this.setState(update(this.state, {
+      todos: {
+        $splice: [
+          [index, 1],
+          [atIndex, 0, todo]
+        ]
+      }
+    }));
+  }
+
+  findCard(id) {
+    const { todos } = this.state;
+    const todo = todos.filter(c => c.id === id)[0];
+
+    return {
+      todo,
+      index: todos.indexOf(todo)
+    };
+  }
+
   render() {
     const { connectDropTarget } = this.props;
-    const { todos, onTodoClick, move, startDrag, endDrag } = this.props;
+    const { onTodoClick, startDrag, endDrag } = this.props;
 
-    debugger;
+    const {todos} = this.state;
 
     return connectDropTarget(
       <div style={style}>
@@ -32,9 +71,8 @@ class SortableList extends Component {
           return (
             <SortableCard key={todo.id}
                   id={todo.id}
-                  move={move}
-                  startDrag={startDrag}
-                  endDrag={endDrag}
+                  moveCard={this.moveCard}
+                  findCard={this.findCard}
                   text={todo.text}/>
               // <Todo
               //   onClick={onTodoClick}
@@ -51,10 +89,9 @@ class SortableList extends Component {
 
 
 const dropTarget = DropTarget( ItemTypes.CARD, cardTarget,
-  connect =>{
-    debugger;
+  (connect) =>{
     return {
-      connectDropTarget: connect.dropTarget()
+      connectDropTarget: connect.dropTarget(),
     };
   })(SortableList);
 

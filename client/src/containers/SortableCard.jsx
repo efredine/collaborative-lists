@@ -13,15 +13,19 @@ const style = {
 
 const cardSource = {
   beginDrag(props) {
-    props.startDrag(props.id);
     return {
-      id: props.id
+      id: props.id,
+      originalIndex: props.findCard(props.id).index
     };
   },
 
   endDrag(props, monitor) {
+    const { id: droppedId, originalIndex } = monitor.getItem();
     const didDrop = monitor.didDrop();
-    props.endDrag(didDrop);
+
+    if (!didDrop) {
+      props.moveCard(droppedId, originalIndex);
+    }
   }
 };
 
@@ -35,10 +39,40 @@ const cardTarget = {
     const { id: overId } = props;
 
     if (draggedId !== overId) {
-      // props.move(overId);
+      const { index: overIndex } = props.findCard(overId);
+      props.moveCard(draggedId, overIndex);
     }
   }
 };
+
+// const cardSource = {
+//   beginDrag(props) {
+//     props.startDrag(props.id);
+//     return {
+//       id: props.id
+//     };
+//   },
+
+//   endDrag(props, monitor) {
+//     const didDrop = monitor.didDrop();
+//     props.endDrag(didDrop);
+//   }
+// };
+
+// const cardTarget = {
+//   canDrop() {
+//     return false;
+//   },
+
+//   hover(props, monitor) {
+//     const { id: draggedId } = monitor.getItem();
+//     const { id: overId } = props;
+
+//     if (draggedId !== overId) {
+//       // props.move(overId);
+//     }
+//   }
+// };
 
 
 class SortableCard extends Component {
@@ -48,7 +82,8 @@ class SortableCard extends Component {
     isDragging: PropTypes.bool.isRequired,
     id: PropTypes.any.isRequired,
     text: PropTypes.string.isRequired,
-    move: PropTypes.func.isRequired
+    moveCard: PropTypes.func.isRequired,
+    findCard: PropTypes.func.isRequired
   };
 
   render() {
