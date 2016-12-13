@@ -8,10 +8,12 @@ export const setVisibilityFilter = (filter) => ({
   filter
 });
 
-export const toggleTodo = (id) => ({
-  type: 'SERVER/TOGGLE_TODO',
-  id
-});
+export const toggleTodo = (id) => {
+  return {
+    type: 'SERVER/TOGGLE_TODO',
+    id
+  };
+}
 
 export const startDrag = (id) => ({
   type: 'START_DRAG',

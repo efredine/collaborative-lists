@@ -3,7 +3,6 @@ import { toggleTodo, startDrag, endDrag, move } from '../actions'
 import SortableList from './SortableList.jsx'
 
 const getVisibleTodos = (todos, filter) => {
-  // debugger;
   switch (filter) {
     case 'SHOW_ALL':
       return todos

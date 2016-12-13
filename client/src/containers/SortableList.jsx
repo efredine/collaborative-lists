@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import update from 'react/lib/update';
 import SortableCard from './SortableCard.jsx';
+import Todo from '../components/Todo';
 import { DropTarget, DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import ItemTypes from './ItemTypes';
-import flow from 'lodash/flow';
 
 const style = {
   width: 400
@@ -14,6 +14,15 @@ const cardTarget = {
   drop() {
   }
 };
+
+function todosDifferent(a, b) {
+  // if (a.length === b. length) {
+  //   return a.some((t, index) => {
+  //     t.id !== b[index].id
+  //   })
+  // }
+  return true;
+}
 
 class SortableList extends Component {
   static propTypes = {
@@ -31,10 +40,11 @@ class SortableList extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    // TODO: check if todos have changed first
-    this.setState({
-      todos: nextProps.todos
-    })
+    if(todosDifferent(this.state.todos, nextProps.todos)) {
+      this.setState({
+        todos: nextProps.todos
+      })
+    }
   }
 
   moveCard(id, atIndex) {
@@ -69,17 +79,12 @@ class SortableList extends Component {
       <div style={style}>
         {todos.map(todo => {
           return (
-            <SortableCard key={todo.id}
-                  id={todo.id}
-                  moveCard={this.moveCard}
-                  findCard={this.findCard}
-                  text={todo.text}/>
-              // <Todo
-              //   onClick={onTodoClick}
-              //   completed={todo.completed}
-              //   text={todo.text}
-              // />
-            // </SortableCard>
+            <SortableCard key={todo.id} id={todo.id} moveCard={this.moveCard} findCard={this.findCard}>
+              <Todo
+                onClick={() => onTodoClick(todo.id)}
+                {...todo}
+              />
+            </SortableCard>
           );
         })}
       </div>
