@@ -11,7 +11,8 @@ function getActionRecord(state, action) {
   switch (action.type) {
     case 'MOVE':
       return Object.assign({}, action, {
-        type: 'Moved'
+        type: 'Moved',
+        text: state.find(x => x.id === action.draggedId).text
       });
     case 'ADD_TODO':
       return Object.assign({}, action, {
