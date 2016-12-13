@@ -11,7 +11,7 @@ import fetch from 'isomorphic-fetch'
 
 const loggerMiddleware = createLogger();
 const socket = io('http://localhost:8080');
-const socketIoMiddleware = createSocketIoMiddleware(socket, ['SERVER/ADD_TODO', 'SERVER/TOGGLE_TODO'], pessimisticExecute);
+const socketIoMiddleware = createSocketIoMiddleware(socket, ['SERVER/ADD_TODO', 'SERVER/TOGGLE_TODO', 'SERVER/MOVE'], pessimisticExecute);
 const store = applyMiddleware(socketIoMiddleware, loggerMiddleware)(createStore)(reducer);
 
 

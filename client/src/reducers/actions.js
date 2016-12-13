@@ -9,6 +9,10 @@ function resolvedToggleState(state, action) {
 
 function getActionRecord(state, action) {
   switch (action.type) {
+    case 'MOVE':
+      return Object.assign({}, action, {
+        type: 'Moved'
+      });
     case 'ADD_TODO':
       return Object.assign({}, action, {
         type: 'Added'
@@ -27,6 +31,7 @@ function getActionRecord(state, action) {
 
 const actions = (state = [], action) => {
   switch (action.type) {
+    case 'MOVE':
     case 'ADD_TODO':
     case 'TOGGLE_TODO':
       return [

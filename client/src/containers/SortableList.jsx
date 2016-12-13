@@ -96,8 +96,10 @@ class SortableList extends Component {
               findCard={this.findCard}
               broadcastMove={this.broadcastMove}>
               <Todo
+                id={todo.id}
                 onClick={() => onTodoClick(todo.id)}
-                {...todo}
+                text={todo.text}
+                completed={todo.completed}
               />
             </SortableCard>
           );

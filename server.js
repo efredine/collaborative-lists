@@ -29,12 +29,21 @@ io.on('connection', function(socket){
   console.log("Socket connected: " + socket.id);
   socket.on('action', (action) => {
     console.log(action);
-    if(action.type === 'SERVER/ADD_TODO') {
+    switch(action.type) {
+    case'SERVER/ADD_TODO':
       action.type = 'ADD_TODO';
       action.id = nextTodoId++;
-    } else {
+      break;
+    case 'SERVER/TOGGLE_TODO':
       action.type = 'TOGGLE_TODO';
       action.toggleId = nextTodoId++;
+      break;
+    case 'SERVER/MOVE':
+      action.type = 'MOVE';
+      action.id = nextTodoId++;
+      break;
+    default:
+      break;
     }
     console.log(action);
     actionHistory.push(action);

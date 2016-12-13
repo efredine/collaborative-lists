@@ -21,7 +21,7 @@ export const toggleTodo = (id) => {
 // });
 
 export const move = (draggedId, overId) => ({
-  type: 'MOVE',
+  type: 'SERVER/MOVE',
   draggedId,
   overId
 });
