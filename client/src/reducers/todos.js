@@ -1,3 +1,28 @@
+// return current index of todo
+const find = (todos, todoId) => {
+  return todos.findIndex(t => t.id === todoId);
+}
+
+// move a todo from one index to another index
+const moveTodos = (todos, index, atIndex) => {
+  const result = todos.slice();
+  const todo = result.splice(index, 1);
+  result.splice(atIndex, 0, todo[0]);
+  return result;
+}
+
+const move = (todos, action) => {
+  const {draggedId, overId} = action;
+
+  // index is the current index of the todo being dragged
+  const index = find(todos, draggedId);
+
+  // atIndex is the index of the todo that we dragged over
+  const atIndex = find(todos, overId);
+
+  return moveTodos(todos, index, atIndex);
+}
+
 const todo = (state, action) => {
   switch (action.type) {
     case 'ADD_TODO':
@@ -32,6 +57,8 @@ const todos = (state = [], action) => {
       return state.map(t =>
         todo(t, action)
       )
+    case 'MOVE':
+      return move(state, action);
     default:
       return state
   }
