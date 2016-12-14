@@ -30,7 +30,7 @@ Turns out the 'one-way' data architecture imposed by Redux and React is an excel
 - use React Router to navigate between different list URLS + api for retrieving list specific data
 - socket updates using rooms or something similar to broadcast list specific updates
 
-## Vision/Possible/Choices Features
+## Vision/Possible Features
 - Really need to decide on one (or a few), primary use cases and drive the feature set out from these
 - Best candidate use cases: situations where multiple users are likely to collaborate in real-time - what features do they need to collaborate?
 - Some possible use cases: multi-person, recurring shopping lists; project to-do list; group decisions (where to go, what to eat, etc.)
@@ -44,3 +44,32 @@ Turns out the 'one-way' data architecture imposed by Redux and React is an excel
 - list suggestions based on location where list is used/created (i.e. shopping lists are store dependent)
 - animate list being sorted
 - badges with update count on history/channel tab
+
+## User Scenarios
+
+### Grocery Lists
+- Often worked on by multiple people - added to over time
+- Addition of last minute items
+- Sorting around how the store is organized
+- Recurring items/suggestions
+- Location dependent recurring items
+
+### Co-operative decision making
+- deciding on a movie, place to eat, bar to go to, activity to do with a group
+- one user creates an initial list and shares it with a group of people
+- people can add/cross things off the list and/or rate/like items in the list
+- the built-in chat channel is useful for commenting on items in the list and having group discussions
+
+### Yelp Search Results
+- One user does a Yelp search and turns search results into a list which they share with other people
+- Other users can rate the items in the list and/or sort the list
+- Users have a mechanims to add new entries in the list
+
+### Competition/Alternatives
+- Google Keep creates very nice lists, but they are slow to update and there is no channel/chat associated with them
+- Workflowy is more about creating complex, nested, filterable lists
+
+## User Stories
+- Create a new list
+- Add an item to a list
+- View your lists
