@@ -1,3 +1,4 @@
+require("../styles/application.scss");
 import React from 'react'
 import { createStore, applyMiddleware } from 'redux';
 import { render } from 'react-dom'

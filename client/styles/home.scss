@@ -3,12 +3,11 @@ h1 {
 }
 .example-enter {
   opacity: 0.01;
-  background-color: red;
 }
 
 .example-enter.example-enter-active {
   opacity: 1;
-  transition: opacity 500ms ease-in;
+  transition: opacity 5000ms ease-in;
 }
 
 .example-leave {
@@ -17,7 +16,7 @@ h1 {
 
 .example-leave.example-leave-active {
   opacity: 0.01;
-  transition: opacity 300ms ease-in;
+  transition: opacity 3000ms ease-in;
 }
 
 .example-appear {

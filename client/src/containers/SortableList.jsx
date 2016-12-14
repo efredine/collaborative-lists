@@ -87,15 +87,14 @@ class SortableList extends Component {
 
     const {todos} = this.state;
 
+    console.log('rendering');
     return connectDropTarget(
-      <div style={style} className="example-enter">
-        <h1 className="example-enter">Hello</h1>
+      <div style={style}>
+        <h1>Hello</h1>
         <ReactCSSTransitionGroup
           transitionName="example"
-          transitionAppear={true}
-          transitionAppearTimeout={500}
-          transitionEnterTimeout={500}
-          transitionLeaveTimeout={300}>
+          transitionEnterTimeout={5000}
+          transitionLeaveTimeout={3000}>
             {todos.map(todo => {
               return (
                 <SortableCard
