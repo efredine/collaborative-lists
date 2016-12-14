@@ -9,7 +9,9 @@ Turns out the 'one-way' data architecture imposed by Redux and React is an excel
 ## Tech Stack
 - Architecturally similar to Chatty app.  Uses the simple React boiler-plate for the front-end and node in the back end.
 - Using Socket.io rather than WS.
-- Using React, Redux and React DND (for drag and drop).
+- [React](https://facebook.github.io/react/) and [Redux](https://github.com/reactjs/redux)
+- [React DND](http://gaearon.gith2ub.io/react-dnd/) for drag and drop.
+- [ReactCSSTransitionGroup](https://facebook.github.io/react/docs/animation.html) to animate additions and deletions from the list
 - Anticipate using Postgres or Mongodb for data storage
 - Node with Express and Socket.io for the server
 
