@@ -117,8 +117,8 @@ class SortableList extends Component {
         <h1>Hello</h1>
         <ReactCSSTransitionGroup
           transitionName="example"
-          transitionEnterTimeout={5000}
-          transitionLeaveTimeout={3000}>
+          transitionEnterTimeout={500}
+          transitionLeaveTimeout={300}>
             {items}
         </ReactCSSTransitionGroup>
       </div>
