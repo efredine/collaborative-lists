@@ -30,10 +30,12 @@ Turns out the 'one-way' data architecture imposed by Redux and React is an excel
 - use React Router to navigate between different list URLS + api for retrieving list specific data
 - socket updates using rooms or something similar to broadcast list specific updates
 
-## Vision/Possible Features
-- use cases: multi-person, recurring shopping list, project to-do list, group decisions (where to go, what to eat, etc.)
-- auto-suggesting list items based on prior lists - for example, when I buy bananas I often also buy frozen berries (for smoothies)
-- populate lists with search results - like a yelp search, so users can collaborate on which restaurant they want to visit
+## Vision/Possible/Choices Features
+- Really need to decide on one (or a few), primary use cases and drive the feature set out from these
+- Best candidate use cases: situations where multiple users are likely to collaborate in real-time - what features do they need to collaborate?
+- Some possible use cases: multi-person, recurring shopping lists; project to-do list; group decisions (where to go, what to eat, etc.)
+- Auto-suggesting list items based on prior lists - for example, when I buy bananas I often also buy frozen berries (for smoothies)
+- Populate lists with search results - like a yelp search, so users can collaborate on which restaurant they want to visit
 - automatically render images/links -etc.
 - group messaging in history/channel tab
 - ability to like/rate items
