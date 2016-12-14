@@ -1,6 +1,10 @@
 import React, {Component} from 'react'
 
 class Action extends Component {
+  componentDidAppear() {
+    console.log('action appeared');
+  }
+
   render() {
     return (
         <li>

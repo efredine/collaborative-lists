@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import Action from './Action.jsx';
+// import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
+import ReactTransitionGroup from 'react/lib/ReactTransitionGroup'
 
 class ActionList extends Component {
   render() {
@@ -11,7 +13,9 @@ class ActionList extends Component {
       });
     return (
       <ul className="list-unstyled">
-        {actionItems}
+        <ReactTransitionGroup>
+            {actionItems}
+        </ReactTransitionGroup>
       </ul>
     );
   }

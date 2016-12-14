@@ -6,6 +6,8 @@ import { DropTarget, DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import ItemTypes from './ItemTypes';
 import shallowEqual from '../utils/shallowEqual'
+import ReactTransitionGroup from 'react/lib/ReactTransitionGroup'
+import TransitionItem from './TransitionItem.jsx'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
 const style = {
@@ -34,6 +36,7 @@ class SortableList extends Component {
 
   constructor(props) {
     super(props);
+    console.log('constructor');
     this.moveCard = this.moveCard.bind(this);
     this.findCard = this.findCard.bind(this);
     this.broadcastMove = this.broadcastMove.bind(this);
@@ -44,6 +47,7 @@ class SortableList extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    console.log('receiving props');
     if(todosDifferent(this.state.todos, nextProps.todos)) {
       this.setState({
         todos: nextProps.todos
@@ -87,6 +91,26 @@ class SortableList extends Component {
 
     const {todos} = this.state;
 
+    const items = todos.map(todo => {
+      return (
+        <TransitionItem key={todo.id}>
+          <SortableCard
+            key={todo.id}
+            id={todo.id}
+            moveCard={this.moveCard}
+            findCard={this.findCard}
+            broadcastMove={this.broadcastMove}>
+            <Todo
+              id={todo.id}
+              onClick={() => onTodoClick(todo.id)}
+              text={todo.text}
+              completed={todo.completed}
+            />
+          </SortableCard>
+        </TransitionItem>
+      );
+    });
+
     console.log('rendering');
     return connectDropTarget(
       <div style={style}>
@@ -95,23 +119,7 @@ class SortableList extends Component {
           transitionName="example"
           transitionEnterTimeout={5000}
           transitionLeaveTimeout={3000}>
-            {todos.map(todo => {
-              return (
-                <SortableCard
-                  key={todo.id}
-                  id={todo.id}
-                  moveCard={this.moveCard}
-                  findCard={this.findCard}
-                  broadcastMove={this.broadcastMove}>
-                  <Todo
-                    id={todo.id}
-                    onClick={() => onTodoClick(todo.id)}
-                    text={todo.text}
-                    completed={todo.completed}
-                  />
-                </SortableCard>
-              );
-            })}
+            {items}
         </ReactCSSTransitionGroup>
       </div>
     );
