@@ -6,6 +6,7 @@ import { DropTarget, DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import ItemTypes from './ItemTypes';
 import shallowEqual from '../utils/shallowEqual'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
 const style = {
   width: 400
@@ -87,24 +88,32 @@ class SortableList extends Component {
     const {todos} = this.state;
 
     return connectDropTarget(
-      <div style={style}>
-        {todos.map(todo => {
-          return (
-            <SortableCard
-              key={todo.id}
-              id={todo.id}
-              moveCard={this.moveCard}
-              findCard={this.findCard}
-              broadcastMove={this.broadcastMove}>
-              <Todo
-                id={todo.id}
-                onClick={() => onTodoClick(todo.id)}
-                text={todo.text}
-                completed={todo.completed}
-              />
-            </SortableCard>
-          );
-        })}
+      <div style={style} className="example-enter">
+        <h1 className="example-enter">Hello</h1>
+        <ReactCSSTransitionGroup
+          transitionName="example"
+          transitionAppear={true}
+          transitionAppearTimeout={500}
+          transitionEnterTimeout={500}
+          transitionLeaveTimeout={300}>
+            {todos.map(todo => {
+              return (
+                <SortableCard
+                  key={todo.id}
+                  id={todo.id}
+                  moveCard={this.moveCard}
+                  findCard={this.findCard}
+                  broadcastMove={this.broadcastMove}>
+                  <Todo
+                    id={todo.id}
+                    onClick={() => onTodoClick(todo.id)}
+                    text={todo.text}
+                    completed={todo.completed}
+                  />
+                </SortableCard>
+              );
+            })}
+        </ReactCSSTransitionGroup>
       </div>
     );
   }

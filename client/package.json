@@ -46,11 +46,11 @@
     "webpack-dev-server": "1.14.1"
   },
   "dependencies": {
-    "react": "15.2.1",
-    "react-bootstrap": "^0.30.7",
+    "react": "^15.2.1",
+    "react-addons-css-transition-group": "^15.4.1",
     "react-dnd": "^2.1.4",
     "react-dnd-html5-backend": "^2.1.2",
-    "react-dom": "15.2.1",
+    "react-dom": "^15.2.1",
     "react-redux": "^4.4.6",
     "react-tabs": "^0.8.2",
     "redux": "^3.6.0"
