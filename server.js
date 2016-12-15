@@ -3,7 +3,6 @@ const app = require('express')();
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
 const bodyParser    = require("body-parser");
-
 const MovieDB = require('moviedb')(process.env.MOVIEDB_KEY);
 
 let nextTodoId = 0;
