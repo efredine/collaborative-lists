@@ -34,8 +34,9 @@ fetch('http://localhost:8080/api/list')
     </Provider>,
     document.getElementById('react-root')
   )
-})
-.catch(error => {
-  document.getElementById('react-root').appendChild(document.createTextNode("Error: can't connect to server."));
 });
+// .catch(error => {
+//   console.log(error);
+//   document.getElementById('react-root').appendChild(document.createTextNode("Error: can't connect to server."));
+// });
 

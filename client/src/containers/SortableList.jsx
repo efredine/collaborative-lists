@@ -8,7 +8,7 @@ import ItemTypes from './ItemTypes';
 import shallowEqual from '../utils/shallowEqual'
 import ReactTransitionGroup from 'react/lib/ReactTransitionGroup'
 import TransitionItem from './TransitionItem.jsx'
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
+import FlipMove from 'react-flip-move';
 
 const style = {
   width: 400
@@ -86,8 +86,7 @@ class SortableList extends Component {
   }
 
   render() {
-    const { connectDropTarget } = this.props;
-    const { onTodoClick, startDrag, endDrag } = this.props;
+    const { isDragging, connectDropTarget, onTodoClick, startDrag, endDrag, dragging } = this.props;
 
     const {todos} = this.state;
 
@@ -97,6 +96,8 @@ class SortableList extends Component {
           <SortableCard
             key={todo.id}
             id={todo.id}
+            startDrag={startDrag}
+            endDrag={endDrag}
             moveCard={this.moveCard}
             findCard={this.findCard}
             broadcastMove={this.broadcastMove}>
@@ -115,12 +116,9 @@ class SortableList extends Component {
     return connectDropTarget(
       <div style={style}>
         <h1>Hello</h1>
-        <ReactCSSTransitionGroup
-          transitionName="example"
-          transitionEnterTimeout={500}
-          transitionLeaveTimeout={300}>
-            {items}
-        </ReactCSSTransitionGroup>
+        <FlipMove easing="cubic-bezier(0, 0.7, 0.8, 0.1)" disableAllAnimations={dragging}>
+          {items}
+        </FlipMove>
       </div>
     );
   }
@@ -130,7 +128,7 @@ class SortableList extends Component {
 const dropTarget = DropTarget( ItemTypes.CARD, cardTarget,
   (connect) =>{
     return {
-      connectDropTarget: connect.dropTarget(),
+      connectDropTarget: connect.dropTarget()
     };
   })(SortableList);
 
