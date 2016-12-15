@@ -3,7 +3,7 @@ import React from 'react'
 import { createStore, applyMiddleware } from 'redux';
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
-import App from './components/App'
+import TodoApp from './components/TodoApp'
 import reducer from './reducers'
 import createSocketIoMiddleware from 'redux-socket.io';
 import io from 'socket.io-client';
@@ -30,7 +30,7 @@ fetch('http://localhost:8080/api/list')
   })
   render(
     <Provider store={store}>
-      <App />
+      <TodoApp />
     </Provider>,
     document.getElementById('react-root')
   )
