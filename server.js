@@ -3,6 +3,8 @@ const server = require('http').Server(app);
 const io = require('socket.io')(server);
 const bodyParser    = require("body-parser");
 
+const MovieDB = require('moviedb')(process.env.MOVIEDB_KEY);
+
 let nextTodoId = 0;
 const actionHistory = [];
 
@@ -16,6 +18,12 @@ app.use(function(req, res, next) {
 
 app.get("/api/list", (req, res) => {
   res.json(actionHistory);
+});
+
+app.get("/api/movies/:movie", (req, res)=> {
+  MovieDB.searchMovie({query: `${req.params.movie}`}, function(err, result){
+    res.json(result)
+  });
 });
 
 app.post("/api/update", (req, res) => {
