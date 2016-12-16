@@ -31,7 +31,7 @@ updateSearch(){
       </div>
     );
   }
-  search(query = "star"){
+  search(query){
     fetch(`http://localhost:8080/api/movies/${query}`)
     .then(response => {
       return response.text();
