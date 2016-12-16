@@ -5,6 +5,7 @@ import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import App from './components/App'
 import TodoApp from './components/TodoApp'
+import Register from './components/Register.jsx';
 import reducer from './reducers'
 import createSocketIoMiddleware from 'redux-socket.io';
 import io from 'socket.io-client';
@@ -29,6 +30,7 @@ render(
      <Router history={browserHistory}>
       <Route path="/" component={App} />
       <Route path="/todos" component={WrappedTodoApp} />
+      <Route path="/signup" component={Register} />
     </Router>
   </Provider>,
   document.getElementById('react-root')

@@ -1,14 +1,16 @@
 import React, {Component} from 'react';
 import MovieContainer from '../containers/movieContainers.jsx'
-import Layout from './Layout.js'
+import NavBar from './NavBar.jsx'
+
 class App extends Component {
 
   render() {
     return(
       <div>
-        <h1>Hello World Again</h1>
-        <MovieContainer/>
-        <Layout/>
+        <NavBar/>
+        <div className="panel-container">
+          <MovieContainer/>
+        </div>
       </div>
     );
   }
