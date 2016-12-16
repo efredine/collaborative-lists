@@ -1,8 +1,11 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router'
+import Login from './Login.jsx'
 
 
 class NavBar extends Component {
+
+
 
   render() {
     return(
@@ -10,7 +13,7 @@ class NavBar extends Component {
         <div className="container-fluid">
           <div className="navbar-header">
           <h2> Lists! </h2>
-          <span><Link to="/signup">Register</Link></span>
+          <Login/>
           </div>
         </div>
       </nav>
