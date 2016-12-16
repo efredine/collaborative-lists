@@ -10,23 +10,7 @@ import fetch from 'isomorphic-fetch'
 class TodoApp extends Component {
 
   componentDidMount() {
-    const {store} = this.props;
-
-    console.log(this.props);
-
-    fetch('http://localhost:8080/api/list')
-    .then((response) => {
-      return response.text();
-    })
-    .then((responseText) => {
-      JSON.parse(responseText).forEach(action => {
-        store.dispatch(action);
-      })
-    })
-    // .catch(error => {
-    //   document.getElementById('react-root').appendChild(document.createTextNode("Error: can't connect to server."));
-    // });
-
+    this.props.fetchTodos();
   }
 
   handleSelect(index, last) {
