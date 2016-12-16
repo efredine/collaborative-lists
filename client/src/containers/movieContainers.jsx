@@ -6,7 +6,11 @@ import _ from 'lodash'
 class MovieContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = {numberOfMovies: 0}
+    this.state = {
+      numberOfMovies: 0,
+      movies: [],
+      selected: []
+    };
   }
 
   componentDidMount() {
@@ -23,22 +27,42 @@ selectMovie(){
   console.log(this.refs.movieSelector.value)
 }
 
+clickMovie = index => event => {
+  const movieSelected = this.state.movies[index];
+  console.log(movieSelected);
+  // create a copy of the selected array
+  const updatedSelectedArray = this.state.selected.slice();
+  updatedSelectedArray.push(movieSelected);
+  this.setState({
+    selected: updatedSelectedArray
+  })
+}
 
   render() {
     // this iterates through the movies object and returns the movie title and rating
-    var movies = _.map(this.state.movies, (movie)=> {
-      return  <a href = "#" key = {movie.id} ><Movie title={movie.original_title} rating={movie.vote_average} /> </a>
+    var movies = _.map(this.state.movies, (movie, index)=> {
+      return  <a href = "#" key = {movie.id} onClick={this.clickMovie(index)} ><Movie title={movie.original_title} rating={movie.vote_average} /> </a>
+
     });
 
     var options = _.map(this.state.movies, (movie)=> {
       return <option key = {movie.id}>{movie.original_title} value = {movie.id} </option>
     });
 
+    const selected = _.map(this.state.selected, (movie)=> {
+      return <Movie key = {movie.id} title={movie.original_title} rating={movie.vote_average} />
+    });
+
     return (
       <div>
-        <input ref = "query" onChange =  {(e) => {this.updateSearch();}} type = 'text'/>
-        <select ref = "movieSelector" onChange = {() => {this.selectMovie()}}>{options}</select>
-        {movies}
+        <div>
+          {selected}
+        </div>
+        <div>
+          <input ref = "query" onChange =  {(e) => {this.updateSearch();}} type = 'text'/>
+          <select ref = "movieSelector" onChange = {() => {this.selectMovie()}}>{options}</select>
+          {movies}
+        </div>
       </div>
     );
   }
