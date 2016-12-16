@@ -26,8 +26,7 @@ updateSearch(){
     return (
       <div>
         <input ref = "query" onChange =  { (e) => {this.updateSearch();}} type = 'text'/>
-        <h1>Number of movies: {this.state.numberOfMovies}</h1>
-        <ul>{movies}</ul>
+        {movies}
       </div>
     );
   }
