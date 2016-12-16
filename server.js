@@ -16,6 +16,10 @@ const knexLogger  = require('knex-logger');
 let nextTodoId = 0;
 const actionHistory = [];
 
+// Seperated Routes for each Resource
+const usersRoutes = require("./routes/users");
+
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
@@ -33,13 +37,18 @@ app.use(morgan('dev'));
 // Log knex SQL queries to STDOUT as well
 app.use(knexLogger(knex));
 
-app.get("/api/list", (req, res) => {
+// Mount all resource routes
+// Mount routes on /api
+//
+app.use("/api/users", usersRoutes(knex));
+
+app.get("/api/todos", (req, res) => {
   res.json(actionHistory);
 });
 
 app.get("/api/movies/:movie", (req, res)=> {
   MovieDB.searchMovie({query: `${req.params.movie}`}, function(err, result){
-    res.json(result)
+    res.json(result);
   });
 });
 
