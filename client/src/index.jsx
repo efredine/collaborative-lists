@@ -4,32 +4,29 @@ import { createStore, applyMiddleware } from 'redux';
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import App from './components/App'
-import TodoApp from './components/TodoApp'
+import TodoAppContainer from './containers/TodoAppContainer.jsx'
 import Register from './components/Register.jsx';
 import reducer from './reducers'
 import createSocketIoMiddleware from 'redux-socket.io';
 import io from 'socket.io-client';
 import createLogger from 'redux-logger';
 import { Router, Route, browserHistory } from 'react-router';
+import ReduxThunk from 'redux-thunk'
 
 const loggerMiddleware = createLogger();
 const socket = io('http://localhost:8080');
 const socketIoMiddleware = createSocketIoMiddleware(socket, ['SERVER/ADD_TODO', 'SERVER/TOGGLE_TODO', 'SERVER/MOVE'], pessimisticExecute);
-const store = applyMiddleware(socketIoMiddleware, loggerMiddleware)(createStore)(reducer);
+const store = applyMiddleware(ReduxThunk, socketIoMiddleware, loggerMiddleware)(createStore)(reducer);
 
 function pessimisticExecute(action, emit, next, dispatch) {
   emit('action', action);
 }
 
-const WrappedTodoApp = ({ store }) => (
-  <TodoApp store={store} hello="hello"/>
-);
-
 render(
   <Provider store={store}>
      <Router history={browserHistory}>
       <Route path="/" component={App} />
-      <Route path="/todos" component={WrappedTodoApp} />
+      <Route path="/todos" component={TodoAppContainer} />
       <Route path="/signup" component={Register} />
     </Router>
   </Provider>,
