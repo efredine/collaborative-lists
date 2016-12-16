@@ -19,8 +19,8 @@ updateSearch(){
 }
 
   render() {
-    var movies = _.map(this.state.movies, (movie, key)=> {
-      return <li>{movie.original_title}</li>
+    var movies = _.map(this.state.movies, (movie)=> {
+      return <li key = {movie.id}>{movie.original_title}, {movie.vote_average}</li>
     });
 
     return (
