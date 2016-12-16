@@ -14,6 +14,9 @@ module.exports = {
   },
   module: {
     loaders: [
+      { test: /\.jpe?g$|\.gif$|\.png$|\.svg$|\.woff$|\.ttf$|\.wav$|\.mp3$/,
+        loader: "file"
+      },
       {
         test: /\.jsx?$/,
         loaders: ['babel'],
