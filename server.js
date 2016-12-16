@@ -1,5 +1,6 @@
 require('dotenv').config({silent: true});
-const app = require('express')();
+const express = require('express')
+const app = express();
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
 const bodyParser    = require("body-parser");
@@ -9,6 +10,7 @@ let nextTodoId = 0;
 const actionHistory = [];
 
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static('public'))
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");

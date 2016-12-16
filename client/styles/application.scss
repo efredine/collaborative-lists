@@ -1,2 +1,37 @@
 // This is the top-level scss file. Import all other files in here.
 @import 'home';
+
+.panel-default>.panel-heading {
+  color: #black;
+  background-color: #7DFF59;
+  width: 413px;
+}
+
+.panel-default {
+  width: 415px;
+  margin-top: 40px;
+}
+
+
+.navbar-default {
+  background-color: #47B229;
+}
+
+.panel-container {
+  margin-top: 120px;
+}
+
+.fresh {
+  height: 20px;
+  width: 20px;
+}
+
+.rotten {
+  height: 20px;
+  width: 20px;
+}
+
+.certified {
+  height: 20px;
+  width: 20px;
+}
