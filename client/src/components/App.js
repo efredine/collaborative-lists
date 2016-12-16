@@ -8,7 +8,6 @@ class App extends Component {
       <div>
         <h1>Hello World Again</h1>
         <MovieContainer/>
-        <Layout/>
       </div>
     );
   }

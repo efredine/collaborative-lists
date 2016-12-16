@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import '../components/Movie.jsx'
+import Movie from '../components/Movie.jsx'
 import fetch from 'isomorphic-fetch';
 import _ from 'lodash'
 
@@ -20,7 +20,7 @@ updateSearch(){
 
   render() {
     var movies = _.map(this.state.movies, (movie)=> {
-      return <li key = {movie.id}>{movie.original_title}, {movie.vote_average}</li>
+      return <Movie key = {movie.id} title={movie.original_title} rating={movie.vote_average} />
     });
 
     return (
