@@ -40,7 +40,7 @@ export const receiveTodos = actionHistory => ({
 });
 
 export const fetchTodos = () => dispatch => {
-  return fetch('http://localhost:8080/api/list')
+  return fetch('http://localhost:8080/api/todos')
   .then(response => response.json())
   .then(json => dispatch(receiveTodos(json)));
   // TODO: add error handling catch
