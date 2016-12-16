@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
+import '../components/Movie.jsx'
 import fetch from 'isomorphic-fetch';
 import _ from 'lodash'
-
 
 class MovieContainer extends Component {
   constructor(props) {
