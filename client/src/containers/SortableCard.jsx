@@ -13,6 +13,7 @@ const style = {
 
 const cardSource = {
   beginDrag(props) {
+    props.startDrag();
     return {
       id: props.id,
       originalIndex: props.findCard(props.id).index
@@ -22,9 +23,9 @@ const cardSource = {
   endDrag(props, monitor) {
     const { id: droppedId, originalIndex } = monitor.getItem();
     const didDrop = monitor.didDrop();
-
     if (!didDrop) {
       props.moveCard(droppedId, originalIndex);
+      props.endDrag();
     } else {
       props.broadcastMove(droppedId);
     }
