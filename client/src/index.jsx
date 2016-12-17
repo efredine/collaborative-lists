@@ -12,6 +12,7 @@ import io from 'socket.io-client';
 import createLogger from 'redux-logger';
 import { Router, Route, browserHistory } from 'react-router';
 import ReduxThunk from 'redux-thunk'
+import lists from './components/lists.jsx'
 
 const loggerMiddleware = createLogger();
 const socket = io('http://localhost:8080');
@@ -28,6 +29,7 @@ render(
       <Route path="/" component={App} />
       <Route path="/todos" component={TodoAppContainer} />
       <Route path="/signup" component={Register} />
+      <Route path="/lists" component={lists} />
     </Router>
   </Provider>,
   document.getElementById('react-root')

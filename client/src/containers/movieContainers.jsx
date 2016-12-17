@@ -14,6 +14,21 @@ class MovieContainer extends Component {
   }
 
   componentDidMount() {
+      // fetch('http://localhost:8080/api/lists')
+      // .then(response => {
+      //   return response.json();
+      // })
+      // .then(names => {
+      //   // const names = JSON.parse(responseText);
+      //   console.log('names',names);
+      //   this.setState({names: names});
+      //   // this.setState({
+      //   //   numberOfNames: movies.results.length,
+      //   //   names: movies.results,
+      //   // });
+      //   //  console.log('responseText', responseText)
+      // })
+
 
   }
 // updates what ever movie name you put in the search box with the results starting with its name
@@ -39,6 +54,11 @@ clickMovie = index => event => {
 }
 
   render() {
+
+    // var names = _.map(this.state.names, (name) => {
+    //   return <li key = {name.id}>{name.name}</li>
+    // })
+
     // this iterates through the movies object and returns the movie title and rating
     var movies = _.map(this.state.movies, (movie, index)=> {
       return  <a href = "#" key = {movie.id} onClick={this.clickMovie(index)} ><Movie title={movie.original_title} rating={movie.vote_average} /> </a>
@@ -62,6 +82,7 @@ clickMovie = index => event => {
           <input ref = "query" onChange =  {(e) => {this.updateSearch();}} type = 'text'/>
           <select ref = "movieSelector" onChange = {() => {this.selectMovie()}}>{options}</select>
           {movies}
+          {/* <h1>{names}</h1> */}
         </div>
       </div>
     );
@@ -82,5 +103,7 @@ clickMovie = index => event => {
       console.log(movies.results)
     })
   }
+
+
 }
 export default MovieContainer;
