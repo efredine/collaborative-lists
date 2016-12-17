@@ -14,7 +14,6 @@ class MovieContainer extends Component {
   }
 
   componentDidMount() {
-
   }
 // updates what ever movie name you put in the search box with the results starting with its name
 updateSearch(){
@@ -39,6 +38,7 @@ clickMovie = index => {
 }
 
   render() {
+
     // this iterates through the movies object and returns the movie title and rating
     var movies = _.map(this.state.movies, (movie, index)=> {
       return  <Movie key={movie.id} index={index} onAdd={this.clickMovie} title={movie.original_title} rating={movie.vote_average} />
@@ -82,5 +82,7 @@ clickMovie = index => {
       console.log(movies.results)
     })
   }
+
+
 }
 export default MovieContainer;
