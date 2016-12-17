@@ -18,10 +18,9 @@ export const toggleTodo = (id) => {
   };
 }
 
-// export const startDrag = (id) => ({
-//   type: 'START_DRAG',
-//   id
-// });
+export const startDrag = () => ({
+  type: 'START_DRAG'
+});
 
 export const move = (draggedId, overId) => ({
   type: 'SERVER/MOVE',
@@ -29,10 +28,9 @@ export const move = (draggedId, overId) => ({
   overId
 });
 
-// export const endDrag = (didDrop) => ({
-//   type: 'END_DRAG',
-//   didDrop
-// });
+export const endDrag = () => ({
+  type: 'END_DRAG'
+});
 
 export const receiveTodos = actionHistory => ({
   type: 'RECEIVE',
