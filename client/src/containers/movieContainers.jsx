@@ -27,7 +27,7 @@ selectMovie(){
   console.log(this.refs.movieSelector.value)
 }
 
-clickMovie = index => event => {
+clickMovie = index => {
   const movieSelected = this.state.movies[index];
   console.log(movieSelected);
   // create a copy of the selected array
@@ -41,7 +41,7 @@ clickMovie = index => event => {
   render() {
     // this iterates through the movies object and returns the movie title and rating
     var movies = _.map(this.state.movies, (movie, index)=> {
-      return  <a href = "#" key = {movie.id} onClick={this.clickMovie(index)} ><Movie title={movie.original_title} rating={movie.vote_average} /> </a>
+      return  <Movie key={movie.id} index={index} onAdd={this.clickMovie} title={movie.original_title} rating={movie.vote_average} />
 
     });
 
