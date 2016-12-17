@@ -11,7 +11,12 @@ module.exports = (knex) => {
       .from("users")
       .then((results) => {
         res.json(results);
-    });
+      });
+  });
+
+  router.post("/login", (req, res) => {
+    console.log(req.body.username);
+    res.json(req.body);
   });
 
   return router;

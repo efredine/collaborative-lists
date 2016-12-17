@@ -3,11 +3,13 @@ import todos from './todos'
 import actions from './actions'
 import visibilityFilter from './visibilityFilter'
 import receiver from './receiver'
+import user from './user'
 
 const sliceReducers = combineReducers({
   todos,
   actions,
-  visibilityFilter
+  visibilityFilter,
+  user
 })
 
 function reduce(state, action) {

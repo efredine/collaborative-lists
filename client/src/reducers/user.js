@@ -1,4 +1,4 @@
-const users = (state = {user: undefined}, action) => {
+const user = (state = {user: undefined}, action) => {
   switch (action.type) {
     case 'RECEIVE_USER':
       return action.user
@@ -7,4 +7,4 @@ const users = (state = {user: undefined}, action) => {
   }
 }
 
-export default users
+export default user

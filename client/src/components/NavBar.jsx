@@ -1,11 +1,9 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router'
-import Login from './Login.jsx'
+import LoginContainer from '../containers/LoginContainer.js'
 
 
 class NavBar extends Component {
-
-
 
   render() {
     return(
@@ -13,7 +11,7 @@ class NavBar extends Component {
         <div className="container-fluid">
           <div className="navbar-header">
           <h2> Lists! </h2>
-          <Login/>
+          <LoginContainer/>
           </div>
         </div>
       </nav>
