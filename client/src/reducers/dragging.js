@@ -4,6 +4,8 @@ const dragging = (state = false, action) => {
       return true;
     case 'END_DRAG':
       return false;
+    case 'MOVE':
+      return false;
     default:
       return state
   }

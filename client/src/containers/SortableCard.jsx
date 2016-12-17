@@ -23,9 +23,9 @@ const cardSource = {
   endDrag(props, monitor) {
     const { id: droppedId, originalIndex } = monitor.getItem();
     const didDrop = monitor.didDrop();
-    props.endDrag();
     if (!didDrop) {
       props.moveCard(droppedId, originalIndex);
+      props.endDrag();
     } else {
       props.broadcastMove(droppedId);
     }
