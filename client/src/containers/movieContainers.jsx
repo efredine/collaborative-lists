@@ -34,6 +34,7 @@ clickMovie = index => {
   updatedSelectedArray.push(movieSelected);
   this.setState({
     selected: updatedSelectedArray
+
   })
 }
 

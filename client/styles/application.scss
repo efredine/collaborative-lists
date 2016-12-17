@@ -3,10 +3,12 @@
 img {
   max-width: 100%;
 }
-
+body {
+  background: -webkit-gradient(linear, left top, right top, color-stop(0%, #008080), color-stop(100%, #66FF8A));
+}
 .panel-default>.panel-heading {
   color: black;
-  background-color: #7DFF59;
+   background: -webkit-gradient(linear, left top, right top, color-stop(0%, #008080), color-stop(100%, #66FF8A));
   width: 413px;
 
 }
@@ -19,7 +21,9 @@ img {
 
 
 .navbar-default {
-  background-color: #4BFF19;
+   background-color: transparent;
+   background: transparent;
+   border-color: transparent;
 }
 
 .panel-container {
@@ -45,6 +49,12 @@ img {
   position: absolute;
   top: 10px;
   right: 10px;
+}
+
+.navbar-text {
+  position: absolute;
+  top: 10px;
+  right: 25px;
 }
 
 .add {
