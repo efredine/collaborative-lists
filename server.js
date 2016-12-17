@@ -41,6 +41,7 @@ app.use(knexLogger(knex));
 // Mount routes on /api
 //
 app.use("/api/users", usersRoutes(knex));
+app.use("/api/lists", usersRoutes(knex));
 
 app.get("/api/todos", (req, res) => {
   res.json(actionHistory);
@@ -51,6 +52,8 @@ app.get("/api/movies/:movie", (req, res)=> {
     res.json(result);
   });
 });
+
+
 
 app.post("/api/update", (req, res) => {
   console.log(req.body.theThing);
