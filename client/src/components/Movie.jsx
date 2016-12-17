@@ -2,6 +2,11 @@ import React, {Component} from 'react';
 
 class Movie extends Component {
 
+  onAdd = () => {
+    const {onAdd, index} = this.props;
+    onAdd(index);
+  }
+
   render() {
     const {title, rating} = this.props;
 
@@ -13,7 +18,7 @@ class Movie extends Component {
             {rating * 10}% {title}
           </h3>
           <div className="add">
-            <img src="http://localhost:8080/images/add.png"/>
+            <img onClick={this.onAdd} src="http://localhost:8080/images/add.png"/>
           </div>
         </div>
         <div className="panel-body">
