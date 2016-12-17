@@ -5,55 +5,52 @@ class Login extends Component {
  constructor(props) {
     super(props);
     this.state = {
-      value: "",
       userInput: ""
     };
 
-
-
-    this.handleChangeText = this.handleChangeText.bind(this);
-    this.handleSubmitText = this.handleSubmitText.bind(this);
-    this.handleChangeUser = this.handleChangeUser.bind(this);
-
   };
 
-
-   handleSubmitText(event) {
-    if (event.key === "Enter") {
-      this.props.sendMessage(event.target.value, this.state.user);
+  componentDidMount() {
+    const {user, identify} = this.props;
+    if(!user.initialized) {
+      identify();
     }
   }
 
-  handleChangeText(event) {
-     console.log(event.target.value)
-     this.setState({value: event.target.value});
-    }
-
-    handleChangeUser(event) {
-    console.log(event.target.value)
+  handleChangeUser = (event) => {
     this.setState({userInput: event.target.value});
+  }
 
-    }
-
+  handleSubmit = (event) => {
+    const { login } = this.props;
+    event.preventDefault();
+    login(this.state.userInput);
+  }
 
   render() {
-    return(
-<div>
-  <form className="navbar-form navbar-right" role="search">
-    <div className="form-group">
-        <input
-        id="login"
-        type="text"
-        value={this.state.userInput}
-        onKeyPress={this.handleSubmitUser}
-        onChange={this.handleChangeUser}
-        placeholder="Username"
-      />
-    </div>
-    <button type="submit" className="btn btn-default">Sign In</button>
-  </form>
-</div>
-    );
+    const {user} = this.props;
+    if(user.username) {
+      return (
+        <div className="navbar-text navbar-right">Logged in as: {user.username}</div>
+      );
+    } else {
+      return(
+        <div>
+          <form className="navbar-form navbar-right" role="search">
+            <div className="form-group">
+                <input
+                id="login"
+                type="text"
+                value={this.state.userInput}
+                onChange={this.handleChangeUser}
+                placeholder="Username"
+              />
+            </div>
+            <button type="submit" onClick={this.handleSubmit} className="btn btn-default">Sign In</button>
+          </form>
+        </div>
+      );
+    }
   }
 }
 export default Login;

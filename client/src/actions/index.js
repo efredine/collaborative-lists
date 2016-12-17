@@ -45,3 +45,26 @@ export const fetchTodos = () => dispatch => {
   .then(json => dispatch(receiveTodos(json)));
   // TODO: add error handling catch
 }
+
+export const receiveUser = user => ({
+  type: 'RECEIVE_USER',
+  user: user
+});
+
+export const identify = () => dispatch => {
+  return fetch('http://localhost:8080/api/users/identify')
+    .then(response => response.json())
+    .then(json => dispatch(receiveUser(json)));
+}
+
+export const login = username => dispatch => {
+  return fetch('http://localhost:8080/api/users/login', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+      body: `username=${username}`
+    })
+  .then(response => response.json())
+  .then(json => dispatch(receiveUser(json)));
+}
