@@ -27,6 +27,13 @@ class Login extends Component {
   //   this.setState({value: event.target.value});
   // }
 
+  componentDidMount() {
+    const {user, identify} = this.props;
+    if(!user.initialized) {
+      identify();
+    }
+  }
+
   handleChangeUser = (event) => {
     console.log(event.target.value)
     this.setState({userInput: event.target.value});
@@ -42,24 +49,28 @@ class Login extends Component {
   render() {
     const {user} = this.props;
     console.log(user);
-
-    return(
-      <div>
-        <form className="navbar-form navbar-right" role="search">
-          <div>Username: {user ? user.username : undefined}</div>
-          <div className="form-group">
-              <input
-              id="login"
-              type="text"
-              value={this.state.userInput}
-              onChange={this.handleChangeUser}
-              placeholder="Username"
-            />
-          </div>
-          <button type="submit" onClick={this.handleSubmit} className="btn btn-default">Sign In</button>
-        </form>
-      </div>
-    );
+    if(user.username) {
+      return (
+        <div className="navbar-text navbar-right">Logged in as: {user.username}</div>
+      );
+    } else {
+      return(
+        <div>
+          <form className="navbar-form navbar-right" role="search">
+            <div className="form-group">
+                <input
+                id="login"
+                type="text"
+                value={this.state.userInput}
+                onChange={this.handleChangeUser}
+                placeholder="Username"
+              />
+            </div>
+            <button type="submit" onClick={this.handleSubmit} className="btn btn-default">Sign In</button>
+          </form>
+        </div>
+      );
+    }
   }
 }
 export default Login;

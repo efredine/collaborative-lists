@@ -1,7 +1,7 @@
-const user = (state = {user: undefined}, action) => {
+const user = (state = {user: undefined, userInitialized: false}, action) => {
   switch (action.type) {
     case 'RECEIVE_USER':
-      return action.user
+      return Object.assign({}, action.user, {userInitialized:true});
     default:
       return state
   }
