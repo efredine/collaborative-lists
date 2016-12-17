@@ -38,3 +38,9 @@ jspm_packages
 
 # OSX Finder
 .DS_Store
+
+# system specific configuration
+.env
+
+# sublime
+*.sublime-workspace

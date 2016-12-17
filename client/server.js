@@ -4,6 +4,7 @@ var config = require('./webpack.config');
 
 new WebpackDevServer(webpack(config), {
     publicPath: config.output.publicPath,
+    historyApiFallback: true,
     watchOptions: {
       aggregateTimeout: 300,
       poll: 1000

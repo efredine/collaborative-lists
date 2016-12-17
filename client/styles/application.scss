@@ -1,2 +1,81 @@
 // This is the top-level scss file. Import all other files in here.
 @import 'home';
+img {
+  max-width: 100%;
+}
+body {
+  background: -webkit-gradient(linear, left top, right top, color-stop(0%, #008080), color-stop(100%, #66FF8A));
+}
+.panel-default>.panel-heading {
+  color: black;
+   background: -webkit-gradient(linear, left top, right top, color-stop(0%, #008080), color-stop(100%, #66FF8A));
+  width: 413px;
+
+}
+
+.panel-default {
+  width: 415px;
+  margin-top: 10px;
+  margin-bottom: 0px;
+}
+
+
+.navbar-default {
+   background-color: transparent;
+   background: transparent;
+   border-color: transparent;
+}
+
+.panel-container {
+  margin-top: 140px;
+}
+
+.fresh {
+  height: 20px;
+  width: 20px;
+}
+
+.rotten {
+  height: 20px;
+  width: 20px;
+}
+
+.certified {
+  height: 20px;
+  width: 20px;
+}
+
+.navbar-form {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.navbar-text {
+  position: absolute;
+  top: 10px;
+  right: 25px;
+}
+
+.add {
+  height: 35px;
+  width: 35px;
+  float: right;
+  opacity: .5;
+  position: absolute;
+  top: 0;
+  right: 0;
+  transition-duration: 200ms;
+
+
+  &:hover {
+  opacity: 1.0;
+  cursor: pointer;
+
+  }
+}
+
+.panel-movie {
+position: relative;
+}
+

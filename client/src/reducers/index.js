@@ -3,12 +3,20 @@ import todos from './todos'
 import actions from './actions'
 import visibilityFilter from './visibilityFilter'
 import dragging from './dragging'
+import receiver from './receiver'
+import user from './user'
 
-const todoApp = combineReducers({
+const sliceReducers = combineReducers({
   todos,
   actions,
   visibilityFilter,
-  dragging
+  dragging,
+  user
 })
 
-export default todoApp
+function reduce(state, action) {
+  const intermediateState = sliceReducers(state, action);
+  return receiver(intermediateState, action, sliceReducers);
+}
+
+export default reduce;

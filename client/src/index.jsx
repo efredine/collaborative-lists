@@ -1,42 +1,36 @@
 require("../styles/application.scss");
-import React from 'react'
+import React, {Component} from 'react'
 import { createStore, applyMiddleware } from 'redux';
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import App from './components/App'
+import TodoAppContainer from './containers/TodoAppContainer.jsx'
+import Register from './components/Register.jsx';
 import reducer from './reducers'
 import createSocketIoMiddleware from 'redux-socket.io';
 import io from 'socket.io-client';
 import createLogger from 'redux-logger';
-import fetch from 'isomorphic-fetch'
+import { Router, Route, browserHistory } from 'react-router';
+import ReduxThunk from 'redux-thunk'
+import lists from './components/lists.jsx'
 
 const loggerMiddleware = createLogger();
 const socket = io('http://localhost:8080');
 const socketIoMiddleware = createSocketIoMiddleware(socket, ['SERVER/ADD_TODO', 'SERVER/TOGGLE_TODO', 'SERVER/MOVE'], pessimisticExecute);
-const store = applyMiddleware(socketIoMiddleware, loggerMiddleware)(createStore)(reducer);
-
+const store = applyMiddleware(ReduxThunk, socketIoMiddleware, loggerMiddleware)(createStore)(reducer);
 
 function pessimisticExecute(action, emit, next, dispatch) {
   emit('action', action);
 }
 
-fetch('http://localhost:8080/api/list')
-.then(function(response) {
-  return response.text();
-})
-.then(function(responseText) {
-  JSON.parse(responseText).forEach(action => {
-    store.dispatch(action);
-  })
-  render(
-    <Provider store={store}>
-      <App />
-    </Provider>,
-    document.getElementById('react-root')
-  )
-});
-// .catch(error => {
-//   console.log(error);
-//   document.getElementById('react-root').appendChild(document.createTextNode("Error: can't connect to server."));
-// });
-
+render(
+  <Provider store={store}>
+     <Router history={browserHistory}>
+      <Route path="/" component={App} />
+      <Route path="/todos" component={TodoAppContainer} />
+      <Route path="/signup" component={Register} />
+      <Route path="/lists" component={lists} />
+    </Router>
+  </Provider>,
+  document.getElementById('react-root')
+)
