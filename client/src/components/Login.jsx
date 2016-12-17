@@ -8,24 +8,7 @@ class Login extends Component {
       userInput: ""
     };
 
-    // this.handleChangeText = this.handleChangeText.bind(this);
-    // this.handleSubmitText = this.handleSubmitText.bind(this);
-    // this.handleChangeUser = this.handleChangeUser.bind(this);
-
   };
-
-
-  // handleSubmitText(event) {
-  //   if (event.key === "Enter") {
-  //     console.log("enter");
-  //     this.props.sendMessage(event.target.value, this.state.user);
-  //   }
-  // }
-
-  // handleChangeText(event) {
-  //   console.log(event.target.value)
-  //   this.setState({value: event.target.value});
-  // }
 
   componentDidMount() {
     const {user, identify} = this.props;
@@ -35,20 +18,17 @@ class Login extends Component {
   }
 
   handleChangeUser = (event) => {
-    console.log(event.target.value)
     this.setState({userInput: event.target.value});
   }
 
   handleSubmit = (event) => {
     const { login } = this.props;
     event.preventDefault();
-    console.log('submit now');
     login(this.state.userInput);
   }
 
   render() {
     const {user} = this.props;
-    console.log(user);
     if(user.username) {
       return (
         <div className="navbar-text navbar-right">Logged in as: {user.username}</div>
