@@ -18,24 +18,15 @@ class lists extends Component {
         return response.json();
       })
       .then(names => {
-        // const names = JSON.parse(responseText);
         console.log('names',names);
         this.setState({names: names});
-        // this.setState({
-        //   numberOfNames: movies.results.length,
-        //   names: movies.results,
-        // });
-        //  console.log('responseText', responseText)
       })
-
-
   }
 
   render() {
-
     var names = _.map(this.state.names, (name) => {
       return <li key = {name.id}>{name.name}</li>
-    })
+    });
     return (
       <div>
           <h1>{names}</h1>
