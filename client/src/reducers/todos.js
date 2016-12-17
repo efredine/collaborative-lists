@@ -25,7 +25,7 @@ const move = (todos, action) => {
 
 const todo = (state, action) => {
   switch (action.type) {
-    case 'ADD_TODO':
+    case 'ADD_CARD':
       return {
         id: action.id,
         text: action.text,
@@ -48,7 +48,7 @@ const todo = (state, action) => {
 
 const todos = (state = [], action) => {
   switch (action.type) {
-    case 'ADD_TODO':
+    case 'ADD_CARD':
       return [
         ...state,
         todo(undefined, action)

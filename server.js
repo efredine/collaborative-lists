@@ -67,8 +67,8 @@ io.on('connection', function(socket){
   socket.on('action', (action) => {
     console.log(action);
     switch(action.type) {
-    case'SERVER/ADD_TODO':
-      action.type = 'ADD_TODO';
+    case'SERVER/ADD_CARD':
+      action.type = 'ADD_CARD';
       action.id = nextTodoId++;
       break;
     case 'SERVER/TOGGLE_TODO':

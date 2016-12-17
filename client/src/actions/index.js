@@ -1,8 +1,8 @@
 import fetch from 'isomorphic-fetch'
 
 
-export const addTodo = (text) => ({
-  type: 'SERVER/ADD_TODO',
+export const addCard = (text) => ({
+  type: 'SERVER/ADD_CARD',
   text
 });
 
