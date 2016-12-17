@@ -13,6 +13,16 @@ body {
 
 }
 
+.logo {
+ position: absolute;
+ top: -25px;
+ left: -135px;
+ max-height: 250%;
+
+}
+
+
+
 .panel-default {
   width: 415px;
   margin-top: 10px;
@@ -24,6 +34,7 @@ body {
    background-color: transparent;
    background: transparent;
    border-color: transparent;
+   position: relative;
 }
 
 .panel-container {
