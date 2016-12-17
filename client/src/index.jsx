@@ -16,7 +16,7 @@ import lists from './components/lists.jsx'
 
 const loggerMiddleware = createLogger();
 const socket = io('http://localhost:8080');
-const socketIoMiddleware = createSocketIoMiddleware(socket, ['SERVER/ADD_CARD', 'SERVER/TOGGLE_TODO', 'SERVER/MOVE'], pessimisticExecute);
+const socketIoMiddleware = createSocketIoMiddleware(socket, ['SERVER/ADD_CARD', 'SERVER/TOGGLE_CARD', 'SERVER/MOVE'], pessimisticExecute);
 const store = applyMiddleware(ReduxThunk, socketIoMiddleware, loggerMiddleware)(createStore)(reducer);
 
 function pessimisticExecute(action, emit, next, dispatch) {

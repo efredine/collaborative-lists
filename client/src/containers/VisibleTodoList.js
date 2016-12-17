@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { toggleTodo, move, startDrag, endDrag } from '../actions'
+import { toggleCard, move, startDrag, endDrag } from '../actions'
 import SortableList from './SortableList.jsx'
 
 const getVisibleTodos = (todos, filter) => {
@@ -21,7 +21,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps =  ({
-  onTodoClick: toggleTodo,
+  onTodoClick: toggleCard,
   move: move,
   startDrag: startDrag,
   endDrag: endDrag

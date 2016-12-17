@@ -11,9 +11,9 @@ export const setVisibilityFilter = (filter) => ({
   filter
 });
 
-export const toggleTodo = (id) => {
+export const toggleCard = (id) => {
   return {
-    type: 'SERVER/TOGGLE_TODO',
+    type: 'SERVER/TOGGLE_CARD',
     id
   };
 }

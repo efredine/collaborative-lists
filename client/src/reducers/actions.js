@@ -18,7 +18,7 @@ function getActionRecord(state, action) {
       return Object.assign({}, action, {
         type: 'Added'
       });
-    case 'TOGGLE_TODO':
+    case 'TOGGLE_CARD':
       return {
         id: action.toggleId,
         targetId: action.id,
@@ -34,7 +34,7 @@ const actions = (state = [], action) => {
   switch (action.type) {
     case 'MOVE':
     case 'ADD_CARD':
-    case 'TOGGLE_TODO':
+    case 'TOGGLE_CARD':
       return [
         ...state,
         getActionRecord(state, action)
