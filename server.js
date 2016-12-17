@@ -18,6 +18,7 @@ const actionHistory = [];
 
 // Seperated Routes for each Resource
 const usersRoutes = require("./routes/users");
+const listsRoutes = require("./routes/lists")
 
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -41,7 +42,7 @@ app.use(knexLogger(knex));
 // Mount routes on /api
 //
 app.use("/api/users", usersRoutes(knex));
-app.use("/api/lists", usersRoutes(knex));
+app.use("/api/lists", listsRoutes(knex));
 
 app.get("/api/todos", (req, res) => {
   res.json(actionHistory);
