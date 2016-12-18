@@ -22,13 +22,7 @@ module.exports = (knex) => {
     } else {
       res.json({username: undefined});
     }
-    //If this user is currently logged in, return their username.
-    // knex
-    //   .select("name")
-    //   .from("users")
-    //   .then((results) => {
-    //     res.json(results);
-    //   });
+
   });
 
   router.post("/login", (req, res) => {
@@ -39,8 +33,9 @@ module.exports = (knex) => {
       .from("users")
       .where("users.name", "=", req.body.username)
       .then((user) => {
-        if(req.body.username === user[0].name) {
-          req.session.user = req.body;
+        const userRecord = user[0];
+        if(req.body.username === userRecord.name) {
+          req.session.user = Object.assign({}, req.body, userRecord);
         }else {
           req.session.user = null;
         }

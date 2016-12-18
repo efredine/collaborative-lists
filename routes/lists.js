@@ -6,7 +6,7 @@ const router  = express.Router();
 module.exports = (knex) => {
 
   router.get("/", (req, res) => {
-    const userId = 1;
+    const userId = req.session.user.id;
     knex
       .select("*")
       .from("lists")
@@ -18,8 +18,7 @@ module.exports = (knex) => {
   });
 
   router.post("/new", (req, res) => {
-    //req.sessions.user.id;
-    const userId = 1;
+    const userId = req.session.user.id;
     knex('lists')
       .returning('id')
       .insert({
