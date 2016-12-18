@@ -102,10 +102,8 @@ class SortableList extends Component {
             findCard={this.findCard}
             broadcastMove={this.broadcastMove}>
             <Todo
-              id={todo.id}
               onClick={() => onTodoClick(todo.id)}
-              content={todo.content}
-              completed={todo.completed}
+              {...todo}
             />
           </SortableCard>
         </TransitionItem>
