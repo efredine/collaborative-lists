@@ -44,6 +44,7 @@ module.exports = (knex) => {
         }else {
           req.session.user = null;
         }
+        console.log(req.session);
         res.json(req.body);
       })
       .catch((error) => {

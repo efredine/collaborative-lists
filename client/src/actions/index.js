@@ -50,13 +50,14 @@ export const receiveUser = user => ({
 });
 
 export const identify = () => dispatch => {
-  return fetch('/api/users/identify')
+  return fetch('/api/users/identify', {credentials: 'include'})
     .then(response => response.json())
     .then(json => dispatch(receiveUser(json)));
 }
 
 export const login = username => dispatch => {
   return fetch('/api/users/login', {
+    credentials: 'include',
     method: 'POST',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'

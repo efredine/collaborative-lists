@@ -5,7 +5,7 @@ var config = require('./webpack.config');
 new WebpackDevServer(webpack(config), {
     quiet: false,
     publicPath: config.output.publicPath,
-    // historyApiFallback: true,
+    historyApiFallback: true,
     proxy: {
       "/api/**" : "http://localhost:8080"
     },
