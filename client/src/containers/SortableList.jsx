@@ -4,7 +4,7 @@ import SortableCard from './SortableCard.jsx';
 import Todo from '../components/Todo';
 import { DropTarget, DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
-import ItemTypes from './ItemTypes';
+import ItemTypes from '../types/DropItemTypes';
 import shallowEqual from '../utils/shallowEqual'
 import ReactTransitionGroup from 'react/lib/ReactTransitionGroup'
 import TransitionItem from './TransitionItem.jsx'

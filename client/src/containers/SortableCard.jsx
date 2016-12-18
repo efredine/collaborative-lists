@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import ItemTypes from './ItemTypes';
+import ItemTypes from '../types/DropItemTypes';
 import { DragSource, DropTarget } from 'react-dnd';
 import flow from 'lodash/flow';
 
