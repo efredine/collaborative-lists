@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import update from 'react/lib/update';
 import SortableCard from './SortableCard.jsx';
-import Todo from '../components/Todo';
+import SmartCard from './SmartCard.js';
 import { DropTarget, DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import ItemTypes from '../types/DropItemTypes';
@@ -101,7 +101,7 @@ class SortableList extends Component {
             moveCard={this.moveCard}
             findCard={this.findCard}
             broadcastMove={this.broadcastMove}>
-            <Todo
+            <SmartCard
               onClick={() => onCardClick(card.id)}
               {...card}
             />
