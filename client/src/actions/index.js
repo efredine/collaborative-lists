@@ -1,9 +1,15 @@
 import fetch from 'isomorphic-fetch'
+import ContentTypes from '../types/ContentTypes';
 
 export const addCard = (content) => ({
   type: 'SERVER/ADD_CARD',
   content
 });
+
+export const addTodo = (text) => (addCard({
+  contentType: ContentTypes.TODO,
+  text: text
+}))
 
 export const setVisibilityFilter = (filter) => ({
   type: 'SET_VISIBILITY_FILTER',

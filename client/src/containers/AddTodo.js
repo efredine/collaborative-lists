@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { addCard } from '../actions'
-import ContentTypes from '../types/ContentTypes';
+import { addTodo } from '../actions'
 
 let AddTodo = ({ dispatch }) => {
   let input
@@ -13,10 +12,7 @@ let AddTodo = ({ dispatch }) => {
         if (!input.value.trim()) {
           return;
         }
-        dispatch(addCard({
-          contentType: ContentTypes.TODO,
-          text: input.value}
-        ));
+        dispatch(addTodo(input.value));
         input.value = '';
       }}>
         <input ref={node => {
