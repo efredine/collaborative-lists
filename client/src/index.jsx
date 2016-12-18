@@ -12,7 +12,7 @@ import io from 'socket.io-client';
 import createLogger from 'redux-logger';
 import { Router, Route, browserHistory } from 'react-router';
 import ReduxThunk from 'redux-thunk';
-import lists from './components/lists.jsx'
+import lists from './components/lists.jsx';
 
 
 const loggerMiddleware = createLogger();
