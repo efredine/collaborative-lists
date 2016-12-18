@@ -1,29 +1,29 @@
 // return current index of todo
-const find = (todos, todoId) => {
-  return todos.findIndex(t => t.id === todoId);
+const find = (cards, id) => {
+  return cards.findIndex(c => c.id === id);
 }
 
-// move a todo from one index to another index
-const moveTodos = (todos, index, atIndex) => {
-  const result = todos.slice();
-  const todo = result.splice(index, 1);
-  result.splice(atIndex, 0, todo[0]);
+// move a card from one index to another index
+const moveCardsByIndex = (cards, index, atIndex) => {
+  const result = cards.slice();
+  const card = result.splice(index, 1);
+  result.splice(atIndex, 0, card[0]);
   return result;
 }
 
-const move = (todos, action) => {
+const moveCard = (cards, action) => {
   const {draggedId, overId} = action;
 
   // index is the current index of the todo being dragged
-  const index = find(todos, draggedId);
+  const index = find(cards, draggedId);
 
   // atIndex is the index of the todo that we dragged over
-  const atIndex = find(todos, overId);
+  const atIndex = find(cards, overId);
 
-  return moveTodos(todos, index, atIndex);
+  return moveCardsByIndex(cards, index, atIndex);
 }
 
-const todo = (state, action) => {
+const card = (state, action) => {
   switch (action.type) {
     case 'ADD_CARD':
       return {
@@ -51,14 +51,14 @@ const cards = (state = [], action) => {
     case 'ADD_CARD':
       return [
         ...state,
-        todo(undefined, action)
+        card(undefined, action)
       ]
     case 'TOGGLE_CARD':
       return state.map(t =>
-        todo(t, action)
+        card(t, action)
       )
     case 'MOVE_CARD':
-      return move(state, action);
+      return moveCard(state, action);
     default:
       return state
   }
