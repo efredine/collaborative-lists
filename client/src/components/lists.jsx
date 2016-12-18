@@ -24,14 +24,14 @@ class lists extends Component {
   }
 
   render() {
-    var list = _.map(this.state.names, (name) => {
-      return <li key = {name.id}>{name.title}</li>
-    });
-    return (
-      <div>
-          <h1>{list}</h1>
-      </div>
-    );
+    // var list = _.map(this.state.names, (name) => {
+    //   return <li key = {name.id}>{name.title}</li>
+    // });
+    // return (
+    //   <div>
+    //       <h1>{list}</h1>
+    //   </div>
+    // );
   }
 
 
