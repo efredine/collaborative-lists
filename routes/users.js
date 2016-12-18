@@ -53,16 +53,9 @@ module.exports = (knex) => {
   });
 
   router.post("/logout", (req, res) => {
-   req.session.user = null;
-<<<<<<< HEAD
- });
-
-  return router;
-};
-=======
-   res.json({username: undefined});
- });
+    req.session.user = null;
+    res.json({username: undefined});
+  });
 
  return router;
 };
->>>>>>> feature/login
