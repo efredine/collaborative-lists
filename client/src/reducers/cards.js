@@ -28,7 +28,7 @@ const card = (state, action) => {
     case 'ADD_CARD':
       return {
         id: action.id,
-        text: action.text,
+        content: action.content,
         completed: false
       }
     case 'TOGGLE_CARD':

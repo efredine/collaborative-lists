@@ -1,9 +1,8 @@
 import fetch from 'isomorphic-fetch'
 
-
-export const addCard = (text) => ({
+export const addCard = (content) => ({
   type: 'SERVER/ADD_CARD',
-  text
+  content
 });
 
 export const setVisibilityFilter = (filter) => ({

@@ -104,7 +104,7 @@ class SortableList extends Component {
             <Todo
               id={todo.id}
               onClick={() => onTodoClick(todo.id)}
-              text={todo.text}
+              content={todo.content}
               completed={todo.completed}
             />
           </SortableCard>
