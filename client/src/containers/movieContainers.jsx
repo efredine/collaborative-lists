@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Movie from '../components/Movie.jsx'
 import fetch from 'isomorphic-fetch';
 import _ from 'lodash'
+import FlipMove from 'react-flip-move';
 
 class MovieContainer extends Component {
   constructor(props) {
@@ -74,13 +75,13 @@ clickMovie = index => {
 
     return (
       <div>
-        <div>
+        <FlipMove easing="cubic-bezier(0, 0.7, 0.8, 0.1)">
           {selected}
-        </div>
-        <div>
-          <input ref = "query" onChange =  {(e) => {this.updateSearch();}} type = 'text'/>
+        </FlipMove>
+        <input ref = "query" onChange =  {(e) => {this.updateSearch();}} type = 'text'/>
+        <FlipMove easing="cubic-bezier(0, 0.7, 0.8, 0.1)">
           {movies}
-        </div>
+        </FlipMove>
       </div>
     );
   }
