@@ -3,7 +3,7 @@ import fetch from 'isomorphic-fetch';
 import _ from 'lodash'
 
 
-class lists extends Component {
+class Lists extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -11,17 +11,33 @@ class lists extends Component {
     };
   }
 
-
   componentDidMount() {
-      fetch('http://localhost:8080/api/lists')
-      .then(response => {
-        return response.json();
-      })
-      .then(names => {
-        console.log('names',names);
-        this.setState({names: names});
-      })
+    fetch('/api/lists', {credentials: 'include'})
+    .then(response => {
+      return response.json();
+    })
+    .then(names => {
+      console.log('names',names);
+      this.setState({names: names});
+    })
   }
+
+  newList = (event) => {
+    console.log('clicked');
+    event.preventDefault();
+    fetch('/api/lists/new', {
+      credentials: 'include',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+        body: 'title=something'
+    })
+    .then(response => response.json())
+    .then(json => console.log('inserted', json))
+    .catch(error => console.log(error));
+  }
+
 
   render() {
     var list = _.map(this.state.names, (name) => {
@@ -29,6 +45,7 @@ class lists extends Component {
     });
     return (
       <div>
+          <button  onClick={this.newList} className="btn btn-default">Add</button>
           <h1>{list}</h1>
       </div>
     );
@@ -36,4 +53,4 @@ class lists extends Component {
 
 
 }
-export default lists;
+export default Lists;
