@@ -90,20 +90,20 @@ class SortableList extends Component {
 
     const {cards} = this.state;
 
-    const items = cards.map(todo => {
+    const items = cards.map(card => {
       return (
-        <TransitionItem key={todo.id}>
+        <TransitionItem key={card.id}>
           <SortableCard
-            key={todo.id}
-            id={todo.id}
+            key={card.id}
+            id={card.id}
             startDrag={startDrag}
             endDrag={endDrag}
             moveCard={this.moveCard}
             findCard={this.findCard}
             broadcastMove={this.broadcastMove}>
             <Todo
-              onClick={() => onCardClick(todo.id)}
-              {...todo}
+              onClick={() => onCardClick(card.id)}
+              {...card}
             />
           </SortableCard>
         </TransitionItem>
