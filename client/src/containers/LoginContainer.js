@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import Login from '../components/Login.jsx'
-import {login, identify} from '../actions/index'
+import {login, identify, logout} from '../actions/index'
 
 const mapStateToProps = (state) => ({
   user: state.user
@@ -8,7 +8,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps =  ({
   login: login,
-  identify: identify
+  identify: identify,
+  logout: logout
 })
 
 const LoginContainer = connect(

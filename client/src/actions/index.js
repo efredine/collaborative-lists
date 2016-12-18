@@ -66,4 +66,15 @@ export const login = username => dispatch => {
     })
   .then(response => response.json())
   .then(json => dispatch(receiveUser(json)));
+
+}
+
+export const logout = () => dispatch => {
+  return fetch ('/api/users/logout', {
+    credentials: 'include',
+    method: 'POST'
+  })
+  .then (response => response.json())
+  .then(json => dispatch(receiveUser(json)));
+
 }
