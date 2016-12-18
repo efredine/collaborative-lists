@@ -52,13 +52,13 @@ export const receiveUser = user => ({
 });
 
 export const identify = () => dispatch => {
-  return fetch('http://localhost:8080/api/users/identify')
+  return fetch('/api/users/identify')
     .then(response => response.json())
     .then(json => dispatch(receiveUser(json)));
 }
 
 export const login = username => dispatch => {
-  return fetch('http://localhost:8080/api/users/login', {
+  return fetch('/api/users/login', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'

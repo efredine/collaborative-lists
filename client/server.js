@@ -3,8 +3,12 @@ var WebpackDevServer = require('webpack-dev-server');
 var config = require('./webpack.config');
 
 new WebpackDevServer(webpack(config), {
+    quiet: false,
     publicPath: config.output.publicPath,
-    historyApiFallback: true,
+    // historyApiFallback: true,
+    proxy: {
+      "/api/**" : "http://localhost:8080"
+    },
     watchOptions: {
       aggregateTimeout: 300,
       poll: 1000
