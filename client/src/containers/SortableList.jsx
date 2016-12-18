@@ -56,13 +56,13 @@ class SortableList extends Component {
   }
 
   moveCard(id, atIndex) {
-    const { todo, index } = this.findCard(id);
+    const { card, index } = this.findCard(id);
     const overId = this.state.cards[atIndex].id;
     this.setState(update(this.state, {
       cards: {
         $splice: [
           [index, 1],
-          [atIndex, 0, todo]
+          [atIndex, 0, card]
         ]
       },
       lastOverId: {
@@ -77,11 +77,11 @@ class SortableList extends Component {
 
   findCard(id) {
     const { cards } = this.state;
-    const todo = cards.filter(c => c.id === id)[0];
+    const card = cards.filter(c => c.id === id)[0];
 
     return {
-      todo,
-      index: cards.indexOf(todo)
+      card,
+      index: cards.indexOf(card)
     };
   }
 
