@@ -86,7 +86,7 @@ class SortableList extends Component {
   }
 
   render() {
-    const { isDragging, connectDropTarget, onTodoClick, startDrag, endDrag, dragging } = this.props;
+    const { isDragging, connectDropTarget, onCardClick, startDrag, endDrag, dragging } = this.props;
 
     const {cards} = this.state;
 
@@ -102,7 +102,7 @@ class SortableList extends Component {
             findCard={this.findCard}
             broadcastMove={this.broadcastMove}>
             <Todo
-              onClick={() => onTodoClick(todo.id)}
+              onClick={() => onCardClick(todo.id)}
               {...todo}
             />
           </SortableCard>

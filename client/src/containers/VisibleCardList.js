@@ -21,7 +21,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps =  ({
-  onTodoClick: toggleCard,
+  onCardClick: toggleCard,
   moveCard: moveCard,
   startDrag: startDrag,
   endDrag: endDrag
