@@ -3,7 +3,7 @@ import fetch from 'isomorphic-fetch';
 import _ from 'lodash'
 
 
-class lists extends Component {
+class Lists extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -11,38 +11,46 @@ class lists extends Component {
     };
   }
 
-
   componentDidMount() {
-      fetch('http://localhost:8080/api/lists')
-      .then(response => {
-        return response.json();
-      })
-      .then(names => {
-        // const names = JSON.parse(responseText);
-        console.log('names',names);
-        this.setState({names: names});
-        // this.setState({
-        //   numberOfNames: movies.results.length,
-        //   names: movies.results,
-        // });
-        //  console.log('responseText', responseText)
-      })
-
-
+    fetch('/api/lists', {credentials: 'include'})
+    .then(response => {
+      return response.json();
+    })
+    .then(names => {
+      console.log('names',names);
+      this.setState({names: names});
+    })
   }
 
-  render() {
-
-    var names = _.map(this.state.names, (name) => {
-      return <li key = {name.id}>{name.name}</li>
+  newList = (event) => {
+    console.log('clicked');
+    event.preventDefault();
+    fetch('/api/lists/new', {
+      credentials: 'include',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+        body: 'title=something'
     })
+    .then(response => response.json())
+    .then(json => console.log('inserted', json))
+    .catch(error => console.log(error));
+  }
+
+
+  render() {
+    var list = _.map(this.state.names, (name) => {
+      return <li key = {name.id}>{name.title}</li>
+    });
     return (
       <div>
-          <h1>{names}</h1>
+          <button  onClick={this.newList} className="btn btn-default">Add</button>
+          <h1>{list}</h1>
       </div>
     );
   }
 
 
 }
-export default lists;
+export default Lists;

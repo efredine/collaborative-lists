@@ -6,6 +6,7 @@ const server = require('http').Server(app);
 const io = require('socket.io')(server);
 const bodyParser    = require("body-parser");
 const MovieDB = require('moviedb')(process.env.MOVIEDB_KEY);
+const cookieSession = require('cookie-session')
 
 const ENV         = process.env.ENV || "development";
 const knexConfig  = require("./knexfile");
@@ -18,8 +19,9 @@ const actionHistory = [];
 
 // Seperated Routes for each Resource
 const usersRoutes = require("./routes/users");
+const listsRoutes = require("./routes/lists");
 
-
+app.use(cookieSession({name: 'session', secret: 'secret garden'}));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
@@ -41,7 +43,7 @@ app.use(knexLogger(knex));
 // Mount routes on /api
 //
 app.use("/api/users", usersRoutes(knex));
-app.use("/api/lists", usersRoutes(knex));
+app.use("/api/lists", listsRoutes(knex));
 
 app.get("/api/todos", (req, res) => {
   res.json(actionHistory);
@@ -49,6 +51,12 @@ app.get("/api/todos", (req, res) => {
 
 app.get("/api/movies/:movie", (req, res)=> {
   MovieDB.searchMovie({query: `${req.params.movie}`}, function(err, result){
+    res.json(result);
+  });
+});
+
+app.get("/api/popular/movies", (req, res)=> {
+  MovieDB.miscPopularMovies(function(err, result){
     res.json(result);
   });
 });

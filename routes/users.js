@@ -15,15 +15,42 @@ module.exports = (knex) => {
   });
 
   router.get("/identify", (req, res) => {
-    // If this user is currently logged in, return their username.
-    res.json({user: undefined});
+    console.log("session:", req.session);
+
+    if(req.session.user) {
+      res.json(req.session.user);
+    } else {
+      res.json({username: undefined});
+    }
+
   });
 
   router.post("/login", (req, res) => {
     // Look up the user name and log them in if appropriate or return an error
-    console.log(req.body.username);
-    res.json(req.body);
+    console.log("session:", req.session);
+    knex
+      .select("id", "name")
+      .from("users")
+      .where("users.name", "=", req.body.username)
+      .then((user) => {
+        const userRecord = user[0];
+        if(req.body.username === userRecord.name) {
+          req.session.user = Object.assign({}, req.body, userRecord);
+        }else {
+          req.session.user = null;
+        }
+        console.log(req.session);
+        res.json(req.body);
+      })
+      .catch((error) => {
+        console.error("Username does not exist");
+      });
   });
 
-  return router;
+  router.post("/logout", (req, res) => {
+    req.session.user = null;
+    res.json({username: undefined});
+  });
+
+ return router;
 };

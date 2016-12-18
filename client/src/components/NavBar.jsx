@@ -10,7 +10,7 @@ class NavBar extends Component {
       <nav className="navbar navbar-default navbar-fixed-top">
         <div className="container-fluid">
           <div className="navbar-header">
-          <h2> Lists! </h2>
+          <img className="logo" src="http://localhost:8080/images/logo.png"/>
           <LoginContainer/>
           </div>
         </div>

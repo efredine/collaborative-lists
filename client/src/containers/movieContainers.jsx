@@ -2,18 +2,31 @@ import React, {Component} from 'react';
 import Movie from '../components/Movie.jsx'
 import fetch from 'isomorphic-fetch';
 import _ from 'lodash'
+import FlipMove from 'react-flip-move';
 
 class MovieContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      numberOfMovies: 0,
       movies: [],
-      selected: []
+      selected: [],
+      popularMovies: 0
     };
   }
 
   componentDidMount() {
+    fetch(`http://localhost:8080/api/popular/movies`)
+    .then(response => {
+      return response.text();
+    })
+    .then(responseText => {
+      const popularMovies = JSON.parse(responseText);
+      console.log("pupular movies", popularMovies);
+       this.setState({
+         movies: popularMovies.results
+       });
+    })
+
   }
 // updates what ever movie name you put in the search box with the results starting with its name
 updateSearch(){
@@ -32,23 +45,29 @@ clickMovie = index => {
   // create a copy of the selected array
   const updatedSelectedArray = this.state.selected.slice();
   updatedSelectedArray.push(movieSelected);
+  const updatedMovies = this.state.movies.slice();
+  updatedMovies.splice(index, 1);
   this.setState({
-    selected: updatedSelectedArray
-
+    selected: updatedSelectedArray,
+    movies: updatedMovies
   })
 }
 
   render() {
 
+    // var currentPopularMovies = _.map(this.state.popularMovies, (movie, index)=> {
+    //   return <Movie key ={movie.id} index={index} onAdd={this.clickMovie} title={movie.original_title} rating={movie.vote_average} />
+    // });
+
     // this iterates through the movies object and returns the movie title and rating
     var movies = _.map(this.state.movies, (movie, index)=> {
-      return  <Movie key={movie.id} index={index} onAdd={this.clickMovie} title={movie.original_title} rating={movie.vote_average} />
+      return <Movie key={movie.id} index={index} onAdd={this.clickMovie} title={movie.original_title} rating={movie.vote_average} />
 
     });
 
-    var options = _.map(this.state.movies, (movie)=> {
-      return <option key = {movie.id}>{movie.original_title} value = {movie.id} </option>
-    });
+    // var options = _.map(this.state.movies, (movie)=> {
+    //   return <option key = {movie.id}>{movie.original_title} value = {movie.id} </option>
+    // });
 
     const selected = _.map(this.state.selected, (movie)=> {
       return <Movie key = {movie.id} title={movie.original_title} rating={movie.vote_average} />
@@ -56,14 +75,15 @@ clickMovie = index => {
 
     return (
       <div>
-        <div>
+        <div className="newPanel">
+        <FlipMove easing="cubic-bezier(0, 0.7, 0.8, 0.1)">
           {selected}
+        </FlipMove>
         </div>
-        <div>
-          <input ref = "query" onChange =  {(e) => {this.updateSearch();}} type = 'text'/>
-          <select ref = "movieSelector" onChange = {() => {this.selectMovie()}}>{options}</select>
+        <input ref = "query" onChange =  {(e) => {this.updateSearch();}} type = 'text'/>
+        <FlipMove easing="cubic-bezier(0, 0.7, 0.8, 0.1)">
           {movies}
-        </div>
+        </FlipMove>
       </div>
     );
   }
@@ -77,7 +97,6 @@ clickMovie = index => {
       const movies = JSON.parse(responseText);
       console.log(movies);
       this.setState({
-        numberOfMovies: movies.results.length,
         movies: movies.results,
       });
       console.log(movies.results)
