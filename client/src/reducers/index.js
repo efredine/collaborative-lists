@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import todos from './todos'
+import cards from './cards'
 import actions from './actions'
 import visibilityFilter from './visibilityFilter'
 import dragging from './dragging'
@@ -7,7 +7,7 @@ import receiver from './receiver'
 import user from './user'
 
 const sliceReducers = combineReducers({
-  todos,
+  cards,
   actions,
   visibilityFilter,
   dragging,

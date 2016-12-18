@@ -2,21 +2,21 @@ import { connect } from 'react-redux'
 import { toggleCard, moveCard, startDrag, endDrag } from '../actions'
 import SortableList from './SortableList.jsx'
 
-const getVisibleTodos = (todos, filter) => {
+const getVisibleTodos = (cards, filter) => {
   switch (filter) {
     case 'SHOW_ALL':
-      return todos
+      return cards
     case 'SHOW_COMPLETED':
-      return todos.filter(t => t.completed)
+      return cards.filter(t => t.completed)
     case 'SHOW_ACTIVE':
-      return todos.filter(t => !t.completed)
+      return cards.filter(t => !t.completed)
     default:
       throw new Error('Unknown filter: ' + filter)
   }
 }
 
 const mapStateToProps = (state) => ({
-  todos: getVisibleTodos(state.todos, state.visibilityFilter),
+  cards: getVisibleTodos(state.cards, state.visibilityFilter),
   dragging: state.dragging
 })
 

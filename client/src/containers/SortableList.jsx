@@ -19,7 +19,7 @@ const cardTarget = {
   }
 };
 
-function todosDifferent(a, b) {
+function cardsDifferent(a, b) {
   if (a.length === b. length) {
     return !a.every((t, index) => {
       shallowEqual(t, b[index]);
@@ -41,25 +41,25 @@ class SortableList extends Component {
     this.findCard = this.findCard.bind(this);
     this.broadcastMove = this.broadcastMove.bind(this);
     this.state = {
-      todos: props.todos,
+      cards: props.cards,
       lastOverId: null
     }
   }
 
   componentWillReceiveProps(nextProps) {
     console.log('receiving props');
-    if(todosDifferent(this.state.todos, nextProps.todos)) {
+    if(cardsDifferent(this.state.cards, nextProps.cards)) {
       this.setState({
-        todos: nextProps.todos
+        cards: nextProps.cards
       })
     }
   }
 
   moveCard(id, atIndex) {
     const { todo, index } = this.findCard(id);
-    const overId = this.state.todos[atIndex].id;
+    const overId = this.state.cards[atIndex].id;
     this.setState(update(this.state, {
-      todos: {
+      cards: {
         $splice: [
           [index, 1],
           [atIndex, 0, todo]
@@ -76,21 +76,21 @@ class SortableList extends Component {
   }
 
   findCard(id) {
-    const { todos } = this.state;
-    const todo = todos.filter(c => c.id === id)[0];
+    const { cards } = this.state;
+    const todo = cards.filter(c => c.id === id)[0];
 
     return {
       todo,
-      index: todos.indexOf(todo)
+      index: cards.indexOf(todo)
     };
   }
 
   render() {
     const { isDragging, connectDropTarget, onTodoClick, startDrag, endDrag, dragging } = this.props;
 
-    const {todos} = this.state;
+    const {cards} = this.state;
 
-    const items = todos.map(todo => {
+    const items = cards.map(todo => {
       return (
         <TransitionItem key={todo.id}>
           <SortableCard
