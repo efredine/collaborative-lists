@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import { toggleCard, moveCard, startDrag, endDrag } from '../actions'
 import SortableList from './SortableList.jsx'
 
-const getVisibleTodos = (cards, filter) => {
+const getVisibleCards = (cards, filter) => {
   switch (filter) {
     case 'SHOW_ALL':
       return cards
@@ -16,7 +16,7 @@ const getVisibleTodos = (cards, filter) => {
 }
 
 const mapStateToProps = (state) => ({
-  cards: getVisibleTodos(state.cards, state.visibilityFilter),
+  cards: getVisibleCards(state.cards, state.visibilityFilter),
   dragging: state.dragging
 })
 
@@ -27,9 +27,9 @@ const mapDispatchToProps =  ({
   endDrag: endDrag
 })
 
-const VisibleTodoList = connect(
+const VisibleCardList = connect(
   mapStateToProps,
   mapDispatchToProps
 )(SortableList)
 
-export default VisibleTodoList
+export default VisibleCardList

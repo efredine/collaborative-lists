@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Footer from './Footer'
 import AddTodo from '../containers/AddTodo'
-import VisibleTodoList from '../containers/VisibleTodoList'
+import VisibleCardList from '../containers/VisibleCardList'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import ActionListContainer from '../containers/ActionListContainer.jsx'
 import fetch from 'isomorphic-fetch'
@@ -30,7 +30,7 @@ class TodoApp extends Component {
 
         <TabPanel>
           <AddTodo />
-          <VisibleTodoList />
+          <VisibleCardList />
           <Footer />
         </TabPanel>
         <TabPanel>
