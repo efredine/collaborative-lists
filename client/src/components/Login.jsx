@@ -25,13 +25,22 @@ class Login extends Component {
     const { login } = this.props;
     event.preventDefault();
     login(this.state.userInput);
+    this.setState({userInput: ""});
+  }
+
+  handleLogout = (event) => {
+    const { logout } = this.props;
+    event.preventDefault();
+    logout();
   }
 
   render() {
     const {user} = this.props;
     if(user.username) {
       return (
-        <div className="navbar-text navbar-right">Logged in as: {user.username}</div>
+        <div className="navbar-text navbar-right">Logged in as: {user.username}
+        <button type="submit" onClick={this.handleLogout} className="btn btn-default">Log Out</button>
+        </div>
       );
     } else {
       return(

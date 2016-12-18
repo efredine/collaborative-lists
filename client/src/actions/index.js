@@ -18,10 +18,9 @@ export const toggleTodo = (id) => {
   };
 }
 
-// export const startDrag = (id) => ({
-//   type: 'START_DRAG',
-//   id
-// });
+export const startDrag = () => ({
+  type: 'START_DRAG'
+});
 
 export const move = (draggedId, overId) => ({
   type: 'SERVER/MOVE',
@@ -29,10 +28,9 @@ export const move = (draggedId, overId) => ({
   overId
 });
 
-// export const endDrag = (didDrop) => ({
-//   type: 'END_DRAG',
-//   didDrop
-// });
+export const endDrag = () => ({
+  type: 'END_DRAG'
+});
 
 export const receiveTodos = actionHistory => ({
   type: 'RECEIVE',
@@ -52,13 +50,14 @@ export const receiveUser = user => ({
 });
 
 export const identify = () => dispatch => {
-  return fetch('/api/users/identify')
+  return fetch('/api/users/identify', {credentials: 'include'})
     .then(response => response.json())
     .then(json => dispatch(receiveUser(json)));
 }
 
 export const login = username => dispatch => {
   return fetch('/api/users/login', {
+    credentials: 'include',
     method: 'POST',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
@@ -66,5 +65,14 @@ export const login = username => dispatch => {
       body: `username=${username}`
     })
   .then(response => response.json())
+  .then(json => dispatch(receiveUser(json)));
+}
+
+export const logout = () => dispatch => {
+  return fetch ('/api/users/logout', {
+    credentials: 'include',
+    method: 'POST'
+  })
+  .then (response => response.json())
   .then(json => dispatch(receiveUser(json)));
 }
