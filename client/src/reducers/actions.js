@@ -9,7 +9,7 @@ function resolvedToggleState(state, action) {
 
 function getActionRecord(state, action) {
   switch (action.type) {
-    case 'MOVE':
+    case 'MOVE_CARD':
       return Object.assign({}, action, {
         type: 'Moved',
         text: state.find(x => x.id === action.draggedId).text
@@ -32,7 +32,7 @@ function getActionRecord(state, action) {
 
 const actions = (state = [], action) => {
   switch (action.type) {
-    case 'MOVE':
+    case 'MOVE_CARD':
     case 'ADD_CARD':
     case 'TOGGLE_CARD':
       return [

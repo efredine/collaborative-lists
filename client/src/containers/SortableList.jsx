@@ -72,7 +72,7 @@ class SortableList extends Component {
   }
 
   broadcastMove(droppedId) {
-    this.props.move(droppedId, this.state.lastOverId);
+    this.props.moveCard(droppedId, this.state.lastOverId);
   }
 
   findCard(id) {

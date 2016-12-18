@@ -4,7 +4,7 @@ const dragging = (state = false, action) => {
       return true;
     case 'END_DRAG':
       return false;
-    case 'MOVE':
+    case 'MOVE_CARD':
       return false;
     default:
       return state

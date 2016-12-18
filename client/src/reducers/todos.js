@@ -57,7 +57,7 @@ const todos = (state = [], action) => {
       return state.map(t =>
         todo(t, action)
       )
-    case 'MOVE':
+    case 'MOVE_CARD':
       return move(state, action);
     default:
       return state

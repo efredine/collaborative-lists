@@ -75,8 +75,8 @@ io.on('connection', function(socket){
       action.type = 'TOGGLE_CARD';
       action.toggleId = nextTodoId++;
       break;
-    case 'SERVER/MOVE':
-      action.type = 'MOVE';
+    case 'SERVER/MOVE_CARD':
+      action.type = 'MOVE_CARD';
       action.id = nextTodoId++;
       break;
     default:

@@ -22,8 +22,8 @@ export const startDrag = () => ({
   type: 'START_DRAG'
 });
 
-export const move = (draggedId, overId) => ({
-  type: 'SERVER/MOVE',
+export const moveCard = (draggedId, overId) => ({
+  type: 'SERVER/MOVE_CARD',
   draggedId,
   overId
 });
