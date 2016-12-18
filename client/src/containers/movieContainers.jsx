@@ -44,8 +44,11 @@ clickMovie = index => {
   // create a copy of the selected array
   const updatedSelectedArray = this.state.selected.slice();
   updatedSelectedArray.push(movieSelected);
+  const updatedMovies = this.state.movies.slice();
+  updatedMovies.splice(index, 1);
   this.setState({
-    selected: updatedSelectedArray
+    selected: updatedSelectedArray,
+    movies: updatedMovies
   })
 }
 
