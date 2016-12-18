@@ -52,5 +52,9 @@ module.exports = (knex) => {
       });
   });
 
+  router.post("/logout", (req, res) => {
+   req.session.user = null;
+ });
+
   return router;
 };
