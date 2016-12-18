@@ -75,9 +75,11 @@ clickMovie = index => {
 
     return (
       <div>
+        <div className="newPanel">
         <FlipMove easing="cubic-bezier(0, 0.7, 0.8, 0.1)">
           {selected}
         </FlipMove>
+        </div>
         <input ref = "query" onChange =  {(e) => {this.updateSearch();}} type = 'text'/>
         <FlipMove easing="cubic-bezier(0, 0.7, 0.8, 0.1)">
           {movies}

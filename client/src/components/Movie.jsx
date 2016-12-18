@@ -13,8 +13,10 @@ class Movie extends Component {
     return(
       <div className="panel-movie panel panel-default">
         <div className="panel-heading">
+          <div className="remove">
+            <img src="http://localhost:8080/images/remove.png"/>
+          </div>
           <h3 className="panel-title">
-            <img className="certified" src="http://localhost:8080/images/certified.png"/>
             {rating * 10}% {title}
           </h3>
           <div className="add">
@@ -22,7 +24,7 @@ class Movie extends Component {
           </div>
         </div>
         <div className="panel-body">
-          Rating: PG-13 | Genre: Action &amp; Adventure  | Runtime: 133 minutes  | Directed By: Gareth Edwards
+          <p> Rating: PG-13 | Genre: Action &amp; Adventure </p>
         </div>
       </div>
   );
