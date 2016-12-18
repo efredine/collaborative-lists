@@ -18,7 +18,7 @@ const actionHistory = [];
 
 // Seperated Routes for each Resource
 const usersRoutes = require("./routes/users");
-const listsRoutes = require("./routes/lists")
+const listsRoutes = require("./routes/lists");
 
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -50,6 +50,12 @@ app.get("/api/todos", (req, res) => {
 
 app.get("/api/movies/:movie", (req, res)=> {
   MovieDB.searchMovie({query: `${req.params.movie}`}, function(err, result){
+    res.json(result);
+  });
+});
+
+app.get("/api/popular/movies", (req, res)=> {
+  MovieDB.miscPopularMovies(function(err, result){
     res.json(result);
   });
 });
