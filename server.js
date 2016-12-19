@@ -23,6 +23,7 @@ const listsRoutes = require("./routes/lists");
 
 app.use(cookieSession({name: 'session', secret: 'secret garden'}));
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json())
 app.use(express.static('public'));
 
 app.use(function(req, res, next) {
@@ -46,7 +47,8 @@ app.use("/api/users", usersRoutes(knex));
 app.use("/api/lists", listsRoutes(knex));
 
 app.get("/api/todos", (req, res) => {
-  res.json(actionHistory);
+  // res.json(actionHistory);
+  res.redirect("/api/lists/1/actions")
 });
 
 app.get("/api/movies/:movie", (req, res)=> {
@@ -62,13 +64,9 @@ app.get("/api/popular/movies", (req, res)=> {
 });
 
 
-
-app.post("/api/update", (req, res) => {
-  console.log(req.body.theThing);
-  res.json(["Got it"]);
-});
-
 server.listen(8080);
+
+const actionHelpers = require('./lib/actionHelpers')(knex);
 
 io.on('connection', function(socket){
   console.log("Socket connected: " + socket.id);
@@ -91,8 +89,16 @@ io.on('connection', function(socket){
       break;
     }
     console.log(action);
-    actionHistory.push(action);
-    io.emit('action', action);
+    // actionHistory.push(action);
+    actionHelpers.insert(1, 1, action)
+    .then(id => {
+      if(action.type === 'TOGGLE_CARD') {
+        action.toggleId = id;
+      } else {
+        action.id = id;
+      }
+      io.emit('action', action);
+    })
   });
 
 });

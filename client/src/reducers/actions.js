@@ -23,7 +23,7 @@ function getActionRecord(state, action) {
         id: action.toggleId,
         targetId: action.id,
         type: resolvedToggleState(state, action),
-        text: state.find(x => x.id === action.id).text
+        text: state.find(x => x.id === action.id).content.text
       };
     default:
       return null;
