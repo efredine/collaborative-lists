@@ -42,8 +42,10 @@ export const receiveTodos = actionHistory => ({
   actionHistory: actionHistory
 });
 
-export const fetchTodos = () => dispatch => {
-  return fetch('http://localhost:8080/api/todos')
+export const fetchTodos = (listId) => dispatch => {
+  return fetch(`/api/lists/${listId}/actions`, {
+    credentials: 'include'
+  })
   .then(response => response.json())
   .then(json => dispatch(receiveTodos(json)));
   // TODO: add error handling catch
@@ -55,9 +57,12 @@ export const receiveUser = user => ({
 });
 
 export const identify = () => dispatch => {
-  return fetch('/api/users/identify', {credentials: 'include'})
-    .then(response => response.json())
-    .then(json => dispatch(receiveUser(json)));
+  return fetch('/api/users/identify', {
+    credentials:
+    'include'
+  })
+  .then(response => response.json())
+  .then(json => dispatch(receiveUser(json)));
 }
 
 export const login = username => dispatch => {

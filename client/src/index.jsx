@@ -28,7 +28,7 @@ render(
   <Provider store={store}>
      <Router history={browserHistory}>
       <Route path="/" component={App} />
-      <Route path="/todos" component={TodoAppContainer} />
+      <Route path="/todos/:listId" component={TodoAppContainer} />
       <Route path="/signup" component={Register} />
       <Route path="/lists" component={lists} />
 
