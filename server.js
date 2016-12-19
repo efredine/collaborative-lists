@@ -75,15 +75,12 @@ io.on('connection', function(socket){
     switch(action.type) {
     case'SERVER/ADD_CARD':
       action.type = 'ADD_CARD';
-      action.id = nextTodoId++;
       break;
     case 'SERVER/TOGGLE_CARD':
       action.type = 'TOGGLE_CARD';
-      action.toggleId = nextTodoId++;
       break;
     case 'SERVER/MOVE_CARD':
       action.type = 'MOVE_CARD';
-      action.id = nextTodoId++;
       break;
     default:
       break;
@@ -92,11 +89,7 @@ io.on('connection', function(socket){
     // actionHistory.push(action);
     actionHelpers.insert(1, 1, action)
     .then(id => {
-      if(action.type === 'TOGGLE_CARD') {
-        action.toggleId = id;
-      } else {
-        action.id = id;
-      }
+      action.id = id;
       io.emit('action', action);
     })
   });

@@ -1,5 +1,5 @@
 function resolvedToggleState(state, action) {
-  const actionCount = state.filter(x => x.targetId === action.id).length;
+  const actionCount = state.filter(x => x.toggleId === action.toggleId).length;
   if(actionCount === 0 || actionCount % 2 === 0) {
     return 'Completed';
   } else {
@@ -20,10 +20,10 @@ function getActionRecord(state, action) {
       });
     case 'TOGGLE_CARD':
       return {
-        id: action.toggleId,
-        targetId: action.id,
+        id: action.id,
+        toggleId: action.toggleId,
         type: resolvedToggleState(state, action),
-        text: state.find(x => x.id === action.id).content.text
+        text: state.find(x => x.id === action.toggleId).content.text
       };
     default:
       return null;

@@ -32,7 +32,7 @@ const card = (state, action) => {
         completed: false
       }
     case 'TOGGLE_CARD':
-      if (state.id !== action.id) {
+      if (state.id !== action.toggleId) {
         return state
       }
       return Object.assign(
