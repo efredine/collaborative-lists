@@ -10,10 +10,6 @@ import ReactTransitionGroup from 'react/lib/ReactTransitionGroup'
 import TransitionItem from './TransitionItem.jsx'
 import FlipMove from 'react-flip-move';
 
-const style = {
-  width: 400
-};
-
 const cardTarget = {
   drop() {
   }
@@ -112,7 +108,7 @@ class SortableList extends Component {
 
     console.log('rendering');
     return connectDropTarget(
-      <div style={style}>
+      <div>
         <h1>Hello</h1>
         <FlipMove easing="cubic-bezier(0, 0.7, 0.8, 0.1)" disableAllAnimations={dragging}>
           {items}

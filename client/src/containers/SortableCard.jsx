@@ -3,13 +3,6 @@ import ItemTypes from '../types/DropItemTypes';
 import { DragSource, DropTarget } from 'react-dnd';
 import flow from 'lodash/flow';
 
-const style = {
-  border: '1px dashed gray',
-  padding: '0.5rem 1rem',
-  marginBottom: '.5rem',
-  backgroundColor: 'white',
-  cursor: 'move'
-};
 
 const cardSource = {
   beginDrag(props) {
@@ -67,7 +60,7 @@ class SortableCard extends Component {
     const opacity = isDragging ? 0 : 1;
 
     return connectDragSource(connectDropTarget(
-      <div style={{ ...style, opacity }}>
+      <div style={{opacity }}>
         {this.props.children}
       </div>
     ));
