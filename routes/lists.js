@@ -8,6 +8,7 @@ module.exports = (knex) => {
 
   router.get("/", (req, res) => {
     const userId = req.session.user.id;
+    console.log(userId);
     knex
       .select('list_id as id', 'title', 'created', 'created_at', 'updated_at')
       .from("lists")
