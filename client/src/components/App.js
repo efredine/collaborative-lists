@@ -4,7 +4,7 @@ import LoginContainer from '../containers/LoginContainer.js';
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem, Grid, Row, Col } from 'react-bootstrap';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import Lists from './Lists.jsx';
+import ListsIndex from './ListsIndex.jsx';
 import List from './List.jsx';
 import AddTodo from '../containers/AddTodo'
 import ActionListContainer from '../containers/ActionListContainer.jsx'
@@ -53,7 +53,7 @@ class App extends Component {
             <Col className="historyContainer" xs={6} md={4}>
               <Router history={browserHistory}>
                 <Route path="/" >
-                  <IndexRoute component={Lists} />
+                  <IndexRoute component={ListsIndex} />
                   <Route path="/:listId" component={List} />
                 </Route>
               </Router>
