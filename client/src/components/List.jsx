@@ -10,7 +10,7 @@ class List extends Component {
     this.dataChanged = this.dataChanged.bind(this);
     this.state = {
       listContainer: {},
-      title: "Oracle",
+      title: "",
 
     }
 }
@@ -61,7 +61,7 @@ dataChanged = (data) => {
       <h1><InlineEdit
               text={title}
               paramName="Title"
-              change={this.dataChanged}
+              change= {this.dataChanged}
               style={{
                 minWidth: 150,
                 display: 'inline-block',

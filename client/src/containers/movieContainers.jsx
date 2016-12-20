@@ -70,7 +70,10 @@ removeMovie = index => {
 
     // this iterates through the movies object and returns the movie title and rating
     var movies = _.map(this.state.movies, (movie, index)=> {
-      return <Movie key={movie.id} index={index} onAdd={this.clickMovie} title={movie.original_title} rating={movie.vote_average} />
+      return <Movie key={movie.id} index={index} onAdd={this.clickMovie}
+      poster = {movie.poster_path} summery = {movie.overview}
+      title={movie.original_title} rating={movie.vote_average}
+          />
 
     });
 
