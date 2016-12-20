@@ -16,10 +16,10 @@ export const setVisibilityFilter = (filter) => ({
   filter
 });
 
-export const toggleCard = (id) => {
+export const toggleCard = (toggleId) => {
   return {
     type: 'SERVER/TOGGLE_CARD',
-    id
+    toggleId
   };
 }
 

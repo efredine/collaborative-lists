@@ -58,5 +58,28 @@ module.exports = (knex) => {
       });
   });
 
+  function formatActionResults(rows) {
+    return rows.map(row => {
+      const action = JSON.parse(row.action);
+      action.id = row.id;
+      action.userId = row.user_id;
+      action.listId = row.list_id;
+      return action
+    });
+  }
+
+  router.get("/:listId/actions", (req, res) => {
+    const listId = req.params.listId;
+    knex('actions')
+      .select('*')
+      .from('actions')
+      .orderBy('id')
+      .where('list_id', listId)
+      .then((results) => {
+        console.log(results);
+        res.json(formatActionResults(results));
+      });
+  });
+
   return router;
 };

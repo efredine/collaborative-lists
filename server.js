@@ -14,8 +14,6 @@ const knex        = require("knex")(knexConfig[ENV]);
 const morgan      = require('morgan');
 const knexLogger  = require('knex-logger');
 
-let nextTodoId = 0;
-const actionHistory = [];
 
 // Seperated Routes for each Resource
 const usersRoutes = require("./routes/users");
@@ -23,6 +21,7 @@ const listsRoutes = require("./routes/lists");
 
 app.use(cookieSession({name: 'session', secret: 'secret garden'}));
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json())
 app.use(express.static('public'));
 
 app.use(function(req, res, next) {
@@ -46,7 +45,8 @@ app.use("/api/users", usersRoutes(knex));
 app.use("/api/lists", listsRoutes(knex));
 
 app.get("/api/todos", (req, res) => {
-  res.json(actionHistory);
+  // res.json(actionHistory);
+  res.redirect("/api/lists/1/actions")
 });
 
 app.get("/api/movies/:movie", (req, res)=> {
@@ -61,36 +61,32 @@ app.get("/api/popular/movies", (req, res)=> {
   });
 });
 
+
 app.post("/api/update", (req, res) => {
   console.log(req.body.theThing);
   res.json(["Got it"]);
 });
 
+
 server.listen(8080);
+
+const actionHelpers = require('./lib/actionHelpers')(knex);
 
 io.on('connection', function(socket){
   console.log("Socket connected: " + socket.id);
   socket.on('action', (action) => {
+    console.log('INCOMING ACTION:');
     console.log(action);
-    switch(action.type) {
-    case'SERVER/ADD_CARD':
-      action.type = 'ADD_CARD';
-      action.id = nextTodoId++;
-      break;
-    case 'SERVER/TOGGLE_CARD':
-      action.type = 'TOGGLE_CARD';
-      action.toggleId = nextTodoId++;
-      break;
-    case 'SERVER/MOVE_CARD':
-      action.type = 'MOVE_CARD';
-      action.id = nextTodoId++;
-      break;
-    default:
-      break;
-    }
-    console.log(action);
-    actionHistory.push(action);
-    io.emit('action', action);
+    // Actions are of the form SERVER/<ACTION>.  The SERVER portion of this is stripped
+    // before broadcasting to all the clients.
+    action.type = action.type.split('/')[1];
+    actionHelpers.insert(1, 1, action)
+    .then(id => {
+      action.id = id;
+      console.log('BROADCAST ACTION');
+      console.log(action);
+      io.emit('action', action);
+    })
   });
 
 });
