@@ -7,6 +7,11 @@ class Movie extends Component {
     onAdd(index);
   }
 
+  onRemove = () => {
+    const {onRemove, index} = this.props;
+    onRemove(index);
+  }
+
   render() {
     const {title, rating} = this.props;
 
@@ -14,7 +19,7 @@ class Movie extends Component {
       <div className="panel-movie panel panel-default">
         <div className="panel-heading">
           <div className="remove">
-            <img src="http://localhost:8080/images/remove.png"/>
+            <img onClick={this.onRemove} src="http://localhost:8080/images/remove.png"/>
           </div>
           <h3 className="panel-title">
             {rating * 10}% {title}

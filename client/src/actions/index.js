@@ -1,33 +1,40 @@
 import fetch from 'isomorphic-fetch'
 import ContentTypes from '../types/ContentTypes';
 
-export const addCard = (content) => ({
+function dispatchWithUserList(action) {
+    return (dispatch, getState) => {
+        const state = getState();
+        action.userId = state.user.id;
+        action.listId = state.activeList;
+        dispatch(action);
+    }
+}
+
+export const addCard = content => dispatchWithUserList({
   type: 'SERVER/ADD_CARD',
   content
 });
 
-export const addTodo = (text) => (addCard({
+export const addTodo = text => addCard({
   contentType: ContentTypes.TODO,
   text: text
-}))
+});
 
 export const setVisibilityFilter = (filter) => ({
   type: 'SET_VISIBILITY_FILTER',
   filter
 });
 
-export const toggleCard = (toggleId) => {
-  return {
-    type: 'SERVER/TOGGLE_CARD',
-    toggleId
-  };
-}
+export const toggleCard = (toggleId) => dispatchWithUserList({
+  type: 'SERVER/TOGGLE_CARD',
+  toggleId
+});
 
 export const startDrag = () => ({
   type: 'START_DRAG'
 });
 
-export const moveCard = (draggedId, overId) => ({
+export const moveCard = (draggedId, overId) => dispatchWithUserList({
   type: 'SERVER/MOVE_CARD',
   draggedId,
   overId
@@ -37,15 +44,18 @@ export const endDrag = () => ({
   type: 'END_DRAG'
 });
 
-export const receiveTodos = actionHistory => ({
+export const receiveTodos = (listId, actionHistory) => ({
   type: 'RECEIVE',
+  listId: listId,
   actionHistory: actionHistory
 });
 
-export const fetchTodos = () => dispatch => {
-  return fetch('http://localhost:8080/api/todos')
+export const fetchTodos = (listId) => dispatch => {
+  return fetch(`/api/lists/${listId}/actions`, {
+    credentials: 'include'
+  })
   .then(response => response.json())
-  .then(json => dispatch(receiveTodos(json)));
+  .then(json => dispatch(receiveTodos(listId, json)));
   // TODO: add error handling catch
 }
 
@@ -55,9 +65,12 @@ export const receiveUser = user => ({
 });
 
 export const identify = () => dispatch => {
-  return fetch('/api/users/identify', {credentials: 'include'})
-    .then(response => response.json())
-    .then(json => dispatch(receiveUser(json)));
+  return fetch('/api/users/identify', {
+    credentials:
+    'include'
+  })
+  .then(response => response.json())
+  .then(json => dispatch(receiveUser(json)));
 }
 
 export const login = username => dispatch => {
