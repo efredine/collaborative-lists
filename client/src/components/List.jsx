@@ -1,13 +1,12 @@
 import React, {Component} from 'react';
 import fetch from 'isomorphic-fetch';
 import _ from 'lodash';
-import InlineEdit from 'react-edit-inline';
 
 class List extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      lists: []
+      listContainer: {}
     }
 }
 
@@ -21,26 +20,23 @@ componentDidMount() {
     return response.json();
     console.log(response)
   })
-  .then(lists => {
-    console.log('lists',lists);
-    this.setState({lists: lists});
+  .then(results => {
+    console.log('results', results);
+    const listContainer = results.length === 1 ? results[0] : {};
+    this.setState({listContainer: listContainer});
   })
 }
-
   render() {
     // const listToRender = _.map(this.state.lists, (listItem)=>{
     //   return  <li>{listItem}</li>
     // });
     // console.log(listToRender);
     // const result = this.state.lists.length > 0 ? this.state.lists[0] : "";
-    const {lists} = this.state;
-    let title = "";
-    if(lists.length === 1) {
-      title = lists[0].title;
-    }
+    const {listContainer} = this.state;
     return (
+      
       <div>
-        List Title: {title}
+        List Title: {listContainer.title}
       </div>
       );
     }
