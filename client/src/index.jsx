@@ -10,7 +10,6 @@ import reducer from './reducers'
 import createSocketIoMiddleware from 'redux-socket.io';
 import io from 'socket.io-client';
 import createLogger from 'redux-logger';
-import { Router, Route, browserHistory } from 'react-router';
 import ReduxThunk from 'redux-thunk';
 import lists from './components/lists.jsx';
 import List from './components/List.jsx';
@@ -27,14 +26,7 @@ function pessimisticExecute(action, emit, next, dispatch) {
 
 render(
   <Provider store={store}>
-     <Router history={browserHistory}>
-      <Route path="/" component={App} />
-      <Route path="/todos/:listId" component={TodoAppContainer} />
-      <Route path="/signup" component={Register} />
-      <Route path="/lists" component={lists} />
-      <Route path="/list/:listId" component={List} />
-      <Route path= "/list/update" component= {List} />
-    </Router>
+    <App/>
   </Provider>,
   document.getElementById('react-root')
 )
