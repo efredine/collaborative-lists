@@ -38,7 +38,7 @@ class AddTodo extends Component {
     return(
        <div>
           <form onSubmit={this.handleSubmit}>
-            <input onChange={this.handleChange}/>
+            <input onChange={this.handleChange} value={this.state.userInput}/>
             <button type="submit">
               Add Todo
             </button>
