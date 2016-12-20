@@ -33,6 +33,7 @@ render(
       <Route path="/signup" component={Register} />
       <Route path="/lists" component={lists} />
       <Route path="/list/:listId" component={List} />
+      <Route path= "/list/update" component= {List} />
     </Router>
   </Provider>,
   document.getElementById('react-root')
