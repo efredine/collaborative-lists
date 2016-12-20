@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
 import MovieContainer from '../containers/movieContainers.jsx'
 import LoginContainer from '../containers/LoginContainer.js';
-import { Navbar, Nav, NavItem, NavDropdown, MenuItem, Grid, Row, Col } from 'react-bootstrap';
+import { Navbar, Nav, NavItem, NavDropdown, MenuItem, Grid, Row, Col, Tabs, Tab } from 'react-bootstrap';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import ListsIndex from './ListsIndex.jsx';
 import List from './List.jsx';
 import AddTodo from '../containers/AddTodo'
@@ -35,19 +34,13 @@ class App extends Component {
 
           <Row className="show-grid">
             <Col className="movieContainer" xs={6} md={4}>
-              <Tabs
-                selectedIndex={0}
-              >
-                <TabList>
-                  <Tab>Movies</Tab>
-                  <Tab>Todos</Tab>
-                </TabList>
-                <TabPanel>
+              <Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
+                <Tab eventKey={1} title="Movies">
                   <MovieContainer className="panel-container"/>
-                </TabPanel>
-                <TabPanel>
+                </Tab>
+                <Tab eventKey={2} title="Todos">
                   <AddTodo />
-                </TabPanel>
+                </Tab>
               </Tabs>
             </Col>
             <Col className="historyContainer" xs={6} md={4}>
