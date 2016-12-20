@@ -7,6 +7,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import Lists from './Lists.jsx';
 import List from './List.jsx';
 import AddTodo from '../containers/AddTodo'
+import ActionListContainer from '../containers/ActionListContainer.jsx'
 
 class App extends Component {
 
@@ -58,7 +59,7 @@ class App extends Component {
               </Router>
                 </Col>
             <Col className="chatContainer" xsHidden md={4}>
-              <MovieContainer className="panel-container"/>
+              <ActionListContainer />
             </Col>
           </Row>
 
