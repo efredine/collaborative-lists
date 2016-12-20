@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import fetch from 'isomorphic-fetch';
-import _ from 'lodash'
+import _ from 'lodash';
+import InlineEdit from 'react-edit-inline';
 
 class List extends Component {
   constructor(props) {

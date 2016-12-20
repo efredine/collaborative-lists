@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
 import fetch from 'isomorphic-fetch';
-import _ from 'lodash'
+import _ from 'lodash';
+import { Link } from 'react-router'
 
 
 class Lists extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: this.names
+      list: this.lists
     };
   }
 
@@ -16,9 +17,9 @@ class Lists extends Component {
     .then(response => {
       return response.json();
     })
-    .then(names => {
-      console.log('names',names);
-      this.setState({names: names});
+    .then(lists => {
+      console.log('lists',lists);
+      this.setState({lists: lists});
     })
   }
 
@@ -40,13 +41,13 @@ class Lists extends Component {
 
 
   render() {
-    var list = _.map(this.state.names, (name) => {
-      return <li key = {name.id}>{name.title}</li>
+    var listArray = _.map(this.state.lists, (list) => {
+      return <li key = {list.id}><Link to={'/list/'+ list.id}>{list.title}</Link></li>
     });
     return (
       <div>
           <button  onClick={this.newList} className="btn btn-default">Add</button>
-          <h1>{list}</h1>
+          <h1>{listArray}</h1>
       </div>
     );
   }

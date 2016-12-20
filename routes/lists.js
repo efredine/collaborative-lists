@@ -25,14 +25,7 @@ module.exports = (knex) => {
     .from("lists")
     .where("id", listId)
     .then((result)=>{
-      if(result.length > 0){
-        res.json(result);
-      }else {
-        console.log("resullttt", result)
-      }
-
-
-
+      res.json(result);
     })
   });
 
