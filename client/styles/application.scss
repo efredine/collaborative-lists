@@ -16,6 +16,7 @@ body {
 .panel-body {
   height: 30px;
   line-height: 0;
+  text-align: center;
 
 }
 
@@ -33,7 +34,7 @@ body {
 }
 
 .panel-title {
-  padding-left: 40px;
+  text-align: center;
 }
 
 .newPanel {
@@ -70,8 +71,8 @@ body {
 }
 
 .add {
-  height: 27px;
-  width: 27px;
+  height: 22px;
+  width: 22px;
   opacity: .5;
   position: absolute;
   top: 5px;
@@ -86,8 +87,12 @@ body {
   }
 }
 
-.container {
-  color: black;
+.progress {
+  background-color: #F5F22E;
+}
+
+.poster {
+  padding-left: 45px;
 }
 
 .remove {
