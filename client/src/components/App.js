@@ -38,7 +38,7 @@ class App extends Component {
         <Router history={browserHistory}>
           <Route path="/" >
             <IndexRoute component={lists} />
-            <Route path="/list/:listId" component={List} />
+            <Route path="/:listId" component={List} />
           </Route>
         </Router>
           </Col>

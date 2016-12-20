@@ -42,7 +42,7 @@ class Lists extends Component {
 
   render() {
     var listArray = _.map(this.state.lists, (list) => {
-      return <li key = {list.id}><Link to={'/list/'+ list.id}>{list.title}</Link></li>
+      return <li key = {list.id}><Link to={'/'+ list.id}>{list.title}</Link></li>
     });
     return (
       <div>
