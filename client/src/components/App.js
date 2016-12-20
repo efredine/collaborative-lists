@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import MovieContainer from '../containers/movieContainers.jsx'
+import MovieSearch from '../containers/MovieSearch.jsx'
 import LoginContainer from '../containers/LoginContainer.js';
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem, Grid, Row, Col, Tabs, Tab } from 'react-bootstrap';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
@@ -36,7 +36,7 @@ class App extends Component {
             <Col className="movieContainer" xs={6} md={4}>
               <Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
                 <Tab eventKey={1} title="Movies">
-                  <MovieContainer className="panel-container"/>
+                  <MovieSearch className="panel-container"/>
                 </Tab>
                 <Tab eventKey={2} title="Todos">
                   <AddTodo />

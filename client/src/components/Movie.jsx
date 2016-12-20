@@ -20,8 +20,7 @@ constructor(...args) {
   }
 
   render() {
-    const {title, rating, summary, poster} = this.props;
-
+    const {original_title, vote_average, summary, poster_path} = this.props.content;
 
     return(
       <div>
@@ -31,17 +30,17 @@ constructor(...args) {
             <img onClick={this.onRemove} src="http://localhost:8080/images/remove.png"/>
           </div>
           <h3 className="panel-title">
-            {title}
+            {original_title}
           </h3>
         <Collapse in={this.state.open}>
           <div>
             <Well>
             <div className="poster">
-              <img src={"http://image.tmdb.org/t/p/w185/" + poster}/>
+              <img src={"http://image.tmdb.org/t/p/w185/" + poster_path}/>
             </div>
               <p>{summary}</p>
               <div>
-               <ProgressBar bsStyle="danger" active now={rating * 10} label={`${rating} / 10 Average Rating`}/>
+               <ProgressBar bsStyle="danger" active now={vote_average * 10} label={`${vote_average} / 10 Average Rating`}/>
               </div>
             </Well>
           </div>

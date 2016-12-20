@@ -15,6 +15,11 @@ export const addCard = content => dispatchWithUserList({
   content
 });
 
+export const addMovie = content => addCard({
+  contentType: ContentTypes.MOVIE,
+  ...content
+});
+
 export const addTodo = text => addCard({
   contentType: ContentTypes.TODO,
   text: text
