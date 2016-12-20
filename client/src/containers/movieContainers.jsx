@@ -53,6 +53,15 @@ clickMovie = index => {
   })
 }
 
+removeMovie = index => {
+  const toRemove = this.state.selected[index];
+  const updatedSelectedArray = this.state.selected.slice();
+  updatedSelectedArray.splice(index,1);
+  this.setState({
+    selected: updatedSelectedArray,
+  })
+}
+
   render() {
 
     // var currentPopularMovies = _.map(this.state.popularMovies, (movie, index)=> {
@@ -69,8 +78,8 @@ clickMovie = index => {
     //   return <option key = {movie.id}>{movie.original_title} value = {movie.id} </option>
     // });
 
-    const selected = _.map(this.state.selected, (movie)=> {
-      return <Movie key = {movie.id} title={movie.original_title} rating={movie.vote_average} />
+    const selected = _.map(this.state.selected, (movie, index)=> {
+      return <Movie key = {movie.id} title={movie.original_title} index={index} onRemove={this.removeMovie} rating={movie.vote_average} />
     });
 
     return (
