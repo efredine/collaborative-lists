@@ -59,13 +59,13 @@ body {
 
 .navbar-form {
   position: absolute;
-  top: 10px;
+  top: 0px;
   right: 10px;
 }
 
 .navbar-text {
   position: absolute;
-  top: 10px;
+  top: 0px;
   right: 25px;
 }
 
@@ -86,6 +86,10 @@ body {
   }
 }
 
+.container {
+  color: black;
+}
+
 .remove {
   display: none;
   height: 27px;
@@ -102,6 +106,27 @@ body {
   cursor: pointer;
 
   }
+}
+
+.movieContainer {
+  background: #FFF00B;
+  border-bottom: 3px solid transparent;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+
+.historyContainer {
+  background: #5551FF;
+  border-bottom: 3px solid transparent;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+
+.chatContainer {
+  background: #0BFF0D;
+  border-bottom: 3px solid transparent;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
 }
 
 .panel-movie {
