@@ -2,9 +2,9 @@ import { connect } from 'react-redux'
 import { fetchTodos } from '../actions'
 import TodoApp from '../components/TodoApp.js'
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch, ownProps) => ({
   fetchTodos: () => {
-    dispatch(fetchTodos())
+    dispatch(fetchTodos(ownProps.params.listId))
   }
 })
 
