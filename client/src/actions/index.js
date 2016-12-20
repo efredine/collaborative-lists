@@ -1,7 +1,16 @@
 import fetch from 'isomorphic-fetch'
 import ContentTypes from '../types/ContentTypes';
 
-export const addCard = (listId, content) => ({
+function dispatchWithUserList(action) {
+    return (dispatch, getState) => {
+        const state = getState();
+        action.userId = state.user.id;
+        action.listId = state.activeList;
+        dispatch(action);
+    }
+}
+
+export const addCard = (listId, content) => dispatchWithUserList({
   type: 'SERVER/ADD_CARD',
   listId,
   content
@@ -17,18 +26,16 @@ export const setVisibilityFilter = (filter) => ({
   filter
 });
 
-export const toggleCard = (toggleId) => {
-  return {
-    type: 'SERVER/TOGGLE_CARD',
-    toggleId
-  };
-}
+export const toggleCard = (toggleId) => dispatchWithUserList({
+  type: 'SERVER/TOGGLE_CARD',
+  toggleId
+});
 
 export const startDrag = () => ({
   type: 'START_DRAG'
 });
 
-export const moveCard = (draggedId, overId) => ({
+export const moveCard = (draggedId, overId) => dispatchWithUserList({
   type: 'SERVER/MOVE_CARD',
   draggedId,
   overId

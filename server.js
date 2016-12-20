@@ -75,8 +75,9 @@ io.on('connection', function(socket){
     // before broadcasting to all the clients.
     action.type = action.type.split('/')[1];
     const listId = action.listId || 1;
-    console.log("listId", listId);
-    actionHelpers.insert(listId, 1, action)
+    const userId = action.userId || 1;
+    console.log("ids", listId, userId);
+    actionHelpers.insert(listId, userId, action)
     .then(id => {
       action.id = id;
       console.log('BROADCAST ACTION');
