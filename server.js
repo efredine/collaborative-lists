@@ -67,7 +67,6 @@ app.post("/api/update", (req, res) => {
   res.json(["Got it"]);
 });
 
-
 server.listen(8080);
 
 const actionHelpers = require('./lib/actionHelpers')(knex);
