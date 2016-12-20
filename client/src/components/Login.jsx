@@ -12,7 +12,7 @@ class Login extends Component {
 
   componentDidMount() {
     const {user, identify} = this.props;
-    if(!user.initialized) {
+    if(!user.userInitialized) {
       identify();
     }
   }
