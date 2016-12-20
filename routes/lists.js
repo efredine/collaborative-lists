@@ -9,10 +9,11 @@ module.exports = (knex) => {
   router.get("/", (req, res) => {
     const userId = req.session.user.id;
     knex
-      .select("*")
+      .select('list_id as id', 'title', 'created', 'created_at', 'updated_at')
       .from("lists")
       .innerJoin("users_lists", "lists.id", "list_id")
       .where("user_id", userId)
+      .orderBy('list_id')
       .then((results) => {
         res.json(results);
       });
