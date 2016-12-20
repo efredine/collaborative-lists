@@ -2,7 +2,9 @@ import React, {Component} from 'react';
 import MovieContainer from '../containers/movieContainers.jsx'
 import LoginContainer from '../containers/LoginContainer.js';
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem, Grid, Row, Col } from 'react-bootstrap';
-
+import { Router, Route, IndexRoute, browserHistory } from 'react-router';
+import lists from './lists.jsx';
+import List from './List.jsx';
 
 class App extends Component {
 
@@ -33,8 +35,13 @@ class App extends Component {
         <MovieContainer className="panel-container"/>
       </Col>
       <Col xs={6} md={4}>
-        <MovieContainer className="panel-container"/>
-      </Col>
+        <Router history={browserHistory}>
+          <Route path="/" >
+            <IndexRoute component={lists} />
+            <Route path="/list/:listId" component={List} />
+          </Route>
+        </Router>
+          </Col>
       <Col xsHidden md={4}>
         <MovieContainer className="panel-container"/>
       </Col>
