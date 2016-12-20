@@ -13,6 +13,7 @@ import createLogger from 'redux-logger';
 import { Router, Route, browserHistory } from 'react-router';
 import ReduxThunk from 'redux-thunk';
 import lists from './components/lists.jsx';
+import List from './components/List.jsx';
 
 
 const loggerMiddleware = createLogger();
@@ -31,8 +32,7 @@ render(
       <Route path="/todos" component={TodoAppContainer} />
       <Route path="/signup" component={Register} />
       <Route path="/lists" component={lists} />
-
-
+      <Route path="/list/:listId" component={List} />
     </Router>
   </Provider>,
   document.getElementById('react-root')

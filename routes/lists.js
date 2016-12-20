@@ -3,6 +3,7 @@
 const express = require('express');
 const router  = express.Router();
 
+
 module.exports = (knex) => {
 
   router.get("/", (req, res) => {
@@ -15,6 +16,24 @@ module.exports = (knex) => {
       .then((results) => {
         res.json(results);
       });
+  }),
+
+  router.get('/:listId', (req, res) => {
+    const listId = req.params.listId;
+    knex
+    .select("*")
+    .from("lists")
+    .where("id", listId)
+    .then((result)=>{
+      if(result.length > 0){
+        res.json(result);
+      }else {
+        console.log("resullttt", result)
+      }
+
+
+
+    })
   });
 
   router.post("/new", (req, res) => {
@@ -41,4 +60,3 @@ module.exports = (knex) => {
 
   return router;
 };
-

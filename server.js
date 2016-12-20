@@ -61,8 +61,6 @@ app.get("/api/popular/movies", (req, res)=> {
   });
 });
 
-
-
 app.post("/api/update", (req, res) => {
   console.log(req.body.theThing);
   res.json(["Got it"]);

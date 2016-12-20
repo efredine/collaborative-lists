@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import MovieContainer from '../containers/movieContainers.jsx'
-import NavBar from './NavBar.jsx'
+import NavBar from './NavBar.jsx';
+
 
 class App extends Component {
 
