@@ -109,7 +109,6 @@ class SortableList extends Component {
     console.log('rendering');
     return connectDropTarget(
       <div>
-        <h1>Hello</h1>
         <FlipMove easing="cubic-bezier(0, 0.7, 0.8, 0.1)" disableAllAnimations={dragging}>
           {items}
         </FlipMove>
