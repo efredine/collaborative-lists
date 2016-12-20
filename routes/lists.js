@@ -29,6 +29,17 @@ module.exports = (knex) => {
     })
   });
 
+  router.post("/update", (req, res)=>{
+    knex('lists').where("id",req.body.id)
+    .update({
+      title: req.body.title
+    })
+    .then ((result)=> {
+      console.log("hello");
+      // res.json(result)
+    })
+  });
+
   router.post("/new", (req, res) => {
     const userId = req.session.user.id;
     knex('lists')
