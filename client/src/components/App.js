@@ -31,10 +31,10 @@ class App extends Component {
   <Grid>
 
     <Row className="show-grid">
-      <Col xs={6} md={4}>
+      <Col className="movieContainer" xs={6} md={4}>
         <MovieContainer className="panel-container"/>
       </Col>
-      <Col xs={6} md={4}>
+      <Col className="historyContainer" xs={6} md={4}>
         <Router history={browserHistory}>
           <Route path="/" >
             <IndexRoute component={lists} />
@@ -42,7 +42,7 @@ class App extends Component {
           </Route>
         </Router>
           </Col>
-      <Col xsHidden md={4}>
+      <Col className="chatContainer" xsHidden md={4}>
         <MovieContainer className="panel-container"/>
       </Col>
     </Row>
