@@ -1,12 +1,13 @@
 import fetch from 'isomorphic-fetch'
 import ContentTypes from '../types/ContentTypes';
 
-export const addCard = (content) => ({
+export const addCard = (listId, content) => ({
   type: 'SERVER/ADD_CARD',
+  listId,
   content
 });
 
-export const addTodo = (text) => (addCard({
+export const addTodo = (listId, text) => (addCard(listId, {
   contentType: ContentTypes.TODO,
   text: text
 }))
@@ -37,8 +38,9 @@ export const endDrag = () => ({
   type: 'END_DRAG'
 });
 
-export const receiveTodos = actionHistory => ({
+export const receiveTodos = (listId, actionHistory) => ({
   type: 'RECEIVE',
+  listId: listId,
   actionHistory: actionHistory
 });
 
@@ -47,7 +49,7 @@ export const fetchTodos = (listId) => dispatch => {
     credentials: 'include'
   })
   .then(response => response.json())
-  .then(json => dispatch(receiveTodos(json)));
+  .then(json => dispatch(receiveTodos(listId, json)));
   // TODO: add error handling catch
 }
 

@@ -5,18 +5,26 @@ import visibilityFilter from './visibilityFilter'
 import dragging from './dragging'
 import receiver from './receiver'
 import user from './user'
+import activeList from './activeList'
 
 const sliceReducers = combineReducers({
   cards,
   actions,
   visibilityFilter,
   dragging,
-  user
-})
+  user,
+  activeList
+});
+
+const cardReducers = combineReducers({
+  cards,
+  actions,
+  visibilityFilter,
+});
 
 function reduce(state, action) {
-  const intermediateState = sliceReducers(state, action);
-  return receiver(intermediateState, action, sliceReducers);
+  const intermediateState = receiver(state, action, cardReducers);
+  return sliceReducers(intermediateState, action);
 }
 
 export default reduce;
