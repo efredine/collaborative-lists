@@ -10,16 +10,15 @@ function dispatchWithUserList(action) {
     }
 }
 
-export const addCard = (listId, content) => dispatchWithUserList({
+export const addCard = content => dispatchWithUserList({
   type: 'SERVER/ADD_CARD',
-  listId,
   content
 });
 
-export const addTodo = (listId, text) => (addCard(listId, {
+export const addTodo = text => addCard({
   contentType: ContentTypes.TODO,
   text: text
-}))
+});
 
 export const setVisibilityFilter = (filter) => ({
   type: 'SET_VISIBILITY_FILTER',

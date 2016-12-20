@@ -28,7 +28,7 @@ class AddTodo extends Component {
     if (userInput.length === 0) {
       return;
     }
-    addTodo(activeList, userInput);
+    addTodo(userInput);
     this.setState({
       userInput: ""
     });
@@ -48,12 +48,8 @@ class AddTodo extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  activeList: state.activeList
-})
-
 const mapDispatchToProps =  ({
   addTodo: addTodo
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddTodo);
+export default connect(null, mapDispatchToProps)(AddTodo);
