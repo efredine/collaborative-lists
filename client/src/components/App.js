@@ -1,9 +1,14 @@
 import React, {Component} from 'react';
 import MovieContainer from '../containers/movieContainers.jsx'
 import LoginContainer from '../containers/LoginContainer.js';
-import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
+import { Navbar, Nav, NavItem, NavDropdown, MenuItem, Grid, Row, Col } from 'react-bootstrap';
 
-const NavbarInstance = () => (
+
+class App extends Component {
+
+  render() {
+    return(
+      <div>
   <Navbar>
     <Navbar.Header>
       <Navbar.Brand>
@@ -11,8 +16,6 @@ const NavbarInstance = () => (
       </Navbar.Brand>
     </Navbar.Header>
     <Nav>
-      <NavItem eventKey={1} href="#">Link</NavItem>
-      <NavItem eventKey={2} href="#">Link</NavItem>
       <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
         <MenuItem eventKey={3.1}>Action</MenuItem>
         <MenuItem eventKey={3.2}>Another action</MenuItem>
@@ -23,17 +26,21 @@ const NavbarInstance = () => (
     </Nav>
     <LoginContainer/>
   </Navbar>
-);
+  <Grid>
 
-class App extends Component {
+    <Row className="show-grid">
+      <Col xs={6} md={4}>
+        <MovieContainer className="panel-container"/>
+      </Col>
+      <Col xs={6} md={4}>
+        <MovieContainer className="panel-container"/>
+      </Col>
+      <Col xsHidden md={4}>
+        <MovieContainer className="panel-container"/>
+      </Col>
+    </Row>
 
-  render() {
-    return(
-      <div>
-        <NavbarInstance/>
-        <div className="panel-container">
-          <MovieContainer/>
-        </div>
+  </Grid>
       </div>
     );
   }
