@@ -12,7 +12,7 @@ class ActionList extends Component {
               />);
       });
     return (
-      <ul className="list-unstyled">
+      <ul className="list-group">
         <ReactTransitionGroup>
             {actionItems}
         </ReactTransitionGroup>
