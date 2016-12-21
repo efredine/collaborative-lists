@@ -9,7 +9,8 @@ class Movie extends Component {
 
     this.state = {
       trailers: [],
-      key: undefined
+      key: undefined,
+  
     };
   }
 
@@ -25,7 +26,7 @@ class Movie extends Component {
           console.log("trailers moviesssss", movieTrailers.results);
            this.setState({
              trailers: movieTrailers.results,
-             key: this.props.movieTrailerKey
+             key: this.props.movieTrailerKey,
            });
         })
   }
@@ -94,7 +95,9 @@ class Movie extends Component {
     var movieTrailerKey = _.map(this.state.trailers, (trailerKey)=> {
         return trailerKey.key
     })
-
+    if(isLoaded){
+      return
+    }
     return(
       <div>
       <div className="panel-movie panel panel-default">
@@ -108,29 +111,29 @@ class Movie extends Component {
               <div className="poster">
                 <img src={"http://image.tmdb.org/t/p/w185/" + poster_path}/>
               </div>
+
               <iframe
                 src={`https://www.youtube.com/embed/${movieTrailerKey[0]}`}
                 allowFullScreen
                 />
-            </Well>
-          </div>
-        </Collapse>
           <div className="add">
             <img onClick={this.onAdd} src="http://localhost:8080/images/add.png"/>
           </div>
-          <p>{overview}</p>
-          <div>
-          <ProgressBar bsStyle="danger" active now={vote_average * 10} label={`${vote_average} / 10 Average Rating`}/>
-            </div>
 
+                <p>{overview}</p>
+                <div>
+                 <ProgressBar bsStyle="danger" active now={vote_average * 10} label={`${vote_average} / 10 Average Rating`}/>
+                </div>
+              </Well>
             </div>
-
+          </Collapse>
           {this.renderAddRemove()}
           {this.drop()}
         </div>
         <div className="panel-body">
           <p> Rating: PG-13 | Genre: Action &amp; Adventure </p>
         </div>
+      </div>
       </div>
 
   );
