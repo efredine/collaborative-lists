@@ -10,7 +10,8 @@ class MovieContainer extends Component {
     this.state = {
       movies: [],
       selected: [],
-      popularMovies: 0
+      popularMovies: 0,
+      trailers: []
     };
   }
 
@@ -25,7 +26,9 @@ class MovieContainer extends Component {
        this.setState({
          movies: popularMovies.results
        });
-    })
+    });
+
+
 
   }
 // updates what ever movie name you put in the search box with the results starting with its name
@@ -64,6 +67,9 @@ removeMovie = index => {
 
   render() {
 
+    var movieTrailerKey = _.map(this.state.trailers, (trailerKey)=> {
+        return console.log("traillerererer",trailerKey.key)
+    })
     // var currentPopularMovies = _.map(this.state.popularMovies, (movie, index)=> {
     //   return <Movie key ={movie.id} index={index} onAdd={this.clickMovie} title={movie.original_title} rating={movie.vote_average} />
     // });
@@ -96,6 +102,7 @@ removeMovie = index => {
         <FlipMove easing="cubic-bezier(0, 0.7, 0.8, 0.1)">
           {movies}
         </FlipMove>
+        {movieTrailerKey}
       </div>
     );
   }
