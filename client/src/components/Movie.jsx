@@ -81,9 +81,7 @@ class Movie extends Component {
             <Collapse in={this.state.open}>
             <div>
               <Well>
-              <div className="poster">
-                <img src={"http://image.tmdb.org/t/p/w500/" + backdrop_path}/>
-              </div>
+
                 <p>{overview}</p>
                 <div>
                  <ProgressBar bsStyle="danger" active now={vote_average * 10} label={`${vote_average} / 10 Average Rating`}/>
@@ -95,7 +93,9 @@ class Movie extends Component {
           {this.drop()}
         </div>
         <div className="panel-body">
-          <p> Rating: PG-13 | Genre: Action &amp; Adventure </p>
+          <div className="poster">
+            <img src={"http://image.tmdb.org/t/p/w500/" + backdrop_path}/>
+          </div>
         </div>
       </div>
 
