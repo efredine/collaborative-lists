@@ -113,35 +113,25 @@ class Movie extends Component {
       <div>
       <div className="panel-movie panel panel-default">
         <div className="panel-heading">
-          <h3 className="panel-title" onClick={ ()=> this.setState({ open: !this.state.open })}>
+          {this.renderAddRemove()}
+          <h3 className="panel-title">
             {title}
           </h3>
-            <Collapse in={this.state.open}>
-            <div>
-              <Well>
-
-              <div className="poster">
-                <img src={"http://image.tmdb.org/t/p/w500/" + backdrop_path}/>
-              </div>
-          <div className="add">
-            <img onClick={this.onAdd} src="http://localhost:8080/images/add.png"/>
-          </div>
-
-
-                <p>{overview}</p>
-                <div>
-                 <ProgressBar bsStyle="danger" active now={vote_average * 10} label={`${vote_average} / 10 Average Rating`}/>
-                </div>
-              </Well>
-            </div>
-          </Collapse>
-          {this.trailerClick()}
-          {this.renderAddRemove()}
-          {this.drop()}
         </div>
-        <div className="panel-body">
+        <div className="panel-body" onClick={ ()=> this.setState({ open: !this.state.open })}>
           <div className="poster">
             <img src={"http://image.tmdb.org/t/p/w500/" + backdrop_path}/>
+            <p> More Info {vote_average}</p>
+            {this.drop()}
+            <Collapse in={this.state.open}>
+            <div>
+              <div>{overview}</div>
+              <div>
+              {this.trailerClick()}
+               <ProgressBar bsStyle="danger" active now={vote_average * 10} label={`${vote_average} / 10 Average Rating`}/>
+              </div>
+            </div>
+          </Collapse>
           </div>
         </div>
       </div>
