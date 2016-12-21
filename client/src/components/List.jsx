@@ -67,15 +67,6 @@ dataChanged = (data) => {
             text={title}
             paramName="Title"
             change= {this.dataChanged}
-            style={{
-              minWidth: 150,
-              display: 'inline-block',
-              margin: 0,
-              padding: 0,
-              fontSize: 15,
-              outline: 0,
-              border: 0
-            }}
           />
         </h1>
         <VisibleCardList />

@@ -8,12 +8,11 @@ Turns out the 'one-way' data architecture imposed by Redux and React is an excel
 
 ## Tech Stack
 - Architecturally similar to Chatty app.  Uses the simple React boiler-plate for the front-end and node in the back end.
-- Using Socket.io rather than WS.
-- [React](https://facebook.github.io/react/) and [Redux](https://github.com/reactjs/redux)
-- [React DND](http://gaearon.gith2ub.io/react-dnd/) for drag and drop.
-- [ReactCSSTransitionGroup](https://facebook.github.io/react/docs/animation.html) to animate additions and deletions from the list
-- Anticipate using Postgres or Mongodb for data storage
 - Node with Express and Socket.io for the server
+- [React](https://facebook.github.io/react/) and [Redux](https://github.com/reactjs/redux) as the front-end
+- [React DND](http://gaearon.gith2ub.io/react-dnd/) for drag and drop.
+- Bootstrap for CSS including the use of React-Bootstrap.
+- Postsgre for data storage.  Knex for migrations and building SQL queries.
 
 ## Prototype features
 - a single global list stored in memory on the server
