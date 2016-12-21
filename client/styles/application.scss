@@ -4,7 +4,7 @@ img {
   max-width: 100%;
 }
 body {
-  background: -webkit-gradient(linear, left top, right top, color-stop(0%, #008080), color-stop(100%, #66FF8A));
+  background: #C4D7ED
 }
 .panel-default>.panel-heading {
   color: black;
@@ -97,7 +97,6 @@ body {
 }
 
 .remove {
-  display: none;
   height: 27px;
   width: 27px;
   opacity: .5;
@@ -114,8 +113,29 @@ body {
   }
 }
 
+.undo {
+  color: blue;
+  opacity: .5;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  transition-duration: 200ms;
+  -moz-transform: scaleX(-1);
+  -o-transform: scaleX(-1);
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+  filter: FlipH;
+  -ms-filter: "FlipH";
+
+
+  &:hover {
+  opacity: 1.0;
+  cursor: pointer;
+
+  }
+}
 .movieContainer {
-  background: #FFF00B;
+  background: #9DACE2;
   border-bottom: 3px solid transparent;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
@@ -124,7 +144,7 @@ body {
 }
 
 .historyContainer {
-  background: #5551FF;
+  background: #375D81;
   border-bottom: 3px solid transparent;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
@@ -133,7 +153,7 @@ body {
 }
 
 .chatContainer {
-  background: #0BFF0D;
+  background: #9DACE2;
   border-bottom: 3px solid transparent;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
