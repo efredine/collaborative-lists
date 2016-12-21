@@ -16,6 +16,7 @@ body {
 .panel-body {
   height: 30px;
   line-height: 0;
+  text-align: center;
 
 }
 
@@ -33,7 +34,8 @@ body {
 }
 
 .panel-title {
-  padding-left: 40px;
+  text-align: center;
+  line-height: inherit;
 }
 
 .newPanel {
@@ -70,8 +72,8 @@ body {
 }
 
 .add {
-  height: 27px;
-  width: 27px;
+  height: 22px;
+  width: 22px;
   opacity: .5;
   position: absolute;
   top: 5px;
@@ -86,8 +88,12 @@ body {
   }
 }
 
-.container {
-  color: black;
+.progress {
+  background-color: #F5F22E;
+}
+
+.poster {
+  padding-left: 45px;
 }
 
 .remove {
@@ -111,22 +117,28 @@ body {
 .movieContainer {
   background: #FFF00B;
   border-bottom: 3px solid transparent;
-  border-top-left-radius: 3px;
-  border-top-right-radius: 3px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
 .historyContainer {
   background: #5551FF;
   border-bottom: 3px solid transparent;
-  border-top-left-radius: 3px;
-  border-top-right-radius: 3px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
 .chatContainer {
   background: #0BFF0D;
   border-bottom: 3px solid transparent;
-  border-top-left-radius: 3px;
-  border-top-right-radius: 3px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
 .panel-movie {

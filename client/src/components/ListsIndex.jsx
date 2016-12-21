@@ -4,7 +4,7 @@ import _ from 'lodash';
 import { Link } from 'react-router'
 
 
-class Lists extends Component {
+class ListsIndex extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -54,4 +54,4 @@ class Lists extends Component {
 
 
 }
-export default Lists;
+export default ListsIndex;

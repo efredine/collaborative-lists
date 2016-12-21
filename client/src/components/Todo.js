@@ -1,9 +1,16 @@
 import React, { PropTypes } from 'react'
+const style = {
+  border: '1px dashed gray',
+  padding: '0.5rem 1rem',
+  marginBottom: '.5rem',
+  backgroundColor: 'white',
+  cursor: 'move'
+};
 
 const Todo = ({ onClick, completed, content }) => (
   <div
     onClick={onClick}
-    style={{
+    style={{...style,
       textDecoration: completed ? 'line-through' : 'none'
     }}
   >

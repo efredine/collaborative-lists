@@ -2,6 +2,13 @@ import React, {Component} from 'react';
 import fetch from 'isomorphic-fetch';
 import _ from 'lodash';
 import InlineEdit from 'react-edit-inline';
+import Footer from './Footer'
+import VisibleCardList from '../containers/VisibleCardList'
+
+import { connect } from 'react-redux'
+import { fetchTodos } from '../actions'
+
+
 
 class List extends Component {
 
@@ -16,6 +23,8 @@ class List extends Component {
 }
 
 componentDidMount() {
+  this.props.fetchTodos();
+
   const listId = this.props.params.listId;
   console.log('listId: ', listId);
   fetch(`/api/lists/${listId}`, {
@@ -29,7 +38,6 @@ componentDidMount() {
     console.log('results', results);
     const listContainer = results.length === 1 ? results[0] : {};
     this.setState({listContainer: listContainer, title: listContainer.title});
-
   })
 }
 
@@ -51,30 +59,42 @@ dataChanged = (data) => {
 
 }
   render() {
-    // const listToRender = _.map(this.state.lists, (listItem)=>{
-    //   return  <li>{listItem}</li>
-    // });
-    // console.log(listToRender);
-    // const result = this.state.lists.length > 0 ? this.state.lists[0] : "";
     const {title} = this.state;
     return (
-      <h1><InlineEdit
-              text={title}
-              paramName="Title"
-              change= {this.dataChanged}
-              style={{
-                minWidth: 150,
-                display: 'inline-block',
-                margin: 0,
-                padding: 0,
-                fontSize: 15,
-                outline: 0,
-                border: 0
-              }}
-            /></h1>
+      <div>
+        <h1>
+          <InlineEdit
+            text={title}
+            paramName="Title"
+            change= {this.dataChanged}
+            style={{
+              minWidth: 150,
+              display: 'inline-block',
+              margin: 0,
+              padding: 0,
+              fontSize: 15,
+              outline: 0,
+              border: 0
+            }}
+          />
+        </h1>
+        <VisibleCardList />
+        <Footer />
+      </div>
       );
     }
 
 }
 
-export default List;
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  fetchTodos: () => {
+    dispatch(fetchTodos(ownProps.params.listId))
+  }
+})
+
+const ListContainer = connect(
+  null,
+  mapDispatchToProps
+)(List);
+
+export default ListContainer;
