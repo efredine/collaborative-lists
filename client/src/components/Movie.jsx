@@ -15,6 +15,8 @@ class Movie extends Component {
   }
 
   componentDidMount(){
+    // disable this capability for now TODO: put it back.
+    return;
     console.log("thisssssfdfdf", this.props.content.id)
     // http://api.themoviedb.org/3/movie/131634?api_key=###&append_to_response=videos
         fetch(`http://api.themoviedb.org/3/movie/${this.props.content.id}/videos?api_key=6b426deee51a1b33c8c0b4231c1543cd`)
@@ -32,6 +34,7 @@ class Movie extends Component {
   }
 
   trailerClick(){
+    // no trailers - TODO: refactor this code
     const movieTrailerKey = _.map(this.state.trailers, (trailerKey)=> {
       return trailerKey.key
     });
