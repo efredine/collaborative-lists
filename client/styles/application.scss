@@ -113,6 +113,30 @@ body {
   }
 }
 
+.drop {
+  color: black;
+  opacity: .5;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  transition-duration: 200ms;
+
+  &:hover {
+  opacity: 1.0;
+  cursor: pointer;
+  }
+
+  &:click {
+  -moz-transform: scaleX(-.5);
+  -o-transform: scaleX(-.5);
+  -webkit-transform: scaleX(-.5);
+  transform: scaleX(-.5);
+  filter: FlipH;
+  -ms-filter: "FlipH";
+
+  }
+}
+
 .undo {
   color: blue;
   opacity: .5;
