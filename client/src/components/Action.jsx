@@ -7,7 +7,7 @@ class Action extends Component {
 
   render() {
     return (
-        <li>
+        <li className="list-group-item small">
           {this.props.type} {this.props.text}
         </li>
     );

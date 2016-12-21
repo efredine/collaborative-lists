@@ -10,7 +10,7 @@ class Movie extends Component {
     this.state = {
       trailers: [],
       key: undefined,
-  
+
     };
   }
 
@@ -90,7 +90,8 @@ class Movie extends Component {
   }
 
   render() {
-    const {original_title, vote_average, overview, poster_path} = this.props.content;
+
+    const {title, vote_average, overview, backdrop_path} = this.props.content;
 
     var movieTrailerKey = _.map(this.state.trailers, (trailerKey)=> {
         return trailerKey.key
@@ -103,13 +104,13 @@ class Movie extends Component {
       <div className="panel-movie panel panel-default">
         <div className="panel-heading">
           <h3 className="panel-title" onClick={ ()=> this.setState({ open: !this.state.open })}>
-            {original_title}
+            {title}
           </h3>
             <Collapse in={this.state.open}>
             <div>
               <Well>
               <div className="poster">
-                <img src={"http://image.tmdb.org/t/p/w185/" + poster_path}/>
+                <img src={"http://image.tmdb.org/t/p/w500/" + backdrop_path}/>
               </div>
 
               <iframe

@@ -34,6 +34,7 @@ class App extends Component {
 
           <Row className="show-grid">
             <Col className="movieContainer" xs={6} md={4}>
+              <h1>List Builders</h1>
               <Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
                 <Tab eventKey={1} title="Movies">
                   <MovieSearch className="panel-container"/>
@@ -43,7 +44,7 @@ class App extends Component {
                 </Tab>
               </Tabs>
             </Col>
-            <Col className="historyContainer" xs={6} md={4}>
+            <Col className="historyContainer" xs={6} md={6}>
               <Router history={browserHistory}>
                 <Route path="/" >
                   <IndexRoute component={ListsIndex} />
@@ -51,8 +52,9 @@ class App extends Component {
                 </Route>
               </Router>
                 </Col>
-            <Col className="chatContainer" xsHidden md={4}>
-              <ActionListContainer />
+            <Col className="chatContainer" xsHidden md={2}>
+              <h1>Activity</h1>
+              <ActionListContainer/>
             </Col>
           </Row>
 
