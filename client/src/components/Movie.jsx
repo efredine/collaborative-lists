@@ -6,10 +6,10 @@ class Movie extends Component {
 
   constructor(...args) {
     super(...args);
-
     this.state = {
       trailers: [],
       key: undefined,
+      open: false
 
     };
   }
@@ -29,6 +29,21 @@ class Movie extends Component {
              key: this.props.movieTrailerKey,
            });
         })
+  }
+
+  trailerClick(){
+    const movieTrailerKey = _.map(this.state.trailers, (trailerKey)=> {
+      return trailerKey.key
+    });
+    console.log('Something was clicked')
+    if (this.state.open === true){
+      console.log("something else", `https://www.youtube.com/embed/${movieTrailerKey[0]}`)
+      return(
+        <iframe onClick={ ()=> this.setState({ open: !this.state.open })}
+        src={`https://www.youtube.com/embed/${movieTrailerKey[0]}`}
+        />
+      )
+    }
   }
 
   drop () {
@@ -90,15 +105,10 @@ class Movie extends Component {
   }
 
   render() {
-
     const {title, vote_average, overview, backdrop_path} = this.props.content;
-
-    var movieTrailerKey = _.map(this.state.trailers, (trailerKey)=> {
-        return trailerKey.key
-    })
-    if(isLoaded){
-      return
-    }
+    // if(isLoaded){
+    //   return
+    // }
     return(
       <div>
       <div className="panel-movie panel panel-default">
@@ -112,11 +122,6 @@ class Movie extends Component {
               <div className="poster">
                 <img src={"http://image.tmdb.org/t/p/w500/" + backdrop_path}/>
               </div>
-
-              <iframe
-                src={`https://www.youtube.com/embed/${movieTrailerKey[0]}`}
-                allowFullScreen
-                />
           <div className="add">
             <img onClick={this.onAdd} src="http://localhost:8080/images/add.png"/>
           </div>
@@ -128,6 +133,7 @@ class Movie extends Component {
               </Well>
             </div>
           </Collapse>
+          {this.trailerClick()}
           {this.renderAddRemove()}
           {this.drop()}
         </div>
