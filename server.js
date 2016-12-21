@@ -79,10 +79,7 @@ io.on('connection', function(socket){
     // Actions are of the form SERVER/<ACTION>.  The SERVER portion of this is stripped
     // before broadcasting to all the clients.
     action.type = action.type.split('/')[1];
-    const listId = action.listId || 1;
-    const userId = action.userId || 1;
-    console.log("ids", listId, userId);
-    actionHelpers.insert(listId, userId, action)
+    actionHelpers.insert(1, 1, action)
     .then(id => {
       action.id = id;
       console.log('BROADCAST ACTION');

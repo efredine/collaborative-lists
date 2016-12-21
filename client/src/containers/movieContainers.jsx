@@ -10,7 +10,8 @@ class MovieContainer extends Component {
     this.state = {
       movies: [],
       selected: [],
-      popularMovies: 0
+      popularMovies: 0,
+      trailers: []
     };
   }
 
@@ -25,7 +26,9 @@ class MovieContainer extends Component {
        this.setState({
          movies: popularMovies.results
        });
-    })
+    });
+
+
 
   }
 // updates what ever movie name you put in the search box with the results starting with its name
@@ -96,6 +99,7 @@ removeMovie = index => {
         <FlipMove easing="cubic-bezier(0, 0.7, 0.8, 0.1)">
           {movies}
         </FlipMove>
+        {movieTrailerKey}
       </div>
     );
   }
