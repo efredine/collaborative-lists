@@ -14,11 +14,18 @@ class Movie extends Component {
     };
   }
 
-  componentDidMount(){
-    // disable this capability for now TODO: put it back.
-    return;
-    console.log("thisssssfdfdf", this.props.content.id)
-    // http://api.themoviedb.org/3/movie/131634?api_key=###&append_to_response=videos
+  trailerLink(){
+    if(this.state.open === true) {
+      if (this.state.trailers.length > 0){
+        const movieTrailerKey = _.map(this.state.trailers, (trailerKey)=> {
+          return trailerKey.key
+        });
+        return(
+          <iframe onClick={ ()=> this.setState({ open: !this.state.open })}
+          src={`https://www.youtube.com/embed/${movieTrailerKey[0]}`}
+          />
+        )
+      } else {
         fetch(`http://api.themoviedb.org/3/movie/${this.props.content.id}/videos?api_key=6b426deee51a1b33c8c0b4231c1543cd`)
         .then(response => {
           return response.text();
@@ -31,22 +38,7 @@ class Movie extends Component {
              key: this.props.movieTrailerKey,
            });
         })
-  }
-
-  trailerClick(){
-    // no trailers - TODO: refactor this code
-    return;
-    const movieTrailerKey = _.map(this.state.trailers, (trailerKey)=> {
-      return trailerKey.key
-    });
-    console.log('Something was clicked')
-    if (this.state.open === true){
-      console.log("something else", `https://www.youtube.com/embed/${movieTrailerKey[0]}`)
-      return(
-        <iframe onClick={ ()=> this.setState({ open: !this.state.open })}
-        src={`https://www.youtube.com/embed/${movieTrailerKey[0]}`}
-        />
-      )
+      }
     }
   }
 
@@ -68,7 +60,6 @@ class Movie extends Component {
 
   renderAddRemove() {
     const { completed } = this.props;
-    console.log("Completed:", completed);
     if (completed === false) {
       return (
           <div className="remove">
@@ -137,7 +128,7 @@ class Movie extends Component {
               </Well>
             </div>
           </Collapse>
-          {this.trailerClick()}
+          {this.trailerLink()}
           {this.renderAddRemove()}
           {this.drop()}
         </div>
