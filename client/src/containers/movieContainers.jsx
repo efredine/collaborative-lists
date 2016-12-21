@@ -67,9 +67,6 @@ removeMovie = index => {
 
   render() {
 
-    var movieTrailerKey = _.map(this.state.trailers, (trailerKey)=> {
-        return console.log("traillerererer",trailerKey.key)
-    })
     // var currentPopularMovies = _.map(this.state.popularMovies, (movie, index)=> {
     //   return <Movie key ={movie.id} index={index} onAdd={this.clickMovie} title={movie.original_title} rating={movie.vote_average} />
     // });
