@@ -43,7 +43,7 @@ class App extends Component {
                 </Tab>
               </Tabs>
             </Col>
-            <Col className="historyContainer" xs={6} md={4}>
+            <Col className="historyContainer" xs={6} md={6}>
               <Router history={browserHistory}>
                 <Route path="/" >
                   <IndexRoute component={ListsIndex} />
@@ -51,7 +51,7 @@ class App extends Component {
                 </Route>
               </Router>
                 </Col>
-            <Col className="chatContainer" xsHidden md={4}>
+            <Col className="chatContainer" xsHidden md={2}>
               <ActionListContainer />
             </Col>
           </Row>

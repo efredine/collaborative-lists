@@ -6,7 +6,7 @@ class Movie extends Component {
   constructor(...args) {
     super(...args);
 
-    this.state = {};
+    this.state = {open: false};
   }
 
   drop () {
@@ -69,20 +69,20 @@ class Movie extends Component {
 
   render() {
 
-    const {original_title, vote_average, overview, poster_path} = this.props.content;
+    const {title, vote_average, overview, backdrop_path} = this.props.content;
 
     return(
       <div>
       <div className="panel-movie panel panel-default">
         <div className="panel-heading">
           <h3 className="panel-title" onClick={ ()=> this.setState({ open: !this.state.open })}>
-            {original_title}
+            {title}
           </h3>
             <Collapse in={this.state.open}>
             <div>
               <Well>
               <div className="poster">
-                <img src={"http://image.tmdb.org/t/p/w185/" + poster_path}/>
+                <img src={"http://image.tmdb.org/t/p/w500/" + backdrop_path}/>
               </div>
                 <p>{overview}</p>
                 <div>
