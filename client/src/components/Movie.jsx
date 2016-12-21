@@ -35,6 +35,7 @@ class Movie extends Component {
 
   trailerClick(){
     // no trailers - TODO: refactor this code
+    return;
     const movieTrailerKey = _.map(this.state.trailers, (trailerKey)=> {
       return trailerKey.key
     });
