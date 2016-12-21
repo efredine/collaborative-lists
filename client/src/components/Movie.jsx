@@ -20,7 +20,7 @@ constructor(...args) {
   }
 
   render() {
-    const {original_title, vote_average, summary, poster_path} = this.props.content;
+    const {original_title, vote_average, overview, poster_path} = this.props.content;
 
     return(
       <div>
@@ -38,7 +38,7 @@ constructor(...args) {
             <div className="poster">
               <img src={"http://image.tmdb.org/t/p/w185/" + poster_path}/>
             </div>
-              <p>{summary}</p>
+              <p>{overview}</p>
               <div>
                <ProgressBar bsStyle="danger" active now={vote_average * 10} label={`${vote_average} / 10 Average Rating`}/>
               </div>

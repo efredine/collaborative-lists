@@ -99,6 +99,7 @@ class SortableList extends Component {
             broadcastMove={this.broadcastMove}>
             <SmartCard
               onClick={() => onCardClick(card.id)}
+              onAdd={() => onCardClick(card.id)}
               {...card}
             />
           </SortableCard>
