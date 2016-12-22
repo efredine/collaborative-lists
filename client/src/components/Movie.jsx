@@ -13,6 +13,25 @@ class Movie extends Component {
     };
   }
 
+  votingEnable () {
+    const { votes } = this.props;
+    if (votes === true) {
+      return (
+        <div>
+         <div className="voteup">
+           <Glyphicon onClick={ ()=> this.setState({ open: !this.state.open })} glyph="glyphicon glyphicon-thumbs-up"/>
+         </div>
+         <div className="votedown">
+           <Glyphicon onClick={ ()=> this.setState({ open: !this.state.open })} glyph="glyphicon glyphicon-thumbs-down"/>
+         </div>
+        </div>
+      )
+    } else {
+      return (<div>&nbsp;</div>);
+    }
+  }
+
+
   trailerLink(){
     if(this.state.open === true) {
       if (this.state.trailers.length > 0){
@@ -114,12 +133,15 @@ class Movie extends Component {
           <div className="panel-body" onClick={ ()=> this.setState({ open: !this.state.open })}>
             <div className="poster">
               <img src={"http://image.tmdb.org/t/p/w500/" + backdrop_path}/>
-              <div>More Info {vote_average} {this.drop()}</div>
+               {this.drop()}
+               {this.votingEnable()}
               <Collapse in={this.state.open}>
             <div>
-              <div>{overview}</div>
+              <div>
+              {this.trailerLink()}
+              <p>{overview}</p>
+              </div>
                 <div>
-                {this.trailerLink()}
                  <ProgressBar bsStyle="danger" active now={vote_average * 10} label={`${vote_average} / 10 Average Rating`}/>
                 </div>
               </div>

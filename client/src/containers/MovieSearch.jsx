@@ -59,7 +59,7 @@ class MovieSearch extends Component {
 
   render() {
     var movies = _.map(this.state.movies, (movie, index)=> {
-      return <Movie key={movie.id} content={movie} index={index} onAdd={this.clickMovie}
+      return <Movie key={movie.id} content={movie} index={index} onAdd={this.clickMovie} votes={false}
           />
     });
     return (

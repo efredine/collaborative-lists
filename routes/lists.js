@@ -38,7 +38,7 @@ module.exports = (knex) => {
     })
     .then ((result)=> {
       console.log("hello");
-      // res.json(result)
+      res.json(result)
     })
   });
 
