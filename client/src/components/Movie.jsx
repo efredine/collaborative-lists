@@ -104,38 +104,30 @@ class Movie extends Component {
     // }
     return(
       <div>
-      <div className="panel-movie panel panel-default">
-        <div className="panel-heading">
-          <h3 className="panel-title" onClick={ ()=> this.setState({ open: !this.state.open })}>
-            {title}
-          </h3>
-            <Collapse in={this.state.open}>
-            <div>
-              <Well>
-              <div className="poster">
-                <img src={"http://image.tmdb.org/t/p/w500/" + backdrop_path}/>
-              </div>
-          <div className="add">
-            <img onClick={this.onAdd} src="http://localhost:8080/images/add.png"/>
+        <div className="panel-movie panel panel-default">
+          <div className="panel-heading">
+            {this.renderAddRemove()}
+            <h3 className="panel-title">
+              {title}
+            </h3>
           </div>
-
-                <p>{overview}</p>
+          <div className="panel-body" onClick={ ()=> this.setState({ open: !this.state.open })}>
+            <div className="poster">
+              <img src={"http://image.tmdb.org/t/p/w500/" + backdrop_path}/>
+              <div>More Info {vote_average} {this.drop()}</div>
+              <Collapse in={this.state.open}>
+            <div>
+              <div>{overview}</div>
                 <div>
+                {this.trailerLink()}
                  <ProgressBar bsStyle="danger" active now={vote_average * 10} label={`${vote_average} / 10 Average Rating`}/>
                 </div>
-              </Well>
+              </div>
+              </Collapse>
             </div>
-          </Collapse>
-          {this.trailerLink()}
-          {this.renderAddRemove()}
-          {this.drop()}
-        </div>
-        <div className="panel-body">
-          <p> Rating: PG-13 | Genre: Action &amp; Adventure </p>
+          </div>
         </div>
       </div>
-      </div>
-
   );
   }
 }
