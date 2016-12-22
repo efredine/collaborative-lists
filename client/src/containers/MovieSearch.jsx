@@ -63,7 +63,7 @@ class MovieSearch extends Component {
 
     // this iterates through the movies object and returns the movie title and rating
     var movies = _.map(this.state.movies, (movie, index)=> {
-      return <Movie key={movie.id} content={movie} index={index} onAdd={this.clickMovie}
+      return <Movie key={movie.id} content={movie} index={index} onAdd={this.clickMovie} votes={false}
           />
     });
 
