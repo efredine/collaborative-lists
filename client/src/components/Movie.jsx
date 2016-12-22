@@ -8,7 +8,8 @@ class Movie extends Component {
     super(...args);
     this.state = {
       trailers: [],
-      open: false
+      open: false,
+      posterOpen: true
 
     };
   }
@@ -124,7 +125,7 @@ class Movie extends Component {
     return(
       <div>
         <div className="panel-movie panel panel-default">
-          <div className="panel-heading">
+          <div className="panel-heading" onClick={ ()=> this.setState({ posterOpen: !this.state.posterOpen })}>
             {this.renderAddRemove()}
             <h3 className="panel-title">
               {title}
@@ -132,7 +133,9 @@ class Movie extends Component {
           </div>
           <div className="panel-body" onClick={ ()=> this.setState({ open: !this.state.open })}>
             <div className="poster">
+            <Collapse in={this.state.posterOpen}>
               <img src={"http://image.tmdb.org/t/p/w500/" + backdrop_path}/>
+            </Collapse>
                {this.drop()}
                {this.votingEnable()}
               <Collapse in={this.state.open}>
