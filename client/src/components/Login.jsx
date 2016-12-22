@@ -38,8 +38,8 @@ class Login extends Component {
     const {user} = this.props;
     if(user.username) {
       return (
-        <div className="navbar-text navbar-right">Logged in as: {user.username}
-        <button type="submit" onClick={this.handleLogout} className="btn btn-default">Log Out</button>
+        <div className="navbar-text navbar-right"><span>Logged in as: {user.username } &nbsp;</span>
+        <button type="submit" onClick={this.handleLogout} className="btn btn-nav">Log Out</button>
         </div>
       );
     } else {
