@@ -1,4 +1,23 @@
 import VoteStates from '../types/VoteStates';
+import _ from 'lodash';
+
+function voteStateToCount(vote) {
+  switch(vote) {
+    case VoteStates.UP:
+      return 1;
+    case VoteStates.DOWN:
+      return -1;
+    default:
+      return 0;
+  }
+}
+
+function votesByUser(state, action) {
+  const userId = action.userId;
+  const newState = Object.assign({}, state)
+  newState[userId] = voteStateToCount(action.vote);
+  return newState;
+}
 
 // return current index of todo
 const find = (cards, id) => {
@@ -32,7 +51,10 @@ const card = (state, action) => {
         id: action.id,
         content: action.content,
         completed: false,
-        currentVote: VoteStates.NONE
+        currentVote: VoteStates.NONE,
+        votesByUser: {},
+        voteCount: 0,
+        numberOfVotes: 0
       }
     case 'TOGGLE_CARD':
       if (state.id !== action.toggleId) {
@@ -48,11 +70,15 @@ const card = (state, action) => {
       if (state.id !== action.voteId) {
         return state
       }
+      const updatedVotesByUser = votesByUser(state.votesByUser, action);
       return Object.assign(
         {},
         state,
         {
-          currentVote: action.vote
+          currentVote: action.vote,
+          votesByUser: updatedVotesByUser,
+          voteCount: _.reduce(updatedVotesByUser, (s, v) => s + v, 0),
+          numberOfVotes: Object.keys(updatedVotesByUser).length
         });
     default:
       return state

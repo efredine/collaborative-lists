@@ -21,11 +21,11 @@ class Movie extends Component {
   }
 
   votingEnable () {
-    const { votes, currentVote } = this.props;
+    const { votes, currentVote, voteCount, numberOfVotes } = this.props;
     if (votes === true) {
       return (
         <div>
-        CurrentVote: {currentVote}
+        CurrentVote: {currentVote} | Count: {voteCount} | Votes: {numberOfVotes}
          <div className="voteup">
            <Glyphicon onClick={ ()=> this.castVote(VoteStates.UP) } glyph="glyphicon glyphicon-thumbs-up"/>
          </div>
