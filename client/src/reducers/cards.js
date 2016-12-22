@@ -31,7 +31,8 @@ const card = (state, action) => {
       return {
         id: action.id,
         content: action.content,
-        completed: false
+        completed: false,
+        currentVote: VoteStates.NONE
       }
     case 'TOGGLE_CARD':
       if (state.id !== action.toggleId) {
@@ -51,7 +52,7 @@ const card = (state, action) => {
         {},
         state,
         {
-          vote: action.vote
+          currentVote: action.vote
         });
     default:
       return state
