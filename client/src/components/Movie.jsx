@@ -24,21 +24,32 @@ class Movie extends Component {
     }
   }
 
+  voteClass(vote) {
+
+  }
+
   votingEnable () {
+    // current vote will be one of the following:
+    // VoteStates.NONE
+    // VoteStates.UP
+    // VoteStates.DOWN
     const { votes, currentVote, voteCount, numberOfVotes } = this.props;
+    const upOn = VoteStates.UP === currentVote ? "-on" : "";
+    const downOn = VoteStates.DOWN === currentVote ? "-off" : "";
     if (votes === true) {
       return (
         <div>
         CurrentVote: {currentVote} | Count: {voteCount} | Votes: {numberOfVotes}
-         <div className="voteup">
+         <div className={"voteup" + upOn}>
            <Glyphicon onClick={ ()=> this.castVote(VoteStates.UP) } glyph="glyphicon glyphicon-thumbs-up"/>
          </div>
-         <div className="votedown">
+         <div className={"votedown" + downOn}>
            <Glyphicon onClick={ ()=> this.castVote(VoteStates.DOWN) } glyph="glyphicon glyphicon-thumbs-down"/>
          </div>
         </div>
       )
-    } else {
+    }
+    else {
       return (<div>&nbsp;</div>);
     }
   }
@@ -143,7 +154,7 @@ class Movie extends Component {
               {title}
             </h3>
           </div>
-          <div className="panel-body" onClick={ ()=> this.setState({ open: !this.state.open })}>
+          <div className="panel-body">
             <div className="poster">
             <Collapse in={this.state.posterOpen}>
               <img src={"http://image.tmdb.org/t/p/w500/" + backdrop_path}/>

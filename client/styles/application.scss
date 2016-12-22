@@ -184,7 +184,7 @@ iframe {
   right: 5px;
   top: -10px;
   line-height: 0;
-  color: green;
+  color: black;
   opacity: .6;
 
   &:hover {
@@ -192,6 +192,31 @@ iframe {
   cursor: pointer;
   }
 }
+
+.voteup-on {
+  font-side:10pt;
+  font-size: 20pt;
+  float: right;
+  position: relative;
+  right: 5px;
+  top: -10px;
+  line-height: 0;
+  color: green;
+  opacity: 1;
+}
+
+.voteup-off {
+  font-side:10pt;
+  font-size: 20pt;
+  float: right;
+  position: relative;
+  right: 5px;
+  top: -10px;
+  line-height: 0;
+  color: green;
+  opacity: .6;
+}
+
 
 .votedown {
   font-side:10pt;
@@ -201,13 +226,37 @@ iframe {
   left: 5px;
   top: -12px;
   line-height: 0;
-  color: red;
+  color: black;
   opacity: .6;
 
   &:hover {
   opacity: 1.0;
   cursor: pointer;
   }
+}
+
+.votedown-on {
+  font-side:10pt;
+  font-size: 20pt;
+  float: left;
+  position: relative;
+  right: 5px;
+  top: -10px;
+  line-height: 0;
+  color: red;
+  opacity: 1;
+}
+
+.votedown-off {
+  font-side:10pt;
+  font-size: 20pt;
+  float: left;
+  position: relative;
+  left: 5px;
+  top: -12px;
+  line-height: 0;
+  color: red;
+  opacity: 1;
 }
 
 .undo {
