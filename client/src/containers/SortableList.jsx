@@ -81,9 +81,12 @@ class SortableList extends Component {
   }
 
   render() {
-    const { isDragging, connectDropTarget, onCardClick, startDrag, endDrag, dragging } = this.props;
+    const { isDragging, connectDropTarget, onCardClick, startDrag, endDrag, dragging, voteCard } = this.props;
 
     const {cards} = this.state;
+
+    // voteId is provided here.  The actual vote is provided in the card.
+    const onVote = voteId => vote => voteCard(voteId, vote);
 
     const items = cards.map(card => {
       return (
@@ -99,6 +102,7 @@ class SortableList extends Component {
             <SmartCard
               onClick={() => onCardClick(card.id)}
               votes={true}
+              onVote={onVote(card.id)}
               {...card}
             />
           </SortableCard>

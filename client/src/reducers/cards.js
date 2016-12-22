@@ -1,3 +1,5 @@
+import VoteStates from '../types/VoteStates';
+
 // return current index of todo
 const find = (cards, id) => {
   return cards.findIndex(c => c.id === id);
@@ -40,7 +42,17 @@ const card = (state, action) => {
         state,
         {
           completed: !state.completed
-      });
+        });
+    case 'VOTE_CARD':
+      if (state.id !== action.voteId) {
+        return state
+      }
+      return Object.assign(
+        {},
+        state,
+        {
+          vote: action.vote
+        });
     default:
       return state
   }
@@ -54,6 +66,7 @@ const cards = (state = [], action) => {
         card(undefined, action)
       ]
     case 'TOGGLE_CARD':
+    case 'VOTE_CARD':
       return state.map(t =>
         card(t, action)
       )

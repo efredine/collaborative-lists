@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Video from 'react-video';
 import { Collapse, Button, Well, ProgressBar, Glyphicon } from 'react-bootstrap';
+import VoteStates from '../types/VoteStates';
 
 class Movie extends Component {
 
@@ -13,16 +14,21 @@ class Movie extends Component {
     };
   }
 
+  castVote = (vote) => {
+    const {onVote} = this.props;
+    onVote(vote);
+  }
+
   votingEnable () {
     const { votes } = this.props;
     if (votes === true) {
       return (
         <div>
          <div className="voteup">
-           <Glyphicon onClick={ ()=> this.setState({ open: !this.state.open })} glyph="glyphicon glyphicon-thumbs-up"/>
+           <Glyphicon onClick={ ()=> this.castVote(VoteStates.UP) } glyph="glyphicon glyphicon-thumbs-up"/>
          </div>
          <div className="votedown">
-           <Glyphicon onClick={ ()=> this.setState({ open: !this.state.open })} glyph="glyphicon glyphicon-thumbs-down"/>
+           <Glyphicon onClick={ ()=> this.castVote(VoteStates.DOWN) } glyph="glyphicon glyphicon-thumbs-down"/>
          </div>
         </div>
       )
