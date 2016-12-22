@@ -32,22 +32,27 @@ class ListsIndex extends Component {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
-        body: 'title=something'
+        body: 'title=untitled'
     })
     .then(response => response.json())
-    .then(json => console.log('inserted', json))
+    .then(result => {
+      console.log('inserted', result, 'props:', this.props);
+      const { listId } = result;
+      const { router } = this.props;
+      router.push(`/${listId}`);
+    })
     .catch(error => console.log(error));
   }
 
-
   render() {
     var listArray = _.map(this.state.lists, (list) => {
-      return <li key = {list.id}><Link to={'/'+ list.id}>{list.title}</Link></li>
+      return <div className="list-group-item" key = {list.id}><Link to={'/'+ list.id}>{list.title}</Link></div>
     });
     return (
       <div>
-          <button  onClick={this.newList} className="btn btn-default">Add</button>
-          <h1>{listArray}</h1>
+        <h1>My Lists</h1>
+        <button  onClick={this.newList} className="btn btn-default">Add</button>
+        <div className="list-group">{listArray}</div>
       </div>
     );
   }

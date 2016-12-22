@@ -9,6 +9,7 @@ import { addMovie} from '../actions'
 class MovieSearch extends Component {
   constructor(props) {
     super(props);
+    this.onSumbit=this.onSumbit.bind(this);
     this.state = {
       movies: [],
     };
@@ -28,15 +29,11 @@ class MovieSearch extends Component {
     })
 
   }
-  // updates what ever movie name you put in the search box with the results starting with its name
-  updateSearch(){
-    this.search(this.refs.query.value);
-    console.log(this.search(this.refs.query.value))
-
-  }
-
-  selectMovie(){
-    console.log(this.refs.movieSelector.value)
+  onSumbit(e){
+    if (e.charCode === 13){
+      console.log("enter pressed")
+      this.search(this.refs.query.value);
+    }
   }
 
   clickMovie = index => {
@@ -72,7 +69,7 @@ class MovieSearch extends Component {
 
     return (
       <div>
-        <input ref = "query" onChange =  {(e) => {this.updateSearch();}} type = 'text'/>
+        <input ref = "query" onKeyPress =  {this.onSumbit} type = 'text'/>
         <div>
           {movies}
         </div>
