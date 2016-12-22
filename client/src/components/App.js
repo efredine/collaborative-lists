@@ -7,27 +7,20 @@ import ListsIndex from './ListsIndex.jsx';
 import List from './List.jsx';
 import AddTodo from '../containers/AddTodo'
 import ActionListContainer from '../containers/ActionListContainer.jsx'
+import { Link } from 'react-router'
 
 class App extends Component {
 
   render() {
+    console.log('context:', this.context);
     return(
       <div>
         <Navbar>
           <Navbar.Header>
             <Navbar.Brand>
-              <a href="#">React-Bootstrap</a>
+              <a href="#" onClick={() => browserHistory.push("/")}>Lists!</a>
             </Navbar.Brand>
           </Navbar.Header>
-          <Nav>
-            <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
-              <MenuItem eventKey={3.1}>Action</MenuItem>
-              <MenuItem eventKey={3.2}>Another action</MenuItem>
-              <MenuItem eventKey={3.3}>Something else here</MenuItem>
-              <MenuItem divider />
-              <MenuItem eventKey={3.3}>Separated link</MenuItem>
-            </NavDropdown>
-          </Nav>
           <LoginContainer/>
         </Navbar>
         <Grid>
