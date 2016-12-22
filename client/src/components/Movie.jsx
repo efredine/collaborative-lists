@@ -16,8 +16,12 @@ class Movie extends Component {
   }
 
   castVote = (vote) => {
-    const {onVote} = this.props;
-    onVote(vote);
+    const {onVote, currentVote} = this.props;
+    if(currentVote === vote) {
+      onVote(VoteStates.NONE)
+    } else {
+      onVote(vote);
+    }
   }
 
   votingEnable () {
