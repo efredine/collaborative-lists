@@ -8,7 +8,6 @@ class Movie extends Component {
     super(...args);
     this.state = {
       trailers: [],
-      key: undefined,
       open: false
 
     };
@@ -35,7 +34,6 @@ class Movie extends Component {
           console.log("trailers moviesssss", movieTrailers.results);
            this.setState({
              trailers: movieTrailers.results,
-             key: this.props.movieTrailerKey,
            });
         })
       }
