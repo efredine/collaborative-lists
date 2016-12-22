@@ -33,17 +33,22 @@ class Movie extends Component {
     // VoteStates.NONE
     // VoteStates.UP
     // VoteStates.DOWN
-    const { votes, currentVote, voteCount, numberOfVotes } = this.props;
-    const upOn = VoteStates.UP === currentVote ? "-on" : "";
-    const downOn = VoteStates.DOWN === currentVote ? "-off" : "";
+    const { votes, currentVote, voteCount, numberOfVotes, thumbsUpCount, thumbsDownCount } = this.props;
+    const upOn = VoteStates.UP === currentVote ? "-on" + " bounce" : "";
+    const downOn = VoteStates.DOWN === currentVote ? "-off" + " bounce" : "";
     if (votes === true) {
       return (
         <div>
-        CurrentVote: {currentVote} | Count: {voteCount} | Votes: {numberOfVotes}
          <div className={"voteup" + upOn}>
+          <div className ="voteupcount">
+           {thumbsUpCount}
+          </div>
            <Glyphicon onClick={ ()=> this.castVote(VoteStates.UP) } glyph="glyphicon glyphicon-thumbs-up"/>
          </div>
          <div className={"votedown" + downOn}>
+           <div className ="votedowncount">
+             {thumbsDownCount}
+          </div>
            <Glyphicon onClick={ ()=> this.castVote(VoteStates.DOWN) } glyph="glyphicon glyphicon-thumbs-down"/>
          </div>
         </div>
