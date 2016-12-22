@@ -54,7 +54,9 @@ const card = (state, action) => {
         currentVote: VoteStates.NONE,
         votesByUser: {},
         voteCount: 0,
-        numberOfVotes: 0
+        numberOfVotes: 0,
+        thumbsUpCount: 0,
+        thumbsDownCount: 0
       }
     case 'TOGGLE_CARD':
       if (state.id !== action.toggleId) {
@@ -78,6 +80,8 @@ const card = (state, action) => {
           currentVote: action.vote,
           votesByUser: updatedVotesByUser,
           voteCount: _.reduce(updatedVotesByUser, (s, v) => s + v, 0),
+          thumbsUpCount: _.reduce(updatedVotesByUser, (s, v) => s + (v > 0 ? 1 : 0), 0),
+          thumbsDownCount: _.reduce(updatedVotesByUser, (s, v) => s + (v < 0 ? 1 : 0), 0),
           numberOfVotes: Object.keys(updatedVotesByUser).length
         });
     default:
