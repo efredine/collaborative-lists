@@ -1,14 +1,15 @@
 import { combineReducers } from 'redux'
 
 function receiveUsers(state = {byId: {}, allIds: []}, action) {
-  switch(action.Type) {
+  switch(action.type) {
     case "RECEIVE_USERS":
       const byId = {};
       action.users.forEach(user => {
         byId[user.id] = user;
       });
       const allIds = action.users.map(user => user.id);
-      return {byId, allIds};
+      const result = {byId, allIds};
+      return result;
     default:
       return state;
   }
