@@ -13,6 +13,25 @@ class Movie extends Component {
     };
   }
 
+  votingEnable () {
+    const { votes } = this.props;
+    if (votes === true) {
+      return (
+        <div>
+         <div className="voteup">
+           <Glyphicon onClick={ ()=> this.setState({ open: !this.state.open })} glyph="glyphicon glyphicon-thumbs-up"/>
+         </div>
+         <div className="votedown">
+           <Glyphicon onClick={ ()=> this.setState({ open: !this.state.open })} glyph="glyphicon glyphicon-thumbs-down"/>
+         </div>
+        </div>
+      )
+    } else {
+      return (<div>&nbsp;</div>);
+    }
+  }
+
+
   trailerLink(){
     if(this.state.open === true) {
       if (this.state.trailers.length > 0){
@@ -115,12 +134,7 @@ class Movie extends Component {
             <div className="poster">
               <img src={"http://image.tmdb.org/t/p/w500/" + backdrop_path}/>
                {this.drop()}
-                <div className="voteup">
-                 <Glyphicon onClick={ ()=> this.setState({ open: !this.state.open })} glyph="glyphicon glyphicon-thumbs-up"/>
-                </div>
-                <div className="votedown">
-                 <Glyphicon onClick={ ()=> this.setState({ open: !this.state.open })} glyph="glyphicon glyphicon-thumbs-down"/>
-                </div>
+               {this.votingEnable()}
               <Collapse in={this.state.open}>
             <div>
               <div>
