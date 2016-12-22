@@ -32,7 +32,6 @@ class SortableList extends Component {
 
   constructor(props) {
     super(props);
-    console.log('constructor');
     this.moveCard = this.moveCard.bind(this);
     this.findCard = this.findCard.bind(this);
     this.broadcastMove = this.broadcastMove.bind(this);
@@ -107,7 +106,6 @@ class SortableList extends Component {
       );
     });
 
-    console.log('rendering');
     return connectDropTarget(
       <div>
         <FlipMove easing="cubic-bezier(0, 0.7, 0.8, 0.1)" disableAllAnimations={dragging}>
