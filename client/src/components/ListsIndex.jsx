@@ -42,12 +42,13 @@ class ListsIndex extends Component {
 
   render() {
     var listArray = _.map(this.state.lists, (list) => {
-      return <li key = {list.id}><Link to={'/'+ list.id}>{list.title}</Link></li>
+      return <div className="list-group-item" key = {list.id}><Link to={'/'+ list.id}>{list.title}</Link></div>
     });
     return (
       <div>
-          <button  onClick={this.newList} className="btn btn-default">Add</button>
-          <h1>{listArray}</h1>
+        <h1>My Lists</h1>
+        <button  onClick={this.newList} className="btn btn-default">Add</button>
+        <div classsName="list-group">{listArray}</div>
       </div>
     );
   }
