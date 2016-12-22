@@ -32,13 +32,17 @@ class ListsIndex extends Component {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
-        body: 'title=something'
+        body: 'title=untitled'
     })
     .then(response => response.json())
-    .then(json => console.log('inserted', json))
+    .then(result => {
+      console.log('inserted', result, 'props:', this.props);
+      const { listId } = result;
+      const { router } = this.props;
+      router.push(`/${listId}`);
+    })
     .catch(error => console.log(error));
   }
-
 
   render() {
     var listArray = _.map(this.state.lists, (list) => {
@@ -48,7 +52,7 @@ class ListsIndex extends Component {
       <div>
         <h1>My Lists</h1>
         <button  onClick={this.newList} className="btn btn-default">Add</button>
-        <div classsName="list-group">{listArray}</div>
+        <div className="list-group">{listArray}</div>
       </div>
     );
   }
