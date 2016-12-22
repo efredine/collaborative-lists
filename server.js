@@ -67,6 +67,19 @@ app.get("/api/popular/movies/topRated", (req, res)=> {
   });
 });
 
+app.get("/api/popular/movies/nowPlaying", (req, res)=> {
+  MovieDB.miscNowPlayingMovies(function(err, result){
+    res.json(result);
+  });
+});
+
+app.get("/api/popular/movies/upComing", (req, res)=> {
+  MovieDB.miscUpcomingMovies(function(err, result){
+    res.json(result);
+  });
+});
+
+
 app.post("/api/update", (req, res) => {
   console.log(req.body.theThing);
   res.json(["Got it"]);

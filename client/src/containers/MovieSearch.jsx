@@ -52,9 +52,14 @@ class MovieSearch extends Component {
     this.search('/api/popular/movies/topRated')
   }
 
-  popular = event => {
+  nowPlaying = event => {
     event.preventDefault();
-    this.search('/api/popular/movies');
+    this.search('/api/popular/movies/nowPlaying');
+  }
+
+  upComing = event => {
+    event.preventDefault();
+    this.search('/api/popular/movies/upComing');
   }
 
   render() {
@@ -65,9 +70,10 @@ class MovieSearch extends Component {
     return (
       <div>
 
-        <input ref = "query" onKeyPress =  {this.onSumbit} type = 'text'/>
-        <a href='#' onClick={this.topRated}>Top Rated</a>
-        <a href='#' onClick={this.popular}>Popular</a>
+        <input ref = "query" onKeyPress =  {this.onSumbit} type = 'text'/> <br/>
+        <button onClick={this.topRated}>Top Rated</button>
+        <button onClick={this.nowPlaying}>Now Playing</button>
+        <button onClick={this.upComing}>Up Coming</button>
         <div>
           {movies}
         </div>
@@ -86,7 +92,7 @@ class MovieSearch extends Component {
       });
     })
   }
-  
+
 }
 const mapDispatchToProps =  ({
   addMovie: addMovie
