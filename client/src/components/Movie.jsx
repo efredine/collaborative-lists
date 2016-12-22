@@ -14,9 +14,18 @@ class Movie extends Component {
     };
   }
 
-  componentDidMount(){
-    console.log("thisssssfdfdf", this.props.content.id)
-    // http://api.themoviedb.org/3/movie/131634?api_key=###&append_to_response=videos
+  trailerLink(){
+    if(this.state.open === true) {
+      if (this.state.trailers.length > 0){
+        const movieTrailerKey = _.map(this.state.trailers, (trailerKey)=> {
+          return trailerKey.key
+        });
+        return(
+          <iframe onClick={ ()=> this.setState({ open: !this.state.open })}
+          src={`https://www.youtube.com/embed/${movieTrailerKey[0]}`}
+          />
+        )
+      } else {
         fetch(`http://api.themoviedb.org/3/movie/${this.props.content.id}/videos?api_key=6b426deee51a1b33c8c0b4231c1543cd`)
         .then(response => {
           return response.text();
@@ -29,20 +38,7 @@ class Movie extends Component {
              key: this.props.movieTrailerKey,
            });
         })
-  }
-
-  trailerClick(){
-    const movieTrailerKey = _.map(this.state.trailers, (trailerKey)=> {
-      return trailerKey.key
-    });
-    console.log('Something was clicked')
-    if (this.state.open === true){
-      console.log("something else", `https://www.youtube.com/embed/${movieTrailerKey[0]}`)
-      return(
-        <iframe onClick={ ()=> this.setState({ open: !this.state.open })}
-        src={`https://www.youtube.com/embed/${movieTrailerKey[0]}`}
-        />
-      )
+      }
     }
   }
 
@@ -64,7 +60,6 @@ class Movie extends Component {
 
   renderAddRemove() {
     const { completed } = this.props;
-    console.log("Completed:", completed);
     if (completed === false) {
       return (
           <div className="remove">
@@ -111,32 +106,30 @@ class Movie extends Component {
     // }
     return(
       <div>
-      <div className="panel-movie panel panel-default">
-        <div className="panel-heading">
-          {this.renderAddRemove()}
-          <h3 className="panel-title">
-            {title}
-          </h3>
-        </div>
-        <div className="panel-body" onClick={ ()=> this.setState({ open: !this.state.open })}>
-          <div className="poster">
-            <img src={"http://image.tmdb.org/t/p/w500/" + backdrop_path}/>
-            <p> More Info {vote_average}</p>
-            {this.drop()}
-            <Collapse in={this.state.open}>
+        <div className="panel-movie panel panel-default">
+          <div className="panel-heading">
+            {this.renderAddRemove()}
+            <h3 className="panel-title">
+              {title}
+            </h3>
+          </div>
+          <div className="panel-body" onClick={ ()=> this.setState({ open: !this.state.open })}>
+            <div className="poster">
+              <img src={"http://image.tmdb.org/t/p/w500/" + backdrop_path}/>
+              <div>More Info {vote_average} {this.drop()}</div>
+              <Collapse in={this.state.open}>
             <div>
               <div>{overview}</div>
-              <div>
-              {this.trailerClick()}
-               <ProgressBar bsStyle="danger" active now={vote_average * 10} label={`${vote_average} / 10 Average Rating`}/>
+                <div>
+                {this.trailerLink()}
+                 <ProgressBar bsStyle="danger" active now={vote_average * 10} label={`${vote_average} / 10 Average Rating`}/>
+                </div>
               </div>
+              </Collapse>
             </div>
-          </Collapse>
           </div>
         </div>
       </div>
-      </div>
-
   );
   }
 }
