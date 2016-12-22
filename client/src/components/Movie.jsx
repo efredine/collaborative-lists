@@ -41,6 +41,7 @@ class Movie extends Component {
         return(
           <iframe onClick={ ()=> this.setState({ open: !this.state.open })}
           src={`https://www.youtube.com/embed/${movieTrailerKey[0]}`}
+          allowFullScreen
           />
         )
       } else {

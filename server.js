@@ -61,6 +61,24 @@ app.get("/api/popular/movies", (req, res)=> {
   });
 });
 
+app.get("/api/popular/movies/topRated", (req, res)=> {
+  MovieDB.miscTopRatedMovies(function(err, result){
+    res.json(result);
+  });
+});
+
+app.get("/api/popular/movies/nowPlaying", (req, res)=> {
+  MovieDB.miscNowPlayingMovies(function(err, result){
+    res.json(result);
+  });
+});
+
+app.get("/api/popular/movies/upComing", (req, res)=> {
+  MovieDB.miscUpcomingMovies(function(err, result){
+    res.json(result);
+  });
+});
+
 
 app.post("/api/update", (req, res) => {
   console.log(req.body.theThing);
