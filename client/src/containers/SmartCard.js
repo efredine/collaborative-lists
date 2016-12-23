@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import ContentTypes from '../types/ContentTypes';
 import Todo from '../components/Todo'
 import Movie from '../components/Movie.jsx'
+import Yelp from '../components/Yelp.jsx'
 
 /**
  * Renders the card based on the card content type.
@@ -14,6 +15,8 @@ class SmartCard extends Component {
         return Todo;
       case ContentTypes.MOVIE:
         return Movie;
+      case ContentTypes.YELP:
+        return Yelp;
       default:
         return undefined;
     }

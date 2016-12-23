@@ -5,5 +5,6 @@
  */
 export default {
   TODO: 'todo',
-  MOVIE: 'movie'
+  MOVIE: 'movie',
+  YELP: 'yelp'
 };
