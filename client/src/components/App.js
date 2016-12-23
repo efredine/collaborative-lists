@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import MovieSearch from '../containers/MovieSearch.jsx'
 import LoginContainer from '../containers/LoginContainer.js';
 import ChatBox from '../containers/ChatBox';
-import { Navbar, Nav, NavItem, NavDropdown, MenuItem, Grid, Row, Col, Tabs, Tab } from 'react-bootstrap';
+import { Navbar, Nav, NavItem, NavDropdown, MenuItem, Grid, Row, Col, Tabs, Tab, Clearfix } from 'react-bootstrap';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import ListsIndex from './ListsIndex.jsx';
 import List from './List.jsx';
@@ -25,11 +25,11 @@ class App extends Component {
     if(open) {
       return(
         <span>
-          <h1>Builder
+          <h3>Builder
             <div className="close">
             <Glyphicon onClick={ ()=> this.setState({ open: !this.state.open })} glyph="glyphicon glyphicon-arrow-left"/>
             </div>
-        </h1>
+        </h3>
         </span>
       );
     } else {
@@ -78,9 +78,8 @@ class App extends Component {
           <LoginContainer/>
         </Navbar>
         <Grid>
-
           <Row className="show-grid">
-            <Col className="movieContainer" xs={6} md={open ? 4 : 1}>
+            <Col className="movieContainer" xs={6} sm={open ? 4 : 1}>
               {this.builderHeader(open)}
               {this.builderContent(open)}
             </Col>
@@ -98,6 +97,7 @@ class App extends Component {
               <ChatBox />
             </Col>
           </Row>
+          <Clearfix/>
           <footer>Lists!</footer>
         </Grid>
       </div>
