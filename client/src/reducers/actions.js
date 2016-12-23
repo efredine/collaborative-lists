@@ -2,7 +2,7 @@ import ContentTypes from '../types/ContentTypes.js';
 import VoteStates from '../types/VoteStates';
 
 function getName(action) {
-  return action.actingUser ? action.actingUser.name : "";
+  return action.actingUser;
 }
 
 function getContentForContentType(content) {
@@ -67,7 +67,7 @@ function getActionRecord(state, action) {
       return {
         user: getName(action),
         id: action.id,
-        type: 'POSTED',
+        type: ': ',
         text: action.text
       };
     default:

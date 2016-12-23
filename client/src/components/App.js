@@ -84,7 +84,7 @@ class App extends Component {
               {this.builderHeader(open)}
               {this.builderContent(open)}
             </Col>
-            <Col className="historyContainer" xs={6} md={open ? 6 : 7}>
+            <Col className="historyContainer" xs={6} md={open ? 5 : 7}>
               <Router history={browserHistory}>
                 <Route path="/" >
                   <IndexRoute component={ListsIndex} />
@@ -92,7 +92,7 @@ class App extends Component {
                 </Route>
               </Router>
             </Col>
-            <Col className="chatContainer" xsHidden md={open ? 2 : 4}>
+            <Col className="chatContainer" xsHidden md={open ? 3 : 4}>
               <h1>Activity</h1>
               <ActionListContainer/>
               <ChatBox />

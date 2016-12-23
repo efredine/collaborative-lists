@@ -6,9 +6,15 @@ class Action extends Component {
   }
 
   render() {
+    const { user, type, text } = this.props;
+    // user.id exists as well
     return (
         <li className="list-group-item small">
-          {this.props.user} {this.props.type} {this.props.text}
+          <span className={"chatuser" + user.id}>
+            {user ? user.name : ""}
+          </span>
+          {this.props.type}
+          {this.props.text}
         </li>
     );
   }
