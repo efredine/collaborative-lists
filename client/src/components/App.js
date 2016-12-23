@@ -8,6 +8,7 @@ import List from './List.jsx';
 import AddTodo from '../containers/AddTodo'
 import ActionListContainer from '../containers/ActionListContainer.jsx'
 import { Link } from 'react-router';
+import { Glyphicon } from 'react-bootstrap';
 import YelpSearch from '../containers/YelpSearch.jsx'
 
 class App extends Component {
@@ -23,15 +24,23 @@ class App extends Component {
     if(open) {
       return(
         <span>
-          <h1>Builder <button onClick={() => this.setState({open: !open})}>Close</button></h1>
+          <h1>Builder
+            <div className="close">
+            <Glyphicon onClick={ ()=> this.setState({ open: !this.state.open })} glyph="glyphicon glyphicon-arrow-left"/>
+            </div>
+        </h1>
         </span>
       );
     } else {
       return(
-        <button onClick={() => this.setState({open: !open})}>Open</button>
+        <div className="open">
+          <Glyphicon onClick={ ()=> this.setState({ open: !this.state.open })} glyph="glyphicon glyphicon-arrow-right"/>
+        </div>
       );
     }
   }
+
+
 
   builderContent = open => {
     if(open) {
