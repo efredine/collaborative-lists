@@ -12,22 +12,28 @@ class AppContainer extends Component {
   }
 
   render() {
-    return(
-      <App/>
-    );
+    const { users } = this.props;
+    console.log(users);
+    if(users.allIds.length > 0) {
+      return (<App/>);
+    }
+    else {
+      return(
+        <div>loading...</div>
+      );
+    }
   }
 }
 
-// const mapStateToProps = (state) => ({
-//   cards: getVisibleCards(state.cards, state.visibilityFilter),
-//   dragging: state.dragging
-// })
+const mapStateToProps = (state) => ({
+  users: state.users
+})
 
 const mapDispatchToProps =  ({
   fetchUsers: fetchUsers
 });
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(AppContainer)

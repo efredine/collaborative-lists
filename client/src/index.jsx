@@ -11,6 +11,7 @@ import createSocketIoMiddleware from 'redux-socket.io';
 import io from 'socket.io-client';
 import createLogger from 'redux-logger';
 import notifications from './middleware/notifications';
+import injectUser from './middleware/injectUser';
 import ReduxThunk from 'redux-thunk';
 
 function pessimisticExecute(action, emit, next, dispatch) {
@@ -24,7 +25,7 @@ const socketIoMiddleware = createSocketIoMiddleware(
   ['SERVER/ADD_CARD', 'SERVER/TOGGLE_CARD', 'SERVER/MOVE_CARD', 'SERVER/VOTE_CARD'],
   pessimisticExecute
 );
-const store = applyMiddleware(ReduxThunk, socketIoMiddleware, notifications, loggerMiddleware)(createStore)(reducer);
+const store = applyMiddleware(ReduxThunk, socketIoMiddleware, notifications, injectUser, loggerMiddleware)(createStore)(reducer);
 
 render(
   <Provider store={store}>
