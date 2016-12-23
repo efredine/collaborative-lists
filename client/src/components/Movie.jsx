@@ -79,7 +79,6 @@ class Movie extends Component {
         })
         .then(responseText => {
           const movieTrailers = JSON.parse(responseText);
-          console.log("trailers moviesssss", movieTrailers.results);
            this.setState({
              trailers: movieTrailers.results,
            });

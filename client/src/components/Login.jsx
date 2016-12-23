@@ -10,13 +10,6 @@ class Login extends Component {
 
   };
 
-  componentDidMount() {
-    const {user, identify} = this.props;
-    if(!user.userInitialized) {
-      identify();
-    }
-  }
-
   handleChangeUser = (event) => {
     this.setState({userInput: event.target.value});
   }

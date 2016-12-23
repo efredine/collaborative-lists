@@ -42,7 +42,6 @@ class SortableList extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('receiving props');
     if(cardsDifferent(this.state.cards, nextProps.cards)) {
       this.setState({
         cards: nextProps.cards

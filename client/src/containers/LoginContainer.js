@@ -8,7 +8,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps =  ({
   login: login,
-  identify: identify,
   logout: logout
 })
 

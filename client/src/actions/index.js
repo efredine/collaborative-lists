@@ -70,6 +70,19 @@ export const fetchTodos = (listId) => dispatch => {
   // TODO: add error handling catch
 }
 
+export const receiveUsers = (users) => ({
+  type: 'RECEIVE_USERS',
+  users
+});
+
+export const fetchUsers = () => dispatch => {
+  return fetch(`/api/users`, {
+    credentials: 'include'
+  })
+  .then(response => response.json())
+  .then(json => dispatch(receiveUsers(json)));
+}
+
 export const receiveUser = user => ({
   type: 'RECEIVE_USER',
   user: user
