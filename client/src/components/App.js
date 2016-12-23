@@ -6,10 +6,20 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import ListsIndex from './ListsIndex.jsx';
 import List from './List.jsx';
 import AddTodo from '../containers/AddTodo'
+import { Glyphicon } from 'react-bootstrap';
 import ActionListContainer from '../containers/ActionListContainer.jsx'
 import { Link } from 'react-router'
 
 class App extends Component {
+
+  constructor(...args) {
+    super(...args);
+    this.state = {
+      open: true,
+      chatcol: 2,
+      constructcol: 4
+    };
+  }
 
   render() {
     return(
@@ -25,8 +35,10 @@ class App extends Component {
         <Grid>
 
           <Row className="show-grid">
-            <Col className="movieContainer" xs={6} md={4}>
+            <Col className={"movieContainer" + this.state.open}  xs={6} md={this.state.constructcol}>
               <h1>List Builders</h1>
+              <div className="drop">
+              </div>
               <Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
                 <Tab eventKey={1} title="Movies">
                   <MovieSearch className="panel-container"/>
@@ -36,7 +48,10 @@ class App extends Component {
                 </Tab>
               </Tabs>
             </Col>
-            <Col className="historyContainer" xs={6} md={6}>
+            <div className={"hide-builder" + this.state.open}>
+              <Glyphicon onClick={ ()=> this.setState({ open: !this.state.open})} glyph="glyphicon glyphicon-transfer"/>
+            </div>
+            <Col className={"historyContainer" + this.state.open} xs={6} md={6}>
               <Router history={browserHistory}>
                 <Route path="/" >
                   <IndexRoute component={ListsIndex} />
@@ -44,7 +59,7 @@ class App extends Component {
                 </Route>
               </Router>
                 </Col>
-            <Col className="chatContainer" xsHidden md={2}>
+            <Col className={"chatContainer" + this.state.open} xs={2} md={this.state.col}>
               <h1>Activity</h1>
               <ActionListContainer/>
             </Col>
