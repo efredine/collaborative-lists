@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import fetch from 'isomorphic-fetch';
 import _ from 'lodash';
+import Yelp from '../components/Yelp.jsx'
 
 
 class YelpSearch extends Component {
@@ -58,16 +59,20 @@ class YelpSearch extends Component {
 
 
   render(){
-    var restaurants = _.map(this.state.restaurant, (restaurant)=>{
-      return <li key = {restaurant.id}>{restaurant.name} {restaurant.location.address} {restaurant.location.city}{restaurant.image_url}</li>
+    var restaurants = _.map(this.state.restaurant, (restaurant, index)=>{
+      return <Yelp key = {restaurant.id} content = {restaurant} votes={false} index={index} onAdd={this.clickMovie} />
     })
 
     return(
       <div>
-        <input ref = "restaurant" onChange = {(e)=>{this.updateSearch()}} type = 'text'/>
-        <input ref = "location" onChange = {(e)=>{this.updateSearch()}} type = 'text' />
-        <input type = 'button' value= 'search' onClick = {(e)=>{this.updateSearch()}}></input>
-        {restaurants}
+        <div>
+          <input ref = "restaurant" onChange = {(e)=>{this.updateSearch()}} type = 'text' value="donair"/>
+          <input ref = "location" onChange = {(e)=>{this.updateSearch()}} type = 'text'  value="vancouver"/>
+          <input type = 'button' value= 'search' onClick = {(e)=>{this.updateSearch()}}></input>
+        </div>
+        <div>
+          {restaurants}
+        </div>
       </div>
     )
 

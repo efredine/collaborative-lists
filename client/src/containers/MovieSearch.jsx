@@ -70,9 +70,6 @@ class MovieSearch extends Component {
     });
     return (
       <div>
-
-
-
         <input ref = "query" onKeyPress =  {this.onSumbit} type = 'text'/> <br/>
         <ButtonGroup>
           <Button onClick={this.topRated}>Top Rated</Button>
