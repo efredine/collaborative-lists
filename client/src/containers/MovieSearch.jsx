@@ -5,6 +5,7 @@ import _ from 'lodash';
 import FlipMove from 'react-flip-move';
 import { connect } from 'react-redux'
 import { addMovie} from '../actions';
+import { ButtonGroup, Button } from 'react-bootstrap';
 
 class MovieSearch extends Component {
   constructor(props) {
@@ -70,10 +71,15 @@ class MovieSearch extends Component {
     return (
       <div>
 
+
+
         <input ref = "query" onKeyPress =  {this.onSumbit} type = 'text'/> <br/>
-        <button onClick={this.topRated}>Top Rated</button>
-        <button onClick={this.nowPlaying}>Now Playing</button>
-        <button onClick={this.upComing}>Up Coming</button>
+        <ButtonGroup>
+          <Button onClick={this.topRated}>Top Rated</Button>
+          <Button onClick={this.nowPlaying}>Now Playing</Button>
+          <Button onClick={this.upComing}>Up Coming</Button>
+        </ButtonGroup>
+
         <div>
           {movies}
         </div>
