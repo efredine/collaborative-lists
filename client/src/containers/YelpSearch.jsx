@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import fetch from 'isomorphic-fetch';
 import _ from 'lodash';
 import Yelp from '../components/Yelp.jsx'
+import { connect } from 'react-redux'
+import { addYelp} from '../actions';
 
 
 class YelpSearch extends Component {
@@ -32,6 +34,17 @@ class YelpSearch extends Component {
   //   })
   //
   // }
+  //
+  click = index => {
+    const { addYelp } =  this.props;
+    const restuarantSelected = this.state.restaurant[index];
+    addYelp(restuarantSelected);
+    const updatedRestaurants = this.state.restaurant.slice();
+    updatedRestaurants.splice(index, 1);
+    this.setState({
+      restaurant: updatedRestaurants
+    })
+  }
 
   updateSearch(e){
     if(this.refs.restaurant.value==="" || this.refs.location.value === ""){
@@ -60,7 +73,7 @@ class YelpSearch extends Component {
 
   render(){
     var restaurants = _.map(this.state.restaurant, (restaurant, index)=>{
-      return <Yelp key = {restaurant.id} content = {restaurant} votes={false} index={index} onAdd={this.clickMovie} />
+      return <Yelp key = {restaurant.id} content = {restaurant} votes={false} index={index} onAdd={this.click} />
     })
 
     return(
@@ -76,13 +89,13 @@ class YelpSearch extends Component {
       </div>
     )
 
-
   }
 
-
-
-
-
-
 }
-export default YelpSearch
+
+const mapDispatchToProps =  ({
+  addYelp: addYelp
+})
+
+export default connect(null, mapDispatchToProps)(YelpSearch);
+

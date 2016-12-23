@@ -25,6 +25,10 @@ export const addTodo = text => addCard({
   text: text
 });
 
+export const addYelp = content => addCard({
+  contentType: ContentTypes.YELP,
+  ...content
+});
 export const setVisibilityFilter = (filter) => ({
   type: 'SET_VISIBILITY_FILTER',
   filter
