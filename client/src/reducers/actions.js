@@ -63,6 +63,13 @@ function getActionRecord(state, action) {
         type: 'VOTED',
         text: getVoteText(action)
       };
+    case 'CHAT_MESSAGE':
+      return {
+        user: getName(action),
+        id: action.id,
+        type: 'POSTED',
+        text: action.text
+      };
     default:
       return null;
   }
@@ -74,6 +81,7 @@ const actions = (state = [], action) => {
     case 'ADD_CARD':
     case 'TOGGLE_CARD':
     case 'VOTE_CARD':
+    case 'CHAT_MESSAGE':
       return [
         ...state,
         getActionRecord(state, action)

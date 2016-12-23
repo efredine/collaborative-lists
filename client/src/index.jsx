@@ -22,7 +22,7 @@ const loggerMiddleware = createLogger();
 const socket = io('http://localhost:8080');
 const socketIoMiddleware = createSocketIoMiddleware(
   socket,
-  ['SERVER/ADD_CARD', 'SERVER/TOGGLE_CARD', 'SERVER/MOVE_CARD', 'SERVER/VOTE_CARD'],
+  ['SERVER/ADD_CARD', 'SERVER/TOGGLE_CARD', 'SERVER/MOVE_CARD', 'SERVER/VOTE_CARD', 'SERVER/CHAT_MESSAGE'],
   pessimisticExecute
 );
 const store = applyMiddleware(ReduxThunk, notifications, injectUser, socketIoMiddleware, loggerMiddleware)(createStore)(reducer);

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import MovieSearch from '../containers/MovieSearch.jsx'
 import LoginContainer from '../containers/LoginContainer.js';
+import ChatBox from '../containers/ChatBox';
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem, Grid, Row, Col, Tabs, Tab } from 'react-bootstrap';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import ListsIndex from './ListsIndex.jsx';
@@ -96,7 +97,7 @@ class App extends Component {
               <div className="content">
                 <ActionListContainer/>
               </div>
-              <div>On the bottom</div>
+              <ChatBox />
             </Col>
           </Row>
 
