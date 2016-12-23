@@ -17,7 +17,6 @@ class Movie extends Component {
 
   castVote = (vote) => {
     const {onVote, currentVote} = this.props;
-    console.log("casting vote:", currentVote, vote);
     if(currentVote === vote) {
       onVote(VoteStates.NONE)
     } else {
@@ -80,7 +79,6 @@ class Movie extends Component {
         })
         .then(responseText => {
           const movieTrailers = JSON.parse(responseText);
-          console.log("trailers moviesssss", movieTrailers.results);
            this.setState({
              trailers: movieTrailers.results,
            });
