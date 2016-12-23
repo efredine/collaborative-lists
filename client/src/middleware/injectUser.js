@@ -4,7 +4,8 @@
  * Implemented as redux middleware.
  */
 const injectUser = ({ getState, dispatch }) => next => action => {
-  if(action.userId) {
+  const isLocal = action.type.split("/").length === 1;
+  if(isLocal && action.userId) {
     const { users, user } = getState();
     action.actingUser = users.byId[action.userId];
     action.currentUser = user;

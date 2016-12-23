@@ -25,7 +25,7 @@ const socketIoMiddleware = createSocketIoMiddleware(
   ['SERVER/ADD_CARD', 'SERVER/TOGGLE_CARD', 'SERVER/MOVE_CARD', 'SERVER/VOTE_CARD'],
   pessimisticExecute
 );
-const store = applyMiddleware(ReduxThunk, socketIoMiddleware, notifications, injectUser, loggerMiddleware)(createStore)(reducer);
+const store = applyMiddleware(ReduxThunk, notifications, injectUser, socketIoMiddleware, loggerMiddleware)(createStore)(reducer);
 
 render(
   <Provider store={store}>

@@ -70,20 +70,23 @@ const card = (state, action) => {
         });
     case 'VOTE_CARD':
       if (state.id !== action.voteId) {
-        return state
+        return state;
       }
       const updatedVotesByUser = votesByUser(state.votesByUser, action);
-      return Object.assign(
+      const updatedState = Object.assign(
         {},
         state,
         {
-          currentVote: action.vote,
           votesByUser: updatedVotesByUser,
           voteCount: _.reduce(updatedVotesByUser, (s, v) => s + v, 0),
           thumbsUpCount: _.reduce(updatedVotesByUser, (s, v) => s + (v > 0 ? 1 : 0), 0),
           thumbsDownCount: _.reduce(updatedVotesByUser, (s, v) => s + (v < 0 ? 1 : 0), 0),
           numberOfVotes: Object.keys(updatedVotesByUser).length
         });
+      if (action.actingUser.id === action.currentUser.id) {
+        updatedState.currentVote = action.vote;
+      }
+      return updatedState;
     default:
       return state
   }

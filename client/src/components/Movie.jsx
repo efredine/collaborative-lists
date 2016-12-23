@@ -17,6 +17,7 @@ class Movie extends Component {
 
   castVote = (vote) => {
     const {onVote, currentVote} = this.props;
+    console.log("casting vote:", currentVote, vote);
     if(currentVote === vote) {
       onVote(VoteStates.NONE)
     } else {
