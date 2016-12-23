@@ -98,7 +98,7 @@ class App extends Component {
               <ChatBox />
             </Col>
           </Row>
-
+          <footer>Lists!</footer>
         </Grid>
       </div>
     );

@@ -367,7 +367,7 @@ iframe {
   height: 100%;
 }
 .movieContainer {
-  height: 100%;
+  height: calc(100% - 20px);
   background: #9DACE2;
   border-bottom: 3px solid transparent;
   border-top-left-radius: 10px;
@@ -381,17 +381,24 @@ iframe {
 }
 
 .historyContainer {
-  height: 100%;
-  overflow: scroll;
+  height: calc(100% - 20px);
+  // overflow: scroll;
   border-bottom: 3px solid transparent;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
+  .list-container {
+    height: 100%;
+    .content {
+      height: calc(100% - 70px);
+      overflow: scroll;
+    }
+  }
 }
 
 .chatContainer {
-  height: 100%;
+  height: calc(100% - 20px);
   background: #9DACE2;
   border-bottom: 3px solid transparent;
   border-top-left-radius: 10px;
@@ -404,6 +411,18 @@ iframe {
   }
 }
 
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 20px;
+  padding: 0;
+  margin: 0;
+  height: 20px;
+  font-size: 12px;
+  line-height: 20px;
+  opacity: 0.5;
+}
+
 .panel-movie {
 position: relative;
 }
@@ -412,6 +431,7 @@ position: relative;
   margin-left: 10px;
   margin-right: -10px;
   padding:0;
+  margin-bottom: 0;
 }
 
 .restuarant {

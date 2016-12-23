@@ -56,7 +56,7 @@ dataChanged = (data) => {
   render() {
     const {title} = this.state;
     return (
-      <div className>
+      <div className="list-container">
         <h1>
           <InlineEdit
             text={title}
