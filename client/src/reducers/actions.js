@@ -1,6 +1,10 @@
 import ContentTypes from '../types/ContentTypes.js';
 import VoteStates from '../types/VoteStates';
 
+function getName(action) {
+  return action.actingUser ? action.actingUser.name : "";
+}
+
 function getContentForContentType(content) {
   switch(content.contentType) {
     case ContentTypes.TODO:
@@ -33,16 +37,19 @@ function getActionRecord(state, action) {
   switch (action.type) {
     case 'MOVE_CARD':
       return Object.assign({}, action, {
+        user: getName(action),
         type: 'MOVED:',
         text: state.find(x => x.id === action.draggedId).text
       });
     case 'ADD_CARD':
       return Object.assign({}, action, {
+        user: getName(action),
         type: 'ADDED:',
         text: getContentForContentType(action.content)
       });
     case 'TOGGLE_CARD':
       return {
+        user: getName(action),
         id: action.id,
         toggleId: action.toggleId,
         type: resolvedToggleState(state, action),
@@ -50,6 +57,7 @@ function getActionRecord(state, action) {
       };
     case 'VOTE_CARD':
       return {
+        user: getName(action),
         id: action.id,
         voteId: action.voteId,
         type: 'VOTED',

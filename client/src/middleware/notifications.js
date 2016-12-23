@@ -9,6 +9,7 @@ const notifications = ({ getState, dispatch }) => next => action => {
     case 'MOVE_CARD':
     case 'ADD_CARD':
     case 'TOGGLE_CARD':
+    case 'VOTE_CARD':
       if(action.linkId === activeLink) {
         return next(action);
       } else {

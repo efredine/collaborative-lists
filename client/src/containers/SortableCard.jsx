@@ -51,10 +51,6 @@ class SortableCard extends Component {
     findCard: PropTypes.func.isRequired
   };
 
-  componentDidAppear() {
-    console.log('Sortable card appeared');
-  }
-
   render() {
     const {isDragging, connectDragSource, connectDropTarget } = this.props;
     const opacity = isDragging ? 0 : 1;

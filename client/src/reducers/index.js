@@ -5,6 +5,7 @@ import visibilityFilter from './visibilityFilter'
 import dragging from './dragging'
 import receiver from './receiver'
 import user from './user'
+import users from './users'
 import activeList from './activeList'
 
 const sliceReducers = combineReducers({
@@ -13,6 +14,7 @@ const sliceReducers = combineReducers({
   visibilityFilter,
   dragging,
   user,
+  users,
   activeList
 });
 
