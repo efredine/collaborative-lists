@@ -19,7 +19,7 @@ class AppContainer extends Component {
     }
     else {
       return(
-        <div>loading...</div>
+        <div></div>
       );
     }
   }
