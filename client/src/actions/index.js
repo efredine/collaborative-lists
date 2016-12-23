@@ -10,6 +10,11 @@ function dispatchWithUserList(action) {
   }
 }
 
+export const addChatMessage = text => dispatchWithUserList({
+  type: 'SERVER/CHAT_MESSAGE',
+  text
+})
+
 export const addCard = content => dispatchWithUserList({
   type: 'SERVER/ADD_CARD',
   content

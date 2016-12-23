@@ -12,6 +12,10 @@ div[data-reactroot] {
   height:100%;
 }
 
+.input-group {
+  width: 100%;
+}
+
 html {
   height: 100%;
 }
@@ -229,7 +233,7 @@ iframe {
 }
 
 .btn-group {
-  left: 10%;
+
 }
 
 .votedown {
@@ -308,20 +312,28 @@ iframe {
   100% { transform: scale(0.85) }
 }
 
-  .shake {
-    animation: shake .5s .1s;
-    transform: translateX(10px)
-  }
+.close {
+  font-size: 25px;
+  opacity: .6;
 
-@keyframes shake {
-  0% {transform: translateX(0);}
-  20% {transform: translateX(-10px);}
-  40% {transform: translateX(10px);}
-  60% {transform: translateX(-10px);}
-  80% {transform: translateX(10px);}
-  100% {transform: translateX(0);}
+  &:hover {
+  opacity: 1.0;
+  cursor: pointer;
+
+  }
 }
 
+.open {
+  font-size: 25px;
+  text-align: center;
+  opacity: .6;
+
+  &:hover {
+  opacity: 1.0;
+  cursor: pointer;
+
+  }
+}
 
 .undo {
   color: blue;
@@ -355,7 +367,7 @@ iframe {
   height: 100%;
 }
 .movieContainer {
-  height: 100%;
+  height: calc(100% - 20px);
   background: #9DACE2;
   border-bottom: 3px solid transparent;
   border-top-left-radius: 10px;
@@ -369,17 +381,24 @@ iframe {
 }
 
 .historyContainer {
-  height: 100%;
-  overflow: scroll;
+  height: calc(100% - 20px);
+  // overflow: scroll;
   border-bottom: 3px solid transparent;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
+  .list-container {
+    height: 100%;
+    .content {
+      height: calc(100% - 70px);
+      overflow: scroll;
+    }
+  }
 }
 
 .chatContainer {
-  height: 100%;
+  height: calc(100% - 20px);
   background: #9DACE2;
   border-bottom: 3px solid transparent;
   border-top-left-radius: 10px;
@@ -392,6 +411,18 @@ iframe {
   }
 }
 
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 20px;
+  padding: 0;
+  margin: 0;
+  height: 20px;
+  font-size: 12px;
+  line-height: 20px;
+  opacity: 0.5;
+}
+
 .panel-movie {
 position: relative;
 }
@@ -400,6 +431,7 @@ position: relative;
   margin-left: 10px;
   margin-right: -10px;
   padding:0;
+  margin-bottom: 0;
 }
 
 .restuarant {
