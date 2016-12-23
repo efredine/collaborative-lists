@@ -12,7 +12,37 @@ import YelpSearch from '../containers/YelpSearch.jsx'
 
 class App extends Component {
 
+  constructor(...args) {
+    super(...args);
+    this.state = {
+      open: true
+    };
+  }
+
+  builderContent = open => {
+    if(open) {
+      return(
+        <div className="content">
+          <Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
+            <Tab eventKey={1} title="Movies">
+              <MovieSearch className="panel-container"/>
+            </Tab>
+            <Tab eventKey={2} title="Yelp">
+              <YelpSearch className="panel-container"/>
+            </Tab>
+            <Tab eventKey={3} title="Todos">
+              <AddTodo />
+            </Tab>
+          </Tabs>
+        </div>
+        );
+    } else {
+      return(<div></div>)
+    }
+  }
+
   render() {
+    const { open } = this.state;
     return(
       <div>
         <Navbar>
@@ -26,23 +56,11 @@ class App extends Component {
         <Grid>
 
           <Row className="show-grid">
-            <Col className="movieContainer" xs={6} md={4}>
-              <h1>List Builders</h1>
-              <div className="content">
-                <Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
-                  <Tab eventKey={1} title="Movies">
-                    <MovieSearch className="panel-container"/>
-                  </Tab>
-                  <Tab eventKey={2} title="Yelp">
-                    <YelpSearch className="panel-container"/>
-                  </Tab>
-                  <Tab eventKey={3} title="Todos">
-                    <AddTodo />
-                  </Tab>
-                </Tabs>
-              </div>
+            <Col className="movieContainer" xs={6} md={open ? 4 : 1}>
+              <h1 onClick={() => this.setState({open: !open})}>List Builders</h1>
+              {this.builderContent(open)}
             </Col>
-            <Col className="historyContainer" xs={6} md={6}>
+            <Col className="historyContainer" xs={6} md={open ? 6 : 7}>
               <Router history={browserHistory}>
                 <Route path="/" >
                   <IndexRoute component={ListsIndex} />
@@ -50,7 +68,7 @@ class App extends Component {
                 </Route>
               </Router>
             </Col>
-            <Col className="chatContainer" xsHidden md={2}>
+            <Col className="chatContainer" xsHidden md={open ? 2 : 4}>
               <h1>Activity</h1>
               <div className="content">
                 <ActionListContainer/>
