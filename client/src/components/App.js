@@ -19,6 +19,20 @@ class App extends Component {
     };
   }
 
+  builderHeader = open => {
+    if(open) {
+      return(
+        <span>
+          <h1>Builder <button onClick={() => this.setState({open: !open})}>Close</button></h1>
+        </span>
+      );
+    } else {
+      return(
+        <button onClick={() => this.setState({open: !open})}>Open</button>
+      );
+    }
+  }
+
   builderContent = open => {
     if(open) {
       return(
@@ -57,7 +71,7 @@ class App extends Component {
 
           <Row className="show-grid">
             <Col className="movieContainer" xs={6} md={open ? 4 : 1}>
-              <h1 onClick={() => this.setState({open: !open})}>List Builders</h1>
+              {this.builderHeader(open)}
               {this.builderContent(open)}
             </Col>
             <Col className="historyContainer" xs={6} md={open ? 6 : 7}>
