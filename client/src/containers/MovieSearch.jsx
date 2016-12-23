@@ -79,14 +79,15 @@ class MovieSearch extends Component {
           <Button onClick={this.upComing}>Up Coming</Button>
         </ButtonGroup>
 
-        <div>
+        <FlipMove easing="cubic-bezier(0, 0.7, 0.8, 0.1)">
           {movies}
-        </div>
+        </FlipMove>
       </div>
     );
   }
 
   search(query){
+    this.setState({movies: []});
     fetch(query)
     .then(response => {
       return response.json();
