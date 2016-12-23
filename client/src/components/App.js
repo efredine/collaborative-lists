@@ -94,9 +94,7 @@ class App extends Component {
             </Col>
             <Col className="chatContainer" xsHidden md={open ? 2 : 4}>
               <h1>Activity</h1>
-              <div className="content">
-                <ActionListContainer/>
-              </div>
+              <ActionListContainer/>
               <ChatBox />
             </Col>
           </Row>
