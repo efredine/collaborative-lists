@@ -407,9 +407,10 @@ position: relative;
   max-height: 250px
 }
 
-.restuarant-info{
+.restaurant-info {
   height: 250;
-  width: 353px
+  width: 260px;
+  margin-left: -38px
 }
 
 .restaurant-img {
@@ -419,9 +420,7 @@ position: relative;
 }
 
 .restaurant-address {
-  // margin-left: 119px;
-  float: right;
-   right: -50px;
+   margin-left: 149px
 }
 
 .restaurant-rating {
@@ -442,7 +441,7 @@ position: relative;
 }
 
 .restaurant-info-image {
-    margin-left: 172px
+    margin-left: 128px
 }
 
 .restaurant-name {
@@ -451,9 +450,11 @@ position: relative;
 }
 
 .restaurant-review {
-  margin-left: 119px
+  margin-left: 43px
 }
 
 .restaurant-people-review {
-  margin-top: 20px
+  padding-top: 73px;
+  margin-top: -39px;
+  // top: 15px
 }
