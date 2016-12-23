@@ -96,8 +96,8 @@ const cards = (state = [], action) => {
   switch (action.type) {
     case 'ADD_CARD':
       return [
-        ...state,
-        card(undefined, action)
+        card(undefined, action),
+        ...state
       ]
     case 'TOGGLE_CARD':
     case 'VOTE_CARD':
