@@ -13,6 +13,8 @@ const knexConfig  = require("./knexfile");
 const knex        = require("knex")(knexConfig[ENV]);
 const morgan      = require('morgan');
 const knexLogger  = require('knex-logger');
+const Yelp        = require('yelp');
+// const yelpAuth    = require(process.env.)
 
 
 // Seperated Routes for each Resource
@@ -28,6 +30,13 @@ app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
+});
+
+var yelp = new Yelp({
+  consumer_key: '3fIu0xLb0HZM_B40Yqz92g',
+  consumer_secret: 'CfRXxRQXS9IlkWb1DkmkbNLamhI',
+  token: '3s36NPl5mObmdcpIpjLcg1Hy0jUcCi8o',
+  token_secret: 'qqBdAkGPSpMiw9pdkaSRvQpHhic',
 });
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
@@ -79,6 +88,19 @@ app.get("/api/popular/movies/upComing", (req, res)=> {
   });
 });
 
+app.get("/v2/search/:restaurant/:location/", (req, res)=>{
+  yelp.search({ term: `${req.params.restaurant}`, location: `${req.params.location}`, limit: 30}, function(err, result){
+    console.log("result", result);
+    console.log("err", err)
+    res.json(result);
+  })
+  // .then(function (data) {
+  //   console.log(data);
+  // })
+  // .catch(function (err) {
+  //   console.error(err);
+  // });
+})
 
 app.post("/api/update", (req, res) => {
   console.log(req.body.theThing);

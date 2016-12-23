@@ -91,6 +91,7 @@ class MovieSearch extends Component {
         movies: movies.results,
       });
     })
+
   }
 
 }
