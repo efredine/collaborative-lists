@@ -184,7 +184,7 @@ iframe {
   right: 5px;
   top: -10px;
   line-height: 0;
-  color: green;
+  color: black;
   opacity: .6;
 
   &:hover {
@@ -193,7 +193,77 @@ iframe {
   }
 }
 
+.voteup-on {
+  font-side:10pt;
+  font-size: 20pt;
+  float: right;
+  position: relative;
+  right: 5px;
+  top: -10px;
+  line-height: 0;
+  color: green;
+  opacity: .6;
+
+   &:hover {
+  opacity: 1.0;
+  cursor: pointer;
+  }
+
+}
+
+.voteup-off {
+  font-side:10pt;
+  font-size: 20pt;
+  float: right;
+  position: relative;
+  right: 5px;
+  top: -10px;
+  line-height: 0;
+  color: green;
+  opacity: .6;
+
+   &:hover {
+  opacity: 1.0;
+  cursor: pointer;
+  }
+}
+
+
 .votedown {
+  font-side:10pt;
+  font-size: 20pt;
+  float: left;
+  position: relative;
+  left: 5px;
+  top: -12px;
+  line-height: 0;
+  color: black;
+  opacity: .6;
+
+  &:hover {
+  opacity: 1.0;
+  cursor: pointer;
+  }
+}
+
+.votedown-on {
+  font-side:10pt;
+  font-size: 20pt;
+  float: left;
+  position: relative;
+  right: 5px;
+  top: -10px;
+  line-height: 0;
+  color: red;
+  opacity: .6;
+
+   &:hover {
+  opacity: 1.0;
+  cursor: pointer;
+  }
+}
+
+.votedown-off {
   font-side:10pt;
   font-size: 20pt;
   float: left;
@@ -204,11 +274,37 @@ iframe {
   color: red;
   opacity: .6;
 
-  &:hover {
+   &:hover {
   opacity: 1.0;
   cursor: pointer;
   }
 }
+
+.voteupcount {
+  position: absolute;
+  top: 15px;
+  right: 30px;
+}
+
+.votedowncount {
+  position: absolute;
+  top: 15px;
+  left: 30px;
+}
+
+.bounce {
+  animation: bounce .5s .1s;
+  transform: scale(1.0);
+}
+
+@keyframes bounce {
+  0% { transform: scale(1.1); opacity: 1 }
+  50% { transform: scale(1.6); opacity: .7; }
+  60% { transform: scale(0.6); opacity: 1 }
+  80% { transform: scale(0.95) }
+  100% { transform: scale(0.85) }
+}
+
 
 .undo {
   color: blue;

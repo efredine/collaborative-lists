@@ -24,21 +24,37 @@ class Movie extends Component {
     }
   }
 
+  voteClass(vote) {
+
+  }
+
   votingEnable () {
-    const { votes, currentVote, voteCount, numberOfVotes } = this.props;
+    // current vote will be one of the following:
+    // VoteStates.NONE
+    // VoteStates.UP
+    // VoteStates.DOWN
+    const { votes, currentVote, voteCount, numberOfVotes, thumbsUpCount, thumbsDownCount } = this.props;
+    const upOn = VoteStates.UP === currentVote ? "-on" + " bounce" : "";
+    const downOn = VoteStates.DOWN === currentVote ? "-off" + " bounce" : "";
     if (votes === true) {
       return (
         <div>
-        CurrentVote: {currentVote} | Count: {voteCount} | Votes: {numberOfVotes}
-         <div className="voteup">
+         <div className={"voteup" + upOn}>
+          <div className ="voteupcount">
+           {thumbsUpCount}
+          </div>
            <Glyphicon onClick={ ()=> this.castVote(VoteStates.UP) } glyph="glyphicon glyphicon-thumbs-up"/>
          </div>
-         <div className="votedown">
+         <div className={"votedown" + downOn}>
+           <div className ="votedowncount">
+             {thumbsDownCount}
+          </div>
            <Glyphicon onClick={ ()=> this.castVote(VoteStates.DOWN) } glyph="glyphicon glyphicon-thumbs-down"/>
          </div>
         </div>
       )
-    } else {
+    }
+    else {
       return (<div>&nbsp;</div>);
     }
   }
@@ -143,7 +159,7 @@ class Movie extends Component {
               {title}
             </h3>
           </div>
-          <div className="panel-body" onClick={ ()=> this.setState({ open: !this.state.open })}>
+          <div className="panel-body">
             <div className="poster">
             <Collapse in={this.state.posterOpen}>
               <img src={"http://image.tmdb.org/t/p/w500/" + backdrop_path}/>
