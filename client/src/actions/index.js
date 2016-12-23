@@ -2,12 +2,12 @@ import fetch from 'isomorphic-fetch'
 import ContentTypes from '../types/ContentTypes';
 
 function dispatchWithUserList(action) {
-    return (dispatch, getState) => {
-        const state = getState();
-        action.userId = state.user.id;
-        action.listId = state.activeList;
-        dispatch(action);
-    }
+  return (dispatch, getState) => {
+      const state = getState();
+      action.userId = state.user.id;
+      action.listId = state.activeList;
+      dispatch(action);
+  }
 }
 
 export const addCard = content => dispatchWithUserList({
@@ -33,6 +33,12 @@ export const setVisibilityFilter = (filter) => ({
 export const toggleCard = (toggleId) => dispatchWithUserList({
   type: 'SERVER/TOGGLE_CARD',
   toggleId
+});
+
+export const voteCard = (voteId, vote) => dispatchWithUserList({
+  type: 'SERVER/VOTE_CARD',
+  voteId: voteId,
+  vote
 });
 
 export const startDrag = () => ({

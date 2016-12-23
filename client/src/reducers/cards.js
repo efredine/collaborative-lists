@@ -1,3 +1,24 @@
+import VoteStates from '../types/VoteStates';
+import _ from 'lodash';
+
+function voteStateToCount(vote) {
+  switch(vote) {
+    case VoteStates.UP:
+      return 1;
+    case VoteStates.DOWN:
+      return -1;
+    default:
+      return 0;
+  }
+}
+
+function votesByUser(state, action) {
+  const userId = action.userId;
+  const newState = Object.assign({}, state)
+  newState[userId] = voteStateToCount(action.vote);
+  return newState;
+}
+
 // return current index of todo
 const find = (cards, id) => {
   return cards.findIndex(c => c.id === id);
@@ -29,7 +50,13 @@ const card = (state, action) => {
       return {
         id: action.id,
         content: action.content,
-        completed: false
+        completed: false,
+        currentVote: VoteStates.NONE,
+        votesByUser: {},
+        voteCount: 0,
+        numberOfVotes: 0,
+        thumbsUpCount: 0,
+        thumbsDownCount: 0
       }
     case 'TOGGLE_CARD':
       if (state.id !== action.toggleId) {
@@ -40,7 +67,23 @@ const card = (state, action) => {
         state,
         {
           completed: !state.completed
-      });
+        });
+    case 'VOTE_CARD':
+      if (state.id !== action.voteId) {
+        return state
+      }
+      const updatedVotesByUser = votesByUser(state.votesByUser, action);
+      return Object.assign(
+        {},
+        state,
+        {
+          currentVote: action.vote,
+          votesByUser: updatedVotesByUser,
+          voteCount: _.reduce(updatedVotesByUser, (s, v) => s + v, 0),
+          thumbsUpCount: _.reduce(updatedVotesByUser, (s, v) => s + (v > 0 ? 1 : 0), 0),
+          thumbsDownCount: _.reduce(updatedVotesByUser, (s, v) => s + (v < 0 ? 1 : 0), 0),
+          numberOfVotes: Object.keys(updatedVotesByUser).length
+        });
     default:
       return state
   }
@@ -54,6 +97,7 @@ const cards = (state = [], action) => {
         card(undefined, action)
       ]
     case 'TOGGLE_CARD':
+    case 'VOTE_CARD':
       return state.map(t =>
         card(t, action)
       )

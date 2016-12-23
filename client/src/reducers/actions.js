@@ -1,4 +1,5 @@
 import ContentTypes from '../types/ContentTypes.js';
+import VoteStates from '../types/VoteStates';
 
 function getContentForContentType(content) {
   switch(content.contentType) {
@@ -17,6 +18,14 @@ function resolvedToggleState(state, action) {
     return 'CLOSED:';
   } else {
     return 'RE-ACTIVATED:'
+  }
+}
+
+function getVoteText(action) {
+  if (action.vote === VoteStates.NONE) {
+    return "nothing";
+  } else {
+    return "thumbs " + action.vote;
   }
 }
 
@@ -39,6 +48,13 @@ function getActionRecord(state, action) {
         type: resolvedToggleState(state, action),
         text: state.find(x => x.id === action.toggleId).text
       };
+    case 'VOTE_CARD':
+      return {
+        id: action.id,
+        voteId: action.voteId,
+        type: 'VOTED',
+        text: getVoteText(action)
+      };
     default:
       return null;
   }
@@ -49,6 +65,7 @@ const actions = (state = [], action) => {
     case 'MOVE_CARD':
     case 'ADD_CARD':
     case 'TOGGLE_CARD':
+    case 'VOTE_CARD':
       return [
         ...state,
         getActionRecord(state, action)

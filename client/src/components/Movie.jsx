@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Video from 'react-video';
 import { Collapse, Button, Well, ProgressBar, Glyphicon } from 'react-bootstrap';
+import VoteStates from '../types/VoteStates';
 
 class Movie extends Component {
 
@@ -14,20 +15,46 @@ class Movie extends Component {
     };
   }
 
+  castVote = (vote) => {
+    const {onVote, currentVote} = this.props;
+    if(currentVote === vote) {
+      onVote(VoteStates.NONE)
+    } else {
+      onVote(vote);
+    }
+  }
+
+  voteClass(vote) {
+
+  }
+
   votingEnable () {
-    const { votes } = this.props;
+    // current vote will be one of the following:
+    // VoteStates.NONE
+    // VoteStates.UP
+    // VoteStates.DOWN
+    const { votes, currentVote, voteCount, numberOfVotes, thumbsUpCount, thumbsDownCount } = this.props;
+    const upOn = VoteStates.UP === currentVote ? "-on" + " bounce" : "";
+    const downOn = VoteStates.DOWN === currentVote ? "-off" + " bounce" : "";
     if (votes === true) {
       return (
         <div>
-         <div className="voteup">
-           <Glyphicon onClick={ ()=> this.setState({ open: !this.state.open })} glyph="glyphicon glyphicon-thumbs-up"/>
+         <div className={"voteup" + upOn}>
+          <div className ="voteupcount">
+           {thumbsUpCount}
+          </div>
+           <Glyphicon onClick={ ()=> this.castVote(VoteStates.UP) } glyph="glyphicon glyphicon-thumbs-up"/>
          </div>
-         <div className="votedown">
-           <Glyphicon onClick={ ()=> this.setState({ open: !this.state.open })} glyph="glyphicon glyphicon-thumbs-down"/>
+         <div className={"votedown" + downOn}>
+           <div className ="votedowncount">
+             {thumbsDownCount}
+          </div>
+           <Glyphicon onClick={ ()=> this.castVote(VoteStates.DOWN) } glyph="glyphicon glyphicon-thumbs-down"/>
          </div>
         </div>
       )
-    } else {
+    }
+    else {
       return (<div>&nbsp;</div>);
     }
   }
@@ -132,7 +159,7 @@ class Movie extends Component {
               {title}
             </h3>
           </div>
-          <div className="panel-body" onClick={ ()=> this.setState({ open: !this.state.open })}>
+          <div className="panel-body">
             <div className="poster">
             <Collapse in={this.state.posterOpen}>
               <img src={"http://image.tmdb.org/t/p/w500/" + backdrop_path}/>

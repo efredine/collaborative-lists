@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { toggleCard, moveCard, startDrag, endDrag } from '../actions'
+import { toggleCard, moveCard, startDrag, endDrag, voteCard } from '../actions'
 import SortableList from './SortableList.jsx'
 
 const getVisibleCards = (cards, filter) => {
@@ -24,7 +24,8 @@ const mapDispatchToProps =  ({
   onCardClick: toggleCard,
   moveCard: moveCard,
   startDrag: startDrag,
-  endDrag: endDrag
+  endDrag: endDrag,
+  voteCard: voteCard
 })
 
 const VisibleCardList = connect(
