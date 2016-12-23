@@ -5,12 +5,14 @@
  */
 const injectUser = ({ getState, dispatch }) => next => action => {
   if(action.userId) {
-    const { users } = getState();
-    action.user = users.byId[action.userId];
+    const { users, user } = getState();
+    action.actingUser = users.byId[action.userId];
+    action.currentUser = user;
   }
   if(action.type === 'RECEIVE') {
-    const { users } = getState();
+    const { users, user } = getState();
     action.users = users;
+    action.currentUser = user;
   }
   return next(action);
 };
