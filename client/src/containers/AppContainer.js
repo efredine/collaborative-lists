@@ -14,7 +14,6 @@ class AppContainer extends Component {
 
   render() {
     const { users, user } = this.props;
-    console.log(users);
     if(users.allIds.length > 0 && user.userInitialized) {
       return (<App/>);
     }

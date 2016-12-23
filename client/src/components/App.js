@@ -12,7 +12,6 @@ import { Link } from 'react-router'
 class App extends Component {
 
   render() {
-    console.log('context:', this.context);
     return(
       <div>
         <Navbar>
