@@ -3,12 +3,11 @@ import Video from 'react-video';
 import { Collapse, Button, Well, ProgressBar, Glyphicon } from 'react-bootstrap';
 import VoteStates from '../types/VoteStates';
 
-class Movie extends Component {
+class Yelp extends Component {
 
   constructor(...args) {
     super(...args);
     this.state = {
-      trailers: [],
       open: false,
       posterOpen: true
 
@@ -59,34 +58,6 @@ class Movie extends Component {
     }
   }
 
-
-  trailerLink(){
-    if(this.state.open === true) {
-      if (this.state.trailers.length > 0){
-        const movieTrailerKey = _.map(this.state.trailers, (trailerKey)=> {
-          return trailerKey.key
-        });
-        return(
-          <iframe onClick={ ()=> this.setState({ open: !this.state.open })}
-          src={`https://www.youtube.com/embed/${movieTrailerKey[0]}`}
-          allowFullScreen
-          />
-        )
-      } else {
-        fetch(`http://api.themoviedb.org/3/movie/${this.props.content.id}/videos?api_key=6b426deee51a1b33c8c0b4231c1543cd`)
-        .then(response => {
-          return response.text();
-        })
-        .then(responseText => {
-          const movieTrailers = JSON.parse(responseText);
-           this.setState({
-             trailers: movieTrailers.results,
-           });
-        })
-      }
-    }
-  }
-
   drop () {
     if (this.state.open === true) {
       return (
@@ -108,7 +79,7 @@ class Movie extends Component {
     if (completed === false) {
       return (
           <div className="remove">
-            <img className= "image" onClick={this.onRemove} src="http://localhost:8080/images/remove.png"/>
+            <img onClick={this.onRemove} className= "image" src="http://localhost:8080/images/remove.png"/>
           </div>
       );
     }
@@ -122,7 +93,7 @@ class Movie extends Component {
      if (completed === undefined) {
         return (
             <div className="add">
-              <img className= "image" onClick={this.onAdd} src="http://localhost:8080/images/add.png"/>
+              <img onClick={this.onAdd} className= "image" src="http://localhost:8080/images/add.png"/>
             </div>
       );
     }
@@ -145,7 +116,10 @@ class Movie extends Component {
   }
 
   render() {
-    const {title, vote_average, overview, backdrop_path} = this.props.content;
+    const {name, location,
+          image_url, is_closed, display_phone, rating,
+          rating_img_url_small, review_count, snippet_text
+        } = this.props.content;
     // if(isLoaded){
     //   return
     // }
@@ -155,27 +129,34 @@ class Movie extends Component {
           <div className="panel-heading" onClick={ ()=> this.setState({ posterOpen: !this.state.posterOpen })}>
             {this.renderAddRemove()}
             <h3 className="panel-title">
-              {title}
+              {name}
             </h3>
           </div>
-          <div className="panel-body">
-            <div className="poster">
-            <Collapse in={this.state.posterOpen}>
-              <img className= "image" src={"http://image.tmdb.org/t/p/w500/" + backdrop_path}/>
-            </Collapse>
+          <div className="restaurant" >
+              <div className="restaurant-container">
+                {this.renderAddRemove()}
+                <div className="restaurant-img"> <img src={image_url}/> </div>
+                <div className= "restaurant-info-image"><h6 className="restaurant-name">{name}</h6> {rating} <img src ={rating_img_url_small}/></div>
+                <span className="restaurant-review">{review_count} Reviews</span>
+                <div className = "restaurant-info" >
+                  <span>is closed:{is_closed}</span>
+                  <div className = "restaurant-address">{location.address} {location.city}<p>{display_phone}</p> </div>
+                  <div className="restaurant-people-review">{snippet_text}</div>
+                </div>
+              </div>
+          </div>
+          <div>
+            <div>
+            {/* <Collapse in={this.state.posterOpen}>
+
+            </Collapse> */}
                {this.drop()}
                {this.votingEnable()}
-              <Collapse in={this.state.open}>
-            <div>
-              <div>
-              {this.trailerLink()}
-              <p>{overview}</p>
-              </div>
+              {/* <Collapse in={this.state.open}>
                 <div>
                  <ProgressBar bsStyle="danger" active now={vote_average * 10} label={`${vote_average} / 10 Average Rating`}/>
                 </div>
-              </div>
-              </Collapse>
+              </Collapse> */}
             </div>
           </div>
         </div>
@@ -183,4 +164,4 @@ class Movie extends Component {
   );
   }
 }
-export default Movie;
+export default Yelp;

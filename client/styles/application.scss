@@ -1,6 +1,6 @@
 // This is the top-level scss file. Import all other files in here.
 @import 'home';
-img {
+.image {
   width: 100%;
 }
 body {
@@ -402,3 +402,58 @@ position: relative;
   padding:0;
 }
 
+.restuarant {
+  max-width: 353px;
+  max-height: 250px
+}
+
+.restuarant-info{
+  height: 250;
+  width: 353px
+}
+
+.restaurant-img {
+  width: 50px;
+  float: left;
+
+}
+
+.restaurant-address {
+  // margin-left: 119px;
+  float: right;
+   right: -50px;
+}
+
+.restaurant-rating {
+  float: right;
+}
+
+.restuarant-container {
+    margin: 20px 20px 0 0;
+    border: 5px solid #333;
+    overflow: auto
+}
+
+.restaurant-img {
+    float: left
+}
+.restuarant-img img {
+    display: block
+}
+
+.restaurant-info-image {
+    margin-left: 172px
+}
+
+.restaurant-name {
+    font-weight: bold;
+    font-size: 140%
+}
+
+.restaurant-review {
+  margin-left: 119px
+}
+
+.restaurant-people-review {
+  margin-top: 20px
+}
