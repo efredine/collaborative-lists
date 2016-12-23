@@ -25,11 +25,11 @@ class App extends Component {
     if(open) {
       return(
         <span>
-          <h1>Builder
+          <h3>Builder
             <div className="close">
             <Glyphicon onClick={ ()=> this.setState({ open: !this.state.open })} glyph="glyphicon glyphicon-arrow-left"/>
             </div>
-        </h1>
+        </h3>
         </span>
       );
     } else {
@@ -78,7 +78,6 @@ class App extends Component {
           <LoginContainer/>
         </Navbar>
         <Grid>
-
           <Row className="show-grid">
             <Col className="movieContainer" xs={6} sm={open ? 4 : 1}>
               {this.builderHeader(open)}
@@ -93,7 +92,7 @@ class App extends Component {
               </Router>
             </Col>
             <Col className="chatContainer" xsHidden sm={open ? 2 : 4}>
-              <h1>Activity</h1>
+              <h3>Activity</h3>
               <ActionListContainer/>
               <ChatBox />
             </Col>

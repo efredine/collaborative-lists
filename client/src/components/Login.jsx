@@ -32,7 +32,7 @@ class Login extends Component {
     if(user.username) {
       return (
         <div className="navbar-text navbar-right"><span>Logged in as: {user.username } &nbsp;</span>
-        <button type="submit" onClick={this.handleLogout} className="btn btn-nav">Log Out</button>
+        <button type="submit" onClick={this.handleLogout} className="btn btn-sm btn-nav">Log Out</button>
         </div>
       );
     } else {
@@ -48,7 +48,7 @@ class Login extends Component {
                 placeholder="Username"
               />
             </div>
-            <button type="submit" onClick={this.handleSubmit} className="btn btn-default">Sign In</button>
+            <button type="submit" onClick={this.handleSubmit} className="btn btn-default btn-sm">Sign In</button>
           </form>
         </div>
       );
