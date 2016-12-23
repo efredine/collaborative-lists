@@ -56,7 +56,7 @@ dataChanged = (data) => {
   render() {
     const {title} = this.state;
     return (
-      <div>
+      <div className>
         <h1>
           <InlineEdit
             text={title}
@@ -64,8 +64,10 @@ dataChanged = (data) => {
             change= {this.dataChanged}
           />
         </h1>
+        <div className="content">
         <VisibleCardList />
         <Footer />
+        </div>
       </div>
       );
     }
