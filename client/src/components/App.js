@@ -17,8 +17,27 @@ class App extends Component {
     this.state = {
       open: true,
       chatcol: 2,
-      constructcol: 4
+      constructcol: 4,
+      historycol: 6
     };
+  }
+
+  toggleCollapse = () => {
+    console.log("toggling");
+    if (this.state.open) {
+      this.setState ({
+          open: false,
+          chatCol: 6,
+          constructcol: 0
+        });
+      } else {
+      this.setState({
+        open:true,
+        chatCol: 2,
+        constructcol: 4,
+        historycol: 6
+      })
+    }
   }
 
   render() {
@@ -35,7 +54,7 @@ class App extends Component {
         <Grid>
 
           <Row className="show-grid">
-            <Col className={"movieContainer" + this.state.open}  xs={6} md={this.state.constructcol}>
+            <Col className={"movieContainer"+this.state.open}  xs={6} md={this.state.constructcol}>
               <h1>List Builders</h1>
               <div className="drop">
               </div>
@@ -49,9 +68,9 @@ class App extends Component {
               </Tabs>
             </Col>
             <div className={"hide-builder" + this.state.open}>
-              <Glyphicon onClick={ ()=> this.setState({ open: !this.state.open})} glyph="glyphicon glyphicon-transfer"/>
+              <Glyphicon onClick={this.toggleCollapse} glyph="glyphicon glyphicon-transfer"/>
             </div>
-            <Col className={"historyContainer" + this.state.open} xs={6} md={6}>
+            <Col className={"historyContainer" + this.state.open} xs={6} md={this.state.historycol}>
               <Router history={browserHistory}>
                 <Route path="/" >
                   <IndexRoute component={ListsIndex} />
@@ -59,7 +78,7 @@ class App extends Component {
                 </Route>
               </Router>
                 </Col>
-            <Col className={"chatContainer" + this.state.open} xs={2} md={this.state.col}>
+            <Col className="chatContainer" xs={2} md={this.state.chatCol}>
               <h1>Activity</h1>
               <ActionListContainer/>
             </Col>
