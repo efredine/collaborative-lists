@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import { connect } from 'react-redux'
 import { addChatMessage } from '../actions'
+import { FormGroup, Button, InputGroup, FormControl } from 'react-bootstrap';
 
 /**
  * Renders the card based on the card content type.
@@ -36,14 +37,19 @@ class ChatBox extends Component {
 
   render() {
     return(
-       <div>
-          <form onSubmit={this.handleSubmit}>
-            <input onChange={this.handleChange} value={this.state.userInput}/>
-            <button type="submit">
-              Post
-            </button>
-          </form>
-        </div>
+
+<form onSubmit={this.handleSubmit}>
+  <FormGroup>
+    <InputGroup>
+      <FormControl type="text" onChange={this.handleChange} value={this.state.userInput} placeholder="Send Message..."/>
+    </InputGroup>
+   </FormGroup>
+</form>
+
+
+
+
+
       );
   }
 }
@@ -53,3 +59,14 @@ const mapDispatchToProps =  ({
 })
 
 export default connect(null, mapDispatchToProps)(ChatBox);
+
+<form>
+  <FormGroup>
+    <InputGroup>
+      <InputGroup.Button>
+        <Button>Before</Button>
+      </InputGroup.Button>
+      <FormControl type="text" />
+    </InputGroup>
+   </FormGroup>
+</form>

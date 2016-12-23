@@ -5,7 +5,7 @@ import _ from 'lodash';
 import FlipMove from 'react-flip-move';
 import { connect } from 'react-redux'
 import { addMovie} from '../actions';
-import { ButtonGroup, Button } from 'react-bootstrap';
+import { ButtonGroup, Button, FormGroup, FormControl } from 'react-bootstrap';
 
 class MovieSearch extends Component {
   constructor(props) {
@@ -70,7 +70,9 @@ class MovieSearch extends Component {
     });
     return (
       <div>
-        <input ref = "query" onKeyPress =  {this.onSumbit} type = 'text'/> <br/>
+        <FormGroup>
+          <FormControl ref = "query" onKeyPress = {this.onSumbit} type = 'text' placeholder="Search" />
+        </FormGroup>
         <ButtonGroup>
           <Button onClick={this.topRated}>Top Rated</Button>
           <Button onClick={this.nowPlaying}>Now Playing</Button>
