@@ -66,8 +66,8 @@ class YelpSearch extends Component {
     return(
       <div>
         <div>
-          <input ref = "restaurant" onChange = {(e)=>{this.updateSearch()}} type = 'text' value="donair"/>
-          <input ref = "location" onChange = {(e)=>{this.updateSearch()}} type = 'text'  value="vancouver"/>
+          <input ref = "restaurant" onChange = {(e)=>{this.updateSearch()}} type = 'text' />
+          <input ref = "location" onChange = {(e)=>{this.updateSearch()}} type = 'text' />
           <input type = 'button' value= 'search' onClick = {(e)=>{this.updateSearch()}}></input>
         </div>
         <div>
