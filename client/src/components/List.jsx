@@ -4,6 +4,7 @@ import _ from 'lodash';
 import InlineEdit from 'react-edit-inline';
 import Footer from './Footer'
 import VisibleCardList from '../containers/VisibleCardList'
+import { browserHistory } from 'react-router';
 
 import { connect } from 'react-redux'
 import { fetchTodos } from '../actions'
@@ -58,6 +59,7 @@ dataChanged = (data) => {
     return (
       <div className="list-container">
         <h1>
+         <a href="#" onClick={() => browserHistory.push("/")}>Lists!</a> {"> "}
           <InlineEdit
             text={title}
             paramName="Title"
