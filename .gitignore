@@ -44,3 +44,4 @@ jspm_packages
 
 # sublime
 *.sublime-workspace
+yelpAuth.json

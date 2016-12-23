@@ -7,7 +7,8 @@ import ListsIndex from './ListsIndex.jsx';
 import List from './List.jsx';
 import AddTodo from '../containers/AddTodo'
 import ActionListContainer from '../containers/ActionListContainer.jsx'
-import { Link } from 'react-router'
+import { Link } from 'react-router';
+import YelpSearch from '../containers/YelpSearch.jsx'
 
 class App extends Component {
 
@@ -31,7 +32,10 @@ class App extends Component {
                 <Tab eventKey={1} title="Movies">
                   <MovieSearch className="panel-container"/>
                 </Tab>
-                <Tab eventKey={2} title="Todos">
+                <Tab eventKey={2} title="Yelp">
+                  <YelpSearch className="panel-container"/>
+                </Tab>
+                <Tab eventKey={3} title="Todos">
                   <AddTodo />
                 </Tab>
               </Tabs>
