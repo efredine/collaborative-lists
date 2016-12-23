@@ -73,12 +73,15 @@ class MovieSearch extends Component {
 
 
 
-        <input ref = "query" onKeyPress =  {this.onSumbit} type = 'text'/> <br/>
+
         <ButtonGroup>
           <Button onClick={this.topRated}>Top Rated</Button>
           <Button onClick={this.nowPlaying}>Now Playing</Button>
           <Button onClick={this.upComing}>Up Coming</Button>
         </ButtonGroup>
+        <div className="search">
+        <input ref = "query" onKeyPress =  {this.onSumbit} type = 'text' placeholder = "Search for a Movie..."/> <br/>
+        </div>
 
         <div>
           {movies}
