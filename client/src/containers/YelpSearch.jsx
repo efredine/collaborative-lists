@@ -80,10 +80,10 @@ class YelpSearch extends Component {
       <div>
           <form>
             <div className="form-group">
-              <input ref = "restaurant" onChange = {(e)=>{this.updateSearch()}} type = 'text' className="form-control" value = "donair" />
+              <input ref = "restaurant" onChange = {(e)=>{this.updateSearch()}} type = 'text' className="form-control" placeholder = "Restaurant" />
             </div>
             <div className= "form-group">
-              <input ref = "location" onChange = {(e)=>{this.updateSearch()}} type = 'text' className="form-control" value= "vancouver"/>
+              <input ref = "location" onChange = {(e)=>{this.updateSearch()}} type = 'text' className="form-control" placeholder= "Location"/>
             </div>
             <button type = 'button' value= 'search' className="btn btn-default" onClick = {(e)=>{this.updateSearch()}}>Submit</button>
           </form>
