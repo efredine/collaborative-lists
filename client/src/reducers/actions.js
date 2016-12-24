@@ -1,5 +1,6 @@
 import ContentTypes from '../types/ContentTypes.js';
 import VoteStates from '../types/VoteStates';
+import { Glyphicon } from 'react-bootstrap';
 
 function getName(action) {
   return action.actingUser;
@@ -29,7 +30,7 @@ function getVoteText(action) {
   if (action.vote === VoteStates.NONE) {
     return "nothing";
   } else {
-    return "thumbs " + action.vote;
+    return  action.vote;
   }
 }
 
@@ -38,13 +39,13 @@ function getActionRecord(state, action) {
     case 'MOVE_CARD':
       return Object.assign({}, action, {
         user: getName(action),
-        type: 'MOVED:',
+        type: ' moved ',
         text: state.find(x => x.id === action.draggedId).text
       });
     case 'ADD_CARD':
       return Object.assign({}, action, {
         user: getName(action),
-        type: 'ADDED:',
+        type: ' added ',
         text: getContentForContentType(action.content)
       });
     case 'TOGGLE_CARD':
@@ -60,14 +61,14 @@ function getActionRecord(state, action) {
         user: getName(action),
         id: action.id,
         voteId: action.voteId,
-        type: 'VOTED',
+        type: ' voted ',
         text: getVoteText(action)
       };
     case 'CHAT_MESSAGE':
       return {
         user: getName(action),
         id: action.id,
-        type: ': ',
+        type: ':  ',
         text: action.text
       };
     default:

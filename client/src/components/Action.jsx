@@ -1,5 +1,12 @@
 import React, {Component} from 'react'
 
+function getColorId(user) {
+  return user % 7;
+}
+
+const colors = ["red","green","blue","yellow","purple","black","orange"];
+
+
 class Action extends Component {
   componentDidAppear() {
     console.log('action appeared');
@@ -7,10 +14,12 @@ class Action extends Component {
 
   render() {
     const { user, type, text } = this.props;
-    // user.id exists as well
+    const SpanStyle = {
+      color: "" + colors[getColorId(user.id)]
+      };
     return (
         <li className="list-group-item small">
-          <span className={"chatuser" + user.id}>
+          <span style={SpanStyle} className={"" + colors[getColorId(user.id)]}>
             {user ? user.name : ""}
           </span>
           {this.props.type}
