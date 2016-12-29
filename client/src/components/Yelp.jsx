@@ -117,8 +117,8 @@ class Yelp extends Component {
 
   render() {
     const {name, location,
-          image_url, is_closed, display_phone, rating,
-          rating_img_url_small, review_count, snippet_text
+          image_url, display_phone, rating,
+          rating_img_url_small, review_count, snippet_text, url
         } = this.props.content;
     // if(isLoaded){
     //   return
@@ -132,33 +132,36 @@ class Yelp extends Component {
               {name}
             </h3>
           </div>
-          <div className="restaurant" >
-              <div className="restaurant-container">
-                {this.renderAddRemove()}
-                <div className="restaurant-img"> <img src={image_url}/> </div>
-                <div className= "restaurant-info-image"><h6 className="restaurant-name">{name}</h6> {rating} <img src ={rating_img_url_small}/></div>
-                <span className="restaurant-review">{review_count} Reviews</span>
-                <div className = "restaurant-info" >
-                  <span>is closed:{is_closed}</span>
-                  <div className = "restaurant-address">{location.address} {location.city}<p>{display_phone}</p> </div>
-                  <div className="restaurant-people-review">{snippet_text}</div>
+          <div className = "panel-body">
+            <div className="restaurant" >
+                <div className="restaurant-container">
+                  {this.renderAddRemove()}
+                  <div className="restaurant-img"> <img src={image_url}/> </div>
+                  <div className = "restaurant-info">
+                    <div className= "restaurant-info-image"> {rating} <img src ={rating_img_url_small}/></div>
+                    <span className="restaurant-review">{review_count}<a href = {url}> Reviews</a></span>
+                    <div className = "restaurant-address">{location.address} {location.city}<p>{display_phone}</p> </div>
+                  </div>
+                  <div >
+                    <div className="restaurant-people-review">{snippet_text}</div>
+                  </div>
                 </div>
-              </div>
-          </div>
-          <div>
+            </div>
             <div>
-            {/* <Collapse in={this.state.posterOpen}>
+            <div>
+              {/* <Collapse in={this.state.posterOpen}>
 
-            </Collapse> */}
-               {this.drop()}
-               {this.votingEnable()}
-              {/* <Collapse in={this.state.open}>
-                <div>
-                 <ProgressBar bsStyle="danger" active now={vote_average * 10} label={`${vote_average} / 10 Average Rating`}/>
-                </div>
               </Collapse> */}
+                 {this.drop()}
+                 {this.votingEnable()}
+                {/* <Collapse in={this.state.open}>
+                  <div>
+                   <ProgressBar bsStyle="danger" active now={vote_average * 10} label={`${vote_average} / 10 Average Rating`}/>
+                  </div>
+                </Collapse> */}
             </div>
           </div>
+        </div>
         </div>
       </div>
   );

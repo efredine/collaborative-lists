@@ -102,6 +102,10 @@ app.get("/v2/search/:restaurant/:location/", (req, res)=>{
   // });
 })
 
+app.get("/ip", (req, res)=>{
+  console.log(req.connection)
+})
+
 app.post("/api/update", (req, res) => {
   console.log(req.body.theThing);
   res.json(["Got it"]);
