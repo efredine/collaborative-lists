@@ -150,7 +150,7 @@ class Movie extends Component {
   };
 
   portraitFormat = () => {
-    const {poster_path, overview} = this.props.content;
+    const {poster_path, overview, vote_average} = this.props.content;
     return(
       <dl className="dl-horizontal">
         <dt>
@@ -158,10 +158,35 @@ class Movie extends Component {
         </dt>
         <dd>
           {overview}
+          <ProgressBar bsStyle="danger" active now={vote_average * 10} label={`${vote_average} / 10 Average Rating`}/>
         </dd>
       </dl>
     );
   };
+
+  landscapeCollapsed = () => {
+    const {overview, vote_average} = this.props.content;
+    return(
+      <div>
+        <div>
+          {this.trailerLink()}
+          <p>{overview}</p>
+        </div>
+        <div>
+          <ProgressBar bsStyle="danger" active now={vote_average * 10} label={`${vote_average} / 10 Average Rating`}/>
+        </div>
+      </div>
+      );
+  }
+
+  portraitCollapsed = () => {
+    console.log('loading collapsed trailer for portrait image');
+    return (
+      <div>
+        {this.trailerLink()}
+      </div>
+    );
+  }
 
   render() {
     const { portrait } = this.props;
@@ -177,26 +202,18 @@ class Movie extends Component {
           </div>
           <div className="panel-body">
             <div className="poster">
-            <Collapse in={this.state.posterOpen}>
-              {portrait ? this.portraitFormat() : this.landscapeFormat()}
-            </Collapse>
-               {this.drop()}
-               {this.votingEnable()}
+              <Collapse in={this.state.posterOpen}>
+                {portrait ? this.portraitFormat() : this.landscapeFormat()}
+              </Collapse>
+              {this.drop()}
+              {this.votingEnable()}
               <Collapse in={this.state.open}>
-            <div>
-              <div>
-              {this.trailerLink()}
-              <p>{overview}</p>
-              </div>
-                <div>
-                 <ProgressBar bsStyle="danger" active now={vote_average * 10} label={`${vote_average} / 10 Average Rating`}/>
-                </div>
-              </div>
+                {this.landscapeCollapsed()}
               </Collapse>
             </div>
           </div>
-        </div>
       </div>
+    </div>
   );
   }
 }
