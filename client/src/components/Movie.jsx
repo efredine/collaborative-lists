@@ -151,15 +151,19 @@ class Movie extends Component {
   portraitFormat = () => {
     const {poster_path, overview, vote_average} = this.props.content;
     return(
-      <dl className="dl-horizontal">
-        <dt>
-          <img className="poster-image" src={"http://image.tmdb.org/t/p/w185/" + poster_path}/>
-        </dt>
-        <dd>
-          {overview}
+      <div>
+        <dl className="dl-horizontal">
+          <dt>
+            <img className="poster-image" src={"http://image.tmdb.org/t/p/w185/" + poster_path}/>
+          </dt>
+          <dd>
+            {overview}
+          </dd>
+        </dl>
+        <div className="review-bar-container">
           <ProgressBar bsStyle="danger" active now={vote_average * 10} label={`${vote_average} / 10 Average Rating`}/>
-        </dd>
-      </dl>
+        </div>
+      </div>
     );
   };
 

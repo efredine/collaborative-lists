@@ -106,13 +106,22 @@ html {
 
 .progress {
   background-color: #F5F22E;
+  margin-bottom: 0;
+}
+
+.review-bar-container {
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .poster {
   margin: 0;
   dl {
-    margin: 0;
     text-align: left;
+  }
+  dd {
+    padding-right: 20px;
+    padding-top: 10px;
   }
 }
 
