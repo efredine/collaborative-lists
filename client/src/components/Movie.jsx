@@ -128,7 +128,6 @@ class Movie extends Component {
     }
   }
 
-
   onAdd = () => {
     const {onAdd, index} = this.props;
     onAdd(index);
@@ -180,12 +179,13 @@ class Movie extends Component {
   }
 
   portraitCollapsed = () => {
-    console.log('loading collapsed trailer for portrait image');
-    return (
+   return(
       <div>
-        {this.trailerLink()}
+        <div>
+          {this.trailerLink()}
+        </div>
       </div>
-    );
+      );
   }
 
   render() {
@@ -208,7 +208,7 @@ class Movie extends Component {
               {this.drop()}
               {this.votingEnable()}
               <Collapse in={this.state.open}>
-                {this.landscapeCollapsed()}
+                {portrait ? this.portraitCollapsed() : this.landscapeCollapsed()}
               </Collapse>
             </div>
           </div>
