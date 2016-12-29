@@ -28,7 +28,6 @@ html {
 
 .panel-body {
   padding: 0;
-  text-align: center;
 
 }
 
@@ -44,13 +43,11 @@ html {
 }
 
 .panel-default {
-  // width:360px;
   margin-top: 10px;
   margin-bottom: 0px;
 }
 
 .panel-title {
-  text-align: center;
   line-height: inherit;
 }
 
@@ -147,7 +144,7 @@ html {
   opacity: .5;
   position: relative;
   transition-duration: 200ms;
-
+  text-align: center;
 
   &:click {
   -moz-transform: scaleX(-.5);
