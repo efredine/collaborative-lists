@@ -107,8 +107,7 @@ html {
 }
 
 .review-bar-container {
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-top: 10px;
 }
 
 .poster {
@@ -116,9 +115,13 @@ html {
   dl {
     text-align: left;
   }
+  dt {
+    width: 130px;
+  }
   dd {
     padding-right: 20px;
     padding-top: 10px;
+    margin-left: 150px;
   }
 }
 
@@ -515,5 +518,5 @@ position: relative;
 }
 
 img.poster-image {
-  height: 240px;
+  width: 100%;
 }

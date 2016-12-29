@@ -158,11 +158,11 @@ class Movie extends Component {
           </dt>
           <dd>
             {overview}
+            <div className="review-bar-container">
+              <ProgressBar bsStyle="danger" active now={vote_average * 10} label={`${vote_average} / 10 Average Rating`}/>
+            </div>
           </dd>
         </dl>
-        <div className="review-bar-container">
-          <ProgressBar bsStyle="danger" active now={vote_average * 10} label={`${vote_average} / 10 Average Rating`}/>
-        </div>
       </div>
     );
   };
