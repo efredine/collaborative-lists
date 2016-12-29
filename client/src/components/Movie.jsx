@@ -144,11 +144,28 @@ class Movie extends Component {
     onClick();
   }
 
+  landscapeFormat = () => {
+    const { backdrop_path } = this.props.content;
+    return(<img className= "image" src={"http://image.tmdb.org/t/p/w500/" + backdrop_path}/>);
+  };
+
+  portraitFormat = () => {
+    const {poster_path, overview} = this.props.content;
+    return(
+      <dl className="dl-horizontal">
+        <dt>
+          <img className="poster-image" src={"http://image.tmdb.org/t/p/w185/" + poster_path}/>
+        </dt>
+        <dd>
+          {overview}
+        </dd>
+      </dl>
+    );
+  };
+
   render() {
+    const { portrait } = this.props;
     const {title, vote_average, overview, backdrop_path} = this.props.content;
-    // if(isLoaded){
-    //   return
-    // }
     return(
       <div>
         <div className="panel-movie panel panel-default">
@@ -161,7 +178,7 @@ class Movie extends Component {
           <div className="panel-body">
             <div className="poster">
             <Collapse in={this.state.posterOpen}>
-              <img className= "image" src={"http://image.tmdb.org/t/p/w500/" + backdrop_path}/>
+              {portrait ? this.portraitFormat() : this.landscapeFormat()}
             </Collapse>
                {this.drop()}
                {this.votingEnable()}

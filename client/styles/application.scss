@@ -110,6 +110,10 @@ html {
 
 .poster {
   margin: 0;
+  dl {
+    margin: 0;
+    text-align: left;
+  }
 }
 
 .remove {
@@ -488,4 +492,8 @@ position: relative;
 
 .restaurant-people-review {
   margin-top: 20px
+}
+
+img.poster-image {
+  height: 240px;
 }

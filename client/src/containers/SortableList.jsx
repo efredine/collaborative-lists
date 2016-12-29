@@ -102,6 +102,7 @@ class SortableList extends Component {
               onClick={() => onCardClick(card.id)}
               votes={true}
               onVote={onVote(card.id)}
+              portrait={true}
               {...card}
             />
           </SortableCard>
