@@ -118,7 +118,7 @@ class Yelp extends Component {
   render() {
     const {name, location,
           image_url, display_phone, rating,
-          rating_img_url_small, review_count, snippet_text, url
+          rating_img_url_small, review_count, snippet_text, url, snippet_image_url
         } = this.props.content;
     // if(isLoaded){
     //   return
@@ -134,6 +134,26 @@ class Yelp extends Component {
           </div>
           <div className = "panel-body">
             <div className="restaurant" >
+              <dl className="dl-horizontal">
+                <dt>
+                  <img className="poster-image" src={image_url}/>
+                </dt>
+                <dd>
+                  <div> {rating} <img src ={rating_img_url_small}/>
+                  &nbsp;{review_count}&nbsp;<a href = {url} target="_blank">Reviews</a>
+                  </div>
+                  <p>{location.address} {location.city}<br/>
+                  {display_phone}</p>
+                </dd>
+                <dt className="restaurant-reviewer">
+                  <img src={snippet_image_url}/>
+                </dt>
+                <dd>
+                  <p>{snippet_text}</p>
+                </dd>
+              </dl>
+
+          {/*
                 <div className="restaurant-container">
                   {this.renderAddRemove()}
                   <div className="restaurant-img"> <img src={image_url}/> </div>
@@ -146,6 +166,8 @@ class Yelp extends Component {
                     <div className="restaurant-people-review">{snippet_text}</div>
                   </div>
                 </div>
+
+          */}
             </div>
             <div>
             <div>

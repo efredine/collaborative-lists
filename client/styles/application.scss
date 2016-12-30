@@ -128,6 +128,30 @@ html {
   }
 }
 
+.restaurant {
+  margin: 0;
+  dl {
+    text-align: left;
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
+  dt {
+    width: 100px;
+  }
+  dd {
+    padding-right: 20px;
+    padding-top: 10px;
+    margin-left: 120px;
+  }
+  .restaurant-reviewer {
+    padding-top: 20px;
+    padding-left: 40px;
+    img {
+      width: 60px;
+    }
+  }
+}
+
 .remove {
   height: 22px;
   width: 22px;
@@ -458,62 +482,61 @@ position: relative;
   margin-bottom: 0;
 }
 
-.restuarant {
-  max-width: 353px;
-  max-height: 250px
-}
+// .restuarant {
+//   max-width: 353px;
+//   max-height: 250px
+// }
 
-.restaurant-info {
-  height: 250;
-  width: 260px;
-  margin-left: -38px
-}
+// .restaurant-info {
+//   height: 250;
+//   width: 260px;
+//   margin-left: -38px
+// }
 
-.restaurant-img {
-  width: 50px;
-  float: left;
+// .restaurant-img {
+//   width: 50px;
+//   float: left;
 
-}
+// }
 
-.restaurant-address {
-   margin-left: 149px
-}
+// .restaurant-address {
+//    margin-left: 149px
+// }
 
-.restaurant-rating {
-  float: right;
-}
+// .restaurant-rating {
+//   float: right;
+// }
 
-.restuarant-container {
-    margin: 20px 20px 0 0;
-    border: 5px solid #333;
-    overflow: auto
-}
+// .restuarant-container {
+//     margin: 20px 20px 0 0;
+//     border: 5px solid #333;
+//     overflow: auto
+// }
 
-.restaurant-img {
-    float: left
-}
-.restuarant-img img {
-    display: block
-}
+// .restaurant-img {
+//     float: left
+// }
+// .restuarant-img img {
+//     display: block
+// }
 
-.restaurant-info-image {
-    margin-left: 128px
-}
+// .restaurant-info-image {
+//     margin-left: 128px
+// }
 
-.restaurant-name {
-    font-weight: bold;
-    font-size: 140%
-}
+// .restaurant-name {
+//     font-weight: bold;
+//     font-size: 140%
+// }
 
-.restaurant-review {
-  margin-left: 43px
-}
+// .restaurant-review {
+//   margin-left: 43px
+// }
 
-.restaurant-people-review {
-  padding-top: 73px;
-  margin-top: -39px;
-  // top: 15px
-}
+// .restaurant-people-review {
+//   padding: 10px;
+//   // top: 15px
+// }
 
 .form-group {
   width: 40%;
