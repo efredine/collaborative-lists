@@ -8,9 +8,7 @@ class Yelp extends Component {
   constructor(...args) {
     super(...args);
     this.state = {
-      open: false,
-      posterOpen: true
-
+      open: true
     };
   }
 
@@ -55,22 +53,6 @@ class Yelp extends Component {
     }
     else {
       return (<div>&nbsp;</div>);
-    }
-  }
-
-  drop () {
-    if (this.state.open === true) {
-      return (
-        <div className="drop">
-          <Glyphicon onClick={ ()=> this.setState({ open: !this.state.open })} glyph="glyphicon glyphicon-chevron-down "/>
-        </div>
-      );
-    }else {
-      return (
-        <div className="drop">
-          <Glyphicon onClick={ ()=> this.setState({ open: !this.state.open })} glyph="glyphicon glyphicon-chevron-right"/>
-        </div>
-      );
     }
   }
 
@@ -152,37 +134,10 @@ class Yelp extends Component {
                   <p>{snippet_text}</p>
                 </dd>
               </dl>
-
-          {/*
-                <div className="restaurant-container">
-                  {this.renderAddRemove()}
-                  <div className="restaurant-img"> <img src={image_url}/> </div>
-                  <div className = "restaurant-info">
-                    <div className= "restaurant-info-image"> {rating} <img src ={rating_img_url_small}/></div>
-                    <span className="restaurant-review">{review_count}<a href = {url}> Reviews</a></span>
-                    <div className = "restaurant-address">{location.address} {location.city}<p>{display_phone}</p> </div>
-                  </div>
-                  <div >
-                    <div className="restaurant-people-review">{snippet_text}</div>
-                  </div>
-                </div>
-
-          */}
             </div>
             <div>
-            <div>
-              {/* <Collapse in={this.state.posterOpen}>
-
-              </Collapse> */}
-                 {this.drop()}
-                 {this.votingEnable()}
-                {/* <Collapse in={this.state.open}>
-                  <div>
-                   <ProgressBar bsStyle="danger" active now={vote_average * 10} label={`${vote_average} / 10 Average Rating`}/>
-                  </div>
-                </Collapse> */}
+              {this.votingEnable()}
             </div>
-          </div>
         </div>
         </div>
       </div>
