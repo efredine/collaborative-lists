@@ -35,7 +35,7 @@ class Yelp extends Component {
     const downOn = VoteStates.DOWN === currentVote ? "-off" + " bounce" : "";
     if (votes === true) {
       return (
-        <div>
+        <div className="restaurant-footer">
          <div className={"voteup" + upOn}>
           <div className ="voteupcount">
            {thumbsUpCount}
@@ -102,13 +102,11 @@ class Yelp extends Component {
           image_url, display_phone, rating,
           rating_img_url_small, review_count, snippet_text, url, snippet_image_url
         } = this.props.content;
-    // if(isLoaded){
-    //   return
-    // }
+
     return(
       <div>
         <div className="panel-movie panel panel-default">
-          <div className="panel-heading" onClick={ ()=> this.setState({ posterOpen: !this.state.posterOpen })}>
+          <div className="panel-heading" onClick={ ()=> this.setState({ open: !this.state.open })}>
             {this.renderAddRemove()}
             <h3 className="panel-title">
               {name}
@@ -116,29 +114,31 @@ class Yelp extends Component {
           </div>
           <div className = "panel-body">
             <div className="restaurant" >
-              <dl className="dl-horizontal">
-                <dt>
-                  <img className="poster-image" src={image_url}/>
-                </dt>
-                <dd>
-                  <div> {rating} <img src ={rating_img_url_small}/>
-                  &nbsp;{review_count}&nbsp;<a href = {url} target="_blank">Reviews</a>
-                  </div>
-                  <p>{location.address} {location.city}<br/>
-                  {display_phone}</p>
-                </dd>
-                <dt className="restaurant-reviewer">
-                  <img src={snippet_image_url}/>
-                </dt>
-                <dd>
-                  <p>{snippet_text}</p>
-                </dd>
-              </dl>
+              <Collapse in={this.state.open}>
+                <dl className="dl-horizontal">
+                  <dt>
+                    <img className="poster-image" src={image_url}/>
+                  </dt>
+                  <dd>
+                    <div> {rating} <img src ={rating_img_url_small}/>
+                    &nbsp;{review_count}&nbsp;<a href = {url} target="_blank">Reviews</a>
+                    </div>
+                    <p>{location.address} {location.city}<br/>
+                    {display_phone}</p>
+                  </dd>
+                  <dt className="restaurant-reviewer">
+                    <img src={snippet_image_url}/>
+                  </dt>
+                  <dd>
+                    <p>{snippet_text}</p>
+                  </dd>
+                </dl>
+              </Collapse>
             </div>
             <div>
               {this.votingEnable()}
             </div>
-        </div>
+          </div>
         </div>
       </div>
   );
