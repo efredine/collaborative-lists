@@ -1,6 +1,7 @@
 import ContentTypes from '../types/ContentTypes.js';
 import VoteStates from '../types/VoteStates';
 import { Glyphicon } from 'react-bootstrap';
+import React, {Component} from 'react';
 
 function getName(action) {
   return action.actingUser;
@@ -20,7 +21,7 @@ function getContentForContentType(content) {
 function resolvedToggleState(state, action) {
   const actionCount = state.filter(x => x.toggleId === action.toggleId).length;
   if(actionCount === 0 || actionCount % 2 === 0) {
-    return 'CLOSED:';
+    return ' removed ';
   } else {
     return 'RE-ACTIVATED:'
   }
@@ -30,7 +31,17 @@ function getVoteText(action) {
   if (action.vote === VoteStates.NONE) {
     return "nothing";
   } else {
-    return  action.vote;
+    if (action.vote === "up") {
+      return (
+        <Glyphicon glyph="glyphicon glyphicon-thumbs-up" />
+      )
+    }
+    if (action.vote === "down") {
+      return (
+        <Glyphicon glyph="glyphicon glyphicon-thumbs-down"/>
+      )
+    }
+
   }
 }
 

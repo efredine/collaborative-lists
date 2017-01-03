@@ -30,12 +30,21 @@ html {
   background: -webkit-gradient(linear, left top, right top, color-stop(0%, #008080), color-stop(100%, #57B3FF));
 }
 
+.panel-default>.panel-heading-resturaunt {
+  color: black;
+  background: -webkit-gradient(linear, left top, right top, color-stop(0%, #fd746c), color-stop(100%, #ff9068));
+}
+
 .panel-body {
   padding: 0;
 
 }
 
 .panel-heading {
+  padding: 5px 15px;
+}
+
+.panel-heading-resturaunt {
   padding: 5px 15px;
 }
 
@@ -245,6 +254,14 @@ iframe {
   cursor: pointer;
   }
 
+}
+
+.glyphicon-thumbs-up {
+  color: green;
+}
+
+.glyphicon-thumbs-down {
+  color: red;
 }
 
 .voteup {

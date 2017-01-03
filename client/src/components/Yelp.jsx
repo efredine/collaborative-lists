@@ -106,7 +106,7 @@ class Yelp extends Component {
     return(
       <div>
         <div className="panel-movie panel panel-default">
-          <div className="panel-heading" onClick={ ()=> this.setState({ open: !this.state.open })}>
+          <div className="panel-heading-resturaunt" onClick={ ()=> this.setState({ open: !this.state.open })}>
             {this.renderAddRemove()}
             <h3 className="panel-title">
               {name}
