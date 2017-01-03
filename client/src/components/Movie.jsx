@@ -97,7 +97,7 @@ class Movie extends Component {
     }else {
       return (
         <div className="drop">
-          <Glyphicon onClick={ ()=> this.setState({ open: !this.state.open })} glyph="glyphicon glyphicon-chevron-right"/>
+          <Glyphicon onClick={ ()=> this.setState({ open: !this.state.open })} glyph="glyphicon glyphicon-facetime-video"/>
         </div>
       );
     }

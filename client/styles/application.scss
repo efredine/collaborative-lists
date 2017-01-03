@@ -17,6 +17,7 @@ div[data-reactroot] {
 }
 
 html {
+
   height: 100%;
 }
 
@@ -111,6 +112,8 @@ html {
 
 .review-bar-container {
   padding-top: 10px;
+  position: relative;
+  top: 95px;
 }
 
 .poster {
@@ -175,7 +178,7 @@ html {
 
 .drop {
   color: black;
-  opacity: .5;
+  opacity: .6;
   position: relative;
   transition-duration: 200ms;
   text-align: center;
@@ -188,6 +191,11 @@ html {
   filter: FlipH;
   -ms-filter: "FlipH";
 
+  }
+
+  &:hover {
+  opacity: 1.0;
+  cursor: pointer;
   }
 }
 
@@ -212,7 +220,7 @@ iframe {
 
 .glyphicon-chevron-down {
   font-side:10pt;
-  top: 10px;
+  top: 20px;
   font-size: 20pt;
   line-height: 0;
   opacity: .6;
@@ -222,6 +230,21 @@ iframe {
   opacity: 1.0;
   cursor: pointer;
   }
+}
+
+.glyphicon-facetime-video {
+  font-side:10pt;
+  top: 20px;
+  font-size: 20pt;
+  line-height: 0;
+  opacity: .6;
+  color: #080808
+
+  &:hover {
+  opacity: 1.0;
+  cursor: pointer;
+  }
+
 }
 
 .voteup {
@@ -494,3 +517,5 @@ position: relative;
 img.poster-image {
   width: 100%;
 }
+
+
