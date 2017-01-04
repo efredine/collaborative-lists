@@ -25,7 +25,7 @@ function resolvedToggleState(state, action) {
   if(actionCount === 0 || actionCount % 2 === 0) {
     return ' removed ';
   } else {
-    return 'RE-ACTIVATED:'
+    return ' restored '
   }
 }
 
@@ -44,11 +44,18 @@ function getVoteIcon(voteState) {
   }
 }
 
-function getVoteText(action) {
+function getVoteText(action, state) {
   if (action.vote === VoteStates.NONE) {
     return "nothing";
   } else {
-    return getVoteIcon(action.vote);
+    const itemVotedOn = state.find(x => x.id === action.voteId);
+    return (
+      <span>
+        {getVoteIcon(action.vote)}
+        &nbsp;on&nbsp;
+        {getContentForContentType(itemVotedOn.content)}
+      </span>
+      );
   }
 }
 
@@ -80,7 +87,7 @@ function getActionRecord(state, action) {
         id: action.id,
         voteId: action.voteId,
         type: ' voted ',
-        text: getVoteText(action)
+        text: getVoteText(action, state)
       };
     case 'CHAT_MESSAGE':
       return {
