@@ -15,6 +15,7 @@ const morgan      = require('morgan');
 const knexLogger  = require('knex-logger');
 const Yelp        = require('yelp');
 const pubsub      = require('./lib/pubsub');
+const publish     = pubsub(io, knex);
 // const yelpAuth    = require(process.env.)
 
 
@@ -52,7 +53,7 @@ app.use(knexLogger(knex));
 // Mount routes on /api
 //
 app.use("/api/users", usersRoutes(knex));
-app.use("/api/lists", listsRoutes(knex));
+app.use("/api/lists", listsRoutes(knex, publish));
 
 app.get("/api/todos", (req, res) => {
   // res.json(actionHistory);
@@ -113,5 +114,3 @@ app.post("/api/update", (req, res) => {
 });
 
 server.listen(8080);
-
-pubsub(io, knex);
