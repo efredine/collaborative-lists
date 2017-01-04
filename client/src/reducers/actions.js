@@ -13,6 +13,8 @@ function getContentForContentType(content) {
       return content.text;
     case ContentTypes.MOVIE:
       return content.title;
+    case ContentTypes.YELP:
+      return content.name;
     default:
       return "";
   }
@@ -27,21 +29,26 @@ function resolvedToggleState(state, action) {
   }
 }
 
+function getVoteIcon(voteState) {
+  switch(voteState) {
+    case VoteStates.UP:
+      return (
+        <Glyphicon glyph="glyphicon glyphicon-thumbs-up" />
+      );
+    case VoteStates.DOWN:
+      return (
+        <Glyphicon glyph="glyphicon glyphicon-thumbs-down"/>
+      );
+    default:
+      return "";
+  }
+}
+
 function getVoteText(action) {
   if (action.vote === VoteStates.NONE) {
     return "nothing";
   } else {
-    if (action.vote === VoteStates.UP) {
-      return (
-        <Glyphicon glyph="glyphicon glyphicon-thumbs-up" />
-      )
-    }
-    if (action.vote === VoteStates.DOWN) {
-      return (
-        <Glyphicon glyph="glyphicon glyphicon-thumbs-down"/>
-      )
-    }
-
+    return getVoteIcon(action.vote);
   }
 }
 
