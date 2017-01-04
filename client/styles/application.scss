@@ -535,4 +535,26 @@ img.poster-image {
   width: 100%;
 }
 
+.genre {
+  font-size: 15px;
+  color: lightgrey
+}
 
+.actors{
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  transition: all 1s ease;
+}
+
+.actors:hover {
+  height: 60px;
+  width: 60px;
+  transform:scale(2) rotate(720deg);
+}
+
+.movieRuntime{
+  float: right;
+  color: grey;
+  margin-right: 10px
+}

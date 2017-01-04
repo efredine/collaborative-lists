@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Video from 'react-video';
 import { Collapse, Button, Well, ProgressBar, Glyphicon } from 'react-bootstrap';
 import VoteStates from '../types/VoteStates';
+import _ from 'lodash'
 
 class Movie extends Component {
 
@@ -10,8 +11,9 @@ class Movie extends Component {
     this.state = {
       trailers: [],
       open: false,
-      posterOpen: true
-
+      posterOpen: true,
+      contents: '',
+      runtime: ''
     };
   }
 
@@ -86,6 +88,52 @@ class Movie extends Component {
       }
     }
   }
+
+  componentDidMount(){
+    fetch(`https://api.themoviedb.org/3/movie/${this.props.content.id}?api_key=6b426deee51a1b33c8c0b4231c1543cd&append_to_response=credits`)
+    .then(response =>{
+      return response.text();
+    })
+    .then(responseText =>{
+      const movieContents = JSON.parse(responseText);
+      console.log('actors', movieContents)
+       this.setState({contents: movieContents})
+    })
+  }
+
+  genre(e){
+    var that = this;
+    // e.preventDefault();
+    var genreTypes = [];
+    var genreIds = this.props.content.genre_ids;
+    genreIds.forEach(function(id){
+      switch(id){
+        case 28:genreTypes.push(" Action ");break;
+        case 12:genreTypes.push(" Adventure ");break;
+        case 16:genreTypes.push(" Animation ");break;
+        case 35:genreTypes.push(" Comedy ");break;
+        case 80:genreTypes.push(" Crime ");break;
+        case 99:genreTypes.push(" Documentary ");break;
+        case 18:genreTypes.push(" Drama ");break;
+        case 10751:genreTypes.push(" Family ");break;
+        case 14:genreTypes.push(" Fantasy ");break;
+        case 10769:genreTypes.push(" Foreign ");break;
+        case 36:genreTypes.push(" History");break;
+        case 27:genreTypes.push(" Horror ");break;
+        case 10402:genreTypes.push(" Music ");break;
+        case 9648:genreTypes.push(" Mystery ");break;
+        case 10749:genreTypes.push(" Romance ");break;
+        case 878:genreTypes.push(" Science Fiction ");break;
+        case 10770:genreTypes.push("TV Movie ");break;
+        case 53: genreTypes.push(" Thriller "); break;
+        case 10752: genreTypes.push(" War "); break;
+        case 37: genreTypes.push(" Western "); break;
+      }
+    })
+// that.setState({genre: ids})
+return genreTypes;
+  }
+
 
   drop () {
     if (this.state.open === true) {
@@ -168,6 +216,17 @@ class Movie extends Component {
   };
 
   landscapeCollapsed = () => {
+    const casts = this.state.contents.credits;
+    var actors = _.map(casts, function(each){
+      var actorNames = [];
+      _.map(each.slice(0, 3), function(actor){
+        actorNames.push(<img className= "actors" src = {"http://image.tmdb.org/t/p/w500"+ actor.profile_path} />);
+      })
+      return actorNames
+
+})
+  console.log("dfsfs", actors)
+
     const {overview, vote_average} = this.props.content;
     return(
       <div>
@@ -175,6 +234,7 @@ class Movie extends Component {
           {this.trailerLink()}
           <p>{overview}</p>
         </div>
+          {actors}
         <div>
           <ProgressBar bsStyle="danger" active now={vote_average * 10} label={`${vote_average} / 10 Average Rating`}/>
         </div>
@@ -193,6 +253,12 @@ class Movie extends Component {
   }
 
   render() {
+    var movieInfo = this.state.contents;
+    console.log("infoo", movieInfo.runtime)
+    _.map(movieInfo, (info)=>{
+      //console.log("info", info.runtime)
+    })
+
     const { portrait } = this.props;
     const {title, vote_average, overview, backdrop_path} = this.props.content;
     return(
@@ -201,7 +267,7 @@ class Movie extends Component {
           <div className="panel-heading" onClick={ ()=> this.setState({ posterOpen: !this.state.posterOpen })}>
             {this.renderAddRemove()}
             <h3 className="panel-title">
-              {title}
+              {title} <span className="movieRuntime">{this.state.contents.runtime} Minutes</span> <div className= "genre">{this.genre()} </div>
             </h3>
           </div>
           <div className="panel-body">

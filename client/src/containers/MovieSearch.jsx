@@ -22,7 +22,6 @@ class MovieSearch extends Component {
 
   onSumbit(e){
     if (e.charCode === 13){
-      console.log("enter pressed:", this.ref);
       const searchUrl = `/api/movies/${this.refs.query.value}`;
       this.search(searchUrl);
     }
@@ -68,6 +67,8 @@ class MovieSearch extends Component {
       return <Movie key={movie.id} content={movie} index={index} onAdd={this.clickMovie} votes={false}
           />
     });
+
+    //console.log('this.movie', this.state.movies)
     return (
       <div>
         <input ref = "query" onKeyPress = {this.onSumbit} type = 'text' placeholder="Search" />
