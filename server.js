@@ -14,6 +14,7 @@ const knex        = require("knex")(knexConfig[ENV]);
 const morgan      = require('morgan');
 const knexLogger  = require('knex-logger');
 const Yelp        = require('yelp');
+const pubsub      = require('./lib/pubsub');
 // const yelpAuth    = require(process.env.)
 
 
@@ -113,26 +114,4 @@ app.post("/api/update", (req, res) => {
 
 server.listen(8080);
 
-const actionHelpers = require('./lib/actionHelpers')(knex);
-
-io.on('connection', function(socket){
-  console.log("Socket connected: " + socket.id);
-  socket.on('action', (action) => {
-    console.log('INCOMING ACTION:');
-    console.log(action);
-    // Actions are of the form SERVER/<ACTION>.  The SERVER portion of this is stripped
-    // before broadcasting to all the clients.
-    action.type = action.type.split('/')[1];
-    const listId = action.listId || 1;
-    const userId = action.userId || 1;
-    console.log("ids", listId, userId);
-    actionHelpers.insert(listId, userId, action)
-    .then(id => {
-      action.id = id;
-      console.log('BROADCAST ACTION');
-      console.log(action);
-      io.emit('action', action);
-    })
-  });
-
-});
+pubsub(io, knex);
