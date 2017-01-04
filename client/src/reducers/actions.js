@@ -31,12 +31,12 @@ function getVoteText(action) {
   if (action.vote === VoteStates.NONE) {
     return "nothing";
   } else {
-    if (action.vote === "up") {
+    if (action.vote === VoteStates.UP) {
       return (
         <Glyphicon glyph="glyphicon glyphicon-thumbs-up" />
       )
     }
-    if (action.vote === "down") {
+    if (action.vote === VoteStates.DOWN) {
       return (
         <Glyphicon glyph="glyphicon glyphicon-thumbs-down"/>
       )
