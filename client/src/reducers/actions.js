@@ -96,6 +96,13 @@ function getActionRecord(state, action) {
         type: ':  ',
         text: action.text
       };
+    case 'ADD_USER_TO_LIST':
+      return {
+        user: getName(action),
+        id: action.id,
+        type: ' joined ',
+        text: 'list'
+      };
     default:
       return null;
   }
@@ -108,6 +115,7 @@ const actions = (state = [], action) => {
     case 'TOGGLE_CARD':
     case 'VOTE_CARD':
     case 'CHAT_MESSAGE':
+    case 'ADD_USER_TO_LIST':
       return [
         ...state,
         getActionRecord(state, action)

@@ -3,8 +3,9 @@
 const express = require('express');
 const router  = express.Router();
 
+module.exports = (knex, publish) => {
 
-module.exports = (knex) => {
+  const actionHelpers = require('../lib/actionHelpers')(knex);
 
   router.get("/", (req, res) => {
     const userId = req.session.user.id;
@@ -18,10 +19,60 @@ module.exports = (knex) => {
       .then((results) => {
         res.json(results);
       });
-  }),
+  });
+
+  const addUserToListAction = (userId, listId) =>  ({
+    type: 'ADD_USER_TO_LIST',
+    userId: userId,
+    listId: listId
+  });
+
+  function insertAndPublish(userId, listId, action) {
+    actionHelpers.insert(listId, userId, action)
+    .then(id => {
+      action.id = id;
+      console.log('BROADCAST ACTION');
+      console.log(action);
+      publish(action);
+    });
+  }
+
+  // If a user isn't already a member of this list, add them to it.
+  // TODO: put this in a transaction so the user can never get added twice
+  function addUserToList(userId, listId) {
+    knex
+    .select('id')
+    .from('users_lists')
+    .where('list_id', listId)
+    .andWhere('user_id', userId)
+    .then( idList => {
+      if(idList.length === 0 ) {
+        console.log("adding user to list");
+        knex('users_lists')
+        .returning('id')
+        .insert({
+          user_id: userId,
+          list_id: listId,
+          created: false
+        })
+        .then(id => {
+          insertAndPublish(userId, listId, addUserToListAction(userId, listId));
+          return id;
+        });
+      } else {
+        return idList[0];
+      }
+    })
+    .catch(error => {
+      console.log(error);
+      return null;
+    })
+  }
 
   router.get('/:listId', (req, res) => {
+    const userId = req.session.user.id;
     const listId = req.params.listId;
+    addUserToList(userId, listId);
     knex
     .select("*")
     .from("lists")
