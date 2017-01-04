@@ -12,7 +12,7 @@ function getContentForContentType(content) {
     case ContentTypes.TODO:
       return content.text;
     case ContentTypes.MOVIE:
-      return content.original_title;
+      return content.title;
     default:
       return "";
   }
