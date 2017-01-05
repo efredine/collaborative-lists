@@ -59,7 +59,6 @@ dataChanged = (data) => {
     return (
       <div className="list-container">
         <h1>
-         <a href="#" onClick={() => browserHistory.push("/")}>Lists!</a> {"> "}
           <InlineEdit
             text={title}
             paramName="Title"
