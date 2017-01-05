@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { Button, Navbar, Nav, NavItem, NavDropdown } from 'react-bootstrap';
 
 class Login extends Component {
 
@@ -31,14 +32,20 @@ class Login extends Component {
     const {user} = this.props;
     if(user.username) {
       return (
-        <div className="navbar-text navbar-right"><span>Logged in as: {user.username } &nbsp;</span>
-        <button type="submit" onClick={this.handleLogout} className="btn btn-sm btn-nav">Log Out</button>
-        </div>
+        <Nav pullRight>
+          <Navbar.Text >
+            Logged in as: {user.username } &nbsp;
+          </Navbar.Text>
+
+          <Navbar.Form pullLeft>
+            <Button type="submit" className="btn-sm btn-nav" onClick={this.handleLogout}>Log Out</Button>
+          </Navbar.Form>
+        </Nav>
       );
     } else {
       return(
         <div>
-          <form className="navbar-form navbar-right" role="search">
+          <form className="navbar-form" role="search">
             <div className="form-group">
                 <input
                 id="login"

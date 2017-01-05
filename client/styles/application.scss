@@ -74,9 +74,11 @@ html {
 }
 
 .navbar-default {
-   background-color: transparent;
-   background: transparent;
-   border-color: transparent;
+  background: #9DACE2;
+  border: none;
+  border-radius: 0;
+   // background: transparent;
+   // border-color: transparent;
    position: fixed;
 }
 
@@ -85,17 +87,17 @@ html {
   margin-left: 30%;
 }
 
-.navbar-form {
-  position: absolute;
-  top: 0px;
-  right: 10px;
-}
+// .navbar-form {
+//   position: absolute;
+//   top: 0px;
+//   right: 10px;
+// }
 
-.navbar-text {
-  position: absolute;
-  top: 0px;
-  right: 25px;
-}
+// .navbar-text {
+//   position: absolute;
+//   top: 0px;
+//   right: 25px;
+// }
 
 .add {
   height: 19px;
@@ -453,11 +455,11 @@ iframe {
 .movieContainer {
   height: calc(100% - 20px);
   background: #9DACE2;
-  border-bottom: 3px solid transparent;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
+  // border-bottom: 3px solid transparent;
+  // border-top-left-radius: 10px;
+  // border-top-right-radius: 10px;
+  // border-bottom-left-radius: 10px;
+  // border-bottom-right-radius: 10px;
   .content {
     height: calc(100% - 70px);
     overflow: scroll;
@@ -491,7 +493,7 @@ iframe {
 
 .chatContainer {
   height: calc(100% - 20px);
-  background: #9DACE2;
+  background: white;
   border-bottom: 3px solid transparent;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
@@ -520,10 +522,10 @@ position: relative;
 }
 
 .container {
-  margin-left: 10px;
-  margin-right: -10px;
-  padding:0;
-  margin-bottom: 0;
+  // margin-left: 0;
+  // margin-right: 0;
+  // padding:0;
+  // margin-bottom: 0;
 }
 
 .form-group {
