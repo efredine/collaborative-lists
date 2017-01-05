@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Button, Navbar, Nav, NavItem, NavDropdown } from 'react-bootstrap';
+import { Button, Navbar, Nav, NavItem, NavDropdown, FormGroup, FormControl } from 'react-bootstrap';
 
 class Login extends Component {
 
@@ -44,20 +44,19 @@ class Login extends Component {
       );
     } else {
       return(
-        <div>
-          <form className="navbar-form" role="search">
-            <div className="form-group">
-                <input
+          <Navbar.Form pullRight>
+            <FormGroup>
+              <FormControl
                 id="login"
                 type="text"
+                placeholder="Username"
                 value={this.state.userInput}
                 onChange={this.handleChangeUser}
-                placeholder="Username"
               />
-            </div>
-            <button type="submit" onClick={this.handleSubmit} className="btn btn-default btn-sm">Sign In</button>
-          </form>
-        </div>
+              {' '}
+              <Button type="submit" onClick={this.handleSubmit}>Sign In</Button>
+            </FormGroup>
+          </Navbar.Form>
       );
     }
   }
