@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import { connect } from 'react-redux'
 import { addChatMessage } from '../actions'
-import { FormGroup, Button, InputGroup, FormControl } from 'react-bootstrap';
+import { FormGroup, Button, InputGroup, FormControl, Form } from 'react-bootstrap';
 
 /**
  * Renders the card based on the card content type.
@@ -38,13 +38,11 @@ class ChatBox extends Component {
   render() {
     return(
 
-<form onSubmit={this.handleSubmit}>
+<Form onSubmit={this.handleSubmit} id="chat-box">
   <FormGroup>
-    <InputGroup>
-      <FormControl type="text" onChange={this.handleChange} value={this.state.userInput} placeholder="Send Message..."/>
-    </InputGroup>
+    <FormControl type="text" onChange={this.handleChange} value={this.state.userInput} placeholder="Send Message..."/>
    </FormGroup>
-</form>
+</Form>
 
 
 
