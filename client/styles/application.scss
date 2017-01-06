@@ -458,15 +458,18 @@ iframe {
   height: 100%;
 }
 .movieContainer {
-  height: calc(100% - 20px);
+  height: calc(100% - 10px);
   background: #9DACE2;
+  padding-top: 20px;
+  margin-top: -10px;
+  border-top: 2px solid #e7e7e7;
   // border-bottom: 3px solid transparent;
   // border-top-left-radius: 10px;
   // border-top-right-radius: 10px;
   // border-bottom-left-radius: 10px;
   // border-bottom-right-radius: 10px;
   .content {
-    height: calc(100% - 70px);
+    height: calc(100% - 10px);
     overflow: scroll;
   }
 }
