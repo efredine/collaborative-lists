@@ -21,6 +21,12 @@ class App extends Component {
     };
   }
 
+  handleSelect = event => {
+    if(event === 1) {
+      this.setState({ open: !this.state.open })
+    }
+  }
+
   builderHeader = open => {
     if(open) {
       return(
@@ -75,6 +81,10 @@ class App extends Component {
               <a href="#" onClick={() => browserHistory.push("/")}>Lists!</a>
             </Navbar.Brand>
           </Navbar.Header>
+          <Nav activeKey={this.state.open && 1} onSelect={this.handleSelect}>
+            <NavItem eventKey={1} href="#">Builder</NavItem>
+            <NavItem eventKey={2} href="#">Link</NavItem>
+          </Nav>
           <LoginContainer/>
         </Navbar>
         <Grid>
