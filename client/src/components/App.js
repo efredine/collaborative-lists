@@ -27,28 +27,6 @@ class App extends Component {
     }
   }
 
-  builderHeader = open => {
-    if(open) {
-      return(
-        <span>
-          <h3>Builder
-            <div className="close">
-            <Glyphicon onClick={ ()=> this.setState({ open: !this.state.open })} glyph="glyphicon glyphicon-arrow-left"/>
-            </div>
-        </h3>
-        </span>
-      );
-    } else {
-      return(
-        <div className="open">
-          <Glyphicon onClick={ ()=> this.setState({ open: !this.state.open })} glyph="glyphicon glyphicon-arrow-right"/>
-        </div>
-      );
-    }
-  }
-
-
-
   builderContent = open => {
     if(open) {
       return(
