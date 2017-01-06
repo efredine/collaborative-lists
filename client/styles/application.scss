@@ -49,10 +49,15 @@ html {
 }
 
 .logo {
- position: absolute;
+ position: inherit;
  top: -15px;
  left: -135px;
  max-height: 250%;
+ padding: 0;
+
+ &:hover {
+  cursor: pointer;
+ }
 }
 
 .panel-default {

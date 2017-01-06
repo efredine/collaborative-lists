@@ -72,7 +72,7 @@ class App extends Component {
         <Navbar>
           <Navbar.Header>
             <Navbar.Brand>
-              <a href="#" onClick={() => browserHistory.push("/")}>Lists!</a>
+              <img className="logo" src="http://localhost:8080/images/Upik.png" onClick={() => browserHistory.push("/")} / >
             </Navbar.Brand>
           </Navbar.Header>
           <LoginContainer/>
