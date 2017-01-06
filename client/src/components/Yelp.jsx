@@ -61,7 +61,7 @@ class Yelp extends Component {
     if (completed === false) {
       return (
           <div className="remove">
-            <img onClick={this.onRemove} className= "image" src="http://localhost:8080/images/remove.png"/>
+            <Glyphicon onClick= {this.onClick} glyph="glyphicon glyphicon-remove"/>
           </div>
       );
     }

@@ -156,7 +156,7 @@ return genreTypes;
     if (completed === false) {
       return (
           <div className="remove">
-            <img className= "image" onClick={this.onRemove} src="http://localhost:8080/images/remove.png"/>
+            <Glyphicon onClick= {this.onClick} glyph="glyphicon glyphicon-remove"/>
           </div>
       );
     }
