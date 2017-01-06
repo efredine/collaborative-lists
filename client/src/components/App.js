@@ -23,6 +23,10 @@ class App extends Component {
     };
   }
 
+  blurNavItem = navItem => {
+    ReactDOM.findDOMNode(navItem).querySelector('a').blur();
+  }
+
   handleSelect = eventKey => {
     if(eventKey === 1) {
       const updatedState = {
@@ -30,16 +34,15 @@ class App extends Component {
         selected: !this.state.open && 1
       }
       if(updatedState.selected !== 1) {
-        console.log("Blurring now");
-        ReactDOM.findDOMNode(this.navItemBuilder).querySelector('a').blur();
+        this.blurNavItem(this.navItemBuilder);
       }
       console.log("handleSelected:", event, this.state, updatedState);
       this.setState(updatedState);
     }
   }
 
-  builderContent = open => {
-    if(open) {
+  menu = () => {
+    if(this.state.open) {
       return(
       <Col className="movieContainer" xs={6} sm={open ? 4 : 1}>
         <div className="content">
@@ -74,13 +77,13 @@ class App extends Component {
           </Navbar.Header>
           <Nav activeKey={this.state.open && 1} onSelect={this.handleSelect}>
             <NavItem eventKey={1} ref={(navItem) => { this.navItemBuilder = navItem; }} href="#">Builder</NavItem>
-            <NavItem eventKey={2} href="#">Link</NavItem>
+            <NavItem eventKey={2} ref={(navItem) => { this.navItemLists = navItem; }} href="#">Lists</NavItem>
           </Nav>
           <LoginContainer/>
         </Navbar>
         <Grid>
           <Row className="show-grid">
-            {this.builderContent(open)}
+            {this.menu()}
             <Col className="historyContainer" xs={6} md={open ? 5 : 7}>
               <Router history={browserHistory}>
                 <Route path="/" >
