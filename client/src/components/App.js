@@ -21,6 +21,12 @@ class App extends Component {
     };
   }
 
+  handleSelect = event => {
+    if(event === 1) {
+      this.setState({ open: !this.state.open })
+    }
+  }
+
   builderHeader = open => {
     if(open) {
       return(
@@ -46,6 +52,7 @@ class App extends Component {
   builderContent = open => {
     if(open) {
       return(
+      <Col className="movieContainer" xs={6} sm={open ? 4 : 1}>
         <div className="content">
           <Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
             <Tab eventKey={1} title="Movies">
@@ -59,6 +66,7 @@ class App extends Component {
             </Tab>
           </Tabs>
         </div>
+      </Col>
         );
     } else {
       return(<div></div>)
@@ -75,14 +83,15 @@ class App extends Component {
               <img className="logo" src="http://localhost:8080/images/Upik.png" onClick={() => browserHistory.push("/")} / >
             </Navbar.Brand>
           </Navbar.Header>
+          <Nav activeKey={this.state.open && 1} onSelect={this.handleSelect}>
+            <NavItem eventKey={1} href="#">Builder</NavItem>
+            <NavItem eventKey={2} href="#">Link</NavItem>
+          </Nav>
           <LoginContainer/>
         </Navbar>
         <Grid>
           <Row className="show-grid">
-            <Col className="movieContainer" xs={6} sm={open ? 4 : 1}>
-              {this.builderHeader(open)}
-              {this.builderContent(open)}
-            </Col>
+            {this.builderContent(open)}
             <Col className="historyContainer" xs={6} md={open ? 5 : 7}>
               <Router history={browserHistory}>
                 <Route path="/" >
@@ -91,7 +100,7 @@ class App extends Component {
                 </Route>
               </Router>
             </Col>
-            <Col className="chatContainer" xsHidden md={open ? 3 : 4}>
+            <Col className="chatContainer" xsHidden md={open ? 3 : 5}>
               <h1>Activity</h1>
               <ActionListContainer/>
               <ChatBox />
