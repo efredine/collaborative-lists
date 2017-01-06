@@ -4,6 +4,7 @@ import _ from 'lodash';
 import Yelp from '../components/Yelp.jsx'
 import { connect } from 'react-redux'
 import { addYelp} from '../actions';
+import { Button, Navbar, Nav, NavItem, NavDropdown, Form, FormGroup, FormControl } from 'react-bootstrap';
 
 
 class YelpSearch extends Component {
@@ -78,15 +79,15 @@ class YelpSearch extends Component {
 
     return(
       <div>
-          <form>
+          <Form inline>
             <div className="form-group">
-              <input ref = "restaurant" onChange = {(e)=>{this.updateSearch()}} type = 'text' className="form-control" placeholder = "Restaurant" />
+              <input ref = "restaurant" onChange = {(e)=>{this.updateSearch()}} type = 'text' className="form-control input-sm" placeholder = "Restaurant" />
             </div>
             <div className= "form-group">
-              <input ref = "location" onChange = {(e)=>{this.updateSearch()}} type = 'text' className="form-control" placeholder= "Location"/>
+              <input ref = "location" onChange = {(e)=>{this.updateSearch()}} type = 'text' className="form-control input-sm" placeholder= "Location"/>
             </div>
-            <button type = 'button' value= 'search' className="btn btn-default" onClick = {(e)=>{this.updateSearch()}}>Submit</button>
-          </form>
+            <Button type = 'submit' value= 'search' className="btn btn-sm" onClick = {(e)=>{this.updateSearch()}}>Submit</Button>
+          </Form>
           {restaurants}
 
       </div>
