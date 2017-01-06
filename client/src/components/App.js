@@ -90,7 +90,6 @@ class App extends Component {
         <Grid>
           <Row className="show-grid">
             <Col className="movieContainer" xs={6} sm={open ? 4 : 1}>
-              {this.builderHeader(open)}
               {this.builderContent(open)}
             </Col>
             <Col className="historyContainer" xs={6} md={open ? 5 : 7}>
