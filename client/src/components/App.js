@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import ReactDOM from 'react-dom'
 import MovieSearch from '../containers/MovieSearch.jsx'
 import LoginContainer from '../containers/LoginContainer.js';
 import ChatBox from '../containers/ChatBox';
@@ -17,13 +18,23 @@ class App extends Component {
   constructor(...args) {
     super(...args);
     this.state = {
-      open: true
+      open: true,
+      selected: 1
     };
   }
 
-  handleSelect = event => {
-    if(event === 1) {
-      this.setState({ open: !this.state.open })
+  handleSelect = eventKey => {
+    if(eventKey === 1) {
+      const updatedState = {
+        open: !this.state.open,
+        selected: !this.state.open && 1
+      }
+      if(updatedState.selected !== 1) {
+        console.log("Blurring now");
+        ReactDOM.findDOMNode(this.navItemBuilder).querySelector('a').blur();
+      }
+      console.log("handleSelected:", event, this.state, updatedState);
+      this.setState(updatedState);
     }
   }
 
@@ -62,7 +73,7 @@ class App extends Component {
             </Navbar.Brand>
           </Navbar.Header>
           <Nav activeKey={this.state.open && 1} onSelect={this.handleSelect}>
-            <NavItem eventKey={1} href="#">Builder</NavItem>
+            <NavItem eventKey={1} ref={(navItem) => { this.navItemBuilder = navItem; }} href="#">Builder</NavItem>
             <NavItem eventKey={2} href="#">Link</NavItem>
           </Nav>
           <LoginContainer/>
