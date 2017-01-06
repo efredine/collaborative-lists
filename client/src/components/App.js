@@ -28,38 +28,51 @@ class App extends Component {
   }
 
   handleSelect = eventKey => {
-    if(eventKey === 1) {
-      const updatedState = {
-        open: !this.state.open,
-        selected: !this.state.open && 1
-      }
-      if(updatedState.selected !== 1) {
+    const sameKey = eventKey === this.state.selected;
+    const open = sameKey ? !this.state.open : true;
+    const updatedState = {
+      open: open,
+      selected: open && eventKey
+    }
+    if(!open) {
+      if(eventKey === 1) {
         this.blurNavItem(this.navItemBuilder);
       }
-      console.log("handleSelected:", event, this.state, updatedState);
-      this.setState(updatedState);
+      if(eventKey === 2) {
+        this.blurNavItem(this.navItemLists);
+      }
     }
+    console.log("handleSelected:", eventKey, this.state, updatedState);
+    this.setState(updatedState);
   }
 
   menu = () => {
     if(this.state.open) {
-      return(
-      <Col className="movieContainer" xs={6} sm={open ? 4 : 1}>
-        <div className="content">
-          <Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
-            <Tab eventKey={1} title="Movies">
-              <MovieSearch className="panel-container"/>
-            </Tab>
-            <Tab eventKey={2} title="Yelp">
-              <YelpSearch className="panel-container"/>
-            </Tab>
-            <Tab eventKey={3} title="Todos">
-              <AddTodo />
-            </Tab>
-          </Tabs>
-        </div>
-      </Col>
-        );
+      if(this.state.selected === 1) {
+        return(
+          <Col className="movieContainer" xs={6} sm={4}>
+            <div className="content">
+              <Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
+                <Tab eventKey={1} title="Movies">
+                  <MovieSearch className="panel-container"/>
+                </Tab>
+                <Tab eventKey={2} title="Yelp">
+                  <YelpSearch className="panel-container"/>
+                </Tab>
+                <Tab eventKey={3} title="Todos">
+                  <AddTodo />
+                </Tab>
+              </Tabs>
+            </div>
+          </Col>
+          );
+      } else {
+        return(
+          <Col className="movieContainer" xs={6} sm={4}>
+            <ListsIndex/>
+          </Col>
+          );
+      }
     } else {
       return(<div></div>)
     }
@@ -75,7 +88,7 @@ class App extends Component {
               <img className="logo" src="http://localhost:8080/images/Upik.png" onClick={() => browserHistory.push("/")} / >
             </Navbar.Brand>
           </Navbar.Header>
-          <Nav activeKey={this.state.open && 1} onSelect={this.handleSelect}>
+          <Nav activeKey={this.state.open && this.state.selected} onSelect={this.handleSelect}>
             <NavItem eventKey={1} ref={(navItem) => { this.navItemBuilder = navItem; }} href="#">Builder</NavItem>
             <NavItem eventKey={2} ref={(navItem) => { this.navItemLists = navItem; }} href="#">Lists</NavItem>
           </Nav>
