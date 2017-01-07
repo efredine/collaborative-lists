@@ -11,30 +11,8 @@ import { fetchActions } from '../actions'
 
 class List extends Component {
 
-  constructor(props) {
-    super(props);
-    this.dataChanged = this.dataChanged.bind(this);
-    this.state = {
-      listContainer: {},
-      title: "",
-
-    }
-  }
-
   componentDidMount() {
     this.props.fetchActions();
-
-    const listId = this.props.params.listId;
-    fetch(`/api/lists/${listId}`, {
-      credentials: 'include'
-    })
-    .then(response => {
-      return response.json();
-    })
-    .then(results => {
-      const listContainer = results.length === 1 ? results[0] : {};
-      this.setState({listContainer: listContainer, title: listContainer.title});
-    })
   }
 
   dataChanged = (data) => {
@@ -53,7 +31,7 @@ class List extends Component {
   }
 
   render() {
-    const {title} = this.state;
+    const {title} = this.props;
     return (
       <div className="list-container">
         <h1>
@@ -72,15 +50,18 @@ class List extends Component {
   }
 }
 
+const mapStateToProps = (state, ownProps) => {
+  const list = state.lists.byId[ownProps.params.listId];
+  return {title: list ? list.title : ""};
+};
+
 const mapDispatchToProps = (dispatch, ownProps) => ({
   fetchActions: () => {
     dispatch(fetchActions(ownProps.params.listId))
   }
-})
+});
 
-const ListContainer = connect(
-  null,
+export default connect(
+  mapStateToProps,
   mapDispatchToProps
 )(List);
-
-export default ListContainer;
