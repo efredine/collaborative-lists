@@ -6,9 +6,10 @@
 const injectUser = ({ getState, dispatch }) => next => action => {
   const isLocal = action.type.split("/").length === 1;
   if(isLocal && action.userId) {
-    const { users, user } = getState();
+    const { users, user, activeList } = getState();
     action.actingUser = users.byId[action.userId];
     action.currentUser = user;
+    action.activeList = activeList;
   }
   if(action.type === 'RECEIVE') {
     const { users, user } = getState();
