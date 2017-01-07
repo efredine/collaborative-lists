@@ -2,15 +2,9 @@ import React, {Component} from 'react';
 import fetch from 'isomorphic-fetch';
 import _ from 'lodash';
 import { Link } from 'react-router'
-import { fetchLists } from '../actions'
 import { connect } from 'react-redux'
 
 class ListsIndex extends Component {
-
-  componentDidMount() {
-    const { fetchLists } = this.props;
-    fetchLists();
-  }
 
   newList = (event) => {
     console.log('clicked');
@@ -52,11 +46,7 @@ const mapStateToProps = (state) => ({
   lists: state.lists.allIds.map(id => state.lists.byId[id])
 })
 
-const mapDispatchToProps =  ({
-  fetchLists: fetchLists
-});
-
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  null
 )(ListsIndex)
