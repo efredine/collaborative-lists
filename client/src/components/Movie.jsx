@@ -96,7 +96,7 @@ class Movie extends Component {
     })
     .then(responseText =>{
       const movieContents = JSON.parse(responseText);
-      console.log('actors', movieContents)
+      // console.log('actors', movieContents)
        this.setState({contents: movieContents})
     })
   }
@@ -225,7 +225,7 @@ return genreTypes;
       return actorNames
 
 })
-  console.log("dfsfs", actors)
+  // console.log("dfsfs", actors)
 
     const {overview, vote_average} = this.props.content;
     return(
@@ -254,7 +254,7 @@ return genreTypes;
 
   render() {
     var movieInfo = this.state.contents;
-    console.log("infoo", movieInfo.runtime)
+    // console.log("infoo", movieInfo.runtime)
     _.map(movieInfo, (info)=>{
       //console.log("info", info.runtime)
     })

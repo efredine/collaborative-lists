@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import ReactDOM from 'react-dom'
 import MovieSearch from '../containers/MovieSearch.jsx'
 import LoginContainer from '../containers/LoginContainer.js';
 import ChatBox from '../containers/ChatBox';
@@ -17,57 +18,61 @@ class App extends Component {
   constructor(...args) {
     super(...args);
     this.state = {
-      open: true
+      open: true,
+      selected: 1
     };
   }
 
-  handleSelect = event => {
-    if(event === 1) {
-      this.setState({ open: !this.state.open })
-    }
+  blurNavItem = navItem => {
+    ReactDOM.findDOMNode(navItem).querySelector('a').blur();
   }
 
-  builderHeader = open => {
-    if(open) {
-      return(
-        <span>
-          <h3>Builder
-            <div className="close">
-            <Glyphicon onClick={ ()=> this.setState({ open: !this.state.open })} glyph="glyphicon glyphicon-arrow-left"/>
+  handleSelect = eventKey => {
+    const sameKey = eventKey === this.state.selected;
+    const open = sameKey ? !this.state.open : true;
+    const updatedState = {
+      open: open,
+      selected: open && eventKey
+    }
+    if(!open) {
+      if(eventKey === 1) {
+        this.blurNavItem(this.navItemBuilder);
+      }
+      if(eventKey === 2) {
+        this.blurNavItem(this.navItemLists);
+      }
+    }
+    console.log("handleSelected:", eventKey, this.state, updatedState);
+    this.setState(updatedState);
+  }
+
+  menu = () => {
+    if(this.state.open) {
+      if(this.state.selected === 1) {
+        return(
+          <Col className="movieContainer" xs={6} sm={4}>
+            <div className="content">
+              <Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
+                <Tab eventKey={1} title="Movies">
+                  <MovieSearch className="panel-container"/>
+                </Tab>
+                <Tab eventKey={2} title="Yelp">
+                  <YelpSearch className="panel-container"/>
+                </Tab>
+                <Tab eventKey={3} title="Todos">
+                  <AddTodo />
+                </Tab>
+              </Tabs>
             </div>
-        </h3>
-        </span>
-      );
-    } else {
-      return(
-        <div className="open">
-          <Glyphicon onClick={ ()=> this.setState({ open: !this.state.open })} glyph="glyphicon glyphicon-arrow-right"/>
-        </div>
-      );
-    }
-  }
-
-
-
-  builderContent = open => {
-    if(open) {
-      return(
-      <Col className="movieContainer" xs={6} sm={open ? 4 : 1}>
-        <div className="content">
-          <Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
-            <Tab eventKey={1} title="Movies">
-              <MovieSearch className="panel-container"/>
-            </Tab>
-            <Tab eventKey={2} title="Yelp">
-              <YelpSearch className="panel-container"/>
-            </Tab>
-            <Tab eventKey={3} title="Todos">
-              <AddTodo />
-            </Tab>
-          </Tabs>
-        </div>
-      </Col>
-        );
+          </Col>
+          );
+      } else {
+        return(
+          <Col className="movieContainer" xs={6} sm={4}>
+            <ListsIndex/>
+          </Col>
+          );
+      }
     } else {
       return(<div></div>)
     }
@@ -83,15 +88,15 @@ class App extends Component {
               <img className="logo" src="http://localhost:8080/images/Upik.png" onClick={() => browserHistory.push("/")} / >
             </Navbar.Brand>
           </Navbar.Header>
-          <Nav activeKey={this.state.open && 1} onSelect={this.handleSelect}>
-            <NavItem eventKey={1} href="#">Builder</NavItem>
-            <NavItem eventKey={2} href="#">Link</NavItem>
+          <Nav activeKey={this.state.open && this.state.selected} onSelect={this.handleSelect}>
+            <NavItem eventKey={1} ref={(navItem) => { this.navItemBuilder = navItem; }} href="#">Builder</NavItem>
+            <NavItem eventKey={2} ref={(navItem) => { this.navItemLists = navItem; }} href="#">Lists</NavItem>
           </Nav>
           <LoginContainer/>
         </Navbar>
         <Grid>
           <Row className="show-grid">
-            {this.builderContent(open)}
+            {this.menu()}
             <Col className="historyContainer" xs={6} md={open ? 5 : 7}>
               <Router history={browserHistory}>
                 <Route path="/" >
