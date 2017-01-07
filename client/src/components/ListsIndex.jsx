@@ -33,9 +33,8 @@ class ListsIndex extends Component {
       return <div className="list-group-item" key = {list.id}><Link to={'/'+ list.id}>{list.title}</Link></div>
     });
     return (
-      <div>
-        <h1>My Lists</h1>
-        <button  onClick={this.newList} className="btn btn-default">Add</button>
+      <div className="content">
+        <button  onClick={this.newList} className="btn btn-default">New list...</button>
         <div className="list-group">{listArray}</div>
       </div>
     );
