@@ -64,7 +64,7 @@ export const endDrag = () => ({
   type: 'END_DRAG'
 });
 
-export const receiveTodos = (listId, actionHistory) => ({
+export const receiveActions = (listId, actionHistory) => ({
   type: 'RECEIVE',
   listId: listId,
   actionHistory: actionHistory
@@ -75,7 +75,7 @@ export const fetchActions = (listId) => dispatch => {
     credentials: 'include'
   })
   .then(response => response.json())
-  .then(json => dispatch(receiveTodos(listId, json)));
+  .then(json => dispatch(receiveActions(listId, json)));
   // TODO: add error handling catch
 }
 
@@ -116,7 +116,6 @@ export const login = username => dispatch => {
     })
   .then(response => response.json())
   .then(json => dispatch(receiveUser(json)));
-
 }
 
 export const logout = () => dispatch => {
