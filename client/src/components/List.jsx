@@ -7,17 +7,17 @@ import VisibleCardList from '../containers/VisibleCardList'
 import { browserHistory } from 'react-router';
 
 import { connect } from 'react-redux'
-import { fetchActions } from '../actions'
+import { fetchActiveIfNeeded } from '../actions'
 
 class List extends Component {
 
   componentDidMount() {
-    this.props.fetchActions();
+    this.props.fetchActiveIfNeeded();
   }
 
   componentWillReceiveProps(nextProps) {
     // TODO: review lifecycle of List component
-    nextProps.fetchActions();
+    nextProps.fetchActiveIfNeeded();
   }
 
   dataChanged = (data) => {
@@ -61,8 +61,8 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  fetchActions: () => {
-    dispatch(fetchActions(ownProps.listId))
+  fetchActiveIfNeeded: () => {
+    dispatch(fetchActiveIfNeeded(ownProps.listId))
   }
 });
 

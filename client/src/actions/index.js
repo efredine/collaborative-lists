@@ -79,6 +79,30 @@ export const fetchActions = (listId) => dispatch => {
   // TODO: add error handling catch
 }
 
+// const shouldFetchPosts = (state, reddit) => {
+//   const posts = state.postsByReddit[reddit]
+//   if (!posts) {
+//     return true
+//   }
+//   if (posts.isFetching) {
+//     return false
+//   }
+//   return posts.didInvalidate
+// }
+
+// export const fetchPostsIfNeeded = reddit => (dispatch, getState) => {
+//   if (shouldFetchPosts(getState(), reddit)) {
+//     return dispatch(fetchPosts(reddit))
+//   }
+// }
+
+export const fetchActiveIfNeeded = (listId) => (dispatch, getState) => {
+  const { activeList } = getState();
+  if(activeList !== listId) {
+    return fetchActions(listId)(dispatch);
+  }
+}
+
 export const receiveUsers = (users) => ({
   type: 'RECEIVE_USERS',
   users
