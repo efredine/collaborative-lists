@@ -116,7 +116,6 @@ function getActionRecord(state, action) {
 }
 
 const actions = (state = [], action) => {
-  console.log("updating with action:", action);
   switch (action.type) {
     case 'MOVE_CARD':
     case 'ADD_CARD':
@@ -129,10 +128,15 @@ const actions = (state = [], action) => {
       ]
     case 'ADD_USER_TO_LIST':
     case 'UPDATE_TITLE':
-      return [
-        ...state,
-        getActionRecord(state, action)
-      ]
+      console.log("updating with action:", action);
+      if(action.activeList === action.listId) {
+        return [
+          ...state,
+          getActionRecord(state, action)
+        ]
+      } else {
+        return state;
+      }
     default:
       return state
   }

@@ -67,6 +67,7 @@ export const endDrag = () => ({
 export const receiveActions = (listId, actionHistory) => ({
   type: 'RECEIVE',
   listId: listId,
+  activeList: listId,
   actionHistory: actionHistory
 });
 
