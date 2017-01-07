@@ -11,7 +11,7 @@ import NavBar from './NavBar.jsx'
 class TodoApp extends Component {
 
   componentDidMount() {
-    this.props.fetchTodos();
+    this.props.fetchActions();
   }
 
   handleSelect(index, last) {

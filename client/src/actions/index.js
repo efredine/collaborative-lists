@@ -70,7 +70,7 @@ export const receiveTodos = (listId, actionHistory) => ({
   actionHistory: actionHistory
 });
 
-export const fetchTodos = (listId) => dispatch => {
+export const fetchActions = (listId) => dispatch => {
   return fetch(`/api/lists/${listId}/actions`, {
     credentials: 'include'
   })
