@@ -3,6 +3,7 @@ import { fetchLists, fetchUsers, identify } from '../actions'
 import { connect } from 'react-redux'
 import React, {Component} from 'react';
 import App from '../components/App';
+import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 
 class AppContainer extends Component {
 
@@ -17,7 +18,11 @@ class AppContainer extends Component {
   render() {
     const { users, user } = this.props;
     if(users.allIds.length > 0 && user.userInitialized) {
-      return (<App/>);
+      return (
+        <Router history={browserHistory}>
+          <Route path="/:listId" component={App} />
+        </Router>
+      );
     }
     else {
       return(

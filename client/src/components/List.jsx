@@ -15,6 +15,11 @@ class List extends Component {
     this.props.fetchActions();
   }
 
+  componentWillReceiveProps(nextProps) {
+    // TODO: review lifecycle of List component
+    nextProps.fetchActions();
+  }
+
   dataChanged = (data) => {
     const listId = this.props.params.listId;
     fetch('/api/lists/update', {
@@ -51,13 +56,13 @@ class List extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const list = state.lists.byId[ownProps.params.listId];
+  const list = state.lists.byId[ownProps.listId];
   return {title: list ? list.title : ""};
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   fetchActions: () => {
-    dispatch(fetchActions(ownProps.params.listId))
+    dispatch(fetchActions(ownProps.listId))
   }
 });
 

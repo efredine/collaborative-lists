@@ -4,7 +4,6 @@ import MovieSearch from '../containers/MovieSearch.jsx'
 import LoginContainer from '../containers/LoginContainer.js';
 import ChatBox from '../containers/ChatBox';
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem, Grid, Row, Col, Tabs, Tab, Clearfix } from 'react-bootstrap';
-import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import ListsIndex from './ListsIndex.jsx';
 import List from './List.jsx';
 import AddTodo from '../containers/AddTodo'
@@ -80,6 +79,7 @@ class App extends Component {
 
   render() {
     const { open } = this.state;
+    const { listId } = this.props.params;
     return(
       <div>
         <Navbar>
@@ -98,12 +98,7 @@ class App extends Component {
           <Row className="show-grid">
             {this.menu()}
             <Col className="historyContainer" xs={6} md={open ? 5 : 7}>
-              <Router history={browserHistory}>
-                <Route path="/" >
-                  <IndexRoute component={ListsIndex} />
-                  <Route path="/:listId" component={List} />
-                </Route>
-              </Router>
+              <List listId={ listId } />
             </Col>
             <Col className="chatContainer" xsHidden md={open ? 3 : 5}>
               <h1>Activity</h1>
