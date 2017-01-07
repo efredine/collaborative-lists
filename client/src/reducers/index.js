@@ -7,6 +7,7 @@ import receiver from './receiver'
 import user from './user'
 import users from './users'
 import activeList from './activeList'
+import lists from './lists'
 
 const sliceReducers = combineReducers({
   cards,
@@ -15,7 +16,8 @@ const sliceReducers = combineReducers({
   dragging,
   user,
   users,
-  activeList
+  activeList,
+  lists
 });
 
 const cardReducers = combineReducers({

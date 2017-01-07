@@ -2,25 +2,14 @@ import React, {Component} from 'react';
 import fetch from 'isomorphic-fetch';
 import _ from 'lodash';
 import { Link } from 'react-router'
-
+import { fetchLists } from '../actions'
+import { connect } from 'react-redux'
 
 class ListsIndex extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      list: this.lists
-    };
-  }
 
   componentDidMount() {
-    fetch('/api/lists', {credentials: 'include'})
-    .then(response => {
-      return response.json();
-    })
-    .then(lists => {
-      console.log('lists',lists);
-      this.setState({lists: lists});
-    })
+    const { fetchLists } = this.props;
+    fetchLists();
   }
 
   newList = (event) => {
@@ -45,7 +34,8 @@ class ListsIndex extends Component {
   }
 
   render() {
-    var listArray = _.map(this.state.lists, (list) => {
+    const { lists } = this.props;
+    const listArray = _.map(lists, (list) => {
       return <div className="list-group-item" key = {list.id}><Link to={'/'+ list.id}>{list.title}</Link></div>
     });
     return (
@@ -56,7 +46,17 @@ class ListsIndex extends Component {
       </div>
     );
   }
-
-
 }
-export default ListsIndex;
+
+const mapStateToProps = (state) => ({
+  lists: state.lists
+})
+
+const mapDispatchToProps =  ({
+  fetchLists: fetchLists
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ListsIndex)

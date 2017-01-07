@@ -99,8 +99,7 @@ export const receiveUser = user => ({
 
 export const identify = () => dispatch => {
   return fetch('/api/users/identify', {
-    credentials:
-    'include'
+    credentials: 'include'
   })
   .then(response => response.json())
   .then(json => dispatch(receiveUser(json)));
@@ -127,5 +126,17 @@ export const logout = () => dispatch => {
   })
   .then (response => response.json())
   .then(json => dispatch(receiveUser(json)));
+}
 
+export const receiveLists = (lists) => ({
+  type: 'RECEIVE_LISTS',
+  lists
+});
+
+export const fetchLists = () => dispatch => {
+  return fetch('/api/lists', {
+    credentials: 'include'
+  })
+  .then(response => response.json())
+  .then(json => dispatch(receiveLists(json)));
 }
