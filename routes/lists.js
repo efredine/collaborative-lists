@@ -27,6 +27,13 @@ module.exports = (knex, publish) => {
     listId: listId
   });
 
+  const updateTitleAction = (userId, listId, title) =>  ({
+    type: 'UPDATE_TITLE',
+    userId: userId,
+    listId: listId,
+    title
+  });
+
   function insertAndPublish(userId, listId, action) {
     actionHelpers.insert(listId, userId, action)
     .then(id => {
@@ -83,12 +90,15 @@ module.exports = (knex, publish) => {
   });
 
   router.post("/update", (req, res)=>{
-    knex('lists').where("id",req.body.id)
+    const userId = req.session.user.id;
+    const listId = req.body.id;
+    const title = req.body.title;
+    knex('lists').where("id",listId)
     .update({
-      title: req.body.title
+      title: title
     })
     .then ((result)=> {
-      console.log("hello");
+      insertAndPublish(userId, listId, updateTitleAction(userId, listId, title));
       res.json(result)
     })
   });
