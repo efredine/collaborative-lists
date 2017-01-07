@@ -1,18 +1,15 @@
 import { combineReducers } from 'redux'
 
-// function receiveLists(state = {byId: {}, allIds: []}, action) {
-function receiveLists(state = [], action) {
-
+function receiveLists(state = {byId: {}, allIds: []}, action) {
   switch(action.type) {
     case "RECEIVE_LISTS":
-      return action.lists;
-      // const byId = {};
-      // action.lists.forEach(list => {
-      //   byId[list.id] = list;
-      // });
-      // const allIds = action.users.map(list => list.id);
-      // const result = {byId, allIds};
-      // return result;
+      const byId = {};
+      action.lists.forEach(list => {
+        byId[list.id] = list;
+      });
+      const allIds = action.lists.map(list => list.id);
+      const result = {byId, allIds};
+      return result;
     default:
       return state;
   }
