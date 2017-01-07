@@ -105,7 +105,7 @@ class Movie extends Component {
     var that = this;
     // e.preventDefault();
     var genreTypes = [];
-    var genreIds = this.props.content.genre_ids;
+    var genreIds = this.props.content.genre_ids || [];
     genreIds.forEach(function(id){
       switch(id){
         case 28:genreTypes.push(" Action ");break;

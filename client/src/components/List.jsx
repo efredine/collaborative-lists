@@ -21,7 +21,7 @@ class List extends Component {
   }
 
   dataChanged = (data) => {
-    const listId = this.props.params.listId;
+    const listId = this.props.listId;
     fetch('/api/lists/update', {
       credentials: 'include',
       method: 'POST',
