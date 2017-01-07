@@ -9,8 +9,6 @@ import { browserHistory } from 'react-router';
 import { connect } from 'react-redux'
 import { fetchActions } from '../actions'
 
-
-
 class List extends Component {
 
   constructor(props) {
@@ -21,39 +19,39 @@ class List extends Component {
       title: "",
 
     }
-}
+  }
 
-componentDidMount() {
-  this.props.fetchActions();
+  componentDidMount() {
+    this.props.fetchActions();
 
-  const listId = this.props.params.listId;
-  fetch(`/api/lists/${listId}`, {
-    credentials: 'include'
-  })
-  .then(response => {
-    return response.json();
-  })
-  .then(results => {
-    const listContainer = results.length === 1 ? results[0] : {};
-    this.setState({listContainer: listContainer, title: listContainer.title});
-  })
-}
+    const listId = this.props.params.listId;
+    fetch(`/api/lists/${listId}`, {
+      credentials: 'include'
+    })
+    .then(response => {
+      return response.json();
+    })
+    .then(results => {
+      const listContainer = results.length === 1 ? results[0] : {};
+      this.setState({listContainer: listContainer, title: listContainer.title});
+    })
+  }
 
-dataChanged = (data) => {
-  const listId = this.props.params.listId;
-  fetch('/api/lists/update', {
-    credentials: 'include',
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
-    },
-      body: `id=${listId}&title=${data.Title}`
-  })
-  .then(response => response.json())
-  .then(json => console.log('updated', json))
-  .catch(error => console.log(error));
+  dataChanged = (data) => {
+    const listId = this.props.params.listId;
+    fetch('/api/lists/update', {
+      credentials: 'include',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+        body: `id=${listId}&title=${data.Title}`
+    })
+    .then(response => response.json())
+    .then(json => console.log('updated', json))
+    .catch(error => console.log(error));
+  }
 
-}
   render() {
     const {title} = this.state;
     return (
@@ -70,9 +68,8 @@ dataChanged = (data) => {
         <Footer />
         </div>
       </div>
-      );
-    }
-
+    );
+  }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
