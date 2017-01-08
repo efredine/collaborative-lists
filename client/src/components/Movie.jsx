@@ -26,10 +26,6 @@ class Movie extends Component {
     }
   }
 
-  voteClass(vote) {
-
-  }
-
   votingEnable () {
     // current vote will be one of the following:
     // VoteStates.NONE
@@ -101,11 +97,9 @@ class Movie extends Component {
     })
   }
 
-  genre(e){
-    var that = this;
-    // e.preventDefault();
-    var genreTypes = [];
-    var genreIds = this.props.content.genre_ids || [];
+  genre(){
+    const genreTypes = [];
+    const genreIds = this.props.content.genre_ids || [];
     genreIds.forEach(function(id){
       switch(id){
         case 28:genreTypes.push(" Action ");break;
@@ -129,9 +123,8 @@ class Movie extends Component {
         case 10752: genreTypes.push(" War "); break;
         case 37: genreTypes.push(" Western "); break;
       }
-    })
-// that.setState({genre: ids})
-return genreTypes;
+    });
+    return genreTypes;
   }
 
 
@@ -222,10 +215,8 @@ return genreTypes;
       _.map(each.slice(0, 3), function(actor){
         actorNames.push(<img className= "actors" src = {"http://image.tmdb.org/t/p/w500"+ actor.profile_path} />);
       })
-      return actorNames
-
-})
-  // console.log("dfsfs", actors)
+      return actorNames;
+    });
 
     const {overview, vote_average} = this.props.content;
     return(
