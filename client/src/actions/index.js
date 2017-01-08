@@ -99,22 +99,6 @@ export const fetchList = listId => dispatch => {
     }
   });
 }
-// const shouldFetchPosts = (state, reddit) => {
-//   const posts = state.postsByReddit[reddit]
-//   if (!posts) {
-//     return true
-//   }
-//   if (posts.isFetching) {
-//     return false
-//   }
-//   return posts.didInvalidate
-// }
-
-// export const fetchPostsIfNeeded = reddit => (dispatch, getState) => {
-//   if (shouldFetchPosts(getState(), reddit)) {
-//     return dispatch(fetchPosts(reddit))
-//   }
-// }
 
 export const fetchActiveIfNeeded = (listId) => (dispatch, getState) => {
   const { activeList, lists } = getState();
