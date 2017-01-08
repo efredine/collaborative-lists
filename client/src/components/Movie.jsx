@@ -94,6 +94,7 @@ class Movie extends Component {
       const movieContents = JSON.parse(responseText);
       // console.log('actors', movieContents)
        this.setState({contents: movieContents})
+       console.log('movieContents:', movieContents);
     })
   }
 
@@ -191,6 +192,7 @@ class Movie extends Component {
 
   portraitFormat = () => {
     const {poster_path, overview, vote_average} = this.props.content;
+    const { contents } = this.state;
     return(
       <div>
         <dl className="dl-horizontal">
@@ -198,7 +200,9 @@ class Movie extends Component {
             <img className="poster-image" src={"http://image.tmdb.org/t/p/w185/" + poster_path}/>
           </dt>
           <dd>
-            {overview}
+            <p>{overview}</p>
+            <p className="movieRuntime">{contents.runtime} Minutes</p>
+            <p className="genre">{this.genre()}</p>
             <div className="review-bar-container">
               <ProgressBar bsStyle="danger" active now={vote_average * 10} label={`${vote_average} / 10 Average Rating`}/>
             </div>
@@ -258,7 +262,7 @@ class Movie extends Component {
           <div className="panel-heading" onClick={ ()=> this.setState({ posterOpen: !this.state.posterOpen })}>
             {this.renderAddRemove()}
             <h3 className="panel-title">
-              {title} <span className="movieRuntime">{this.state.contents.runtime} Minutes</span> <div className= "genre">{this.genre()} </div>
+              {title}
             </h3>
           </div>
           <div className="panel-body">
