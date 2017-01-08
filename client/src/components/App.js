@@ -84,7 +84,7 @@ class App extends Component {
         <Navbar>
           <Navbar.Header>
             <Navbar.Brand>
-              <img className="logo" src="http://localhost:8080/images/Upik.png" onClick={() => browserHistory.push("/")} / >
+              <img className="logo" src="http://localhost:8080/images/Upik.png" />
             </Navbar.Brand>
           </Navbar.Header>
           <Nav activeKey={this.state.open && this.state.selected} onSelect={this.handleSelect}>
