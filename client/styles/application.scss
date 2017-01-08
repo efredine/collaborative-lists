@@ -482,10 +482,13 @@ iframe {
       }
     }
 
-    li.list-group-item {
+    li {
       a:visited {
         color: #555;
       }
+    }
+
+    li.list-group-item {
       &.active, &.active:hover, &.active:focus {
         background-color: #e7e7e7;
         border-color: #e7e7e7;
