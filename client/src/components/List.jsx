@@ -18,7 +18,6 @@ class List extends Component {
     if(!listId && lists.length > 0) {
       browserHistory.push(`/${lists[0].id}`)
     }
-    console.log("redirectIfNeeded", listId, lists);
   }
 
   componentDidMount() {
