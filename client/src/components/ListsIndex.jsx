@@ -28,9 +28,13 @@ class ListsIndex extends Component {
   }
 
   render() {
-    const { lists } = this.props;
+    const { lists, activeList } = this.props;
     const listArray = _.map(lists, (list) => {
-      return <ListGroupItem key = {list.id}><Link to={'/'+ list.id}>{list.title}</Link></ListGroupItem>
+      return (
+        <ListGroupItem key = {list.id} active={Number(list.id) === Number(activeList)}>
+          <Link to={'/'+ list.id}>{list.title}</Link>
+        </ListGroupItem>
+      );
     });
     return (
       <div className="content">
@@ -42,7 +46,8 @@ class ListsIndex extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  lists: state.lists.allIds.map(id => state.lists.byId[id])
+  lists: state.lists.allIds.map(id => state.lists.byId[id]),
+  activeList: state.activeList
 })
 
 export default connect(
