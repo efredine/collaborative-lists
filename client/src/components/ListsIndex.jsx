@@ -38,7 +38,7 @@ class ListsIndex extends Component {
     });
     return (
       <div className="content">
-        <Button onClick={this.newList} block>New list...</Button>
+        <Button className="list-index-button" onClick={this.newList} block>New list...</Button>
         <ListGroup className="nav">{listArray}</ListGroup>
       </div>
     );
