@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import fetch from 'isomorphic-fetch';
 import _ from 'lodash';
-import { Link } from 'react-router'
+import { Link, browserHistory } from 'react-router'
 import { connect } from 'react-redux'
 
 class ListsIndex extends Component {
@@ -21,8 +21,7 @@ class ListsIndex extends Component {
     .then(result => {
       console.log('inserted', result, 'props:', this.props);
       const { listId } = result;
-      const { router } = this.props;
-      router.push(`/${listId}`);
+      browserHistory.push(`/${listId}`);
     })
     .catch(error => console.log(error));
   }
