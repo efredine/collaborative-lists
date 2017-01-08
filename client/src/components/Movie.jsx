@@ -92,9 +92,7 @@ class Movie extends Component {
     })
     .then(responseText =>{
       const movieContents = JSON.parse(responseText);
-      // console.log('actors', movieContents)
        this.setState({contents: movieContents})
-       console.log('movieContents:', movieContents);
     })
   }
 
@@ -212,16 +210,17 @@ class Movie extends Component {
     );
   };
 
-  landscapeCollapsed = () => {
-    const casts = this.state.contents.credits;
-    var actors = _.map(casts, function(each){
-      var actorNames = [];
-      _.map(each.slice(0, 3), function(actor){
-        actorNames.push(<img className= "actors" src = {"http://image.tmdb.org/t/p/w500"+ actor.profile_path} />);
-      })
-      return actorNames;
-    });
+  getActors = () => {
+    const { contents } = this.state;
+    if(contents) {
+      const cast = contents.credits.cast;
+      return cast.slice(0, 10).map( (actor, index) =>
+        (<img key={index} className= "actors" src = {"http://image.tmdb.org/t/p/w500"+ actor.profile_path} />)
+      );
+    }
+  }
 
+  landscapeCollapsed = () => {
     const {overview, vote_average} = this.props.content;
     return(
       <div>
@@ -229,7 +228,7 @@ class Movie extends Component {
           {this.trailerLink()}
           <p>{overview}</p>
         </div>
-          {actors}
+        <div>{this.getActors()}</div>
         <div>
           <ProgressBar bsStyle="danger" active now={vote_average * 10} label={`${vote_average} / 10 Average Rating`}/>
         </div>
@@ -248,11 +247,6 @@ class Movie extends Component {
   }
 
   render() {
-    var movieInfo = this.state.contents;
-    // console.log("infoo", movieInfo.runtime)
-    _.map(movieInfo, (info)=>{
-      //console.log("info", info.runtime)
-    })
 
     const { portrait } = this.props;
     const {title, vote_average, overview, backdrop_path} = this.props.content;
