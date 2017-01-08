@@ -185,7 +185,9 @@ class Movie extends Component {
 
   landscapeFormat = () => {
     const { backdrop_path } = this.props.content;
-    return(<img className= "image" src={"http://image.tmdb.org/t/p/w500/" + backdrop_path}/>);
+    if(backdrop_path) {
+      return(<img className= "image" src={"http://image.tmdb.org/t/p/w500/" + backdrop_path}/>);
+    }
   };
 
   portraitFormat = () => {
@@ -215,7 +217,7 @@ class Movie extends Component {
     if(contents) {
       const cast = contents.credits.cast;
       return cast.slice(0, 10).map( (actor, index) =>
-        (<img key={index} className= "actors" src = {"http://image.tmdb.org/t/p/w500"+ actor.profile_path} />)
+        (actor.profile_path && <img key={index} className= "actors" src = {"http://image.tmdb.org/t/p/w500"+ actor.profile_path} />)
       );
     }
   }
