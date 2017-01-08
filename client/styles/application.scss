@@ -471,6 +471,26 @@ iframe {
   .content {
     height: calc(100% - 10px);
     overflow: scroll;
+
+    button {
+      margin-bottom: 10px;
+    }
+
+    .nav {
+      li.list-group-item{
+        padding: 0;
+      }
+    }
+
+    li.list-group-item {
+      a:visited {
+        color: #555;
+      }
+      &.active, &.active:hover, &.active:focus {
+        background-color: #e7e7e7;
+        border-color: #e7e7e7;
+      }
+    }
   }
 }
 
@@ -574,17 +594,4 @@ img.poster-image {
   margin-bottom: 10px;
 }
 
-.nav {
-  li.list-group-item{
-    padding: 0;
-  }
-}
-li.list-group-item {
-  a:visited {
-    color: #555;
-  }
-  &.active, &.active:hover, &.active:focus {
-    background-color: #e7e7e7;
-    border-color: #e7e7e7;
-  }
-}
+

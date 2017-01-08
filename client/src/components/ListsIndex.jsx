@@ -3,7 +3,7 @@ import fetch from 'isomorphic-fetch';
 import _ from 'lodash';
 import { Link, browserHistory } from 'react-router'
 import { connect } from 'react-redux'
-import { ListGroup, ListGroupItem } from 'react-bootstrap'
+import { Button, ListGroup, ListGroupItem } from 'react-bootstrap'
 
 class ListsIndex extends Component {
 
@@ -38,7 +38,7 @@ class ListsIndex extends Component {
     });
     return (
       <div className="content">
-        <button  onClick={this.newList} className="btn btn-default">New list...</button>
+        <Button onClick={this.newList} block>New list...</Button>
         <ListGroup className="nav">{listArray}</ListGroup>
       </div>
     );
