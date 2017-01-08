@@ -3,6 +3,7 @@ import fetch from 'isomorphic-fetch';
 import _ from 'lodash';
 import { Link, browserHistory } from 'react-router'
 import { connect } from 'react-redux'
+import { ListGroup, ListGroupItem } from 'react-bootstrap'
 
 class ListsIndex extends Component {
 
@@ -29,12 +30,12 @@ class ListsIndex extends Component {
   render() {
     const { lists } = this.props;
     const listArray = _.map(lists, (list) => {
-      return <div className="list-group-item" key = {list.id}><Link to={'/'+ list.id}>{list.title}</Link></div>
+      return <ListGroupItem key = {list.id}><Link to={'/'+ list.id}>{list.title}</Link></ListGroupItem>
     });
     return (
       <div className="content">
         <button  onClick={this.newList} className="btn btn-default">New list...</button>
-        <div className="list-group">{listArray}</div>
+        <ListGroup>{listArray}</ListGroup>
       </div>
     );
   }
