@@ -41,7 +41,6 @@ class App extends Component {
         this.blurNavItem(this.navItemLists);
       }
     }
-    console.log("handleSelected:", eventKey, this.state, updatedState);
     this.setState(updatedState);
   }
 
