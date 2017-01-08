@@ -17,8 +17,8 @@ class App extends Component {
   constructor(...args) {
     super(...args);
     this.state = {
-      open: true,
-      selected: 1
+      open: false,
+      selected: undefined
     };
   }
 
@@ -48,7 +48,7 @@ class App extends Component {
     if(this.state.open) {
       if(this.state.selected === 1) {
         return(
-          <Col className="movieContainer" xs={6} sm={4}>
+          <Col className="movieContainer" xs={4} lg={4}>
             <div className="content">
               <Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
                 <Tab eventKey={1} title="Movies">
@@ -66,7 +66,7 @@ class App extends Component {
           );
       } else {
         return(
-          <Col className="movieContainer" xs={6} sm={4}>
+          <Col className="movieContainer" xs={4} lg={4}>
             <ListsIndex/>
           </Col>
           );
@@ -96,10 +96,10 @@ class App extends Component {
         <Grid>
           <Row className="show-grid">
             {this.menu()}
-            <Col className="historyContainer" xs={6} md={open ? 5 : 7}>
+            <Col className="historyContainer" xs={open ? 5 : 7} lg={open ? 5 : 7}>
               <List listId={ listId } />
             </Col>
-            <Col className="chatContainer" xsHidden md={open ? 3 : 5}>
+            <Col className="chatContainer" xs={open ? 3 : 5} lg={open ? 3 : 5}>
               <h1>Activity</h1>
               <ActionListContainer/>
               <ChatBox />
