@@ -11,6 +11,16 @@ import { fetchActiveIfNeeded } from '../actions'
 
 class List extends Component {
 
+  redirectIfNeeded = () => {
+    // if listId is null it means the user has navigated to the home directory
+    // redirect them to the first element of the list
+    const { listId, lists } = this.props;
+    if(!listId && lists.length > 0) {
+      browserHistory.push(`/${lists[0].id}`)
+    }
+    console.log("redirectIfNeeded", listId, lists);
+  }
+
   componentDidMount() {
     this.props.fetchActiveIfNeeded();
   }
@@ -37,6 +47,7 @@ class List extends Component {
 
   render() {
     const {title} = this.props;
+    this.redirectIfNeeded();
     return (
       <div className="list-container">
         <h1>
@@ -57,7 +68,10 @@ class List extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   const list = state.lists.byId[ownProps.listId];
-  return {title: list ? list.title : ""};
+  return {
+    title: list ? list.title : "",
+    lists: state.lists.allIds.map(id => state.lists.byId[id])
+  };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

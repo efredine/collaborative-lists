@@ -20,6 +20,7 @@ class AppContainer extends Component {
     if(users.allIds.length > 0 && user.userInitialized) {
       return (
         <Router history={browserHistory}>
+          <Route path="/" component={App} />
           <Route path="/:listId" component={App} />
         </Router>
       );
