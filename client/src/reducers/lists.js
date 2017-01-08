@@ -26,26 +26,38 @@ function updateTitle(state, action) {
   return updatedState;
 }
 
+function addList(state, action) {
+  const { listId } = action;
+  if(state[listId]) {
+    return state;
+  } else {
+    const updatedState = Object.assign({}, state);
+    updatedState[listId] = action.list;
+    return updatedState;
+  }
+}
+
 function listsById(state = {}, action) {
   switch(action.type) {
     case "UPDATE_TITLE" : return updateTitle(state, action);
+    case "RECEIVE_LIST" : return addList(state, action);
     default : return state;
   }
 }
 
-// function addUserId(state, action) {
-//   // add this userId if it isn't already in the array
-//   const { userId } = action;
-//   if(state.find(userId))  {
-//     return state.concat(action.userId);
-//   } else {
-//     return state;
-//   }
-// }
+function addListId(state, action) {
+  // add this listId if it isn't already in the array
+  const { listId } = action;
+  if(state.find(x => Number(x) === Number(listId)))  {
+    return state;
+  } else {
+    return state.concat(listId);
+  }
+}
 
 function allLists(state = [], action) {
   switch(action.type) {
-    // case "JOIN_LIST" : return addUserId(state, action);
+    case "RECEIVE_LIST" : return addListId(state, action);
     default : return state;
   }
 }

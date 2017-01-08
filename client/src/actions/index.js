@@ -70,7 +70,13 @@ export const receiveActions = (listId, actionHistory) => ({
   actionHistory: actionHistory
 });
 
-export const fetchActions = (listId) => dispatch => {
+export const receiveList = (listId, list) => ({
+  type: 'RECEIVE_LIST',
+  listId: listId,
+  list: list
+});
+
+export const fetchActions = listId => dispatch => {
   return fetch(`/api/lists/${listId}/actions`, {
     credentials: 'include'
   })
@@ -79,6 +85,20 @@ export const fetchActions = (listId) => dispatch => {
   // TODO: add error handling catch
 }
 
+export const fetchList = listId => dispatch => {
+  return fetch(`/api/lists/${listId}`, {
+    credentials: 'include'
+  })
+  .then(response => response.json())
+  .then(json => {
+    if(json.length === 1) {
+      return dispatch(receiveList(listId, json[0]));
+    } else {
+      console.log("Invalid list:", listId);
+      return Promise.reject(new Error("not found"));
+    }
+  });
+}
 // const shouldFetchPosts = (state, reddit) => {
 //   const posts = state.postsByReddit[reddit]
 //   if (!posts) {
@@ -97,9 +117,14 @@ export const fetchActions = (listId) => dispatch => {
 // }
 
 export const fetchActiveIfNeeded = (listId) => (dispatch, getState) => {
-  const { activeList } = getState();
+  const { activeList, lists } = getState();
   if(activeList !== listId) {
-    return fetchActions(listId)(dispatch);
+    const fetches = [];
+    fetches.push(fetchActions(listId)(dispatch));
+    if(!lists.byId[listId]) {
+      fetches.push(fetchList(listId)(dispatch));
+    }
+    return Promise.all(fetches);
   }
 }
 

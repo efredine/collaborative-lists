@@ -128,7 +128,6 @@ const actions = (state = [], action) => {
       ]
     case 'ADD_USER_TO_LIST':
     case 'UPDATE_TITLE':
-      console.log("updating with action:", action);
       if(action.activeList === action.listId) {
         return [
           ...state,
