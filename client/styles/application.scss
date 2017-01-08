@@ -573,3 +573,9 @@ img.poster-image {
   margin-top: 10px;
   margin-bottom: 10px;
 }
+
+li.list-group-item.active {
+  a {
+    color: lightgrey;
+  }
+}
