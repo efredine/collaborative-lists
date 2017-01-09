@@ -4,7 +4,6 @@ import { createStore, applyMiddleware } from 'redux';
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import AppContainer from './containers/AppContainer'
-import TodoAppContainer from './containers/TodoAppContainer.jsx'
 import Register from './components/Register.jsx';
 import reducer from './reducers'
 import createSocketIoMiddleware from 'redux-socket.io';

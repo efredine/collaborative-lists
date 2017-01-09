@@ -78,7 +78,7 @@ class MovieSearch extends Component {
           <Button onClick={this.upComing}>Up Coming</Button>
         </ButtonGroup>
 
-        <FlipMove easing="cubic-bezier(0, 0.7, 0.8, 0.1)">
+        <FlipMove>
           {movies}
         </FlipMove>
       </div>

@@ -103,6 +103,13 @@ function getActionRecord(state, action) {
         type: ' joined ',
         text: 'list'
       };
+     case 'UPDATE_TITLE':
+      return {
+        user: getName(action),
+        id: action.id,
+        type: ' updated title to ',
+        text: action.title
+      };
     default:
       return null;
   }
@@ -115,11 +122,20 @@ const actions = (state = [], action) => {
     case 'TOGGLE_CARD':
     case 'VOTE_CARD':
     case 'CHAT_MESSAGE':
-    case 'ADD_USER_TO_LIST':
       return [
         ...state,
         getActionRecord(state, action)
       ]
+    case 'ADD_USER_TO_LIST':
+    case 'UPDATE_TITLE':
+      if(action.activeList === action.listId) {
+        return [
+          ...state,
+          getActionRecord(state, action)
+        ]
+      } else {
+        return state;
+      }
     default:
       return state
   }

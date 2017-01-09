@@ -1,27 +1,11 @@
 import React, {Component} from 'react';
 import fetch from 'isomorphic-fetch';
 import _ from 'lodash';
-import { Link } from 'react-router'
-
+import { Link, browserHistory } from 'react-router'
+import { connect } from 'react-redux'
+import { Button, ListGroup, ListGroupItem } from 'react-bootstrap'
 
 class ListsIndex extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      list: this.lists
-    };
-  }
-
-  componentDidMount() {
-    fetch('/api/lists', {credentials: 'include'})
-    .then(response => {
-      return response.json();
-    })
-    .then(lists => {
-      console.log('lists',lists);
-      this.setState({lists: lists});
-    })
-  }
 
   newList = (event) => {
     console.log('clicked');
@@ -38,25 +22,35 @@ class ListsIndex extends Component {
     .then(result => {
       console.log('inserted', result, 'props:', this.props);
       const { listId } = result;
-      const { router } = this.props;
-      router.push(`/${listId}`);
+      browserHistory.push(`/${listId}`);
     })
     .catch(error => console.log(error));
   }
 
   render() {
-    var listArray = _.map(this.state.lists, (list) => {
-      return <div className="list-group-item" key = {list.id}><Link to={'/'+ list.id}>{list.title}</Link></div>
+    const { lists, activeList } = this.props;
+    const listArray = _.map(lists, (list) => {
+      return (
+        <ListGroupItem key = {list.id} active={Number(list.id) === Number(activeList)}>
+          <Link to={'/'+ list.id}>{list.title}</Link>
+        </ListGroupItem>
+      );
     });
     return (
-      <div>
-        <h1>My Lists</h1>
-        <button  onClick={this.newList} className="btn btn-default">Add</button>
-        <div className="list-group">{listArray}</div>
+      <div className="content">
+        <Button className="list-index-button" onClick={this.newList} block>New list...</Button>
+        <ListGroup className="nav">{listArray}</ListGroup>
       </div>
     );
   }
-
-
 }
-export default ListsIndex;
+
+const mapStateToProps = (state) => ({
+  lists: state.lists.allIds.map(id => state.lists.byId[id]),
+  activeList: state.activeList
+})
+
+export default connect(
+  mapStateToProps,
+  null
+)(ListsIndex)

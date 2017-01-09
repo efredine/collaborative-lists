@@ -26,10 +26,6 @@ class Movie extends Component {
     }
   }
 
-  voteClass(vote) {
-
-  }
-
   votingEnable () {
     // current vote will be one of the following:
     // VoteStates.NONE
@@ -96,16 +92,13 @@ class Movie extends Component {
     })
     .then(responseText =>{
       const movieContents = JSON.parse(responseText);
-      // console.log('actors', movieContents)
        this.setState({contents: movieContents})
     })
   }
 
-  genre(e){
-    var that = this;
-    // e.preventDefault();
-    var genreTypes = [];
-    var genreIds = this.props.content.genre_ids;
+  genre(){
+    const genreTypes = [];
+    const genreIds = this.props.content.genre_ids || [];
     genreIds.forEach(function(id){
       switch(id){
         case 28:genreTypes.push(" Action ");break;
@@ -129,9 +122,8 @@ class Movie extends Component {
         case 10752: genreTypes.push(" War "); break;
         case 37: genreTypes.push(" Western "); break;
       }
-    })
-// that.setState({genre: ids})
-return genreTypes;
+    });
+    return genreTypes;
   }
 
 
@@ -193,11 +185,15 @@ return genreTypes;
 
   landscapeFormat = () => {
     const { backdrop_path } = this.props.content;
-    return(<img className= "image" src={"http://image.tmdb.org/t/p/w500" + backdrop_path}/>);
+
+    if(backdrop_path) {
+      return(<img className= "image" src={"http://image.tmdb.org/t/p/w500/" + backdrop_path}/>);
+    }
   };
 
   portraitFormat = () => {
     const {poster_path, overview, vote_average} = this.props.content;
+    const { contents } = this.state;
     return(
       <div>
         <dl className="dl-horizontal">
@@ -205,7 +201,9 @@ return genreTypes;
             <img className="poster-image" src={"http://image.tmdb.org/t/p/w185" + poster_path}/>
           </dt>
           <dd>
-            {overview}
+            <p>{overview}</p>
+            <p className="movieRuntime">{contents.runtime} Minutes</p>
+            <p className="genre">{this.genre()}</p>
             <div className="review-bar-container">
               <ProgressBar bsStyle="danger" active now={vote_average * 10} label={`${vote_average} / 10 Average Rating`}/>
             </div>
@@ -215,18 +213,18 @@ return genreTypes;
     );
   };
 
+  getActors = () => {
+    if(!this.state.open) return;
+    const { contents } = this.state;
+    if(contents && contents.credits && contents.credits.cast) {
+      const cast = contents.credits.cast;
+      return cast.slice(0, 14).map( (actor, index) =>
+        (actor.profile_path && <img key={index} className= "actors" src = {"http://image.tmdb.org/t/p/w500"+ actor.profile_path} />)
+      );
+    }
+  }
+
   landscapeCollapsed = () => {
-    const casts = this.state.contents.credits;
-    var actors = _.map(casts, function(each){
-      var actorNames = [];
-      _.map(each.slice(0, 3), function(actor){
-        actorNames.push(<img className= "actors" src = {"http://image.tmdb.org/t/p/w500"+ actor.profile_path} />);
-      })
-      return actorNames
-
-})
-  // console.log("dfsfs", actors)
-
     const {overview, vote_average} = this.props.content;
     return(
       <div>
@@ -234,7 +232,7 @@ return genreTypes;
           {this.trailerLink()}
           <p>{overview}</p>
         </div>
-          {actors}
+        <div>{this.getActors()}</div>
         <div>
           <ProgressBar bsStyle="danger" active now={vote_average * 10} label={`${vote_average} / 10 Average Rating`}/>
         </div>
@@ -253,11 +251,6 @@ return genreTypes;
   }
 
   render() {
-    var movieInfo = this.state.contents;
-    // console.log("infoo", movieInfo.runtime)
-    _.map(movieInfo, (info)=>{
-      //console.log("info", info.runtime)
-    })
 
     const { portrait } = this.props;
     const {title, vote_average, overview, backdrop_path} = this.props.content;
@@ -267,7 +260,7 @@ return genreTypes;
           <div className="panel-heading" onClick={ ()=> this.setState({ posterOpen: !this.state.posterOpen })}>
             {this.renderAddRemove()}
             <h3 className="panel-title">
-              {title} <span className="movieRuntime">{this.state.contents.runtime} Minutes</span> <div className= "genre">{this.genre()} </div>
+              {title}
             </h3>
           </div>
           <div className="panel-body">

@@ -64,19 +64,52 @@ export const endDrag = () => ({
   type: 'END_DRAG'
 });
 
-export const receiveTodos = (listId, actionHistory) => ({
+export const receiveActions = (listId, actionHistory) => ({
   type: 'RECEIVE',
   listId: listId,
   actionHistory: actionHistory
 });
 
-export const fetchTodos = (listId) => dispatch => {
+export const receiveList = (listId, list) => ({
+  type: 'RECEIVE_LIST',
+  listId: listId,
+  list: list
+});
+
+export const fetchActions = listId => dispatch => {
   return fetch(`/api/lists/${listId}/actions`, {
     credentials: 'include'
   })
   .then(response => response.json())
-  .then(json => dispatch(receiveTodos(listId, json)));
+  .then(json => dispatch(receiveActions(listId, json)));
   // TODO: add error handling catch
+}
+
+export const fetchList = listId => dispatch => {
+  return fetch(`/api/lists/${listId}`, {
+    credentials: 'include'
+  })
+  .then(response => response.json())
+  .then(json => {
+    if(json.length === 1) {
+      return dispatch(receiveList(listId, json[0]));
+    } else {
+      console.log("Invalid list:", listId);
+      return Promise.reject(new Error("not found"));
+    }
+  });
+}
+
+export const fetchActiveIfNeeded = (listId) => (dispatch, getState) => {
+  const { activeList, lists } = getState();
+  if(activeList !== listId) {
+    const fetches = [];
+    fetches.push(fetchActions(listId)(dispatch));
+    if(!lists.byId[listId]) {
+      fetches.push(fetchList(listId)(dispatch));
+    }
+    return Promise.all(fetches);
+  }
 }
 
 export const receiveUsers = (users) => ({
@@ -99,8 +132,7 @@ export const receiveUser = user => ({
 
 export const identify = () => dispatch => {
   return fetch('/api/users/identify', {
-    credentials:
-    'include'
+    credentials: 'include'
   })
   .then(response => response.json())
   .then(json => dispatch(receiveUser(json)));
@@ -117,7 +149,6 @@ export const login = username => dispatch => {
     })
   .then(response => response.json())
   .then(json => dispatch(receiveUser(json)));
-
 }
 
 export const logout = () => dispatch => {
@@ -127,5 +158,17 @@ export const logout = () => dispatch => {
   })
   .then (response => response.json())
   .then(json => dispatch(receiveUser(json)));
+}
 
+export const receiveLists = (lists) => ({
+  type: 'RECEIVE_LISTS',
+  lists
+});
+
+export const fetchLists = () => dispatch => {
+  return fetch('/api/lists', {
+    credentials: 'include'
+  })
+  .then(response => response.json())
+  .then(json => dispatch(receiveLists(json)));
 }

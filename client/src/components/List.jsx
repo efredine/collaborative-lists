@@ -7,55 +7,46 @@ import VisibleCardList from '../containers/VisibleCardList'
 import { browserHistory } from 'react-router';
 
 import { connect } from 'react-redux'
-import { fetchTodos } from '../actions'
-
-
+import { fetchActiveIfNeeded } from '../actions'
 
 class List extends Component {
 
-  constructor(props) {
-    super(props);
-    this.dataChanged = this.dataChanged.bind(this);
-    this.state = {
-      listContainer: {},
-      title: "",
-
+  redirectIfNeeded = () => {
+    // if listId is null it means the user has navigated to the home directory
+    // redirect them to the first element of the list
+    const { listId, lists } = this.props;
+    if(!listId && lists.length > 0) {
+      browserHistory.push(`/${lists[0].id}`)
     }
-}
+  }
 
-componentDidMount() {
-  this.props.fetchTodos();
+  componentDidMount() {
+    this.props.fetchActiveIfNeeded();
+  }
 
-  const listId = this.props.params.listId;
-  fetch(`/api/lists/${listId}`, {
-    credentials: 'include'
-  })
-  .then(response => {
-    return response.json();
-  })
-  .then(results => {
-    const listContainer = results.length === 1 ? results[0] : {};
-    this.setState({listContainer: listContainer, title: listContainer.title});
-  })
-}
+  componentWillReceiveProps(nextProps) {
+    // TODO: review lifecycle of List component
+    nextProps.fetchActiveIfNeeded();
+  }
 
-dataChanged = (data) => {
-  const listId = this.props.params.listId;
-  fetch('/api/lists/update', {
-    credentials: 'include',
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
-    },
-      body: `id=${listId}&title=${data.Title}`
-  })
-  .then(response => response.json())
-  .then(json => console.log('updated', json))
-  .catch(error => console.log(error));
+  dataChanged = (data) => {
+    const listId = this.props.listId;
+    fetch('/api/lists/update', {
+      credentials: 'include',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+        body: `id=${listId}&title=${data.Title}`
+    })
+    .then(response => response.json())
+    .then(json => console.log('updated', json))
+    .catch(error => console.log(error));
+  }
 
-}
   render() {
-    const {title} = this.state;
+    const {title} = this.props;
+    this.redirectIfNeeded();
     return (
       <div className="list-container">
         <h1>
@@ -66,24 +57,29 @@ dataChanged = (data) => {
           />
         </h1>
         <div className="content">
-        <VisibleCardList />
-        <Footer />
+          <VisibleCardList />
         </div>
+        <Footer />
       </div>
-      );
-    }
-
+    );
+  }
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  fetchTodos: () => {
-    dispatch(fetchTodos(ownProps.params.listId))
-  }
-})
+const mapStateToProps = (state, ownProps) => {
+  const list = state.lists.byId[ownProps.listId];
+  return {
+    title: list ? list.title : "",
+    lists: state.lists.allIds.map(id => state.lists.byId[id])
+  };
+};
 
-const ListContainer = connect(
-  null,
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  fetchActiveIfNeeded: () => {
+    dispatch(fetchActiveIfNeeded(ownProps.listId))
+  }
+});
+
+export default connect(
+  mapStateToProps,
   mapDispatchToProps
 )(List);
-
-export default ListContainer;
