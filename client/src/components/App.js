@@ -89,8 +89,12 @@ class App extends Component {
             </Navbar.Brand>
           </Navbar.Header>
           <Nav activeKey={this.state.open && this.state.selected} onSelect={this.handleSelect}>
-            <NavItem eventKey={1} ref={(navItem) => { this.navItemBuilder = navItem; }} href="#">Builder</NavItem>
-            <NavItem eventKey={2} ref={(navItem) => { this.navItemLists = navItem; }} href="#">Lists</NavItem>
+            <NavItem eventKey={1} ref={(navItem) => { this.navItemBuilder = navItem; }} href="#">
+            <img className="builder" src="http://localhost:8080/images/builder.png" />
+            </NavItem>
+            <NavItem eventKey={2} ref={(navItem) => { this.navItemLists = navItem; }} href="#">
+              <img className="lists" src="http://localhost:8080/images/lists.png" />
+            </NavItem>
           </Nav>
           <LoginContainer/>
         </Navbar>
