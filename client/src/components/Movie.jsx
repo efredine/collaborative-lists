@@ -193,7 +193,7 @@ return genreTypes;
 
   landscapeFormat = () => {
     const { backdrop_path } = this.props.content;
-    return(<img className= "image" src={"http://image.tmdb.org/t/p/w500/" + backdrop_path}/>);
+    return(<img className= "image" src={"http://image.tmdb.org/t/p/w500" + backdrop_path}/>);
   };
 
   portraitFormat = () => {
@@ -202,7 +202,7 @@ return genreTypes;
       <div>
         <dl className="dl-horizontal">
           <dt>
-            <img className="poster-image" src={"http://image.tmdb.org/t/p/w185/" + poster_path}/>
+            <img className="poster-image" src={"http://image.tmdb.org/t/p/w185" + poster_path}/>
           </dt>
           <dd>
             {overview}
