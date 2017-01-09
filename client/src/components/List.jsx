@@ -57,9 +57,9 @@ class List extends Component {
           />
         </h1>
         <div className="content">
-        <VisibleCardList />
-        <Footer />
+          <VisibleCardList />
         </div>
+        <Footer />
       </div>
     );
   }

@@ -11,6 +11,7 @@ import ActionListContainer from '../containers/ActionListContainer.jsx'
 import { Link } from 'react-router';
 import { Glyphicon } from 'react-bootstrap';
 import YelpSearch from '../containers/YelpSearch.jsx'
+import Footer from './Footer'
 
 class App extends Component {
 

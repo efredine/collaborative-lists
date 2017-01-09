@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { setVisibilityFilter } from '../actions'
-import Link from '../components/Link'
+import { NavItem } from 'react-bootstrap'
 
 const mapStateToProps = (state, ownProps) => ({
   active: ownProps.filter === state.visibilityFilter
@@ -15,6 +15,6 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 const FilterLink = connect(
   mapStateToProps,
   mapDispatchToProps
-)(Link)
+)(NavItem)
 
 export default FilterLink
