@@ -185,6 +185,7 @@ class Movie extends Component {
 
   landscapeFormat = () => {
     const { backdrop_path } = this.props.content;
+
     if(backdrop_path) {
       return(<img className= "image" src={"http://image.tmdb.org/t/p/w500/" + backdrop_path}/>);
     }
@@ -197,7 +198,7 @@ class Movie extends Component {
       <div>
         <dl className="dl-horizontal">
           <dt>
-            <img className="poster-image" src={"http://image.tmdb.org/t/p/w185/" + poster_path}/>
+            <img className="poster-image" src={"http://image.tmdb.org/t/p/w185" + poster_path}/>
           </dt>
           <dd>
             <p>{overview}</p>
