@@ -501,7 +501,7 @@ iframe {
     }
 
     li {
-      a:visited {
+      a, a:active, a:visited {
         color: #555;
       }
     }
@@ -536,7 +536,7 @@ iframe {
     }
   }
   .nav-pills>li>a {
-    &:visited {
+    &, &:visited, &:active, &:focus {
       color: #555;
     }
   }
