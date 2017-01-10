@@ -49,9 +49,9 @@ html {
 }
 
 .logo {
- position: inherit;
- top: -15px;
- left: -135px;
+ position: absolute;
+ top: 0px;
+ left: 50%;
  max-height: 250%;
  padding: 0;
 
@@ -120,6 +120,14 @@ html {
 .panel-container {
   margin-top: 80px;
   margin-left: 30%;
+}
+.navbar-nav {
+  margin-bottom: 0px;
+  margin-top: 0px;
+  margin-left: -15px;
+}
+.navbar-brand {
+  height: 100%;
 }
 
 
