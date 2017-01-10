@@ -4,7 +4,7 @@ function getColorId(user) {
   return user % 7;
 }
 
-const colors = ["red","green","blue","yellow","purple","black","orange"];
+const colors = ["red","green","blue","purple","black","orange"];
 
 
 class Action extends Component {
