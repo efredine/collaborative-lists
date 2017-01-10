@@ -32,12 +32,15 @@ class Login extends Component {
     const {user} = this.props;
     if(user.username) {
       return (
-          <Navbar.Form pullRight>
-            <FormGroup>
-              <span> Logged in as: {user.username } &nbsp;</span>
-              <Button type="submit" className="btn-sm btn-nav" onClick={this.handleLogout}>Log Out</Button>
-            </FormGroup>
-          </Navbar.Form>
+        <Navbar.Header className="pull-right">
+          <Navbar.Text>
+          Logged in as: {user.username } &nbsp;
+          <Button type="submit" className="btn-sm btn-nav" onClick={this.handleLogout}>Log Out</Button>
+          </Navbar.Text>
+          <Navbar.Brand>
+            <img className="logo" src="http://localhost:8080/images/Upik.png" />
+          </Navbar.Brand>
+        </Navbar.Header>
       );
     } else {
       return(

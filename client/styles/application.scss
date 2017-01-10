@@ -49,15 +49,17 @@ html {
 }
 
 .logo {
- position: inherit;
- top: -15px;
- left: -135px;
- max-height: 250%;
+ // position: inherit;
+ // top: -15px;
+ // left: -135px;
+ // max-height: 200%;
  padding: 0;
+ padding-left: 20px;
+ // display:inline-block;
 
- &:hover {
-  cursor: pointer;
- }
+ // &:hover {
+ //  cursor: pointer;
+ // }
 }
 
 .builder {

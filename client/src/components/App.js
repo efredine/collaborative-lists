@@ -83,11 +83,6 @@ class App extends Component {
     return(
       <div>
         <Navbar>
-          <Navbar.Header>
-            <Navbar.Brand>
-              <img className="logo" src="http://localhost:8080/images/Upik.png" />
-            </Navbar.Brand>
-          </Navbar.Header>
           <Nav activeKey={this.state.open && this.state.selected} onSelect={this.handleSelect}>
             <NavItem eventKey={1} ref={(navItem) => { this.navItemBuilder = navItem; }} href="#">
             <img className="builder" src="http://localhost:8080/images/builder.png" />
