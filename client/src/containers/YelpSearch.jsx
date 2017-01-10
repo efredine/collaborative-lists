@@ -12,34 +12,32 @@ class YelpSearch extends Component {
     super(props);
     this.state = {
       restaurant: [],
-      clientIp: 'van'
+      clientIp: ''
     };
   }
 
   componentWillMount(){
     const that = this;
-       //e.preventDefault();
-      fetch(`http://ipinfo.io/json`)
+    fetch(`http://ipinfo.io/json`)
+    .then(response => {
+      return response.text();
+    })
+    .then(responseText => {
+      const ipAddress = JSON.parse(responseText);
+      this.setState({
+        clientIp: ipAddress.city
+      })
+      fetch(`http://localhost:8080/v2/search/term/${that.state.clientIp}`)
       .then(response => {
         return response.text();
       })
       .then(responseText => {
-        const ipAddress = JSON.parse(responseText);
-        this.setState({
-          clientIp: ipAddress.city
-        })
-        console.log("ipAdress: ", that.state.clientIp )
-        fetch(`http://localhost:8080/v2/search/term/${that.state.clientIp}`)
-        .then(response => {
-          return response.text();
-        })
-        .then(responseText => {
-          const restaurant = JSON.parse(responseText);
-           this.setState({
-             restaurant: restaurant.businesses
-           });
-        })
+        const restaurant = JSON.parse(responseText);
+         this.setState({
+           restaurant: restaurant.businesses
+         });
       })
+    })
   }
 
 
@@ -55,8 +53,6 @@ class YelpSearch extends Component {
   }
 
   updateSearch(e){
-    // e.preventDefault()
-    const rest = 'seta'
     if(this.refs.restaurant.value === "" || this.refs.location.value === ""){
     }
     else{
