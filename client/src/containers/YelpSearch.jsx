@@ -11,31 +11,38 @@ class YelpSearch extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      restaurant: []
+      restaurant: [],
+      clientIp: 'van'
     };
   }
 
-  // onSumbit(e){
-  //   if (e.charCode === 13){
-  //     console.log("enter pressed");
-  //     const searchUrl = `/api/restaurant/${this.refs.term.value}`;
-  //     this.foodSearch(searchUrl);
-  //   }
-  // }
+  componentWillMount(){
+    const that = this;
+       //e.preventDefault();
+      fetch(`http://ipinfo.io/json`)
+      .then(response => {
+        return response.text();
+      })
+      .then(responseText => {
+        const ipAddress = JSON.parse(responseText);
+        this.setState({
+          clientIp: ipAddress.city
+        })
+        console.log("ipAdress: ", that.state.clientIp )
+        fetch(`http://localhost:8080/v2/search/term/${that.state.clientIp}`)
+        .then(response => {
+          return response.text();
+        })
+        .then(responseText => {
+          const restaurant = JSON.parse(responseText);
+           this.setState({
+             restaurant: restaurant.businesses
+           });
+        })
+      })
+  }
 
-  // foodSearch(term){
-  //   fetch(term)
-  //   .then(response => {
-  //     return response.json();
-  //   })
-  //   .then(search => {
-  //     this.setState({
-  //       search: search
-  //     });
-  //   })
-  //
-  // }
-  //
+
   click = index => {
     const { addYelp } =  this.props;
     const restuarantSelected = this.state.restaurant[index];
@@ -48,8 +55,9 @@ class YelpSearch extends Component {
   }
 
   updateSearch(e){
-    if(this.refs.restaurant.value==="" || this.refs.location.value === ""){
-      //alert("Please enter both values");
+    // e.preventDefault()
+    const rest = 'seta'
+    if(this.refs.restaurant.value === "" || this.refs.location.value === ""){
     }
     else{
       console.log("button pressed")
@@ -71,7 +79,6 @@ class YelpSearch extends Component {
     })
   }
 
-
   render(){
     var restaurants = _.map(this.state.restaurant, (restaurant, index)=>{
       return <Yelp key = {restaurant.id} content = {restaurant} votes={false} index={index} onAdd={this.click} />
@@ -84,9 +91,9 @@ class YelpSearch extends Component {
               <input ref = "restaurant" onChange = {(e)=>{this.updateSearch()}} type = 'text' className="form-control input-sm" placeholder = "Restaurant" />
             </div>
             <div className= "form-group">
-              <input ref = "location" onChange = {(e)=>{this.updateSearch()}} type = 'text' className="form-control input-sm" placeholder= "Location"/>
+              <input ref = "location" onChange = {(e)=>{this.updateSearch()}} type = 'text' className="form-control input-sm" placeholder = {this.state.clientIp}/>
             </div>
-            <Button type = 'submit' value= 'search' className="btn btn-sm" onClick = {(e)=>{this.updateSearch()}}>Submit</Button>
+            <Button type = 'submit' value= 'search' className="btn btn-sm" onClick = {()=>{this.updateSearch()}}>Submit</Button>
           </Form>
           {restaurants}
 
@@ -94,7 +101,6 @@ class YelpSearch extends Component {
     )
 
   }
-
 }
 
 const mapDispatchToProps =  ({
