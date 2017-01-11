@@ -54,6 +54,10 @@ export const startDrag = () => ({
   type: 'START_DRAG'
 });
 
+export const toggleSortByVote = () =>({
+  type: 'TOGGLE_SORT_BY_VOTE'
+});
+
 export const moveCard = (draggedId, overId) => dispatchWithUserList({
   type: 'SERVER/MOVE_CARD',
   draggedId,
@@ -102,7 +106,7 @@ export const fetchList = listId => dispatch => {
 
 export const fetchActiveIfNeeded = (listId) => (dispatch, getState) => {
   const { activeList, lists } = getState();
-  if(activeList !== listId) {
+  if(listId && activeList !== listId) {
     const fetches = [];
     fetches.push(fetchActions(listId)(dispatch));
     if(!lists.byId[listId]) {
