@@ -12,7 +12,7 @@ function getContentForContentType(content) {
     case ContentTypes.TODO:
       return content.text;
     case ContentTypes.MOVIE:
-      return content.title;
+      return content.title
     case ContentTypes.YELP:
       return content.name;
     default:
@@ -46,26 +46,60 @@ function getVoteIcon(voteState) {
 
 function getVoteText(action, state) {
   const itemVotedOn = state.find(x => x.id === action.voteId);
-  if (action.vote === VoteStates.NONE) {
+  if (action.vote === VoteStates.NONE && itemVotedOn.content.contentType === "movie") {
     return (
-      <span>
+      <span className="movieChat">
          &nbsp;canceled vote on&nbsp;
+         <span className="movieChatBox">
         {getContentForContentType(itemVotedOn.content)}
+          </span>
       </span>
       )
 
-  } else {
+  }
+
+  if (action.vote === VoteStates.NONE && itemVotedOn.content.contentType === "yelp") {
+    return (
+      <span className="resturauntChat">
+         &nbsp;canceled vote on&nbsp;
+         <span className="restChatBox">
+        {getContentForContentType(itemVotedOn.content)}
+        </span>
+      </span>
+      )
+
+  }
+
+   if (itemVotedOn.content.contentType === "movie") {
 
     return (
-      <span>
+      <span className="movieChat">
         &nbsp;voted&nbsp;
         {getVoteIcon(action.vote)}
         &nbsp;on&nbsp;
+         <span className="movieChatBox">
         {getContentForContentType(itemVotedOn.content)}
+         </span>
       </span>
       );
   }
+
+    if (itemVotedOn.content.contentType === "yelp") {
+
+      return (
+      <span className="resturauntChat">
+        &nbsp;voted&nbsp;
+        {getVoteIcon(action.vote)}
+        &nbsp;on&nbsp;
+        <span className="restChatBox">
+        {getContentForContentType(itemVotedOn.content)}
+        </span>
+      </span>
+      );
+    }
 }
+
+
 
 function getActionRecord(state, action) {
   switch (action.type) {
