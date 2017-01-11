@@ -45,12 +45,20 @@ function getVoteIcon(voteState) {
 }
 
 function getVoteText(action, state) {
+  const itemVotedOn = state.find(x => x.id === action.voteId);
   if (action.vote === VoteStates.NONE) {
-    return "nothing";
-  } else {
-    const itemVotedOn = state.find(x => x.id === action.voteId);
     return (
       <span>
+         &nbsp;canceled their vote on&nbsp;
+        {getContentForContentType(itemVotedOn.content)}
+      </span>
+      )
+
+  } else {
+
+    return (
+      <span>
+        &nbsp;voted&nbsp;
         {getVoteIcon(action.vote)}
         &nbsp;on&nbsp;
         {getContentForContentType(itemVotedOn.content)}
@@ -86,7 +94,7 @@ function getActionRecord(state, action) {
         user: getName(action),
         id: action.id,
         voteId: action.voteId,
-        type: ' voted ',
+        type: '',
         text: getVoteText(action, state)
       };
     case 'CHAT_MESSAGE':
@@ -101,7 +109,7 @@ function getActionRecord(state, action) {
         user: getName(action),
         id: action.id,
         type: ' joined ',
-        text: 'list'
+        text: 'the chat'
       };
      case 'UPDATE_TITLE':
       return {
