@@ -252,7 +252,7 @@ class Movie extends Component {
 
   render() {
 
-    const { portrait } = this.props;
+    const { portrait, canDrag, votes } = this.props;
     const {title, vote_average, overview, backdrop_path} = this.props.content;
     return(
       <div>
@@ -263,7 +263,7 @@ class Movie extends Component {
               {title}
             </h3>
           </div>
-          <div className="panel-body">
+          <div className="panel-body" style={{cursor: votes && canDrag ? 'move' : 'auto'}}>
             <div className="poster">
               <Collapse in={this.state.posterOpen}>
                 {portrait ? this.portraitFormat() : this.landscapeFormat()}

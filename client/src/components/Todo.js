@@ -4,14 +4,14 @@ const style = {
   padding: '0.5rem 1rem',
   marginBottom: '1rem',
   marginTop: '1rem',
-  backgroundColor: 'white',
-  cursor: 'move'
+  backgroundColor: 'white'
 };
 
-const Todo = ({ onClick, completed, content }) => (
+const Todo = ({ onClick, completed, content, canDrag }) => (
   <div
     onClick={onClick}
     style={{...style,
+      cursor: canDrag ? 'move' : 'auto',
       textDecoration: completed ? 'line-through' : 'none'
     }}
   >

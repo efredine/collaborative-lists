@@ -14,7 +14,7 @@ const cardSource = {
   },
 
   canDrag(props) {
-    return !props.sortByVote;
+    return props.canDrag;
   },
 
   endDrag(props, monitor) {
