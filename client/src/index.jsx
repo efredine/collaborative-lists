@@ -18,7 +18,10 @@ function pessimisticExecute(action, emit, next, dispatch) {
 }
 
 const loggerMiddleware = createLogger();
-const socket = io('http://localhost:8080');
+const host = location.host.split(':')[0];
+const socketAddress = 'http://'+host+':8080';
+console.log('host:', host);
+const socket = io(socketAddress);
 const socketIoMiddleware = createSocketIoMiddleware(
   socket,
   ['SERVER/ADD_CARD', 'SERVER/TOGGLE_CARD', 'SERVER/MOVE_CARD', 'SERVER/VOTE_CARD', 'SERVER/CHAT_MESSAGE'],
