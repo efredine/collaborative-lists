@@ -80,7 +80,7 @@ class SortableList extends Component {
   }
 
   render() {
-    const { isDragging, connectDropTarget, onCardClick, startDrag, endDrag, dragging, voteCard } = this.props;
+    const { isDragging, connectDropTarget, onCardClick, startDrag, endDrag, dragging, voteCard, sortByVote } = this.props;
 
     const {cards} = this.state;
 
@@ -93,6 +93,7 @@ class SortableList extends Component {
           <SortableCard
             key={card.id}
             id={card.id}
+            sortByVote={sortByVote}
             startDrag={startDrag}
             endDrag={endDrag}
             moveCard={this.moveCard}

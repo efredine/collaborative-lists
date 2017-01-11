@@ -13,6 +13,10 @@ const cardSource = {
     };
   },
 
+  canDrag(props) {
+    return !props.sortByVote;
+  },
+
   endDrag(props, monitor) {
     const { id: droppedId, originalIndex } = monitor.getItem();
     const didDrop = monitor.didDrop();

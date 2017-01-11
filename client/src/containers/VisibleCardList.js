@@ -25,7 +25,8 @@ const getSortedByVote = (cards, sortByVote) => {
 
 const mapStateToProps = (state) => ({
   cards: getSortedByVote( getVisibleCards(state.cards, state.visibilityFilter), state.sortByVote),
-  dragging: state.dragging
+  dragging: state.dragging,
+  sortByVote: state.sortByVote
 })
 
 const mapDispatchToProps =  ({
