@@ -3,6 +3,28 @@ import VoteStates from '../types/VoteStates';
 import { Glyphicon } from 'react-bootstrap';
 import React, {Component} from 'react';
 
+function outerClassForContentType(contentType) {
+  switch(contentType) {
+    case ContentTypes.MOVIE:
+      return "movieChat"
+    case ContentTypes.YELP:
+      return "restaurantChat";
+    default:
+      return "";
+  }
+}
+
+function innerClassForContentType(contentType) {
+  switch(contentType) {
+    case ContentTypes.MOVIE:
+      return "movieChatBox"
+    case ContentTypes.YELP:
+      return "restChatBox";
+    default:
+      return "";
+  }
+}
+
 function getName(action) {
   return action.actingUser;
 }
@@ -18,6 +40,18 @@ function getContentForContentType(content) {
     default:
       return "";
   }
+}
+
+function getFormatedContent(typeText, content) {
+  const { contentType } = content;
+  return(
+    <span className={outerClassForContentType(contentType)}>
+       &nbsp;{typeText}&nbsp;
+       <span className={innerClassForContentType(contentType)}>
+      {getContentForContentType(content)}
+      </span>
+    </span>
+  );
 }
 
 function resolvedToggleState(state, action) {
@@ -113,7 +147,7 @@ function getActionRecord(state, action) {
       return Object.assign({}, action, {
         user: getName(action),
         type: ' added ',
-        text: getContentForContentType(action.content)
+        text: getFormatedContent('', action.content)
       });
     case 'TOGGLE_CARD':
       return {
