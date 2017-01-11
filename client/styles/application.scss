@@ -49,9 +49,9 @@ html {
 }
 
 .logo {
- position: inherit;
- top: -15px;
- left: -135px;
+ position: absolute;
+ top: 0px;
+ left: 45%;
  max-height: 250%;
  padding: 0;
 
@@ -120,6 +120,14 @@ html {
 .panel-container {
   margin-top: 80px;
   margin-left: 30%;
+}
+.navbar-nav {
+  margin-bottom: 0px;
+  margin-top: 0px;
+  margin-left: -15px;
+}
+.navbar-brand {
+  height: 100%;
 }
 
 
@@ -273,7 +281,7 @@ iframe {
   font-size: 20pt;
   line-height: 0;
   opacity: .6;
-  color: #080808
+  color: black;
 
   &:hover {
   opacity: 1.0;
@@ -283,11 +291,11 @@ iframe {
 }
 
 .glyphicon-thumbs-up {
-  color: green;
+  color: black;
 }
 
 .glyphicon-thumbs-down {
-  color: red;
+  color: black;
 }
 
 .voteup {
@@ -316,7 +324,11 @@ iframe {
   top: -10px;
   line-height: 0;
   color: green;
-  opacity: .6;
+  opacity: 1;
+
+  .glyphicon-thumbs-up {
+  color: green;
+}
 
    &:hover {
   opacity: 1.0;
@@ -335,6 +347,8 @@ iframe {
   line-height: 0;
   color: green;
   opacity: .6;
+
+
 
    &:hover {
   opacity: 1.0;
@@ -374,6 +388,7 @@ iframe {
   color: red;
   opacity: .6;
 
+
    &:hover {
   opacity: 1.0;
   cursor: pointer;
@@ -389,7 +404,11 @@ iframe {
   top: -12px;
   line-height: 0;
   color: red;
-  opacity: .6;
+  opacity: 1;
+
+.glyphicon-thumbs-down {
+  color: red;
+}
 
    &:hover {
   opacity: 1.0;
@@ -630,6 +649,19 @@ img.poster-image {
 #chat-box {
   margin-top: 10px;
   margin-bottom: 10px;
+}
+
+.small {
+  font-size: 100%;
+
+  .glyphicon-thumbs-up {
+  color: green;
+}
+
+.glyphicon-thumbs-down {
+  color: red;
+}
+
 }
 
 
