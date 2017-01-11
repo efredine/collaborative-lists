@@ -1,17 +1,19 @@
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom'
-import MovieSearch from '../containers/MovieSearch.jsx'
+import ReactDOM from 'react-dom';
+import MovieSearch from '../containers/MovieSearch.jsx';
 import LoginContainer from '../containers/LoginContainer.js';
 import ChatBox from '../containers/ChatBox';
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem, Grid, Row, Col, Tabs, Tab, Clearfix } from 'react-bootstrap';
 import ListsIndex from './ListsIndex.jsx';
 import List from './List.jsx';
-import AddTodo from '../containers/AddTodo'
-import ActionListContainer from '../containers/ActionListContainer.jsx'
+import AddTodo from '../containers/AddTodo';
+import ActionListContainer from '../containers/ActionListContainer.jsx';
 import { Link } from 'react-router';
 import { Glyphicon } from 'react-bootstrap';
-import YelpSearch from '../containers/YelpSearch.jsx'
-import Footer from './Footer'
+import YelpSearch from '../containers/YelpSearch.jsx';
+import Footer from './Footer';
+import ContentTypes from '../types/ContentTypes';
+import { connect } from 'react-redux';
 
 class App extends Component {
 
@@ -46,12 +48,13 @@ class App extends Component {
   }
 
   menu = () => {
+    const { defaultEventKey } = this.props;
     if(this.state.open) {
       if(this.state.selected === 1) {
         return(
           <Col className="movieContainer" xs={4} lg={4}>
             <div className="content">
-              <Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
+              <Tabs defaultActiveKey={defaultEventKey} id="uncontrolled-tab-example">
                 <Tab eventKey={1} title="Movies">
                   <MovieSearch className="panel-container"/>
                 </Tab>
@@ -117,4 +120,38 @@ class App extends Component {
     );
   }
 }
-export default App;
+
+const ContentTypeToEventKeyMap = {
+  "movie": 0,
+  "yelp": 1,
+  "todo": 2
+}
+
+function getContentTypeCounts(cards) {
+  return cards.reduce((counts, card) => {
+    if(!card.completed) {
+      counts[ContentTypeToEventKeyMap[card.content.contentType]] += 1;
+    }
+    return counts;
+  }, [0, 0, 0]);
+}
+
+function getEventKeyDefault(state) {
+  const { cards } = state;
+  if(cards && cards.length > 0) {
+    const counts = getContentTypeCounts(cards);
+    const max = counts.reduce((a, b) => b > a ? b : a);
+    return counts.indexOf(max) + 1;
+  } else {
+    return 1;
+  }
+}
+
+const mapStateToProps = (state) => ({
+  defaultEventKey: getEventKeyDefault(state),
+})
+
+export default connect(
+  mapStateToProps,
+  null
+)(App);
