@@ -8,7 +8,6 @@ const bodyParser    = require("body-parser");
 const MovieDB = require('moviedb')(process.env.MOVIEDB_KEY);
 const cookieSession = require('cookie-session')
 
-
 const ENV         = process.env.ENV || "development";
 const knexConfig  = require("./knexfile");
 const knex        = require("knex")(knexConfig[ENV]);
@@ -19,19 +18,9 @@ const pubsub      = require('./lib/pubsub');
 const publish     = pubsub(io, knex);
 // const yelpAuth    = require(process.env.)
 
-
 // Seperated Routes for each Resource
 const usersRoutes = require("./routes/users");
 const listsRoutes = require("./routes/lists");
-
-var getRemoteIP = function(request) {
-  var ip = request.headers['x-forwarded-for'] ||
-           request.connection.remoteAddress ||
-           request.socket.remoteAddress ||
-           request.connection.socket.remoteAddress
-
-  return ip;
-}
 
 app.use(cookieSession({name: 'session', secret: 'secret garden'}));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -66,7 +55,6 @@ app.use("/api/users", usersRoutes(knex));
 app.use("/api/lists", listsRoutes(knex, publish));
 
 app.get("/api/todos", (req, res) => {
-  // res.json(actionHistory);
   res.redirect("/api/lists/1/actions")
 });
 
@@ -112,17 +100,6 @@ app.get("/v2/search/:restaurant/:location/", (req, res)=>{
     console.log("err", err)
     res.json(result);
   })
-  // .then(function (data) {
-  //   console.log(data);
-  // })
-  // .catch(function (err) {
-  //   console.error(err);
-  // });
-})
-
-app.get("/api/ip", (req, res)=>{
-  // console.dir(ip.address())
-  res.send(console.log("request IP:", req))
 })
 
 app.post("/api/update", (req, res) => {
