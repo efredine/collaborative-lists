@@ -11,7 +11,7 @@ class Movie extends Component {
     this.state = {
       trailers: [],
       open: false,
-      posterOpen: true,
+      posterOpen: !this.props.votes,
       contents: '',
       runtime: ''
     };

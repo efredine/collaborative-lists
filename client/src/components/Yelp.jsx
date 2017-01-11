@@ -8,7 +8,7 @@ class Yelp extends Component {
   constructor(...args) {
     super(...args);
     this.state = {
-      open: true
+      open: !this.props.votes
     };
   }
 
