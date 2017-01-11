@@ -30,7 +30,7 @@ class Yelp extends Component {
     // VoteStates.NONE
     // VoteStates.UP
     // VoteStates.DOWN
-    const { votes, currentVote, voteCount, numberOfVotes, thumbsUpCount, thumbsDownCount } = this.props;
+    const { votes, currentVote, voteCount, numberOfVotes, thumbsUpCount, thumbsDownCount, canDrag } = this.props;
     const upOn = VoteStates.UP === currentVote ? "-on" + " bounce" : "";
     const downOn = VoteStates.DOWN === currentVote ? "-off" + " bounce" : "";
     if (votes === true) {
@@ -98,6 +98,7 @@ class Yelp extends Component {
   }
 
   render() {
+    const { votes, canDrag } = this.props;
     const {name, location,
           image_url, display_phone, rating,
           rating_img_url_small, review_count, snippet_text, url, snippet_image_url
@@ -112,7 +113,7 @@ class Yelp extends Component {
               {name}
             </h3>
           </div>
-          <div className = "panel-body">
+          <div className = "panel-body" style={{cursor: votes && canDrag ? 'move' : 'auto'}}>
             <div className="restaurant" >
               <Collapse in={this.state.open}>
                 <dl className="dl-horizontal">

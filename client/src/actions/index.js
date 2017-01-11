@@ -106,7 +106,7 @@ export const fetchList = listId => dispatch => {
 
 export const fetchActiveIfNeeded = (listId) => (dispatch, getState) => {
   const { activeList, lists } = getState();
-  if(activeList !== listId) {
+  if(listId && activeList !== listId) {
     const fetches = [];
     fetches.push(fetchActions(listId)(dispatch));
     if(!lists.byId[listId]) {

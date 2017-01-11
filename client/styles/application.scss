@@ -37,15 +37,16 @@ html {
 
 .panel-body {
   padding: 0;
-
 }
 
 .panel-heading {
   padding: 5px 15px;
+  cursor: pointer;
 }
 
 .panel-heading-resturaunt {
   padding: 5px 15px;
+  cursor: pointer;
 }
 
 .logo {
@@ -54,10 +55,6 @@ html {
  left: 45%;
  max-height: 250%;
  padding: 0;
-
- &:hover {
-  cursor: pointer;
- }
 }
 
 .builder {
@@ -565,6 +562,9 @@ iframe {
       height: calc(100% - 100px);
       overflow: scroll;
     }
+  }
+  input {
+    width: 100%;
   }
 }
 
