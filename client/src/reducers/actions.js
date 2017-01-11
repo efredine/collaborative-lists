@@ -42,12 +42,11 @@ function getContentForContentType(content) {
   }
 }
 
-function getFormatedContent(typeText, content) {
+function getFormatedContent(content) {
   const { contentType } = content;
   return(
     <span className={outerClassForContentType(contentType)}>
-       &nbsp;{typeText}&nbsp;
-       <span className={innerClassForContentType(contentType)}>
+      <span className={innerClassForContentType(contentType)}>
       {getContentForContentType(content)}
       </span>
     </span>
@@ -147,7 +146,7 @@ function getActionRecord(state, action) {
       return Object.assign({}, action, {
         user: getName(action),
         type: ' added ',
-        text: getFormatedContent('', action.content)
+        text: getFormatedContent(action.content)
       });
     case 'TOGGLE_CARD':
       return {
