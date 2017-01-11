@@ -40,7 +40,6 @@ class YelpSearch extends Component {
     })
   }
 
-
   click = index => {
     const { addYelp } =  this.props;
     const restuarantSelected = this.state.restaurant[index];
