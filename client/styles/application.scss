@@ -656,10 +656,12 @@ img.poster-image {
 
   .glyphicon-thumbs-up {
   color: green;
+  font-size: larger;
 }
 
 .glyphicon-thumbs-down {
   color: red;
+  font-size: larger;
 }
 
 }
@@ -667,9 +669,19 @@ img.poster-image {
 .movieChatBox {
   color: black;
   background: -webkit-gradient(linear, left top, right top, color-stop(0%, #008080), color-stop(100%, #57B3FF));
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  padding: 3px;
 }
 
 .restChatBox {
   color: black;
   background: -webkit-gradient(linear, left top, right top, color-stop(0%, #fd746c), color-stop(100%, #ff9068));
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  padding: 3px;
 }
