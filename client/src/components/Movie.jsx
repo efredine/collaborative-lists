@@ -219,7 +219,7 @@ class Movie extends Component {
     if(contents && contents.credits && contents.credits.cast) {
       const cast = contents.credits.cast;
       return cast.slice(0, 14).map( (actor, index) =>
-        (actor.profile_path && <img key={index} className= "actors" src = {"http://image.tmdb.org/t/p/w500"+ actor.profile_path} />)
+        (actor.profile_path && <img key={index} title = {actor.name} className= "actors" src = {"http://image.tmdb.org/t/p/w500"+ actor.profile_path} />)
       );
     }
   }
