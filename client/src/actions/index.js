@@ -54,6 +54,10 @@ export const startDrag = () => ({
   type: 'START_DRAG'
 });
 
+export const toggleSortByVote = () =>({
+  type: 'TOGGLE_SORT_BY_VOTE'
+});
+
 export const moveCard = (draggedId, overId) => dispatchWithUserList({
   type: 'SERVER/MOVE_CARD',
   draggedId,

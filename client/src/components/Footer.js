@@ -1,13 +1,12 @@
 import React from 'react'
 import FilterLink from '../containers/FilterLink'
-import { Nav, NavItem, Glyphicon } from 'react-bootstrap'
+import { Nav, NavItem } from 'react-bootstrap'
+import SortControl from '../containers/SortControl'
 
 const Footer = () => (
   <div>
     <Nav bsStyle="pills" pullLeft>
-      <NavItem>
-       <Glyphicon onClick={ () => {} } glyph="glyphicon glyphicon-sort"/>
-      </NavItem>
+      <SortControl/>
     </Nav>
     <Nav bsStyle="pills" pullRight>
       <FilterLink filter="SHOW_COMPLETED">

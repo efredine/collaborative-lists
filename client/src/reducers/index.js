@@ -8,6 +8,7 @@ import user from './user'
 import users from './users'
 import activeList from './activeList'
 import lists from './lists'
+import sortByVote from './sortByVote'
 
 const sliceReducers = combineReducers({
   cards,
@@ -17,7 +18,8 @@ const sliceReducers = combineReducers({
   user,
   users,
   activeList,
-  lists
+  lists,
+  sortByVote
 });
 
 const cardReducers = combineReducers({
