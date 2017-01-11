@@ -49,7 +49,7 @@ function getVoteText(action, state) {
   if (action.vote === VoteStates.NONE) {
     return (
       <span>
-         &nbsp;canceled their vote on&nbsp;
+         &nbsp;canceled vote on&nbsp;
         {getContentForContentType(itemVotedOn.content)}
       </span>
       )
