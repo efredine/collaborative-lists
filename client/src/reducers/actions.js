@@ -3,6 +3,28 @@ import VoteStates from '../types/VoteStates';
 import { Glyphicon } from 'react-bootstrap';
 import React, {Component} from 'react';
 
+function outerClassForContentType(contentType) {
+  switch(contentType) {
+    case ContentTypes.MOVIE:
+      return "movieChat"
+    case ContentTypes.YELP:
+      return "restaurantChat";
+    default:
+      return "";
+  }
+}
+
+function innerClassForContentType(contentType) {
+  switch(contentType) {
+    case ContentTypes.MOVIE:
+      return "movieChatBox"
+    case ContentTypes.YELP:
+      return "restChatBox";
+    default:
+      return "";
+  }
+}
+
 function getName(action) {
   return action.actingUser;
 }
@@ -12,12 +34,23 @@ function getContentForContentType(content) {
     case ContentTypes.TODO:
       return content.text;
     case ContentTypes.MOVIE:
-      return content.title;
+      return content.title
     case ContentTypes.YELP:
       return content.name;
     default:
       return "";
   }
+}
+
+function getFormatedContent(content) {
+  const { contentType } = content;
+  return(
+    <span className={outerClassForContentType(contentType)}>
+      <span className={innerClassForContentType(contentType)}>
+      {getContentForContentType(content)}
+      </span>
+    </span>
+  );
 }
 
 function resolvedToggleState(state, action) {
@@ -46,26 +79,60 @@ function getVoteIcon(voteState) {
 
 function getVoteText(action, state) {
   const itemVotedOn = state.find(x => x.id === action.voteId);
-  if (action.vote === VoteStates.NONE) {
+  if (action.vote === VoteStates.NONE && itemVotedOn.content.contentType === "movie") {
     return (
-      <span>
+      <span className="movieChat">
          &nbsp;canceled vote on&nbsp;
+         <span className="movieChatBox">
         {getContentForContentType(itemVotedOn.content)}
+          </span>
       </span>
       )
 
-  } else {
+  }
+
+  if (action.vote === VoteStates.NONE && itemVotedOn.content.contentType === "yelp") {
+    return (
+      <span className="resturauntChat">
+         &nbsp;canceled vote on&nbsp;
+         <span className="restChatBox">
+        {getContentForContentType(itemVotedOn.content)}
+        </span>
+      </span>
+      )
+
+  }
+
+   if (itemVotedOn.content.contentType === "movie") {
 
     return (
-      <span>
+      <span className="movieChat">
         &nbsp;voted&nbsp;
         {getVoteIcon(action.vote)}
         &nbsp;on&nbsp;
+         <span className="movieChatBox">
         {getContentForContentType(itemVotedOn.content)}
+         </span>
       </span>
       );
   }
+
+    if (itemVotedOn.content.contentType === "yelp") {
+
+      return (
+      <span className="resturauntChat">
+        &nbsp;voted&nbsp;
+        {getVoteIcon(action.vote)}
+        &nbsp;on&nbsp;
+        <span className="restChatBox">
+        {getContentForContentType(itemVotedOn.content)}
+        </span>
+      </span>
+      );
+    }
 }
+
+
 
 function getActionRecord(state, action) {
   switch (action.type) {
@@ -79,7 +146,7 @@ function getActionRecord(state, action) {
       return Object.assign({}, action, {
         user: getName(action),
         type: ' added ',
-        text: getContentForContentType(action.content)
+        text: getFormatedContent(action.content)
       });
     case 'TOGGLE_CARD':
       return {
