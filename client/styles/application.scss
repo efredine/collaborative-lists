@@ -291,11 +291,11 @@ iframe {
 }
 
 .glyphicon-thumbs-up {
-  color: green;
+  color: black;
 }
 
 .glyphicon-thumbs-down {
-  color: red;
+  color: black;
 }
 
 .voteup {
@@ -326,6 +326,10 @@ iframe {
   color: green;
   opacity: .6;
 
+  .glyphicon-thumbs-up {
+  color: green;
+}
+
    &:hover {
   opacity: 1.0;
   cursor: pointer;
@@ -343,6 +347,8 @@ iframe {
   line-height: 0;
   color: green;
   opacity: .6;
+
+
 
    &:hover {
   opacity: 1.0;
@@ -382,6 +388,7 @@ iframe {
   color: red;
   opacity: .6;
 
+
    &:hover {
   opacity: 1.0;
   cursor: pointer;
@@ -398,6 +405,10 @@ iframe {
   line-height: 0;
   color: red;
   opacity: .6;
+
+.glyphicon-thumbs-down {
+  color: red;
+}
 
    &:hover {
   opacity: 1.0;
@@ -638,6 +649,19 @@ img.poster-image {
 #chat-box {
   margin-top: 10px;
   margin-bottom: 10px;
+}
+
+.small {
+  font-size: 100%;
+
+  .glyphicon-thumbs-up {
+  color: green;
+}
+
+.glyphicon-thumbs-down {
+  color: red;
+}
+
 }
 
 
