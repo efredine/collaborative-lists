@@ -185,10 +185,7 @@ class Movie extends Component {
 
   landscapeFormat = () => {
     const { backdrop_path } = this.props.content;
-
-    if(backdrop_path) {
-      return(<img className= "image" src={"http://image.tmdb.org/t/p/w500/" + backdrop_path}/>);
-    }
+    return(<img className= "image" src={"http://image.tmdb.org/t/p/w500/" + backdrop_path}/>);
   };
 
   portraitFormat = () => {
