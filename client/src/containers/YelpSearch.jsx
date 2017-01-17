@@ -27,7 +27,7 @@ class YelpSearch extends Component {
       this.setState({
         clientIp: ipAddress.city
       })
-      fetch(`http://localhost:8080/v2/search/term/${that.state.clientIp}`)
+      fetch(`/api/v2/search/term/${that.state.clientIp}`)
       .then(response => {
         return response.text();
       })
@@ -61,7 +61,7 @@ class YelpSearch extends Component {
   }
 
   foodSearch(restaurant, location){
-    fetch(`http://localhost:8080/v2/search/${restaurant}/${location}`)
+    fetch(`/api/v2/search/${restaurant}/${location}`)
     .then(response => {
       return response.text();
     })
