@@ -7,7 +7,8 @@ new WebpackDevServer(webpack(config), {
     publicPath: config.output.publicPath,
     historyApiFallback: true,
     proxy: {
-      "/api/**" : "http://localhost:8080"
+      "/api/**" : "http://localhost:8080",
+      "/images/**" : "http://localhost:8080"
     },
     watchOptions: {
       aggregateTimeout: 300,

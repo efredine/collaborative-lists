@@ -162,7 +162,7 @@ class Movie extends Component {
      if (completed === undefined) {
         return (
             <div className="add">
-              <img className= "image" onClick={this.onAdd} src="http://localhost:8080/images/add.png"/>
+              <img className= "image" onClick={this.onAdd} src="/images/add.png"/>
             </div>
       );
     }

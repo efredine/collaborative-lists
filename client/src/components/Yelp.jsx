@@ -75,7 +75,7 @@ class Yelp extends Component {
      if (completed === undefined) {
         return (
             <div className="add">
-              <img onClick={this.onAdd} className= "image" src="http://localhost:8080/images/add.png"/>
+              <img onClick={this.onAdd} className= "image" src="/images/add.png"/>
             </div>
       );
     }

@@ -88,15 +88,15 @@ class App extends Component {
         <Navbar>
           <Navbar.Header>
             <Navbar.Brand>
-              <img className="logo" src="http://localhost:8080/images/Upik.png" />
+              <img className="logo" src="/images/Upik.png" />
             </Navbar.Brand>
           </Navbar.Header>
           <Nav activeKey={this.state.open && this.state.selected} onSelect={this.handleSelect}>
             <NavItem eventKey={1} ref={(navItem) => { this.navItemBuilder = navItem; }} href="#">
-            <img className="builder" src="http://localhost:8080/images/builder.png" />
+            <img className="builder" src="/images/builder.png" />
             </NavItem>
             <NavItem eventKey={2} ref={(navItem) => { this.navItemLists = navItem; }} href="#">
-              <img className="lists" src="http://localhost:8080/images/lists.png" />
+              <img className="lists" src="/images/lists.png" />
             </NavItem>
           </Nav>
           <LoginContainer/>
