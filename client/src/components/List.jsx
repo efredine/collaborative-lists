@@ -30,14 +30,15 @@ class List extends Component {
   }
 
   dataChanged = (data) => {
-    const listId = this.props.listId;
+    const listId = encodeURIComponent(this.props.listId);
+    const title = encodeURIComponent(data.Title);
     fetch('/api/lists/update', {
       credentials: 'include',
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
-        body: `id=${listId}&title=${data.Title}`
+        body: `id=${listId}&title=${title}`
     })
     .then(response => response.json())
     .then(json => console.log('updated', json))
