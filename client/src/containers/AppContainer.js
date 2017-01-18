@@ -16,19 +16,11 @@ class AppContainer extends Component {
   }
 
   render() {
-    const { users, user } = this.props;
-    if(users.allIds.length > 0 && user.userInitialized) {
-      return (
-        <Router history={browserHistory}>
-          <Route path="/(:listId)" component={App} />
-        </Router>
-      );
-    }
-    else {
-      return(
-        <div></div>
-      );
-    }
+    return (
+      <Router history={browserHistory}>
+        <Route path="/(:listId)" component={App} />
+      </Router>
+    );
   }
 }
 

@@ -25,6 +25,11 @@ class App extends Component {
     };
   }
 
+  isAuthorized = () => {
+    const { users, user } = this.props;
+    return users.allIds.length > 0 && user.userInitialized && user.id;
+  }
+
   blurNavItem = navItem => {
     ReactDOM.findDOMNode(navItem).querySelector('a').blur();
   }
@@ -80,9 +85,34 @@ class App extends Component {
     }
   }
 
-  render() {
+  unAuthorized = () => {
+    return (
+      <Row className="show-grid">
+        <Col xs={12}>You have to log in.</Col>
+      </Row>
+    );
+  }
+
+  authorized = () => {
     const { open } = this.state;
     const { listId } = this.props.params;
+    return (
+      <Row className="show-grid">
+        { this.menu() }
+        <Col className="historyContainer" xs={open ? 5 : 7} lg={open ? 5 : 7}>
+          <List listId={ listId } />
+        </Col>
+        <Col className="chatContainer" xs={open ? 3 : 5} lg={open ? 3 : 5}>
+          <h1>Activity</h1>
+          <ActionListContainer/>
+          <ChatBox />
+        </Col>
+      </Row>
+    );
+  }
+
+  render() {
+    const { open } = this.state;
     return(
       <div>
         <Navbar>
@@ -101,21 +131,13 @@ class App extends Component {
           </Nav>
           <LoginContainer/>
         </Navbar>
+
         <Grid>
-          <Row className="show-grid">
-            {this.menu()}
-            <Col className="historyContainer" xs={open ? 5 : 7} lg={open ? 5 : 7}>
-              <List listId={ listId } />
-            </Col>
-            <Col className="chatContainer" xs={open ? 3 : 5} lg={open ? 3 : 5}>
-              <h1>Activity</h1>
-              <ActionListContainer/>
-              <ChatBox />
-            </Col>
-          </Row>
+          { this.isAuthorized() ? this.authorized() : this.unAuthorized() }
           <Clearfix/>
           <footer>Lists!</footer>
         </Grid>
+
       </div>
     );
   }
@@ -149,6 +171,8 @@ function getEventKeyDefault(state) {
 
 const mapStateToProps = (state) => ({
   defaultEventKey: getEventKeyDefault(state),
+  users: state.users,
+  user: state.user
 })
 
 export default connect(
