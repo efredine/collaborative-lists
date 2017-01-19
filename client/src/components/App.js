@@ -25,6 +25,11 @@ class App extends Component {
     };
   }
 
+  isUserInitialized = () => {
+    const { user } = this.props;
+    return user.userInitialized;
+  }
+
   isAuthorized = () => {
     const { users, user } = this.props;
     return users.allIds.length > 0 && user.userInitialized && user.id;
@@ -88,7 +93,7 @@ class App extends Component {
   unAuthorized = () => {
     return (
       <Row className="show-grid">
-        <Col xs={12}>You have to log in.</Col>
+        <Col xs={12}>{this.isUserInitialized() && 'You have to log in.'}</Col>
       </Row>
     );
   }

@@ -29,6 +29,9 @@ const cardReducers = combineReducers({
 });
 
 function reduce(state, action) {
+  if (action.type === 'USER_LOGOUT') {
+    state = undefined;
+  }
   const intermediateState = receiver(state, action, cardReducers);
   return sliceReducers(intermediateState, action);
 }

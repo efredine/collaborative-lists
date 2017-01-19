@@ -152,10 +152,20 @@ export const login = username => dispatch => {
       body: `username=${username}`
     })
   .then(response => response.json())
-  .then(json => dispatch(receiveUser(json)));
+  .then(json => Promise.all([
+    dispatch(receiveUser(json)),
+    dispatch(identify()),
+    dispatch(fetchUsers()),
+    dispatch(fetchLists())
+    ]
+  ));
 }
 
 export const logout = () => dispatch => {
+  dispatch({
+    type: 'USER_LOGOUT'
+  });
+
   return fetch ('/api/users/logout', {
     credentials: 'include',
     method: 'POST'
