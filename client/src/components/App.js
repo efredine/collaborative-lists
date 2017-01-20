@@ -1,14 +1,9 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import MovieSearch from '../containers/MovieSearch.jsx';
-import LoginContainer from '../containers/LoginContainer.js';
-import ChatBox from '../containers/ChatBox';
-import { Navbar, Nav, NavItem, NavDropdown, MenuItem, Grid, Row, Col, Tabs, Tab, Clearfix } from 'react-bootstrap';
-import ListsIndex from './ListsIndex.jsx';
-import List from './List.jsx';
+import LoginContainer from '../containers/LoginContainer';
+import ListTools from './ListTools.jsx'
+import { Navbar, Nav, NavItem, NavDropdown, MenuItem, Grid, Row, Col, Clearfix } from 'react-bootstrap';
 import AddTodo from '../containers/AddTodo';
-import ActionListContainer from '../containers/ActionListContainer.jsx';
-import { Link } from 'react-router';
 import { Glyphicon } from 'react-bootstrap';
 import YelpSearch from '../containers/YelpSearch.jsx';
 import Footer from './Footer';
@@ -98,26 +93,10 @@ class App extends Component {
     );
   }
 
-  authorized = () => {
-    const { open } = this.state;
-    const { listId } = this.props.params;
-    return (
-      <Row className="show-grid">
-        { this.menu() }
-        <Col className="historyContainer" xs={open ? 5 : 7} lg={open ? 5 : 7}>
-          <List listId={ listId } />
-        </Col>
-        <Col className="chatContainer" xs={open ? 3 : 5} lg={open ? 3 : 5}>
-          <h1>Activity</h1>
-          <ActionListContainer/>
-          <ChatBox />
-        </Col>
-      </Row>
-    );
-  }
-
   render() {
-    const { open } = this.state;
+    const { open, selected } = this.state;
+    const { defaultEventKey } = this.props;
+    const { listId } = this.props.params;
     return(
       <div>
         <Navbar>
@@ -138,7 +117,13 @@ class App extends Component {
         </Navbar>
 
         <Grid>
-          { this.isAuthorized() ? this.authorized() : this.unAuthorized() }
+          <ListTools
+            open={open}
+            selected={selected}
+            listId={listId}
+            defaultEventKey={defaultEventKey}
+            enabled={this.isAuthorized()}
+          />
           <Clearfix/>
           <footer>Lists!</footer>
         </Grid>
