@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import fetch from 'isomorphic-fetch';
+import fetch from '../utils/fetch';
 import _ from 'lodash';
 import Yelp from '../components/Yelp.jsx'
 import { connect } from 'react-redux'

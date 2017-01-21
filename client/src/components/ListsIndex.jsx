@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import fetch from 'isomorphic-fetch';
+import fetch from '../utils/fetch';
 import _ from 'lodash';
 import { Link, browserHistory } from 'react-router'
 import { connect } from 'react-redux'

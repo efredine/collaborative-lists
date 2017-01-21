@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Movie from '../components/Movie.jsx'
-import fetch from 'isomorphic-fetch';
+import fetch from '../utils/fetch';
 import _ from 'lodash';
 import FlipMove from 'react-flip-move';
 import { connect } from 'react-redux'

@@ -1,4 +1,4 @@
-import fetch from 'isomorphic-fetch'
+import fetch from '../utils/fetch';
 import ContentTypes from '../types/ContentTypes';
 
 function dispatchWithUserList(action) {
@@ -81,18 +81,14 @@ export const receiveList = (listId, list) => ({
 });
 
 export const fetchActions = listId => dispatch => {
-  return fetch(`/api/lists/${listId}/actions`, {
-    credentials: 'include'
-  })
+  return fetch(`/api/lists/${listId}/actions`, {})
   .then(response => response.json())
   .then(json => dispatch(receiveActions(listId, json)));
   // TODO: add error handling catch
 }
 
 export const fetchList = listId => dispatch => {
-  return fetch(`/api/lists/${listId}`, {
-    credentials: 'include'
-  })
+  return fetch(`/api/lists/${listId}`, {})
   .then(response => response.json())
   .then(json => {
     if(json.length === 1) {
@@ -122,9 +118,7 @@ export const receiveUsers = (users) => ({
 });
 
 export const fetchUsers = () => dispatch => {
-  return fetch(`/api/users`, {
-    credentials: 'include'
-  })
+  return fetch(`/api/users`, {})
   .then(response => response.json())
   .then(json => dispatch(receiveUsers(json)));
 }
@@ -135,16 +129,13 @@ export const receiveUser = user => ({
 });
 
 export const identify = () => dispatch => {
-  return fetch('/api/users/identify', {
-    credentials: 'include'
-  })
+  return fetch('/api/users/identify', {})
   .then(response => response.json())
   .then(json => dispatch(receiveUser(json)));
 }
 
 export const login = username => dispatch => {
   return fetch('/api/users/login', {
-    credentials: 'include',
     method: 'POST',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
@@ -167,7 +158,6 @@ export const logout = () => dispatch => {
   });
 
   return fetch ('/api/users/logout', {
-    credentials: 'include',
     method: 'POST'
   })
   .then (response => response.json())
@@ -180,9 +170,7 @@ export const receiveLists = (lists) => ({
 });
 
 export const fetchLists = () => dispatch => {
-  return fetch('/api/lists', {
-    credentials: 'include'
-  })
+  return fetch('/api/lists', {})
   .then(response => response.json())
   .then(json => dispatch(receiveLists(json)));
 }

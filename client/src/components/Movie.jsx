@@ -1,3 +1,4 @@
+import fetch from '../utils/fetch';
 import React, {Component} from 'react';
 import Video from 'react-video';
 import { Collapse, Button, Well, ProgressBar, Glyphicon } from 'react-bootstrap';

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import fetch from 'isomorphic-fetch';
+import fetch from '../utils/fetch';
 import _ from 'lodash';
 import InlineEdit from 'react-edit-inline';
 import Footer from './Footer'
@@ -33,7 +33,6 @@ class List extends Component {
     const listId = encodeURIComponent(this.props.listId);
     const title = encodeURIComponent(data.Title);
     fetch('/api/lists/update', {
-      credentials: 'include',
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
