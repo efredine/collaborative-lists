@@ -1,12 +1,14 @@
 import fetch from 'isomorphic-fetch';
+import Auth from './Auth';
 
-const config = {
-  credentials: 'include'
-}
-
-function authorizedFetch(url, options, authorized=true) {
+function authorizedFetch(url, options, authorize=true) {
   if(options) {
-    if(authorized) {
+    if(authorize) {
+      const config = {
+        headers: {
+          'Authorization': `JWT ${Auth.getToken().token}`
+        }
+      };
       return fetch(url, Object.assign({}, options, config));
     } else {
       return fetch(url, options);

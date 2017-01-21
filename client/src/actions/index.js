@@ -1,5 +1,6 @@
 import fetch from '../utils/fetch';
 import ContentTypes from '../types/ContentTypes';
+import Auth from '../utils/Auth';
 
 function dispatchWithUserList(action) {
   return (dispatch, getState) => {
@@ -132,14 +133,16 @@ function initializeUser(dispatch, user) {
   let actions = [ receiveUser(user) ];
   if(user.id) {
     actions = actions.concat(fetchUsers(), fetchLists());
+    Auth.authenticateUser(user);
+  } else {
+    Auth.deauthenticateUser();
   }
   return Promise.all(actions.map(dispatch));
 }
 
 export const identify = () => dispatch => {
-  return fetch('/api/users/identify', {})
-  .then(response => response.json())
-  .then(user => initializeUser(dispatch, user));
+  const user = Auth.getToken() || {name: undefined, id: undefined};
+  return initializeUser(dispatch, user);
 }
 
 export const login = name => dispatch => {
@@ -149,7 +152,7 @@ export const login = name => dispatch => {
       'Content-Type': 'application/x-www-form-urlencoded'
     },
       body: `name=${name}`
-    })
+    }, false)
   .then(response => response.json())
   .then(user => initializeUser(dispatch, user));
 }

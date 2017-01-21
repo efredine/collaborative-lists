@@ -8,7 +8,7 @@ module.exports = (knex, publish) => {
   const actionHelpers = require('../lib/actionHelpers')(knex);
 
   router.get("/", (req, res) => {
-    const userId = req.session.user.id;
+    const userId = req.user.id;
     console.log(userId);
     knex
       .select('list_id as id', 'title', 'created', 'created_at', 'updated_at')
@@ -77,7 +77,7 @@ module.exports = (knex, publish) => {
   }
 
   router.get('/:listId', (req, res) => {
-    const userId = req.session.user.id;
+    const userId = req.user.id;
     const listId = req.params.listId;
     addUserToList(userId, listId);
     knex
@@ -90,7 +90,7 @@ module.exports = (knex, publish) => {
   });
 
   router.post("/update", (req, res)=>{
-    const userId = req.session.user.id;
+    const userId = req.user.id;
     const listId = req.body.id;
     const title = req.body.title;
     knex('lists').where("id",listId)
@@ -104,7 +104,7 @@ module.exports = (knex, publish) => {
   });
 
   router.post("/new", (req, res) => {
-    const userId = req.session.user.id;
+    const userId = req.user.id;
     knex('lists')
       .returning('id')
       .insert({

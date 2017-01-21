@@ -9,6 +9,7 @@ const MovieDB = require('moviedb')(process.env.MOVIEDB_KEY);
 const cookieSession = require('cookie-session')
 
 const ENV         = process.env.ENV || "development";
+
 const knexConfig  = require("./knexfile");
 const knex        = require("knex")(knexConfig[ENV]);
 const morgan      = require('morgan');
@@ -16,6 +17,8 @@ const knexLogger  = require('knex-logger');
 const Yelp        = require('yelp');
 const pubsub      = require('./lib/pubsub');
 const publish     = pubsub(io, knex);
+const auth        = require("./lib/auth.js")();
+
 // const yelpAuth    = require(process.env.)
 
 // Seperated Routes for each Resource
@@ -26,6 +29,7 @@ app.use(cookieSession({name: 'session', secret: 'secret garden'}));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json())
 app.use(express.static('public'));
+app.use(auth.initialize());
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -52,7 +56,7 @@ app.use(knexLogger(knex));
 // Mount routes on /api
 //
 app.use("/api/users", usersRoutes(knex));
-app.use("/api/lists", listsRoutes(knex, publish));
+app.use("/api/lists", auth.authenticate(), listsRoutes(knex, publish));
 
 app.get("/api/todos", (req, res) => {
   res.redirect("/api/lists/1/actions")
