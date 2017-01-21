@@ -143,13 +143,16 @@ export const login = name => dispatch => {
       body: `name=${name}`
     })
   .then(response => response.json())
-  .then(json => Promise.all([
-    dispatch(receiveUser(json)),
-    dispatch(identify()),
-    dispatch(fetchUsers()),
-    dispatch(fetchLists())
-    ]
-  ));
+  .then(user => {
+    if(user.id) {
+      return Promise.all([
+        dispatch(receiveUser(user)),
+        dispatch(fetchUsers()),
+        dispatch(fetchLists())
+        ]
+      );
+    }
+  });
 }
 
 export const logout = () => dispatch => {

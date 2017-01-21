@@ -3,6 +3,8 @@
 const express = require('express');
 const router  = express.Router();
 
+const undefinedUser = {name: undefined, id: undefined};
+
 module.exports = (knex) => {
 
   router.get("/", (req, res) => {
@@ -28,28 +30,33 @@ module.exports = (knex) => {
   router.post("/login", (req, res) => {
     // Look up the user name and log them in if appropriate or return an error
     console.log("session:", req.session);
+    const name = req.body.name;
     knex
       .select("id", "name")
       .from("users")
-      .where("users.name", "=", req.body.name)
-      .then((user) => {
-        const userRecord = user[0];
-        if(req.body.name === userRecord.name) {
-          req.session.user = Object.assign({}, req.body, userRecord);
-        }else {
-          req.session.user = null;
+      .where("users.name", "=", name)
+      .then((users) => {
+        if(users && users.length === 1) {
+          const user = users[0];
+          if(name === user.name) {
+            req.session.user = user;
+            console.log("logged in:", req.session);
+            return res.json(user);
+          }
         }
-        console.log(req.session);
-        res.json(req.body);
+        req.session.user = null;
+        console.log("user not found:", req.session);
+        res.json(undefinedUser);
       })
       .catch((error) => {
-        console.error("Username does not exist");
+        console.log(error);
+        res.status(500).json(undefinedUser);
       });
   });
 
   router.post("/logout", (req, res) => {
     req.session.user = null;
-    res.json({name: undefined});
+    res.json(undefinedUser);
   });
 
  return router;
