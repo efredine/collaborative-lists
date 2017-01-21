@@ -128,10 +128,18 @@ export const receiveUser = user => ({
   user: user
 });
 
+function initializeUser(dispatch, user) {
+  let actions = [ receiveUser(user) ];
+  if(user.id) {
+    actions = actions.concat(fetchUsers(), fetchLists());
+  }
+  return Promise.all(actions.map(dispatch));
+}
+
 export const identify = () => dispatch => {
   return fetch('/api/users/identify', {})
   .then(response => response.json())
-  .then(json => dispatch(receiveUser(json)));
+  .then(user => initializeUser(dispatch, user));
 }
 
 export const login = name => dispatch => {
@@ -143,16 +151,7 @@ export const login = name => dispatch => {
       body: `name=${name}`
     })
   .then(response => response.json())
-  .then(user => {
-    if(user.id) {
-      return Promise.all([
-        dispatch(receiveUser(user)),
-        dispatch(fetchUsers()),
-        dispatch(fetchLists())
-        ]
-      );
-    }
-  });
+  .then(user => initializeUser(dispatch, user));
 }
 
 export const logout = () => dispatch => {
