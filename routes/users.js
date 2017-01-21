@@ -20,7 +20,7 @@ module.exports = (knex) => {
     if(req.session.user) {
       res.json(req.session.user);
     } else {
-      res.json({username: undefined});
+      res.json({name: undefined});
     }
 
   });
@@ -31,10 +31,10 @@ module.exports = (knex) => {
     knex
       .select("id", "name")
       .from("users")
-      .where("users.name", "=", req.body.username)
+      .where("users.name", "=", req.body.name)
       .then((user) => {
         const userRecord = user[0];
-        if(req.body.username === userRecord.name) {
+        if(req.body.name === userRecord.name) {
           req.session.user = Object.assign({}, req.body, userRecord);
         }else {
           req.session.user = null;
@@ -49,7 +49,7 @@ module.exports = (knex) => {
 
   router.post("/logout", (req, res) => {
     req.session.user = null;
-    res.json({username: undefined});
+    res.json({name: undefined});
   });
 
  return router;

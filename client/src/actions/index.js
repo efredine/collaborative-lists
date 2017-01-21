@@ -134,13 +134,13 @@ export const identify = () => dispatch => {
   .then(json => dispatch(receiveUser(json)));
 }
 
-export const login = username => dispatch => {
+export const login = name => dispatch => {
   return fetch('/api/users/login', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
     },
-      body: `username=${username}`
+      body: `name=${name}`
     })
   .then(response => response.json())
   .then(json => Promise.all([

@@ -30,11 +30,11 @@ class Login extends Component {
 
   render() {
     const {user} = this.props;
-    if(user.username) {
+    if(user.name) {
       return (
           <Navbar.Form pullRight>
             <FormGroup>
-              <span> Logged in as: {user.username } &nbsp;</span>
+              <span> Logged in as: {user.name } &nbsp;</span>
               <Button type="submit" className="btn-sm btn-nav" onClick={this.handleLogout}>Log Out</Button>
             </FormGroup>
           </Navbar.Form>
