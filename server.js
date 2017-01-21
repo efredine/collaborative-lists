@@ -6,7 +6,6 @@ const server = require('http').Server(app);
 const io = require('socket.io')(server);
 const bodyParser    = require("body-parser");
 const MovieDB = require('moviedb')(process.env.MOVIEDB_KEY);
-const cookieSession = require('cookie-session')
 
 const ENV         = process.env.ENV || "development";
 
@@ -25,7 +24,6 @@ const auth        = require("./lib/auth.js")();
 const usersRoutes = require("./routes/users");
 const listsRoutes = require("./routes/lists");
 
-app.use(cookieSession({name: 'session', secret: 'secret garden'}));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json())
 app.use(express.static('public'));
