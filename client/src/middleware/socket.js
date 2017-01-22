@@ -33,6 +33,7 @@ export default function createAuthenticatedSocketIoMiddleware(socketAddress, cri
             .on('connect', () => {
               socketEstablished = true;
               socketIoMiddleware = createSocketIoMiddleware(socket, criteria, options)( { getState, dispatch } );
+              dispatch({type: 'SOCKET_ESTABLISHED'});
             });
           }
           return next(action);
