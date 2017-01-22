@@ -20,7 +20,17 @@ export default function createAuthenticatedSocketIoMiddleware(socketAddress, cri
       switch(action.type) {
         case 'RECEIVE_USER':
           if(action.user.token) {
-            socket = io(socketAddress, {forceNew: true});
+            console.log('opening socket with token:', action.user.token);
+            socket = io(socketAddress, {
+              forceNew: true,
+              query: 'token=' + action.user.token
+            });
+            socket.on('unauthorized', function(error) {
+              console.log('unauthorized', error);
+            })
+            .on('authenticated', function () {
+              console.log('authenticated');
+            });
             socketIoMiddleware = createSocketIoMiddleware(socket, criteria, options)( { getState, dispatch } );
           }
           return next(action);

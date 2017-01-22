@@ -39,7 +39,7 @@ module.exports = (knex, publish) => {
     .then(id => {
       action.id = id;
       console.log('BROADCAST ACTION');
-      console.log(action);
+      console.log(action.type);
       publish(action);
     });
   }
@@ -143,7 +143,6 @@ module.exports = (knex, publish) => {
       .orderBy('id')
       .where('list_id', listId)
       .then((results) => {
-        console.log(results);
         res.json(formatActionResults(results));
       });
   });
