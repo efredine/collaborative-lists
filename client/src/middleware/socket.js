@@ -14,33 +14,36 @@ import io from 'socket.io-client';
 
 export default function createAuthenticatedSocketIoMiddleware(socketAddress, criteria, options) {
   return ({ getState, dispatch }) => {
+    let socketEstablished = false;
     let socket = null;
     let socketIoMiddleware = null;
     return next => action => {
       switch(action.type) {
         case 'RECEIVE_USER':
           if(action.user.token) {
-            console.log('opening socket with token:', action.user.token);
             socket = io(socketAddress, {
               forceNew: true,
               query: 'token=' + action.user.token
             });
-            socket.on('unauthorized', function(error) {
-              console.log('unauthorized', error);
-            })
-            .on('authenticated', function () {
-              console.log('authenticated');
+            socket
+            .on('connecting', () => console.log('connecting'))
+            .on('disconnect', () => console.log('socket disconnected'))
+            .on('event', () => console.log('event'))
+            .on('unauthorized', () => console.log('socket unauthorized'))
+            .on('connect', () => {
+              socketEstablished = true;
+              socketIoMiddleware = createSocketIoMiddleware(socket, criteria, options)( { getState, dispatch } );
             });
-            socketIoMiddleware = createSocketIoMiddleware(socket, criteria, options)( { getState, dispatch } );
           }
           return next(action);
         case 'USER_LOGOUT':
+          socketEstablished = false;
           socket.close();
           socket = null;
           socketIoMiddleware = null;
           return next(action);
         default:
-          if( socket ) {
+          if( socketEstablished ) {
             return socketIoMiddleware(next)(action);
           } else {
             return next(action);
