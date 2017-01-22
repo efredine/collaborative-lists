@@ -14,13 +14,27 @@ import io from 'socket.io-client';
 
 export default function createAuthenticatedSocketIoMiddleware(socketAddress, criteria, options) {
   return ({ getState, dispatch }) => {
-    let socket = io(socketAddress);
-    let socketIoMiddleware = createSocketIoMiddleware(socket, criteria, options)( { getState, dispatch } );
+    let socket = null;
+    let socketIoMiddleware = null;
     return next => action => {
-      if( socket ) {
-        return socketIoMiddleware(next)(action);
-      } else {
-        return next(action);
+      switch(action.type) {
+        case 'RECEIVE_USER':
+          if(action.user.token) {
+            socket = io(socketAddress, {forceNew: true});
+            socketIoMiddleware = createSocketIoMiddleware(socket, criteria, options)( { getState, dispatch } );
+          }
+          return next(action);
+        case 'USER_LOGOUT':
+          socket.close();
+          socket = null;
+          socketIoMiddleware = null;
+          return next(action);
+        default:
+          if( socket ) {
+            return socketIoMiddleware(next)(action);
+          } else {
+            return next(action);
+          }
       }
     };
   };

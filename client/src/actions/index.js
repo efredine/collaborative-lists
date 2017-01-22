@@ -158,15 +158,12 @@ export const login = name => dispatch => {
 }
 
 export const logout = () => dispatch => {
-  dispatch({
-    type: 'USER_LOGOUT'
-  });
-
-  return fetch ('/api/users/logout', {
-    method: 'POST'
-  })
-  .then (response => response.json())
-  .then(json => dispatch(receiveUser(json)));
+  return Promise.all([
+     dispatch({
+        type: 'USER_LOGOUT'
+      }),
+     initializeUser(dispatch, {name: undefined, id: undefined})
+    ]);
 }
 
 export const receiveLists = (lists) => ({
