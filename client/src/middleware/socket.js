@@ -30,6 +30,8 @@ export default function createAuthenticatedSocketIoMiddleware(socketAddress, cri
             .on('disconnect', () => console.log('socket disconnected'))
             .on('event', () => console.log('event'))
             .on('unauthorized', () => console.log('socket unauthorized'))
+            .on('connect_error', () => console.log('connect_error'))
+            .on('error', (error) => console.log('socket error', error))
             .on('connect', () => {
               socketEstablished = true;
               socketIoMiddleware = createSocketIoMiddleware(socket, criteria, options)( { getState, dispatch } );
