@@ -29,8 +29,8 @@ class ListsIndex extends Component {
     const { lists, activeList, history } = this.props;
     const listArray = _.map(lists, (list) => {
       return (
-        <ListGroupItem key = {list.id} active={Number(list.id) === Number(activeList)}>
-          <a onClick={() => history.push('/'+ list.id)}>{list.title}</a>
+        <ListGroupItem key = {list.id} active={Number(list.id) === Number(activeList)} onClick={() => history.push('/'+ list.id)}>
+          {list.title}
         </ListGroupItem>
       );
     });
