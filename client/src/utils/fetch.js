@@ -4,12 +4,10 @@ import Auth from './Auth';
 function authorizedFetch(url, options, authorize=true) {
   if(options) {
     if(authorize) {
-      const config = {
-        headers: {
+      options.headers = Object.assign({}, options.headers || {}, {
           'Authorization': `JWT ${Auth.getToken().token}`
-        }
-      };
-      return fetch(url, Object.assign({}, options, config));
+        });
+      return fetch(url, options);
     } else {
       return fetch(url, options);
     }
