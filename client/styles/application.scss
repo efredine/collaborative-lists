@@ -51,18 +51,17 @@ html {
 
 .logo {
  position: absolute;
- top: 0px;
+ top: 5px;
  left: 45%;
- max-height: 250%;
- padding: 0;
+ height: 40px;
 }
 
 .builder {
  position: inherit;
  top: -10px;
  left: 0px;
- max-height: 250%;
- padding: 0;
+ height: 35px;
+
 
  &:hover {
   cursor: pointer;
@@ -73,8 +72,7 @@ html {
  position: inherit;
  top: -10px;
  left: 0px;
- max-height: 250%;
- padding: 0;
+ height: 35px;
 
  &:hover {
   cursor: pointer;
@@ -123,10 +121,6 @@ html {
   margin-top: 0px;
   margin-left: -15px;
 }
-.navbar-brand {
-  height: 100%;
-}
-
 
 .add {
   height: 19px;
@@ -500,7 +494,7 @@ iframe {
   height: calc(100% - 10px);
   background: #B4BEE2;
   padding-top: 20px;
-  margin-top: -6px;
+  margin-top: -10px;
 
   .content {
     height: calc(100% - 10px);

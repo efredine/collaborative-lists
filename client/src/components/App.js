@@ -65,9 +65,7 @@ class App extends Component {
       <div>
         <Navbar>
           <Navbar.Header>
-            <Navbar.Brand>
               <img className="logo" src="/images/Upik.png" />
-            </Navbar.Brand>
           </Navbar.Header>
           <Nav activeKey={this.state.open && this.state.selected} onSelect={this.handleSelect}>
             <NavItem eventKey={1} ref={(navItem) => { this.navItemBuilder = navItem; }} href="#">
