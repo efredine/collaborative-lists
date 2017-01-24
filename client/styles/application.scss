@@ -522,10 +522,14 @@ iframe {
       }
     }
 
-    li.list-group-item {
+    .list-group-item {
+      &:focus {
+        outline: none;
+      }
       &.active, &.active:hover, &.active:focus {
         background-color: #e7e7e7;
         border-color: #e7e7e7;
+        color: #555;
       }
     }
   }
