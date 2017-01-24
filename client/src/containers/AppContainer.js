@@ -20,9 +20,9 @@ class AppContainer extends Component {
 }
 
 function listIdFromLocation(location){
-  console.log('location:', location);
   return location.pathname.split('/')[1];
 }
+
 const mapStateToProps = (state) => ({
   users: state.users,
   user: state.user,
