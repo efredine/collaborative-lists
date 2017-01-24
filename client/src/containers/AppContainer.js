@@ -3,7 +3,6 @@ import { identify } from '../actions'
 import { connect } from 'react-redux'
 import React, {Component} from 'react';
 import App from '../components/App';
-import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 
 class AppContainer extends Component {
 
@@ -13,17 +12,21 @@ class AppContainer extends Component {
   }
 
   render() {
+    const { history, listId } = this.props;
     return (
-      <Router history={browserHistory}>
-        <Route path="/(:listId)" component={App} />
-      </Router>
+      <App history={history} listId={listId}/>
     );
   }
 }
 
+function listIdFromLocation(location){
+  console.log('location:', location);
+  return location.pathname.split('/')[1];
+}
 const mapStateToProps = (state) => ({
   users: state.users,
-  user: state.user
+  user: state.user,
+  listId: listIdFromLocation(state.location)
 })
 
 const mapDispatchToProps =  ({

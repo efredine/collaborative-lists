@@ -9,6 +9,7 @@ import users from './users'
 import activeList from './activeList'
 import lists from './lists'
 import sortByVote from './sortByVote'
+import { location } from '../utils/redux-history';
 
 const sliceReducers = combineReducers({
   cards,
@@ -19,7 +20,8 @@ const sliceReducers = combineReducers({
   users,
   activeList,
   lists,
-  sortByVote
+  sortByVote,
+  location
 });
 
 const cardReducers = combineReducers({

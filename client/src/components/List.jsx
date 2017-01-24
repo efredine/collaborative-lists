@@ -68,7 +68,7 @@ class List extends Component {
 const mapStateToProps = (state, ownProps) => {
   const list = state.lists.byId[ownProps.listId];
   return {
-    title: list ? list.title : "",
+    title: list && list.title ? list.title : "untitled",
     lists: state.lists.allIds.map(id => state.lists.byId[id])
   };
 };

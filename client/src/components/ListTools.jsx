@@ -33,7 +33,7 @@ class ListTools extends Component {
       } else {
         return(
           <Col className="movieContainer" xs={4} lg={4}>
-            <ListsIndex/>
+            <ListsIndex history={this.props.history}/>
           </Col>
           );
       }

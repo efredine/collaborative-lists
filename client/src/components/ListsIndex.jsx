@@ -1,14 +1,12 @@
 import React, {Component} from 'react';
 import fetch from '../utils/fetch';
 import _ from 'lodash';
-import { Link, browserHistory } from 'react-router'
 import { connect } from 'react-redux'
 import { Button, ListGroup, ListGroupItem } from 'react-bootstrap'
 
 class ListsIndex extends Component {
 
   newList = (event) => {
-    console.log('clicked');
     event.preventDefault();
     fetch('/api/lists/new', {
       credentials: 'include',
@@ -22,17 +20,17 @@ class ListsIndex extends Component {
     .then(result => {
       console.log('inserted', result, 'props:', this.props);
       const { listId } = result;
-      browserHistory.push(`/${listId}`);
+      this.props.history.push(`/${listId}`);
     })
     .catch(error => console.log(error));
   }
 
   render() {
-    const { lists, activeList } = this.props;
+    const { lists, activeList, history } = this.props;
     const listArray = _.map(lists, (list) => {
       return (
         <ListGroupItem key = {list.id} active={Number(list.id) === Number(activeList)}>
-          <Link to={'/'+ list.id}>{list.title}</Link>
+          <a onClick={() => history.push('/'+ list.id)}>{list.title}</a>
         </ListGroupItem>
       );
     });

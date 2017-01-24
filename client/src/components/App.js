@@ -3,9 +3,7 @@ import ReactDOM from 'react-dom';
 import LoginContainer from '../containers/LoginContainer';
 import ListTools from './ListTools.jsx'
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem, Grid, Row, Col, Clearfix } from 'react-bootstrap';
-import AddTodo from '../containers/AddTodo';
 import { Glyphicon } from 'react-bootstrap';
-import YelpSearch from '../containers/YelpSearch.jsx';
 import Footer from './Footer';
 import ContentTypes from '../types/ContentTypes';
 import { connect } from 'react-redux';
@@ -52,39 +50,6 @@ class App extends Component {
     this.setState(updatedState);
   }
 
-  menu = () => {
-    const { defaultEventKey } = this.props;
-    if(this.state.open) {
-      if(this.state.selected === 1) {
-        return(
-          <Col className="movieContainer" xs={4} lg={4}>
-            <div className="content">
-              <Tabs defaultActiveKey={defaultEventKey} id="uncontrolled-tab-example">
-                <Tab eventKey={1} title="Movies">
-                  <MovieSearch className="panel-container"/>
-                </Tab>
-                <Tab eventKey={2} title="Yelp">
-                  <YelpSearch className="panel-container"/>
-                </Tab>
-                <Tab eventKey={3} title="Todos">
-                  <AddTodo />
-                </Tab>
-              </Tabs>
-            </div>
-          </Col>
-          );
-      } else {
-        return(
-          <Col className="movieContainer" xs={4} lg={4}>
-            <ListsIndex/>
-          </Col>
-          );
-      }
-    } else {
-      return(<div></div>)
-    }
-  }
-
   unAuthorized = () => {
     return (
       <Row className="show-grid">
@@ -95,8 +60,7 @@ class App extends Component {
 
   render() {
     const { open, selected } = this.state;
-    const { defaultEventKey } = this.props;
-    const { listId } = this.props.params;
+    const { defaultEventKey, listId, history } = this.props;
     return(
       <div>
         <Navbar>
@@ -121,6 +85,7 @@ class App extends Component {
             open={open}
             selected={selected}
             listId={listId}
+            history={history}
             defaultEventKey={defaultEventKey}
             enabled={this.isAuthorized()}
           />

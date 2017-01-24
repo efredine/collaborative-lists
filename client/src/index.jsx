@@ -13,6 +13,8 @@ import notifications from './middleware/notifications';
 import injectUser from './middleware/injectUser';
 import createAuthenticatedSocketIoMiddleware from './middleware/socket';
 import ReduxThunk from 'redux-thunk';
+import createHistory from 'history/createBrowserHistory'
+import { connectHistory } from './utils/redux-history';
 
 function pessimisticExecute(action, emit, next, dispatch) {
   emit('action', action);
@@ -29,10 +31,12 @@ const socketIoMiddleware = createAuthenticatedSocketIoMiddleware(
   {execute: pessimisticExecute}
 );
 const store = applyMiddleware(ReduxThunk, notifications, injectUser, socketIoMiddleware, loggerMiddleware)(createStore)(reducer);
+const history = createHistory();
+const unconnectHistory = connectHistory(history, store);
 
 render(
   <Provider store={store}>
-    <AppContainer/>
+    <AppContainer history={history}/>
   </Provider>,
   document.getElementById('react-root')
 )
