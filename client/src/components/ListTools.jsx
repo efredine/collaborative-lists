@@ -45,7 +45,7 @@ class ListTools extends Component {
   main = (open, listId) => {
     return(
        <Col className="historyContainer" xs={open ? 5 : 7} lg={open ? 5 : 7}>
-         <List listId={ listId } />
+         <List listId={ listId } history={this.props.history}/>
        </Col>
       );
   }

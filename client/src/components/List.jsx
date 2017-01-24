@@ -4,7 +4,6 @@ import _ from 'lodash';
 import InlineEdit from 'react-edit-inline';
 import Footer from './Footer'
 import VisibleCardList from '../containers/VisibleCardList'
-import { browserHistory } from 'react-router';
 
 import { connect } from 'react-redux'
 import { fetchActiveIfNeeded } from '../actions'
@@ -16,7 +15,7 @@ class List extends Component {
     // redirect them to the first element of the list
     const { listId, lists } = this.props;
     if(!listId && lists.length > 0) {
-      browserHistory.push(`/${lists[0].id}`)
+      this.props.history.push(`/${lists[0].id}`)
     }
   }
 
