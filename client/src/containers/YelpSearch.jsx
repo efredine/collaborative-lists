@@ -5,6 +5,7 @@ import Yelp from '../components/Yelp.jsx'
 import { connect } from 'react-redux'
 import { addYelp} from '../actions';
 import { Button, Navbar, Nav, NavItem, NavDropdown, Form, FormGroup, FormControl } from 'react-bootstrap';
+import FlipMove from 'react-flip-move';
 
 
 class YelpSearch extends Component {
@@ -60,6 +61,9 @@ class YelpSearch extends Component {
   }
 
   foodSearch(restaurant, location){
+    this.setState({
+      restaurant:[]
+    });
     fetch(`/api/v2/search/${restaurant}/${location}`)
     .then(response => {
       return response.text();
@@ -88,7 +92,9 @@ class YelpSearch extends Component {
             </div>
             <Button type = 'submit' value= 'search' className="btn btn-sm">Submit</Button>
           </Form>
-          {restaurants}
+          <FlipMove>
+            {restaurants}
+          </FlipMove>
       </div>
     )
 
