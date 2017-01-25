@@ -27,7 +27,7 @@ class YelpSearch extends Component {
       this.setState({
         clientIp: ipAddress.city
       })
-      fetch(`/api/v2/search/term/${that.state.clientIp}`)
+      fetch(`/api/v2/search/restaurant/${that.state.clientIp}`)
       .then(response => {
         return response.json();
       })
