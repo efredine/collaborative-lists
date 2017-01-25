@@ -20,19 +20,17 @@ class YelpSearch extends Component {
     const that = this;
     fetch(`http://ipinfo.io/json`)
     .then(response => {
-      return response.text();
+      return response.json();
     })
-    .then(responseText => {
-      const ipAddress = JSON.parse(responseText);
+    .then(ipAddress => {
       this.setState({
         clientIp: ipAddress.city
       })
       fetch(`/api/v2/search/term/${that.state.clientIp}`)
       .then(response => {
-        return response.text();
+        return response.json();
       })
-      .then(responseText => {
-        const restaurant = JSON.parse(responseText);
+      .then(restaurant => {
          this.setState({
            restaurant: restaurant.businesses
          });
