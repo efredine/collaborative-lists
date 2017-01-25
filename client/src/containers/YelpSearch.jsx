@@ -49,12 +49,13 @@ class YelpSearch extends Component {
     })
   }
 
-  updateSearch(e){
+  submitHandler = e => {
+    e.preventDefault();
     if(this.refs.restaurant.value === "" || this.refs.location.value === ""){
     }
     else{
       console.log("button pressed")
-      this.foodSearch(this.refs.restaurant.value, this.refs.location.value)
+      this.foodSearch(this.refs.restaurant.value, this.refs.location.value);
     }
   }
 
@@ -65,7 +66,6 @@ class YelpSearch extends Component {
     })
     .then(responseText => {
       const restaurant = JSON.parse(responseText);
-      console.log("foooddd", restaurant);
        this.setState({
          restaurant: restaurant.businesses
        });
@@ -79,17 +79,16 @@ class YelpSearch extends Component {
 
     return(
       <div>
-          <Form inline>
+          <Form inline onSubmit={this.submitHandler}>
             <div className="form-group">
-              <input ref = "restaurant" onChange = {(e)=>{this.updateSearch()}} type = 'text' className="form-control input-sm" placeholder = "Restaurant" />
+              <input ref = "restaurant" type = 'text' className="form-control input-sm" placeholder = "Restaurant" />
             </div>
             <div className= "form-group">
-              <input ref = "location" onChange = {(e)=>{this.updateSearch()}} type = 'text' className="form-control input-sm" placeholder = {this.state.clientIp}/>
+              <input ref = "location" type = 'text' className="form-control input-sm" placeholder = {this.state.clientIp}/>
             </div>
-            <Button type = 'submit' value= 'search' className="btn btn-sm" onClick = {()=>{this.updateSearch()}}>Submit</Button>
+            <Button type = 'submit' value= 'search' className="btn btn-sm">Submit</Button>
           </Form>
           {restaurants}
-
       </div>
     )
 
