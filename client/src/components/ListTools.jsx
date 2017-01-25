@@ -7,6 +7,7 @@ import List from './List.jsx';
 import AddTodo from '../containers/AddTodo';
 import ActionListContainer from '../containers/ActionListContainer.jsx';
 import YelpSearch from '../containers/YelpSearch.jsx';
+import Auth from '../utils/Auth';
 
 class ListTools extends Component {
 
@@ -62,11 +63,14 @@ class ListTools extends Component {
 
   render() {
     const { open, selected, listId, defaultEventKey, enabled } = this.props;
+    const authenticated = Auth.isUserAuthenticated();
+    const loaded = authenticated && enabled;
     return(
       <Row className="show-grid">
        { enabled && this.menu(defaultEventKey, open, selected) }
        { enabled && this.main(open, listId) }
        { enabled && this.activity(open) }
+       { !authenticated && 'You have to log in' }
      </Row>
     );
   }

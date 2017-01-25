@@ -18,12 +18,7 @@ class App extends Component {
     };
   }
 
-  isUserInitialized = () => {
-    const { user } = this.props;
-    return user.userInitialized;
-  }
-
-  isAuthorized = () => {
+  isLoaded = () => {
     const { users, user } = this.props;
     return users.allIds.length > 0 && user.userInitialized && user.id;
   }
@@ -48,14 +43,6 @@ class App extends Component {
       }
     }
     this.setState(updatedState);
-  }
-
-  unAuthorized = () => {
-    return (
-      <Row className="show-grid">
-        <Col xs={12}>{this.isUserInitialized() && 'You have to log in.'}</Col>
-      </Row>
-    );
   }
 
   render() {
@@ -85,7 +72,7 @@ class App extends Component {
             listId={listId}
             history={history}
             defaultEventKey={defaultEventKey}
-            enabled={this.isAuthorized()}
+            enabled={this.isLoaded()}
           />
           <Clearfix/>
           <footer>Lists!</footer>
