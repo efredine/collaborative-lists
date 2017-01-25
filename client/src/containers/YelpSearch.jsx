@@ -52,11 +52,12 @@ class YelpSearch extends Component {
 
   submitHandler = e => {
     e.preventDefault();
-    if(this.refs.restaurant.value === "" || this.refs.location.value === ""){
+    const searchTerm = this.refs.restaurant.value;
+    if(!searchTerm === ""){
     }
     else{
-      console.log("button pressed")
-      this.foodSearch(this.refs.restaurant.value, this.refs.location.value);
+      const location = this.refs.location.value;
+      this.foodSearch(searchTerm, location === "" ? this.state.clientIp : location);
     }
   }
 
