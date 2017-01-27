@@ -5,6 +5,7 @@ import Yelp from '../components/Yelp.jsx'
 import { connect } from 'react-redux'
 import { addYelp} from '../actions';
 import { Button, Navbar, Nav, NavItem, NavDropdown, Form, FormGroup, FormControl } from 'react-bootstrap';
+import FlipMove from 'react-flip-move';
 
 
 class YelpSearch extends Component {
@@ -20,19 +21,17 @@ class YelpSearch extends Component {
     const that = this;
     fetch(`http://ipinfo.io/json`)
     .then(response => {
-      return response.text();
+      return response.json();
     })
-    .then(responseText => {
-      const ipAddress = JSON.parse(responseText);
+    .then(ipAddress => {
       this.setState({
         clientIp: ipAddress.city
       })
-      fetch(`/api/v2/search/term/${that.state.clientIp}`)
+      fetch(`/api/v2/search/restaurant/${that.state.clientIp}`)
       .then(response => {
-        return response.text();
+        return response.json();
       })
-      .then(responseText => {
-        const restaurant = JSON.parse(responseText);
+      .then(restaurant => {
          this.setState({
            restaurant: restaurant.businesses
          });
@@ -51,23 +50,27 @@ class YelpSearch extends Component {
     })
   }
 
-  updateSearch(e){
-    if(this.refs.restaurant.value === "" || this.refs.location.value === ""){
+  submitHandler = e => {
+    e.preventDefault();
+    const searchTerm = this.refs.restaurant.value;
+    if(!searchTerm === ""){
     }
     else{
-      console.log("button pressed")
-      this.foodSearch(this.refs.restaurant.value, this.refs.location.value)
+      const location = this.refs.location.value;
+      this.foodSearch(searchTerm, location === "" ? this.state.clientIp : location);
     }
   }
 
   foodSearch(restaurant, location){
+    this.setState({
+      restaurant:[]
+    });
     fetch(`/api/v2/search/${restaurant}/${location}`)
     .then(response => {
       return response.text();
     })
     .then(responseText => {
       const restaurant = JSON.parse(responseText);
-      console.log("foooddd", restaurant);
        this.setState({
          restaurant: restaurant.businesses
        });
@@ -81,17 +84,18 @@ class YelpSearch extends Component {
 
     return(
       <div>
-          <Form inline>
+          <Form inline onSubmit={this.submitHandler}>
             <div className="form-group">
-              <input ref = "restaurant" onChange = {(e)=>{this.updateSearch()}} type = 'text' className="form-control input-sm" placeholder = "Restaurant" />
+              <input ref = "restaurant" type = 'text' className="form-control input-sm" placeholder = "Restaurant" />
             </div>
             <div className= "form-group">
-              <input ref = "location" onChange = {(e)=>{this.updateSearch()}} type = 'text' className="form-control input-sm" placeholder = {this.state.clientIp}/>
+              <input ref = "location" type = 'text' className="form-control input-sm" placeholder = {this.state.clientIp}/>
             </div>
-            <Button type = 'submit' value= 'search' className="btn btn-sm" onClick = {()=>{this.updateSearch()}}>Submit</Button>
+            <Button type = 'submit' value= 'search' className="btn btn-sm">Submit</Button>
           </Form>
-          {restaurants}
-
+          <FlipMove>
+            {restaurants}
+          </FlipMove>
       </div>
     )
 

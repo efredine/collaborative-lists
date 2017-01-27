@@ -97,9 +97,8 @@ app.get("/api/popular/movies/discover/:movie", (req, res)=> {
 });
 
 app.get("/api/v2/search/:restaurant/:location/", (req, res)=>{
+  console.log('yelp search for:', req.params.restuarant, req.params.location);
   yelp.search({ term: `${req.params.restaurant}`, location: `${req.params.location}`, limit: 30}, function(err, result){
-    console.log("result", result);
-    console.log("err", err)
     res.json(result);
   })
 })

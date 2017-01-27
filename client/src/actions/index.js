@@ -141,17 +141,17 @@ function initializeUser(dispatch, user) {
 }
 
 export const identify = () => dispatch => {
-  const user = Auth.getToken() || {name: undefined, id: undefined};
+  const user = Auth.getToken() || {username: undefined, id: undefined};
   return initializeUser(dispatch, user);
 }
 
-export const login = name => dispatch => {
+export const login = username => dispatch => {
   return fetch('/api/users/login', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
     },
-      body: `name=${name}`
+      body: `username=${username}`
     }, false)
   .then(response => response.json())
   .then(user => initializeUser(dispatch, user));
@@ -162,7 +162,7 @@ export const logout = () => dispatch => {
      dispatch({
         type: 'USER_LOGOUT'
       }),
-     initializeUser(dispatch, {name: undefined, id: undefined})
+     initializeUser(dispatch, {username: undefined, id: undefined})
     ]);
 }
 
