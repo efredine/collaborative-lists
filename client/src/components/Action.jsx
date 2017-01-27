@@ -20,7 +20,7 @@ class Action extends Component {
     return (
         <li className="list-group-item small">
           <span style={SpanStyle} className={"" + colors[getColorId(user.id)]}>
-            {user ? user.name : ""}
+            {user ? user.username : ""}
           </span>
           {this.props.type}
           {this.props.text}

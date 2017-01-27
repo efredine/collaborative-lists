@@ -5,7 +5,7 @@ const router  = express.Router();
 const cfg = require('../config.js');
 const jwt = require("jwt-simple");
 
-const undefinedUser = {name: undefined, id: undefined, token: undefined};
+const undefinedUser = {username: undefined, id: undefined, token: undefined};
 
 module.exports = (knex, auth) => {
 
@@ -19,16 +19,16 @@ module.exports = (knex, auth) => {
   });
 
   router.post("/login", (req, res) => {
-    // Look up the user name and log them in if appropriate or return an error
-    const name = req.body.name;
+    // Look up the user's username and log them in if appropriate or return an error
+    const username = req.body.username;
     knex
-      .select("id", "name")
+      .select("id", "username")
       .from("users")
-      .where("users.name", "=", name)
+      .where("users.username", "=", username)
       .then((users) => {
         if(users && users.length === 1) {
           const user = users[0];
-          if(name === user.name) {
+          if(username === user.username) {
             const payload = {
                 id: user.id
             };

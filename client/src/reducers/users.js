@@ -16,13 +16,13 @@ function receiveUsers(state = {byId: {}, allIds: []}, action) {
 }
 
 function addUserEntry(state, action) {
-  const {userId, name} = action;
+  const {userId, username} = action;
   return Object.assign(
     {},
     state,
     {
       userId,
-      name
+      username
     });
 }
 
