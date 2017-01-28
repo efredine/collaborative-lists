@@ -55,6 +55,7 @@ app.use(knexLogger(knex));
 //
 app.use("/api/users", usersRoutes(knex));
 app.use("/api/lists", auth.authenticate(), listsRoutes(knex, publish));
+require("./lib/facebook")(knex);
 
 app.get("/api/todos", (req, res) => {
   res.redirect("/api/lists/1/actions")

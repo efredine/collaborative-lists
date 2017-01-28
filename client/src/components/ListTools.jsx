@@ -8,7 +8,7 @@ import AddTodo from '../containers/AddTodo';
 import ActionListContainer from '../containers/ActionListContainer.jsx';
 import YelpSearch from '../containers/YelpSearch.jsx';
 import Auth from '../utils/Auth';
-import FacebookLogin from 'react-facebook-login';
+import LoginPage from './LoginPage.jsx'
 
 class ListTools extends Component {
 
@@ -62,10 +62,6 @@ class ListTools extends Component {
      );
   }
 
-  responseFacebook = (response) => {
-    console.log(response);
-  };
-
   render() {
     const { open, selected, listId, defaultEventKey, enabled } = this.props;
     const authenticated = Auth.isUserAuthenticated();
@@ -75,15 +71,7 @@ class ListTools extends Component {
        { enabled && this.menu(defaultEventKey, open, selected) }
        { enabled && this.main(open, listId) }
        { enabled && this.activity(open) }
-       { !authenticated &&
-          <FacebookLogin
-            appId="1925495421029921"
-            autoLoad
-            buttonStyle={ { fontSize: 20 } }
-            callback={this.responseFacebook}
-            icon="fa-facebook"
-          />
-        }
+       { !authenticated && <LoginPage/> }
      </Row>
     );
   }

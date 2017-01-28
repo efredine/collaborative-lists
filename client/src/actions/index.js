@@ -157,6 +157,17 @@ export const login = username => dispatch => {
   .then(user => initializeUser(dispatch, user));
 }
 
+export const facebookLogin = accessToken => dispatch => {
+    return fetch('/api/users/facebook_login', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${accessToken}`
+      },
+    }, false)
+  .then(response => response.json())
+  .then(user => initializeUser(dispatch, user));
+}
+
 export const logout = () => dispatch => {
   return Promise.all([
      dispatch({

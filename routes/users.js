@@ -4,6 +4,7 @@ const express = require('express');
 const router  = express.Router();
 const cfg = require('../config.js');
 const jwt = require("jwt-simple");
+const passport = require("passport");
 
 const undefinedUser = {username: undefined, id: undefined, token: undefined};
 
@@ -43,6 +44,16 @@ module.exports = (knex, auth) => {
         console.log(error);
         res.status(500).json(undefinedUser);
       });
+  });
+
+  router.post("/facebook_login", passport.authenticate('facebook-token', cfg.jwtSession), (req, res) => {
+    const { user } = req;
+    if (user) {
+      user.token = jwt.encode({id: user.id}, cfg.jwtSecret);
+      res.json(user);
+    } else {
+      res.status(401);
+    }
   });
 
   router.post("/logout", (req, res) => {
