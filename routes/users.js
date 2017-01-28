@@ -34,14 +34,12 @@ module.exports = (knex, auth) => {
                 id: user.id
             };
             user.token = jwt.encode(payload, cfg.jwtSecret);
-            console.log("logged in:", user);
             return res.json(user);
           }
         }
         res.json(undefinedUser);
       })
       .catch((error) => {
-        console.log(error);
         res.status(500).json(undefinedUser);
       });
   });

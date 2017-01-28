@@ -168,7 +168,14 @@ export const facebookLogin = accessToken => dispatch => {
   .then(user => initializeUser(dispatch, user));
 }
 
-export const logout = () => dispatch => {
+export const logout = () => (dispatch, getState) => {
+  const { user } = getState();
+  if(user.provider && user.provider === 1) {
+    window.FB.logout(response => {
+      console.log('logged out of facebook:', response);
+    });
+  }
+
   return Promise.all([
      dispatch({
         type: 'USER_LOGOUT'
