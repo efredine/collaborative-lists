@@ -28,6 +28,10 @@ class List extends Component {
     nextProps.fetchActiveIfNeeded();
   }
 
+  componentDidUpdate() {
+    this.redirectIfNeeded();
+  }
+
   dataChanged = (data) => {
     const listId = encodeURIComponent(this.props.listId);
     const title = encodeURIComponent(data.Title);
@@ -45,7 +49,6 @@ class List extends Component {
 
   render() {
     const {title} = this.props;
-    this.redirectIfNeeded();
     return (
       <div className="list-container">
         <h1>
