@@ -8,6 +8,7 @@ const bodyParser    = require("body-parser");
 const MovieDB = require('moviedb')(process.env.MOVIEDB_KEY);
 
 const ENV         = process.env.ENV || "development";
+const cfg = require('./config.js');
 
 const knexConfig  = require("./knexfile");
 const knex        = require("knex")(knexConfig[ENV]);
@@ -35,12 +36,9 @@ app.use(function(req, res, next) {
   next();
 });
 
-var yelp = new Yelp({
-  consumer_key: '3fIu0xLb0HZM_B40Yqz92g',
-  consumer_secret: 'CfRXxRQXS9IlkWb1DkmkbNLamhI',
-  token: '3s36NPl5mObmdcpIpjLcg1Hy0jUcCi8o',
-  token_secret: 'qqBdAkGPSpMiw9pdkaSRvQpHhic',
-});
+console.log(cfg.yelp);
+
+var yelp = new Yelp(cfg.yelp);
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
