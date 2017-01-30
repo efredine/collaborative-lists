@@ -36,8 +36,6 @@ app.use(function(req, res, next) {
   next();
 });
 
-console.log(cfg.yelp);
-
 var yelp = new Yelp(cfg.yelp);
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
@@ -96,15 +94,10 @@ app.get("/api/popular/movies/discover/:movie", (req, res)=> {
 });
 
 app.get("/api/v2/search/:restaurant/:location/", (req, res)=>{
-  console.log('yelp search for:', req.params.restuarant, req.params.location);
   yelp.search({ term: `${req.params.restaurant}`, location: `${req.params.location}`, limit: 30}, function(err, result){
     res.json(result);
   })
 })
 
-app.post("/api/update", (req, res) => {
-  console.log(req.body.theThing);
-  res.json(["Got it"]);
-});
 
 server.listen(8080);
