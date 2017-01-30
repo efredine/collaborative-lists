@@ -8,6 +8,7 @@ const bodyParser    = require("body-parser");
 const MovieDB = require('moviedb')(process.env.MOVIEDB_KEY);
 
 const ENV         = process.env.ENV || "development";
+const PORT          = process.env.PORT || 8080;
 const cfg = require('./config.js');
 
 const knexConfig  = require("./knexfile");
@@ -100,4 +101,6 @@ app.get("/api/v2/search/:restaurant/:location/", (req, res)=>{
 })
 
 
-server.listen(8080);
+server.listen(PORT, () => {
+    console.log("Collaborative lists listening on port " + PORT);
+  });
