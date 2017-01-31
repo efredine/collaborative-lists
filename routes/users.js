@@ -40,6 +40,7 @@ module.exports = (knex, auth) => {
         res.json(undefinedUser);
       })
       .catch((error) => {
+        console.log(error);
         res.status(500).json(undefinedUser);
       });
   });
