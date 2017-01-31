@@ -1,7 +1,5 @@
 require('dotenv').config({silent: true});
 
-console.log(process.env);
-
 const express = require('express');
 const app = express();
 const server = require('http').Server(app);
@@ -15,7 +13,6 @@ const PORT          = process.env.PORT || 8080;
 const cfg = require('./config.js');
 
 const knexConfig  = require("./knexfile");
-console.log("knexConfig:", ENV, knexConfig, knexConfig[ENV]);
 const knex        = require("knex")(knexConfig[ENV]);
 const morgan      = require('morgan');
 const knexLogger  = require('knex-logger');
