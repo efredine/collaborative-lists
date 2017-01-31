@@ -76,7 +76,7 @@ const mapStateToProps = (state, ownProps) => {
   const list = state.lists.byId[ownProps.listId];
   return {
     title: getTitle(list),
-    lists: state.lists.allIds.map(id => state.lists.byId[id])
+    lists: state.lists.allIds.map(id => state.lists.byId[id]).filter(x => x.list),
   };
 };
 

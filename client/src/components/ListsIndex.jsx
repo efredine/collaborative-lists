@@ -44,7 +44,9 @@ class ListsIndex extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  lists: state.lists.allIds.map(id => state.lists.byId[id]),
+  lists: state.lists.allIds
+  .map(id => state.lists.byId[id])
+  .filter(x => x.list),
   activeList: state.activeList
 })
 

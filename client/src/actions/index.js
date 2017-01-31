@@ -105,7 +105,9 @@ export const fetchList = listId => (dispatch, getState) => {
         return dispatch(receiveList(listId, {list: json[0], fetching:false, error:null}));
       } else {
         console.log("Invalid list:", listId);
-        return Promise.reject(new Error("not found"));
+        const error = new Error("List not found.");
+        dispatch(receiveList(listId, {list: null, fetching:false, error: error}));
+        return Promise.reject(error);
       }
     });
   }
