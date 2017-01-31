@@ -1,7 +1,6 @@
 node_modules
 npm-debug.log
 .DS_Store
-dist
 
 ### PhpStorm ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and Webstorm
