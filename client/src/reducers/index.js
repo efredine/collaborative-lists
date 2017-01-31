@@ -34,7 +34,8 @@ function reduce(state, action) {
   if (action.type === 'USER_LOGOUT') {
     const savedLocationState = state.location;
     const resetState = reduce(undefined, {type: 'RESET'});
-    state.location = savedLocationState;
+    resetState.location = savedLocationState;
+    return resetState;
   }
   const intermediateState = receiver(state, action, cardReducers);
   return sliceReducers(intermediateState, action);
