@@ -88,17 +88,27 @@ export const fetchActions = listId => dispatch => {
   // TODO: add error handling catch
 }
 
-export const fetchList = listId => dispatch => {
-  return fetch(`/api/lists/${listId}`, {})
-  .then(response => response.json())
-  .then(json => {
-    if(json.length === 1) {
-      return dispatch(receiveList(listId, json[0]));
-    } else {
-      console.log("Invalid list:", listId);
-      return Promise.reject(new Error("not found"));
-    }
-  });
+// Should fetch if we don't already have it in the state
+// If it is in the state, fetch it as long as it isn't already being fetched or the previous fetch returned an error.
+const shouldFetch = (listId, state) => {
+  const list = state.lists[listId];
+  return !list || (!list.fetching && list.error);
+}
+
+export const fetchList = listId => (dispatch, getState) => {
+  if(shouldFetch(listId, getState())) {
+    dispatch({type: 'FETCH_LIST', listId, list:{list: null, fetching:true, error:null}});
+    return fetch(`/api/lists/${listId}`, {})
+    .then(response => response.json())
+    .then(json => {
+      if(json.length === 1) {
+        return dispatch(receiveList(listId, {list: json[0], fetching:false, error:null}));
+      } else {
+        console.log("Invalid list:", listId);
+        return Promise.reject(new Error("not found"));
+      }
+    });
+  }
 }
 
 export const fetchActiveIfNeeded = (listId) => (dispatch, getState) => {
@@ -107,7 +117,7 @@ export const fetchActiveIfNeeded = (listId) => (dispatch, getState) => {
     const fetches = [];
     fetches.push(fetchActions(listId)(dispatch));
     if(!lists.byId[listId]) {
-      fetches.push(fetchList(listId)(dispatch));
+      fetches.push(fetchList(listId)(dispatch, getState));
     }
     return Promise.all(fetches);
   }

@@ -3,13 +3,19 @@ import { combineReducers } from 'redux'
 function receiveLists(state = {byId: {}, allIds: []}, action) {
   switch(action.type) {
     case "RECEIVE_LISTS":
-      const byId = {};
-      action.lists.forEach(list => {
-        byId[list.id] = {list, fetching:false, error:null};
-      });
-      const allIds = action.lists.map(list => list.id);
-      const result = {byId, allIds};
-      return result;
+      const nextState = action.lists.reduce((state, list) =>{
+        const instanceAction = {
+          type: 'RECEIVE_LIST',
+          listId: list.id,
+          list: {
+            list: list,
+            fetching: false,
+            error: null,
+          }
+        };
+        return listsSliceReducers(state, instanceAction);
+      }, state);
+      return nextState;
     default:
       return state;
   }
@@ -33,19 +39,16 @@ function updateTitle(state, action) {
 
 function addList(state, action) {
   const { listId, list } = action;
-  if(state[listId]) {
-    return state;
-  } else {
-    const updatedState = Object.assign({}, state);
-    updatedState[listId] = {list, fetching:false, error:null};
-    return updatedState;
-  }
+  const updatedState = Object.assign({}, state);
+  updatedState[listId] = list;
+  return updatedState;
 }
 
 function listsById(state = {}, action) {
   switch(action.type) {
     case "UPDATE_TITLE" : return updateTitle(state, action);
     case "RECEIVE_LIST" : return addList(state, action);
+    case "FETCH_LIST"   : return addList(state, action);
     default : return state;
   }
 }
