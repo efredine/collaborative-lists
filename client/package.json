@@ -4,7 +4,8 @@
   "description": "Simple and lightweight Boilerplate for ReactJS projects",
   "scripts": {
     "lint": "eslint src",
-    "start": "node server.js"
+    "start": "node server.js",
+    "bundle": "ENV=production node_modules/.bin/webpack"
   },
   "repository": {
     "type": "git",
