@@ -10,7 +10,7 @@ const bodyParser    = require("body-parser");
 const MovieDB = require('moviedb')(process.env.MOVIEDB_KEY);
 const path = require('path');
 
-const ENV         = process.env.ENV || "development";
+const ENV         = process.env.NODE_ENV || "development";
 const PORT          = process.env.PORT || 8080;
 const cfg = require('./config.js');
 
