@@ -19,7 +19,7 @@ class YelpSearch extends Component {
 
   componentWillMount(){
     const that = this;
-    fetch(`http://ipinfo.io/json`)
+    fetch(`https://ipinfo.io/json`)
     .then(response => {
       return response.json();
     })
