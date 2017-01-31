@@ -6,6 +6,7 @@ const server = require('http').Server(app);
 const io = require('socket.io')(server);
 const bodyParser    = require("body-parser");
 const MovieDB = require('moviedb')(process.env.MOVIEDB_KEY);
+const path = require('path');
 
 const ENV         = process.env.ENV || "development";
 const PORT          = process.env.PORT || 8080;
@@ -29,6 +30,7 @@ const listsRoutes = require("./routes/lists");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json())
 app.use(express.static('public'));
+app.use(express.static('./client/dist/'));
 app.use(auth.initialize());
 
 app.use(function(req, res, next) {
@@ -100,6 +102,11 @@ app.get("/api/v2/search/:restaurant/:location/", (req, res)=>{
   })
 })
 
+// send all other requests to index.html so browserHistory in client app works
+app.get('*', function (req, res) {
+  const fileToServe = path.join(__dirname, 'public/index.html');
+  res.sendFile(fileToServe);
+});
 
 server.listen(PORT, () => {
     console.log("Collaborative lists listening on port " + PORT);
