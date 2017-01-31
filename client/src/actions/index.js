@@ -81,7 +81,7 @@ export const receiveList = (listId, list) => ({
   list: list
 });
 
-export const fetchActions = listId => dispatch => {
+const fetchActions = listId => dispatch => {
   return fetch(`/api/lists/${listId}/actions`, {})
   .then(response => response.json())
   .then(json => dispatch(receiveActions(listId, json)));
@@ -90,38 +90,40 @@ export const fetchActions = listId => dispatch => {
 
 // Should fetch if we don't already have it in the state
 // If it is in the state, fetch it as long as it isn't already being fetched or the previous fetch returned an error.
-const shouldFetch = (listId, state) => {
-  const list = state.lists[listId];
+const shouldFetch = (list) => {
   return !list || (!list.fetching && list.error);
 }
 
-export const fetchList = listId => (dispatch, getState) => {
-  if(shouldFetch(listId, getState())) {
-    dispatch({type: 'FETCH_LIST', listId, list:{list: null, fetching:true, error:null}});
-    return fetch(`/api/lists/${listId}`, {})
-    .then(response => response.json())
-    .then(json => {
-      if(json.length === 1) {
-        return dispatch(receiveList(listId, {list: json[0], fetching:false, error:null}));
-      } else {
-        console.log("Invalid list:", listId);
-        const error = new Error("List not found.");
-        dispatch(receiveList(listId, {list: null, fetching:false, error: error}));
-        return Promise.reject(error);
-      }
-    });
-  }
+const fetchList = listId => (dispatch, getState) => {
+  dispatch({type: 'FETCH_LIST', listId, list:{list: null, fetching:true, error:null}});
+  return fetch(`/api/lists/${listId}`, {})
+  .then(response => response.json())
+  .then(json => {
+    if(json.length === 1) {
+      return dispatch(receiveList(listId, {list: json[0], fetching:false, error:null}));
+    } else {
+      console.log("Invalid list:", listId);
+      const error = new Error("List not found.");
+      dispatch(receiveList(listId, {list: null, fetching:false, error: error}));
+      return Promise.reject(error);
+    }
+  });
 }
 
 export const fetchActiveIfNeeded = (listId) => (dispatch, getState) => {
-  const { activeList, lists } = getState();
+  const state = getState();
+  const { activeList, lists } = state;
   if(listId && activeList !== listId) {
-    const fetches = [];
-    fetches.push(fetchActions(listId)(dispatch));
-    if(!lists.byId[listId]) {
-      fetches.push(fetchList(listId)(dispatch, getState));
+    console.log('fetch cycle for:', listId);
+    const list = lists.byId[listId];
+    if(shouldFetch(list)) {
+      console.log('Get list then actions.');
+      fetchList(listId)(dispatch, getState)
+      .then(() => fetchActions(listId)(dispatch, getState));
+    } else {
+      console.log('Just fetch actions.');
+      return fetchActions(listId)(dispatch, getState);
     }
-    return Promise.all(fetches);
   }
 }
 
