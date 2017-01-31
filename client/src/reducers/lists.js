@@ -5,7 +5,7 @@ function receiveLists(state = {byId: {}, allIds: []}, action) {
     case "RECEIVE_LISTS":
       const byId = {};
       action.lists.forEach(list => {
-        byId[list.id] = list;
+        byId[list.id] = {list, fetching:false, error:null};
       });
       const allIds = action.lists.map(list => list.id);
       const result = {byId, allIds};
@@ -15,24 +15,29 @@ function receiveLists(state = {byId: {}, allIds: []}, action) {
   }
 }
 
+function updateListDetails(listToUpdate, updatedFields) {
+  const list = Object.assign({}, listToUpdate.list, updatedFields);
+  return Object.assign({}, listToUpdate, { list });
+}
+
 function updateTitle(state, action) {
   const {listId, title} = action;
-  const currentListDetails = state[listId];
-  if(!currentListDetails) {
+  const listToUpdate = state[listId];
+  if(!listToUpdate) {
     return state;
   }
   const updatedState = Object.assign({}, state);
-  updatedState[listId] = Object.assign({}, currentListDetails, {title});
+  updatedState[listId] = updateListDetails(listToUpdate, { title });
   return updatedState;
 }
 
 function addList(state, action) {
-  const { listId } = action;
+  const { listId, list } = action;
   if(state[listId]) {
     return state;
   } else {
     const updatedState = Object.assign({}, state);
-    updatedState[listId] = action.list;
+    updatedState[listId] = {list, fetching:false, error:null};
     return updatedState;
   }
 }

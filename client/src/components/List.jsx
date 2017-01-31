@@ -15,7 +15,7 @@ class List extends Component {
     // redirect them to the first element of the list
     const { listId, lists } = this.props;
     if(!listId && lists.length > 0) {
-      this.props.history.push(`/${lists[0].id}`)
+      this.props.history.push(`/${lists[0].list.id}`)
     }
   }
 
@@ -67,10 +67,15 @@ class List extends Component {
   }
 }
 
+const getTitle = list => {
+  const valid = list && !list.error && !list.fetching;
+  return valid ? list.list.title : "";
+}
+
 const mapStateToProps = (state, ownProps) => {
   const list = state.lists.byId[ownProps.listId];
   return {
-    title: list && list.title ? list.title : "untitled",
+    title: getTitle(list),
     lists: state.lists.allIds.map(id => state.lists.byId[id])
   };
 };
