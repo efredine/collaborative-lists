@@ -132,11 +132,15 @@ export const receiveUser = user => ({
 function initializeUser(dispatch, user) {
   let actions = [ receiveUser(user) ];
   if(user.id) {
-    actions = actions.concat(fetchUsers(), fetchLists());
     Auth.authenticateUser(user);
   } else {
     Auth.deauthenticateUser();
   }
+  return Promise.all(actions.map(dispatch));
+}
+
+export const socketEstablishedAction = dispatch => {
+  const actions = [{type: 'SOCKET_ESTABLISHED'}, fetchUsers(), fetchLists()];
   return Promise.all(actions.map(dispatch));
 }
 

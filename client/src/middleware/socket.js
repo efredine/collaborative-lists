@@ -11,6 +11,7 @@
 */
 import createSocketIoMiddleware from 'redux-socket.io';
 import io from 'socket.io-client';
+import { socketEstablishedAction } from '../actions';
 
 export default function createAuthenticatedSocketIoMiddleware(socketAddress, criteria, options) {
   return ({ getState, dispatch }) => {
@@ -35,7 +36,7 @@ export default function createAuthenticatedSocketIoMiddleware(socketAddress, cri
             .on('connect', () => {
               socketEstablished = true;
               socketIoMiddleware = createSocketIoMiddleware(socket, criteria, options)( { getState, dispatch } );
-              dispatch({type: 'SOCKET_ESTABLISHED'});
+              socketEstablishedAction(dispatch);
             });
           }
           return next(action);
