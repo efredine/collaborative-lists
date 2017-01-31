@@ -18,9 +18,20 @@ function pessimisticExecute(action, emit, next, dispatch) {
   emit('action', action);
 }
 
+// If running on port 3000 connect to 8080 instead because we're in dev mode.  Otherwise, connect to origin.
+function getSocketAddress(){
+  if(location.port ==='3000') {
+    const host = location.host.split(':')[0];
+    return 'http://'+host+':8080';
+  } else {
+    return location.origin;
+  }
+}
+
 const loggerMiddleware = createLogger();
-const host = location.host.split(':')[0];
-const socketAddress = 'http://'+host+':8080';
+const socketAddress = getSocketAddress();
+console.log(location, socketAddress);
+
 const socketIoMiddleware = createAuthenticatedSocketIoMiddleware(
   socketAddress,
   ['SERVER/ADD_CARD', 'SERVER/TOGGLE_CARD', 'SERVER/MOVE_CARD', 'SERVER/VOTE_CARD', 'SERVER/CHAT_MESSAGE'],
