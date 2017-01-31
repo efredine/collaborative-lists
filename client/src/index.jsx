@@ -20,7 +20,7 @@ function pessimisticExecute(action, emit, next, dispatch) {
 
 // If running on port 3000 connect to 8080 instead because we're in dev mode.  Otherwise, connect to origin.
 function getSocketAddress(){
-  if(location.port ==='3000') {
+  if(location.port === '3000') {
     const host = location.host.split(':')[0];
     return 'http://'+host+':8080';
   } else {
