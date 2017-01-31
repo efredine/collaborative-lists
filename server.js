@@ -33,12 +33,6 @@ app.use(express.static('public'));
 app.use(express.static('./client/dist/'));
 app.use(auth.initialize());
 
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
-
 var yelp = new Yelp(cfg.yelp);
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
