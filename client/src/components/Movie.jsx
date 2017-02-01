@@ -72,7 +72,7 @@ class Movie extends Component {
           />
         )
       } else {
-        fetch(`http://api.themoviedb.org/3/movie/${this.props.content.id}/videos?api_key=6b426deee51a1b33c8c0b4231c1543cd`)
+        fetch(`https://api.themoviedb.org/3/movie/${this.props.content.id}/videos?api_key=6b426deee51a1b33c8c0b4231c1543cd`)
         .then(response => {
           return response.text();
         })
@@ -186,7 +186,7 @@ class Movie extends Component {
 
   landscapeFormat = () => {
     const { backdrop_path } = this.props.content;
-    return(<img className= "image" src={"http://image.tmdb.org/t/p/w500/" + backdrop_path}/>);
+    return(<img className= "image" src={"https://image.tmdb.org/t/p/w500/" + backdrop_path}/>);
   };
 
   portraitFormat = () => {
@@ -196,7 +196,7 @@ class Movie extends Component {
       <div>
         <dl className="dl-horizontal">
           <dt>
-            <img className="poster-image" src={"http://image.tmdb.org/t/p/w185" + poster_path}/>
+            <img className="poster-image" src={"https://image.tmdb.org/t/p/w185" + poster_path}/>
           </dt>
           <dd>
             <p>{overview}</p>
@@ -217,7 +217,7 @@ class Movie extends Component {
     if(contents && contents.credits && contents.credits.cast) {
       const cast = contents.credits.cast;
       return cast.slice(0, 14).map( (actor, index) =>
-        (actor.profile_path && <img key={index} title = {actor.name} className= "actors" src = {"http://image.tmdb.org/t/p/w500"+ actor.profile_path} />)
+        (actor.profile_path && <img key={index} title = {actor.name} className= "actors" src = {"https://image.tmdb.org/t/p/w500"+ actor.profile_path} />)
       );
     }
   }
