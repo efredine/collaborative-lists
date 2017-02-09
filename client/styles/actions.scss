@@ -1,0 +1,41 @@
+// action history element styles
+#chat-box {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+// TODO: this should probably target a specific class -- it's targeting elements of the action-history container
+.small {
+  font-size: 100%;
+
+  .glyphicon-thumbs-up {
+  color: green;
+  font-size: larger;
+  }
+
+  .glyphicon-thumbs-down {
+    color: red;
+    font-size: larger;
+  }
+
+}
+
+.movieChatBox {
+  color: black;
+  background: -webkit-gradient(linear, left top, right top, color-stop(0%, #008080), color-stop(100%, #57B3FF));
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  padding: 3px;
+}
+
+.restChatBox {
+  color: black;
+  background: -webkit-gradient(linear, left top, right top, color-stop(0%, #fd746c), color-stop(100%, #ff9068));
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  padding: 3px;
+}

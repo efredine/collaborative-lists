@@ -1,0 +1,54 @@
+
+// navbar elements
+.logo {
+ position: absolute;
+ top: 5px;
+ left: 45%;
+ height: 40px;
+}
+
+.builder {
+ position: inherit;
+ top: -10px;
+ left: 0px;
+ height: 35px;
+
+
+ &:hover {
+  cursor: pointer;
+ }
+}
+
+.lists {
+ position: inherit;
+ top: -10px;
+ left: 0px;
+ height: 35px;
+
+ &:hover {
+  cursor: pointer;
+ }
+}
+
+// custom navbar styling
+.navbar-default {
+  background-color: #9DACE2;
+  border: none;
+  border-radius: 0;
+  position: fixed;
+}
+
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
+  background-color: #B4BEE2;
+}
+
+.navbar-nav {
+  margin-bottom: 0px;
+  margin-top: 0px;
+  margin-left: -15px;
+}
+
+.navbar-nav>li>a {
+  padding-bottom: 0px;
+}
+

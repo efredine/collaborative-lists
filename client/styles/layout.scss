@@ -1,0 +1,126 @@
+// layout
+body {
+  background: #C4D7ED;
+  height: 100%;
+}
+
+div[data-reactroot] {
+  height:100%;
+}
+
+html {
+
+  height: 100%;
+}
+
+// layout
+.show-grid {
+  height: 100%;
+  padding-top: 60px;
+}
+
+.container {
+  height: 100%;
+}
+
+.movieContainer {
+  height: calc(100% - 10px);
+  background: #B4BEE2;
+  padding-top: 20px;
+  margin-top: -10px;
+
+  .content {
+    height: calc(100% - 10px);
+    overflow: scroll;
+
+    button.list-index-button {
+      margin-bottom: 10px;
+    }
+
+    .nav {
+      li.list-group-item{
+        padding: 0;
+      }
+    }
+
+    li {
+      a, a:active, a:visited {
+        color: #555;
+      }
+    }
+
+    .list-group-item {
+      &:focus {
+        outline: none;
+      }
+      &.active, &.active:hover, &.active:focus {
+        background-color: #e7e7e7;
+        border-color: #e7e7e7;
+        color: #555;
+      }
+    }
+  }
+}
+
+.historyContainer {
+  height: calc(100% - 20px);
+  // overflow: scroll;
+  border-bottom: 3px solid transparent;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  .nav {
+    padding-top: 5px;
+  }
+  .nav>li>a {
+    padding: 5px 15px;
+  }
+  .nav-pills>li.active>a {
+    background-color: #e7e7e7;
+    &:visited {
+      color: #555;
+    }
+  }
+  .nav-pills>li>a {
+    &, &:visited, &:active, &:focus {
+      color: #555;
+    }
+  }
+  .list-container {
+    height: 100%;
+    .content {
+      height: calc(100% - 100px);
+      overflow: scroll;
+    }
+  }
+  input {
+    width: 100%;
+  }
+}
+
+.chatContainer {
+  height: calc(100% - 20px);
+  background: white;
+  border-bottom: 3px solid transparent;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  .content {
+    height: calc(100% - 120px);
+    overflow: scroll;
+  }
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 20px;
+  padding: 0;
+  margin: 0;
+  height: 20px;
+  font-size: 12px;
+  line-height: 20px;
+  opacity: 0.5;
+}
