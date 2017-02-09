@@ -23,6 +23,7 @@ html {
   height: 100%;
 }
 
+// when open the left column contains either the list of lists or the builder.
 .left-column {
   height: calc(100% - 10px);
   background: #B4BEE2;
@@ -99,7 +100,7 @@ html {
   }
 }
 
-.chatContainer {
+.action-history-container {
   height: calc(100% - 20px);
   background: white;
   border-bottom: 3px solid transparent;

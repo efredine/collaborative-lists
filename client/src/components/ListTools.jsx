@@ -54,7 +54,7 @@ class ListTools extends Component {
 
   activity = (open) => {
     return (
-      <Col className="chatContainer" xs={open ? 3 : 5} lg={open ? 3 : 5}>
+      <Col className="action-history-container" xs={open ? 3 : 5} lg={open ? 3 : 5}>
          <h1>Activity</h1>
          <ActionListContainer/>
          <ChatBox />
