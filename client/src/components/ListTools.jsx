@@ -16,7 +16,7 @@ class ListTools extends Component {
     if(open) {
       if(selected === 1) {
         return(
-          <Col className="movieContainer" xs={4} lg={4}>
+          <Col className="left-column" xs={4} lg={4}>
             <div className="content">
               <Tabs defaultActiveKey={defaultEventKey} id="uncontrolled-tab-example">
                 <Tab eventKey={1} title="Movies">
@@ -34,7 +34,7 @@ class ListTools extends Component {
           );
       } else {
         return(
-          <Col className="movieContainer" xs={4} lg={4}>
+          <Col className="left-column" xs={4} lg={4}>
             <ListsIndex history={this.props.history}/>
           </Col>
           );

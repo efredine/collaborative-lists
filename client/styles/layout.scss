@@ -9,7 +9,6 @@ div[data-reactroot] {
 }
 
 html {
-
   height: 100%;
 }
 
@@ -19,11 +18,12 @@ html {
   padding-top: 60px;
 }
 
+// this seems like a bit of a dangerous change since it's over-riding an important bootstrap class
 .container {
   height: 100%;
 }
 
-.movieContainer {
+.left-column {
   height: calc(100% - 10px);
   background: #B4BEE2;
   padding-top: 20px;
