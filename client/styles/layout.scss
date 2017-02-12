@@ -64,7 +64,7 @@ html {
 }
 
 .active-list-container {
-  height: calc(100% - 20px);
+  height: calc(100% - 50px);
   // overflow: scroll;
   border-bottom: 3px solid transparent;
   border-top-left-radius: 10px;
@@ -73,6 +73,9 @@ html {
   border-bottom-right-radius: 10px;
   .nav {
     padding-top: 5px;
+  }
+  .nav.pull-left {
+    padding-top: 30px;
   }
   .nav>li>a {
     padding: 5px 15px;
@@ -87,6 +90,9 @@ html {
     &, &:visited, &:active, &:focus {
       color: #555;
     }
+  }
+  button.list-btn-add {
+    margin-top: 10px;
   }
   .list-container {
     height: 100%;
