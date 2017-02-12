@@ -1,14 +1,12 @@
 import React, {Component} from 'react';
-import MovieSearch from '../containers/MovieSearch.jsx';
 import ChatBox from '../containers/ChatBox';
-import { Grid, Row, Col, Tabs, Tab, Clearfix } from 'react-bootstrap';
+import { Grid, Row, Col, Clearfix } from 'react-bootstrap';
 import ListsIndex from './ListsIndex.jsx';
 import List from './List.jsx';
-import AddTodo from '../containers/AddTodo';
 import ActionListContainer from '../containers/ActionListContainer.jsx';
-import YelpSearch from '../containers/YelpSearch.jsx';
 import Auth from '../utils/Auth';
-import LoginPage from './LoginPage.jsx'
+import LoginPage from './LoginPage.jsx';
+import Builder from './Builder';
 
 class ListTools extends Component {
 
@@ -18,17 +16,7 @@ class ListTools extends Component {
         return(
           <Col className="left-column" xs={4} lg={4}>
             <div className="content">
-              <Tabs defaultActiveKey={defaultEventKey} id="uncontrolled-tab-example">
-                <Tab eventKey={1} title="Movies">
-                  <MovieSearch className="panel-container"/>
-                </Tab>
-                <Tab eventKey={2} title="Yelp">
-                  <YelpSearch className="panel-container"/>
-                </Tab>
-                <Tab eventKey={3} title="Todos">
-                  <AddTodo />
-                </Tab>
-              </Tabs>
+              <Builder />
             </div>
           </Col>
           );

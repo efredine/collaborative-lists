@@ -47,7 +47,7 @@ class App extends Component {
 
   render() {
     const { open, selected } = this.state;
-    const { defaultEventKey, listId, history } = this.props;
+    const { listId, history } = this.props;
     return(
       <div>
         <Navbar fixedTop>
@@ -71,7 +71,6 @@ class App extends Component {
             selected={selected}
             listId={listId}
             history={history}
-            defaultEventKey={defaultEventKey}
             enabled={this.isLoaded()}
           />
           <Clearfix/>
@@ -83,34 +82,7 @@ class App extends Component {
   }
 }
 
-const ContentTypeToEventKeyMap = {
-  "movie": 0,
-  "yelp": 1,
-  "todo": 2
-}
-
-function getContentTypeCounts(cards) {
-  return cards.reduce((counts, card) => {
-    if(!card.completed) {
-      counts[ContentTypeToEventKeyMap[card.content.contentType]] += 1;
-    }
-    return counts;
-  }, [0, 0, 0]);
-}
-
-function getEventKeyDefault(state) {
-  const { cards } = state;
-  if(cards && cards.length > 0) {
-    const counts = getContentTypeCounts(cards);
-    const max = counts.reduce((a, b) => b > a ? b : a);
-    return counts.indexOf(max) + 1;
-  } else {
-    return 1;
-  }
-}
-
 const mapStateToProps = (state) => ({
-  defaultEventKey: getEventKeyDefault(state),
   users: state.users,
   user: state.user
 })
