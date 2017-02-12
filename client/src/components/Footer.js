@@ -2,6 +2,7 @@ import React from 'react'
 import FilterLink from '../containers/FilterLink'
 import { Nav, NavItem, Button, Glyphicon } from 'react-bootstrap'
 import SortControl from '../containers/SortControl'
+import MediaQuery from 'react-responsive';
 
 const Footer = () => (
   <div>
@@ -14,11 +15,21 @@ const Footer = () => (
         Active
       </FilterLink>
     </Nav>
-    <Nav bsStyle="pills" pullRight>
-      <Button bsStyle="danger" className="btn-circle btn-lg list-btn-add">
-        <Glyphicon glyph="plus"/>
-      </Button>
-    </Nav>
+    <MediaQuery minWidth={768}>
+      {(matches) => {
+        if(!matches) {
+          return(
+            <Nav bsStyle="pills" pullRight>
+              <Button bsStyle="danger" className="btn-circle btn-lg list-btn-add">
+                <Glyphicon glyph="plus"/>
+              </Button>
+            </Nav>
+          );
+        } else {
+          return null;
+        }
+      }}
+    </MediaQuery>
   </div>
 )
 
