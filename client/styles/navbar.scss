@@ -32,21 +32,25 @@
 
 // custom navbar styling
 .navbar-default {
-  background-color: #9DACE2;
   border: none;
-  border-radius: 0;
-  position: fixed;
+  background-color: inherit;
+  &>.container {
+    background-color: #9DACE2;
+    // border: none;
+    // border-radius: 0;
+    // position: fixed;
+  }
 }
 
 .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
   background-color: #B4BEE2;
 }
 
-.navbar-nav {
-  margin-bottom: 0px;
-  margin-top: 0px;
-  margin-left: -15px;
-}
+// .navbar-nav {
+//   margin-bottom: 0px;
+//   margin-top: 0px;
+//   margin-left: -15px;
+// }
 
 .navbar-nav>li>a {
   padding-bottom: 0px;

@@ -4,6 +4,10 @@ body {
   height: 100%;
 }
 
+#react-root {
+  height: 100%;
+}
+
 div[data-reactroot] {
   height:100%;
 }

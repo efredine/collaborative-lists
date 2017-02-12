@@ -50,7 +50,7 @@ class App extends Component {
     const { defaultEventKey, listId, history } = this.props;
     return(
       <div>
-        <Navbar>
+        <Navbar fixedTop>
           <Navbar.Header>
               <img className="logo" src="/images/Upik.png" />
           </Navbar.Header>
