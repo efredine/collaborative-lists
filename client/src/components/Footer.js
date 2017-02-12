@@ -15,20 +15,12 @@ const Footer = () => (
         Active
       </FilterLink>
     </Nav>
-    <MediaQuery minWidth={768}>
-      {(matches) => {
-        if(!matches) {
-          return(
-            <Nav bsStyle="pills" pullRight>
-              <Button bsStyle="danger" className="btn-circle btn-lg list-btn-add">
-                <Glyphicon glyph="plus"/>
-              </Button>
-            </Nav>
-          );
-        } else {
-          return null;
-        }
-      }}
+    <MediaQuery maxWidth={768}>
+      <Nav bsStyle="pills" pullRight>
+        <Button bsStyle="danger" className="btn-circle btn-lg list-btn-add">
+          <Glyphicon glyph="plus"/>
+        </Button>
+      </Nav>
     </MediaQuery>
   </div>
 )
